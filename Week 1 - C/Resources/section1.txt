@@ -1,0 +1,379 @@
+CARTER ZENKE: OK. Well, hello, one and all, and welcome to CS50's very first section. My name is Carter Zenke, one of the course's preceptors here on campus. And the goal of sections is to help you bridge the gap between lectures and problem sets. 
+
+So let's say there's something in the lecture that you think you might have understood, but now it's your turn to try to put that idea into practice actually writing some code along the way. That is the goal of these sections here. So this week's section is on our very first week in CS50, week one. 
+
+We're moving from Scratch into learning this language called C that you use to build increasingly complex programs. So, again, my name is Carter Zenke. If you'd like to reach out to me at any time after this section or while you're taking CS50x online, you can reach out to me here at this email, carter@cs50.harvard.edu. 
+
+But what's on the agenda today? So today, we have a few different things from lecture. We have this idea of variables and types, how we store information inside of our programs. We also have an idea of taking input from a user and trying to print some of those values back out to the user as they use our program. 
+
+Later on, we'll see these ideas of functions and loops and conditionals allowing us to design ever more complex programs. And finally, towards the end, we'll work a bit on those very first steps in Problem Set 1 to help you get started and go on your way to completing that very first problem set. So let's dive in here into our first topic, this one called Variables and Types. 
+
+So, as we said before, a variable is simply some way of storing information inside of a computer. But I'm curious, for those of you who are here, how would you describe a variable in a single sentence? Let's say we have a contact application. We're trying to store information about, let's say, different people we're in contact with. How would you describe what a variable is in a single sentence? 
+
+I'm seeing a container. Certainly, that's a good idea. A variable is a container for some value. It could hold some piece of information, like a number or a character. Any other ideas too? Containers, something like a group. I think that idea could work. It's something like trying to put some piece of data, like a number or a character or even some word, into a particular container, maybe something we could call a group and often, if I could add on to the idea, is giving it some name. 
+
+So I see someone else in the chat has said, it's a name given to some value. So often we'll have these containers that will have some values inside of them. And a variable allows us to give that value a name. 
+
+So visually, you could think of a variable a bit like this. Let's say we have a container represented by this black box here. And inside is some value, like this value 0. But it's not quite a variable yet, really any place in our computer could have some value. 
+
+But what makes this piece special is that it has a particular name. In this case, if we're building a contacts application, we could say, this variable's name is calls. So this variable, this container for some value, now has this name called calls. 
+
+And calls could store really any particular value. That's why it's a variable. This value could change over time. Maybe I'm calling my sister, for instance. And maybe I'm tracking how many times I've called her. 
+
+So I've called her currently 0 times. But let's say I call her. That value gets updated from 0 now to 1. It could also be 2 later on in time, maybe 3 or so on. We could think of this variable as a name for a value that can change. 
+
+In this case, our variable is named calls. And it has this value, first 0, then 1, then 2, then 3, that is changing over time. So this works visually. But there's also some syntax we can use in this new language called C to actually give us this variable, give us this value in memory in our computer. 
+
+And syntax, as you'll learn, is simply the characters we type to write some C code and tell our computer what to do. So, in this case, if we wanted to have this variable called calls, we'd simply write something a bit like this. We'd say int calls equals 3 and a semicolon at the end, int calls equals 3 followed by a semicolon. 
+
+And I'm curious, for those of you in the room who maybe have seen this from lecture, what are the three parts you notice inside of this syntax here? What parts do you notice here? I'm seeing a type, some name for the variable, maybe its value. And I think we're on to something here. 
+
+So if we break this down into smaller pieces, this single line of syntax, we'll see there are really three important parts to it. So the first part is the name for the variable. What are we going to call this place in memory that now has this value 3? 
+
+Well, as we see on the right, we have this container that has the value 3. And up above, it has this name called calls. So we can say that when we type int calls equals 3, we're telling our computer that this variable is named calls. 
+
+Now, there's one more piece, also the type, as somebody else said. So here we say, what kind of value does this container store? We've given it a name called calls. 
+
+But then we have to define, what kind of value could I put in this container? Is it going to be maybe a character or an integer, as in a whole number, or something else entirely? That's the type of this variable. And we often define that up front, up first, even before the variable name. And then finally, as somebody else pointed out here, we have the actual value for this variable, in this case, the value 3. 
+
+Now, there is still one piece of syntax, actually maybe two, we haven't quite talked about yet. We've seen the type, the name of this variable, and the value. But what have we not talked about yet in this syntax? I'm seeing that equal sign. 
+
+So this equal sign, we haven't yet touched on. But it does have a special name. It's probably less so an equal sign and more so what we'd call an assignment operator. So I see some folks saying in the chat too, this is our assignment operator. 
+
+We're not so much saying that this value, this calls here, is equal to 3 as much as we're saying we've created some container and called it calls. And we're going to assign the value of that container to be equal to 3, so difference between equals and the assignment operator here. And if we wanted to read this in terms of just plain old English, we could do so a bit like this. We could say we're going to create an integer named calls that gets the value 3. 
+
+So now that we've seen this overview of variables and, in this case, types as well, I want to ask you a question. Let's say I give you this variable here, a variable called country_code. And it looks a bit like this on the right. I'm curious, how would you read the code on the left-hand side in plain English? Based on what we saw before, how might you read the code on the left-hand side? What exactly are we doing here? 
+
+So I'm seeing a few folks saying something a bit like this. So if we had this syntax on the left-hand side, we could read it exactly as follows. We could say, we're going to create an integer that is named country_code. And that container that is an integer called country_code, that will get the value of 65. 
+
+And if you're curious here, country_code refers to a cell phone number or a regular phone number where oft, if you're calling somebody outside of your own home country, you prepend some number. Like for the United States, it's the number 1. For, I believe, Singapore, it is the number 65 in this case. So if you wanted to call somebody in Singapore, you'd call them using this country code, 65, and then add their phone number right afterwards. 
+
+Now, one question we often get is, why do we begin all of these statements about variables with this type? Like, here we have int. And it's the very first thing we say when we declare or initialize some variable. But why? And I'm curious about your idea for this too. 
+
+Feel free to chime in. Why do you think the very first thing we write is the type of this variable? Why do we even care about types? Why do we even have them in this case? I'll give you a minute to think here. Why do we care about types? 
+
+So I'm seeing a few ideas. So someone says that it will determine what we can make the variable do or what aspect it possesses. I like that idea. So certainly we can do some things with numbers, like add them up, for instance, that we couldn't do with characters. 
+
+Someone else says, it tells us how to handle that value in memory. That's also a good idea. So you could think of, perhaps, maybe different numbers and characters are represented differently underneath the hood inside of our computer. As we saw in lecture, for instance, the letter A corresponds to the number 65, which in binary is something like-- well, I don't know the exact binary. But it represents something. It tells us how to represent that character in memory. 
+
+Other ideas here too, to reserve enough space to store that data type. That's also a good idea as well. So why don't we give a bit of a concrete example as to why we really care about these types. So here I'm trying to store this value, 65, as part of this variable called country_code. But as we just discussed, everything in our computer is stored in terms of zeros and ones, these little bits that we can use to represent all kinds of things. 
+
+And for the decimal number 65, well, if we want to represent that in binary, it would be exactly this, 01000001. This is the binary, what our computer is actually storing, to represent that number 65. So underneath the hood, we could kind of see it like this. We have this value, the decimal number 65, and our computer is actually storing what you see underneath, 010001, and so on. 
+
+But let's say we actually changed the type of this variable from an int instead to what we call a char, or a character, here representing not 65, but now the letter A. Anyone else have an idea of why if we change the type from an int to type char, we get A instead? Any ideas? 
+
+So I'm seeing somebody saying, we learned from lecture this idea of ASCII, the American Standard Code for Information Interchange. And the ASCII folks, they decided that decimal number 65, when you want to think of that value as instead a character, it represents the letter A. So here with this code on the left-hand side I'm saying, let's store that decimal value 65 but treat it as a character. 
+
+And if we say we are representing a character, well, I'm not going to get that decimal number anymore. I'm going to get the actual character represented by that decimal number, which in this case is A. As we'll see later on in the course, these decisions about types actually influence how much memory we're going to use and how we actually store the data on our computer underneath the hood. So more on types a bit later. 
+
+But let's keep going here. And let's see what we can do that's more interesting than just focusing on single pieces of variables, like single variables themselves. We can also try to add things up or change variables over time. And there's a few operators you might want to know to be able to actually do that kind of work. 
+
+So, for instance, here are a few of them. We have this variable now called calls. And we're setting it to that value 4. But let's say later on I want to add 2 to that value. I could use this operator here, that plus sign, to say take calls, add 2 to it, and reassign it to that container that we called calls. 
+
+And then later in my program, maybe they could subtract from calls. I could say, well, let's make calls 1 less than what it currently is. To do that I could say, let's take calls, subtract 1, and then reassign it back to that variable called calls, and so on, for multiplication here on that fourth line and division on that fifth line, so multiplication using our star and division using our slash. 
+
+But there's an even shorter way to do much of this in C, this language we're currently using. There's this thing called syntactic sugar we could use to actually shorten these lines. I could take the very same operators, plus, minus, star, the slash for division here, and I could append an equal sign of it like this. 
+
+I could say calls plus equals 2, calls minus equals 1. And that is shorthand for saying calls equals calls plus 2 or calls equals calls minus 1, just kind of a way to update that value in place over time. So I'm curious here, if you were to walk through this step by step, what do you think the value of calls would be? We have some code on the left-hand side. Maybe pause the video, take a moment. What would be the value of calls? 
+
+So I'm seeing 5, and I believe that is correct. So we'll start with 4 here. And we're going to add 2. So 4 plus 2 is 6, minus 1 is 5. Multiply that by 2. That's 10. Divide it by 2. That's back to being 5. So you're correct. Calls, in this case, would be 5. 
+
+Now, here's a different kind of question. Let's say we take a look at this. So, again, calls here is 5. Let's say we take a look at this next set on the left-hand side. What would be the value of calls now? 
+
+Here, again, is our code. What would be the value of calls? Now, I'm seeing a few options. So I'm seeing 4.5. And I'm seeing 4. And I'll ask you, which one of those do you think is correct, 4 or 4.5? 
+
+So let's walk through this step by step. We have calls first being 4. We'll add one, which makes it 5, subtract 2, which makes it 3, multiply that by 3, which is now 9 because 3 times 3 is 9, and divide 9 now by 2. And technically, if you were doing it on your own head, you might think, well, 9 divided by 2, that's 4.5. But actually, it'll be 4 in the end. 
+
+And I'm curious, why do you think it will be four? I'm seeing somebody saying that it's 4 because we're storing an integer. And you're correct. So calls here-- up front, we said calls is going to be an integer. That is a whole number. 
+
+And if we take 9 and divide it by 2, we get this decimal number, 4.5, also called a floating point number. But because calls is strictly an integer, it can't store 4.5. So what will happen instead? In C, it will simply do what we call truncating that value. We'll say, we have 4.5. There is some decimal value after that decimal point. But we're going to simply get rid of it, not care about it, and take whatever whole number we see up front. 
+
+So if our calculations yielded 4.1, what would we get? Well, just four. If we even had 4.8, we'd get simply 4. So to be clear, it's not rounding, but it is truncating, taking off that last bit of the decimal place there. 
+
+So I'm curious now, what questions do we have about variables, about assignment, about updating them over time? Any questions we can take while we're here live? And feel free to write those questions in the chat for those of you who are here. 
+
+OK. Not seeing too many questions, which maybe is a good sign. But certainly feel free to ask if you're watching this recording. Ask a friend. Ask online in CS50's communities, certainly get those questions answered for you. 
+
+Now, we'll continue here and try to do something a little more interesting with our variables. I think what we'll do is think about how to take input from the user and then print that input back out to the user. So we'll talk about input now and printing. 
+
+One of the first things you might want to do is get input from your users. If you're running some program, you want them to control how that program is actually working. So there are a few ways, at least in CS50 and in C in general, to get input from your user. 
+
+Let's say I want to, in this case, get an input from the user that will tell me, what should the value of calls be? Well, in CS50, you'll have access to this function called get_int. And there's a few pieces here. 
+
+Get_int takes this argument, this input, called calls, in this case, calls colon followed by a space. And you'll see that separated by quotes here. And moreover, that then is surrounded by these parentheses that tell us this is the input to this function that we're going to call calls. 
+
+So there's a few things to keep in mind as we start to use these functions to get user input. First, what we're doing right here, this is called a function call. So before we assign the value of calls, we're going to run this function and wait for the user to input some value. 
+
+So get_int, this function on the left-hand side, that will first be run before we store that value inside this variable we created called calls. But let's say that the user does give us some value. And they give us the value 4. Well, the whole point of get_int is that once it finishes running, it returns to us or gives us back the value the user entered. 
+
+So let's say they enter this value 4. Well, it's kind of like saying this function runs and gets almost replaced by this value 4. Such that in the end, it's almost exactly like writing some code like this, int calls gets the value 4. How do we get that? By running this function called get-int that returned to us what the user typed in. 
+
+So we're going to get user input here. But now we can think about how we can print that back out. And to print things in C, we'll use this function called printf. So here we have that same line of code. Int calls gets the value 4. Notice how now calls is storing that value called 4. 
+
+But now on the bottom, we see calls is-- well, calls is %i backslash n comma calls. And that seems a little cryptic. So I'm curious, for those of you who are here, what do you think will actually get printed out if we were to run this line of code? What will we actually see on the screen? 
+
+So I'm seeing we'd literally see the text, "calls is 4," the actual value 4. And to show you here, we'd see this. Calls is, again, that numeric value 4. And this is a special property of printf. And if you're wondering, well, why is there an F at the end? Turns out that F stands for Formatted. 
+
+So I'm going to print something that will be formatted. And I have, on the inside of this string if you will, calls is %i. I will replace that %i with the value of this variable called calls. 
+
+Now, the follow up question is, well, how did I know to put the value of calls in that placeholder, %i? Well, what I did is I followed up my text, denoted in quotes here, "calls is %i backslash n" with a comma. And I gave another input to printf. This time I said, I want to put in the value of this variable named calls. So whatever follows, your text that you give to printf by a comma, whatever variable you include there, the value of that variable will be included inside whatever format code you've included there or in replacement of that format code itself. 
+
+So there are a few other format codes you're probably familiar with. A few of them look like this. We have this one for integers, %i, that we saw earlier, one for floats or decimal numbers, %f, one for characters, %c, and one for strings, actual not just single characters, but whole collections of text like we saw earlier. That would be %s. So you'll see these over time as well. 
+
+So questions then on types and format codes, which ones we should use in which cases? All right. So seeing none so far here. What we'll do is actually get some practice writing code. So I think this is enough review of the lecture so far. And one of our first steps in this week's problem set is to write a program called hello, world. 
+
+And this is often the first program many people write when they're beginning their computer science journey. In this case, we're going to write a program that simply says hello, world to the user and, of course, perhaps, to the world. So I'll go over and I'll open up cs50.dev. So you should see something a bit like this if you were to go to cs50.dev and log in with your GitHub account. No need to follow along exactly like this. But if you're watching the recording, you certainly can. 
+
+Notice how I have a few different areas in cs50.dev. I have a top area up here that will soon be able to have a file that I can actually edit things in. And down below, I have this place called the terminal. I can interact with this computer that I've loaded up in the cloud. 
+
+So I'm now connected to some other computer, not my own, where I actually write my own code and where we, CS50, have installed some software for you to actually write C code very easily. So let me try, in this case, to open up a file called hello.c. I'll type code hello.c in my terminal. Let me zoom in a bit so you all can see that. 
+
+Here I now have code hello.c. I'll hit Enter. And I'll see this blank file up top called hello.c. So now I'll actually go ahead and type in some C code. Maybe I want to say hello to the user. What's the first thing I should do? For those of you who watched lecture, what might I need to do at the top of my file? 
+
+I need to include some stuff people are saying. So in CS50, and actually in C in general, we have this idea of a library or some code somebody else has written for us that we could then use in our own program. And it turns out that somebody else wrote this function called printf. And because they wrote it and included it in this library, we can then actually use that function in our own code without worrying how they made it. We just kind of know that it just works. 
+
+So to get access to functions like printf, I can type this special piece of syntax up top. I can say, #include stdio.h and hit Enter here. So this is allowing me to include this file called stdio.h, a header file that has printf defined inside of it. And now, what's the next step I might need to do here? 
+
+I have Standard I/O included. But how I might start off my program as we usually do in C? So I'm seeing we need to make a main function. So by convention, in C, when we want to make a new program, we always include that entire program inside this function we call main, int main(void). 
+
+And now here i have-- let me fix that formatting here. I have this function called main. Yours might be syntax highlighted, not quite sure why mine isn't highlighting here. But I'll resolve that a little bit later. So here we have int main(void). And we could type in our actual code inside of this function that we are calling main. 
+
+Now, what kind of code could we type to say hello to the user based on what we saw a little earlier? What function should we use? Probably printf, right? So I'll say, printf. And then why don't I do this? I'll say, hello, world. And now if I hit a period here to say a sentence, backslash n, I should be able to hopefully run this program down in my terminal. 
+
+So let me try this. If I want to run, I could try saying ./hello and hit Enter. But I get this error, no such file or directory. So what did I actually miss in this case? Yeah, some of you are saying I forgot to make this file. 
+
+So as we saw in lecture, there's this idea of taking the source code that is this C file and compiling it to machine code or the zeros and ones a computer actually understands. So to take this C code and convert it to the code a computer understands, we have this special program called make, which is a compiler that simply says take whatever is in hello.c and convert it for me to an actual program my computer can run. 
+
+So in my terminal, I will choose to make hello, hit Enter, and now nothing seemed to happen. But that's actually a good sign. If I type ls to list my files, I'll see hello star, which means this is a file my computer can run. I'll say ./hello, hit Enter, and now I see hello comma world. So syntax highlighting aside, which you hopefully see in your own code space, this is how we can actually write our own hello, world program. 
+
+What questions do we have then on these lines of code? I'm seeing a question here. What is the difference between a library and a header file? So that's two pieces of vocabulary we've used here. We often say we're going to include a header file or, conversationally, include some library. But there's a difference between these two things. 
+
+So notice how this, stdio.h, that is an actual file we're calling a header file. And in this particular file, we've defined all the functions that are included in this library, like, for example, printf. But in that header file, we haven't actually defined the entirety of the printf function. We've just defined a few particular things, like what inputs printf takes or what outputs it gives to us. 
+
+Now, the entire library likely has more files than just this header file under which those functions are actually defined under which they tell us what exactly does printf do. So the library, in general, you can think of it as including all kinds of functions, some like printf. But the header file is our way of defining what functions are inside this library to begin with. A great question. 
+
+So let's keep going and make this a little more advanced. So our next step in problem set 0 is to not just say hello to the world, but to say hello to a particular user. So in this case, we want to get input from the user and allow them, in this case, to say hello back to themselves. 
+
+So I'll go back to my program, hello.c. And now I want to get input from the user. So what could I do? Maybe I want to make a variable. And I'll actually ask you all who are here, what kind of variable should I make? If I want to store some text from the user, what type might be good for that? 
+
+I'm seeing a string. A string is a variable that can store a collection of text, not just a single character, but a whole collection of it. So I'll type string here. This is the type. And now, what should I name this variable? What might be an appropriate name here? 
+
+We could just call it name. This is a variable whose name is name because it stores someone's actual name, kind of confusing, but we'll go with it, string name. And then it gets some value. So I'll use this assignment operator here. What value should it get? 
+
+I could type just Carter here, like this, to get my own name. But I want to get the user's name. So what could I do? I'm seeing I could use get_string as we saw before. So get_string is a function that is included in the CS50 library that allows you to safely get some user input that is a string. 
+
+And as input inside these parentheses here, get_string can take some piece of text itself or a string. So I'll say, "What is your name?" And leave a space so the user can type in their name after that. And now, down below, I should think about what I should update here. 
+
+I have hello, world. But now what should I change this to? Not hello, world, but what? Probably a placeholder, as I'm seeing some folks say. I want to have a placeholder for this variable we created called name. So I'll say hello comma and then a space %s. %s is our format code, our placeholder, for a variable of the type string. 
+
+And now, how could I make sure that the value of name gets included here? I could simply follow this text with a comma, then say the variable name. And now I'll make sure that whatever value is stored by this variable called name, I should be able to have a placeholder for it here in %s. 
+
+So now let's try it. I'll do make hello to recompile our program, update it, and turn it back into machine code. I'll hit Enter. And I get a fatal error. Let's see. What might be wrong? 
+
+So there's a few clues here, "use of undeclared identifier string." Did I mean standard in? It's actually not what I meant in this case. But often if you'll see, you might get some errors saying something is undeclared, undefined in some ways. When that happens, you might want to take a look at which files you're including at the top of your program. 
+
+And in this case, I told you that get_string was included in the CS50 library. But I didn't include it up top. So let me go ahead and include it. I'll say, #include and then cs50.h to include that CS50 header file. And just for style's sake, what I'll do is actually move CS50 above Standard I/O just to keep things alphabetized up here. 
+
+So C comes before S. I'll make sure I have all my header files alphabetized just for style's sake. It would work the other way too, but just to keep things a little cleaner around here. So let me try this. I'll say make hello, hit Enter, nothing seemed to happen, which is good. 
+
+I'll type ./hello, which is my program, hit Enter. I'll see, "What is your name?" And I'll type Carter. And I should see, "Hello, Carter." So all seems to work in this case. Now, what questions do we have on writing our very own hello to you program? 
+
+Seeing none so far. And now let's move on to something that's a little more advanced. Actually, there is one question here. So why do we put name after %s backslash n? So it's kind of just by convention. The people who wrote printf, who came before us and made this function, they simply decided that printf would take one or more inputs. 
+
+So here I say, hello %s backslash n. And if I want to include-- if I want to take the value of this variable name and put it in this placeholder, I just simply follow up with this first input called hello comma %s backslash n and include that variable itself. If you want to get more advanced with this, you actually could. So let's say I want to take a first name and a last name. I could actually have two placeholders, hello %s space %s. 
+
+And now if I wanted to include another variable, one let's say changes name to first name and then have one later called last name, here's how I could use printf. I could now have three inputs separated by commas. The first is the actual string I want to print with the placeholders. The next one is the first variable to replace that is the value of first name will go into this first placeholder and then the second variable, last name, that will go into the second placeholder here. 
+
+So I'll update my program. I'll say hello string first name. What is your first name? And then here I'll say, string last name gets the value of get_string asking, what is your last name? --and a semicolon to finish. So now I'll type make hello. And I'll run ./hello. 
+
+I'll type Carter followed by Zenke. And now I'll see "Hello, Carter Zenke." So there's some other ways to use printf if you want to actually involve more than one variable in your output. 
+
+Now, building on this, let's actually continue on. And let's try actually making a more advanced program to store our contacts. So I'll go back to my slides. And I'll show you this. We're going to write a program that takes in and stores and then later prints out a user's contact information. 
+
+And so if you're going to write this program, I want you to include the following three attributes of somebody. Make sure you include, let's say, their name. You can treat it as either first name or first name and last name, their age, and also their phone number, so name, age, and phone number. And I want you to, if you're watching this as a recording, maybe pause the video here and try to write this program yourself and then come back and we'll write it all together. 
+
+All right. So if you're back from writing this program, let's go ahead and try to write it all together here. Go back to my code space. And this time, I'll get rid of hello.c. I'll x out up top. And now I'll type code contacts.c to create this new file that is a C program called contacts. 
+
+And I'll include my initial libraries. I'll say include stdio.h and include, perhaps up top here, cs50.h as well. Now I'll type int main(void), what we do to kick off all of our C programs here. And now I need to get the information from the user. So I'm curious, for those of you who are here live, what should I be doing to actually get the user's name? Well, probably similar to what we did before. 
+
+I could say, string name equals get_string what is your name? Just like this. But now I want to get their age. And I'm curious, what type might be good for getting their age? Maybe an integer. So I could say int age equals get_int what is your age? Just like this. 
+
+And then finally, down below, I want to get their phone number. But what type might be best for a phone number? Seeing a few options here. So one might be an integer. It is a phone number. So it could just be an integer value. But it might be better to find as a string. 
+
+So the difference here is that if I say int, let's say just number for phone number, get_int what is your phone number? Well, that restricts the user to entering only digits. And sometimes you might see phone numbers written with dashes or plus signs for country codes. And if I wanted to include those, well, if I have an int, I actually can't include those. 
+
+So if I wanted to be able to have the user type in pluses along with numbers, a string might be good for this. So I'll say instead string number and use get_string what is your phone number? Now the user could include not just numbers, like 7 or 1 or so on, they could also include parentheses, dashes, plus signs, whatever they need to enter their phone number. 
+
+And now to print all this out, I'll go back down below. And I'll say, let's say, why don't we print out name followed by their name? And why don't we print out, in this case, the age followed by their age using %i for our integer here and then printf and then number followed by %s backslash n semicolon. And now I'll be able to include all of these as placeholders, name, age, and number. And I'll be able to take the value of name and put it in this placeholder, for instance. 
+
+So why don't we do this? I'll say, make contacts, then ./contacts. Hit Enter. What is my name? Carter. What is my age? 25. I'll type in a phone number. I'll say, plus one. Let's go with 555-555-5555 for a random phone number here. Hit Enter. And now I see that same information being printed back out to me. 
+
+So what questions do we have on this contacts application here? OK. So I'm not seeing any from our live audience. But what we'll do is kind of round out this week's section by focusing now on not just getting input from the user and storing it in variables, but actually writing our programs with our very own functions and loops and conditionals. And I think things get a lot more interesting when we get to use other kinds of building blocks here. 
+
+So let's talk now about, again, functions, loops, and conditionals. And in this week's problem set, you'll see you'll be tasked with making your very own pyramid like the pyramid that's in Mario, that very old game and also somewhat new game coming out very soon that Mario has to go through and fight enemies and go through a higher level by jumping over things like this pyramid that we see on this video here. 
+
+So there are a few kinds of loops. And one of these loops is called a while loop. A while loop is great for when you want to maybe do something while some condition is true in your program. So as one example of this, let's say I have a while loop that looks a bit like this on the left-hand side. 
+
+Well, I will tell you right now that the output of this piece of code is going to look a bit like this on the right-hand side. I'll get four hashes on the right-hand side. But how did we get here? Let's walk through it step by step using the syntax that we see here. 
+
+So the very first line of code, int j, gets the value 0. Well, that creates this container in memory called j that has this value called 0. And now here's where things are a little more interesting. I have this variable. But I want to do something with it. 
+
+I could make a condition out of it. I could say, I want to do something in my program while it is true that the value of j is less than 4. That is this condition right here. Now, what do I want to do while the value of j is less than 4? Let's say I first want to print this single hashtag down below. 
+
+So now I've gone and I've said, well, is j less than 4? It is. It's currently 0. So I'll print out a single hash. And then what will I do? I'll then say, let's increase j by one using the syntax of plus plus, some syntactic sugar here, to say j is now one more than what it previously was. 
+
+And now, logically in this loop, I'll go back up to the top. And I'll reassess this condition. I'll say, is j still less than 4? And for those of you who are here live, is j is still less than 4? I think it is, right? So we'll keep going. We'll go through this loop one more time. 
+
+I'll say, print out another hash. And then I'll increase j by one. So now what is j? j is 2. I'll ask again. Is j less than 4? It is. So let's do this again. I'll print out a hash. And I'll increase j by one. 
+
+And finally, I'll go back up to the top, ask, is j less than 4? Well, it still is. It's still 3. I'll print another hash, add one, and now when I go back up to the top to assess this condition, is j less than 4? Well, j is equal to 4. It's not less than 4. 
+
+So we'll stop doing the code in this loop. And we'll instead print out the special character we saw in lecture, backslash n, that says we'll move to a new line. So that is one way, in this case, to get some set of hashes going along the bottom of, let's say, our pyramid using some kind of while loop. 
+
+But there's also another way to do this. We could think of it not just in terms of a while loop, but in terms of another tool called a for loop. So a for loop is-- it can allow you to do very similar things to a while loop. But it's good for when you know the exact number of times you want to iterate. 
+
+A while loop is great if you're not exactly sure how many times you want to do something, but you know you want to do it while something is true. A for loop is great when you know the exact number of times that you want to actually loop, in this case. So we could actually write that very same while loop using code a bit like this on the left-hand side. 
+
+There's a few components here though that we need to break apart. So maybe the first piece here is going to be this part on the left-hand side. Let me actually zoom through this. Let me show you-- oops. Let me come back here. What do I want to show you? 
+
+Yeah. So let's actually go back to the very beginning of this. If we go here, let's look at the very top of this for loop. So for int j equals 0 semicolon j is less than 4 semicolon j plus plus. That probably looks familiar from our while loop, right? We had those kind of very same things in our while loop. 
+
+We first set j to be 0. Our condition was, is j less than 4? And the thing we did each loop was increase j by one using j plus plus. So we've taken all those same components but simply put them at the top of our for loop. And it allows us to simplify our syntax here. 
+
+So on the inside, we just say what we're going to do for each iteration of this loop, which is print out a single hash. So to visualize this, on the right-hand side, let's say our very first thing we do in this for loop is we create a variable called j that gets this value called 0. Then we're going to print out a single hash. 
+
+We're going to ask that question again. Is j less than 4? Well, it is. So we'll do that thing we said we'd do at the very end of this for loop, j plus plus. Now j becomes 1. We'll go through, print out another hash. 
+
+And then we'll say, is 1 less than 4? It still is. I print another hash and keep going. And now we'll see, is 2 less than 4? Well, it is. So it will print another hash. j is 3. Now j is 4. No longer will it be printing out these hashes. 
+
+That condition, j less than 4, is no longer true. We'll instead print backslash n to finish things off at the bottom. So what questions do we have here on the syntax for while loops and for loops, if any? 
+
+A good question, is there any difference between the while loop and the for loop other than the initial condition and the update in the same line in the for loop? Any differences? I think the main difference is more syntax. So as you see here, they are in a different kind of order as we saw in the while loop. 
+
+I'm going to go out on a limb and say I think that most things you could do in a while loop, you can also do in a for loop and vice versa. Generally though, the syntax of a while loop is better suited for if you have some condition, you're not sure when it will be true, but you know what that condition is. So you'd include that in the while loop, whereas a for loop is good because you kind of get to actually specify the exact number of times you want something to do that loop over and over again. 
+
+If that makes sense and answers your question, let me know. If not, I can give you another take on that. Let's see. Why is the j plus plus now outside of those brackets here, these curly braces that you see on the left-hand side? So that's simply the way that the makers of C decided it would be. 
+
+You might see some very similar syntax across different languages beyond C, also in things like Java and maybe even Python as well. Basically this allows us to simply make things a little more compact. We're moving that increment, what we do each loop, to increase this variable, j. We're moving it to the actual definition of the for loop. Nice. OK. 
+
+So with these kinds of tools, I want to pose a question to you, which is, let's say we're able to get to a point where we're printing out a single line of hashes. This code here prints out a single line of hashes and moves to that new line. But let's think for a moment. What could I do to get not just a single line of hashes, but maybe even a full square of hashes, having multiple lines now? 
+
+I have one loop to make a single line. I'm seeing an idea coming up in the chat. Maybe we could use another loop to have more than one line, not just a single line, but maybe multiple, like four lines of four hashes to make a square of hashes. And it's actually true. You can take a loop, like this, and put it inside of another loop, a bit like this here. 
+
+So notice how the inner loop, this for int j equals 0, j is less than 4, j plus plus, that is still printing out a single line of hashes. But now I'm going to do that step four times per the for loop that is around that loop, for int i equals 0, i is less than 4, i plus plus. The result of this will be the square we see on the right-hand side of hashes. 
+
+So as you're working on a program like Mario, don't be afraid to make a loop and then put that loop inside of, perhaps, another loop to help you solve the problem you're trying to solve in this case. Now, to help us focus even more on functions even beyond loops in particular, let's go ahead and actually try to take a first step towards writing that Mario problem that we see in this week's problem set. And, in this case, we're going to-- well, actually in the problem set, you're asked to write a right-aligned pyramid. 
+
+In this case though, we'll actually write a left-aligned pyramid. So if you think of your right hand and your left hand and thinking which way should the pyramid go, a right-aligned pyramid kind of goes up to your right, whereas a left-aligned pyramid goes up to your left. And I would probably argue a left-aligned pyramid is a bit easier than a right-aligned pyramid. But I'll leave that part up to you as you work on the problem set. 
+
+And today we'll focus on our left-aligned pyramid. So a left-aligned pyramid looks a bit like this. Oops. Looks a bit-- oh, sorry. I didn't have those slides in this presentation. That's OK. 
+
+We will do, instead, talking about functions and what we could do to create a left-aligned pyramid if you can visualize in your head. Let me go to my actual code space over here, what that looks like. I'll say, code pyramid.txt. And I'll show you an example. So here, this is an example of a left-aligned pyramid. 
+
+This is a pyramid of height five. But if I wanted to have a pyramid of height four, I could simply get rid of a hash here and a hash there and a hash there and a hash there. And now I have a pyramid of height four. 
+
+And pyramid of height three too, I could say get rid of this hash and this hash and this hash and this hash. And now I have a pyramid of height three. I could keep going, a pyramid of height two and even a pyramid of height one, just to help you visualize what's at stake in this problem here. 
+
+So if we want to make our very own pyramid, a program that prints our very own pyramid, why don't we go ahead and make a file called Mario. I'll say code mario.c. And inside I'll do the usual things. I'll include stdio.h. I'll include cs50.h, these header files that have the CS50 library and Standard I/O library somewhat defined in them. 
+
+I'll then say int main(void) to kick off this program. And on the inside, what's the first thing I should do? I probably want to get height from the user. But how could I do that, those of you who are here live? How could I get a height from the user to print out this pyramid? 
+
+So I'm seeing, maybe I want to use something like an integer to store the height because, again, this pyramid will be some number of blocks tall. So I like the idea. Let's go with that. I'll say int height here. 
+
+And I could, for instance, say int height equals 5 off the bat. But I could probably get the input from the user using that function we saw earlier, get_int, like this. And I'll prompt the user for some height. 
+
+So now it's a good idea, once I'm at some stopping point in my program, to try to compile it and see if it works. I'll then type make mario, hit Enter, and I'll type ./mario. I'll see I'm prompted for a height. I'll hit 5 here and nothing happens. But at least I know my program tends to work at this particular stage. 
+
+So let's think about how we could use functions to be solving this problem. Now, here we have this function called get_int. But it's worth actually diving into what get_int is doing for us and talking through some vocabulary that can help us understand what get_int is actually doing. 
+
+So for that, we'll focus on functions. And notice here how we can actually define get_int. We, at CS50, define this function for you. You don't see its definition in your actual code because you can only just use it now. But we did work on defining this function for you. 
+
+And notice a few pieces of this function. Notice how, up front, we have this idea of the name for this function, this one called get_int. We could think of it kind of like that black box we saw Dave mention in lecture. We have some algorithm, some function, that is called get_int, some black box here that's going to take an input and give us some output. 
+
+Now, we can also define the output of get_int. We could do this part for you. We said that it will take an input, in this case, called prompt that is of type string. So notice how when I used get_int, I typed in a string as the input to get_int. This input was called height followed by a colon. 
+
+So now, in this case, we see that get_int takes a string that within that function is called prompt. And then what does get_int give us? Well, at the very end of the day, it gives us back an integer, in this case, a whole number that the user actually typed in themselves. 
+
+And so, of course, we would use this function a bit like this. We could say, take in a prompt to give us back two or four or so on. But we use it using int height gets the value of something like this function, get_int followed by height. And when this function runs, it returns to us what we said it would return over here, something of type integer, if that makes sense. 
+
+So questions then on this function declaration, what we did over here to define what get_int is doing for us? OK. Not seeing too many questions here. So why don't we keep working on our Mario program? 
+
+I'll go back over here. And we saw before that I could print out a single row of hashes using a for loop, right? But maybe it would be worthwhile to consider how I could put that code that prints out a single line of hashes into its own separate function that I could use in my main part of my program, this one called main up here. 
+
+If I wanted to define that code that writes that line of hashes for me separately, I could probably put it in its own function. And to define my own function, I could probably go down below here and say something like this. Why don't I create this new function. I'll call it, in this case, print_row. 
+
+And what kind of input do you think print_row should take, ideally? Maybe I want to modify the length of the row. How could I say print_row takes an input to modify the length? Any ideas in the chat? 
+
+One thing I could do is think, well, the input to this function, I want it to be the number of hashes to print on the row. So that seems to be a number, an integer. So I could say, print row takes an input that is of type integer. And I have to give it a name. I'll call it, in this case, length, the length of that row. 
+
+And now I'll think, what should print_row return to me? Well, it doesn't really return me a value. If I'm going to use it, it simply just prints things out to the screen. In lecture, we saw a difference between return values and side effects. 
+
+In this case, it just has a side effect. It just prints things to the screen. So actually make sure that this return value is simply void. It's nothing in particular. So now print row is a separate function. It has an input called length that is of type int. And it returns to me nothing in particular, just prints things out to the screen. 
+
+So now inside of print row, I could have that very same loop we saw earlier, perhaps a for loop. I'll say for int i is 0. And i is less than-- i is less than what? Before, we saw 4 to get a length of 4 or 3 to get a length of 3. But now I want it to be a variable length. I could decide later what I want the length to be. 
+
+I'm seeing some folks saying maybe I could use this variable that's input to print_row called length. I'll try that. i is less than length i plus plus. So now when I use this function print_row, I could pass in some number. And then I'll loop that many times in my for loop. 
+
+And what will I do for each loop? Well, I'll print out, in this case, I will print out a hash each time. At the end of all that looping, I'll print out simply backslash n to move to a new line. So this is my print_row function down below. 
+
+Now, if I go up top, I could try to use print_row. I could say, well, I want to print a row that has the length of four, like this. So I'll first get the input of height from the user. And I'll not use it for now. I'll just use print_row with the value 4. 
+
+I'll go to my terminal here, type make mario, hit Enter, and I seem to be getting an error. What is the error? You'll see here, implicit declaration of function print_row is invalid in C99. What ideas does that bring up for you here? What might I be doing wrong? 
+
+Yeah, so it seems I haven't actually included what we're calling the prototype for this function. So if I look down below here-- actually, if I read my program top to bottom, like C would, I'll see I'm going to include some files, have a main function, get the height, and then call this function or use this function called print_row and give it the value 4. 
+
+But up until now, if I'm reading top to bottom, I actually haven't seen the definition for print_row. Where is it? Well, it's below. It's down here on line 10. But I can't be calling this function if I haven't told C that's going to come up in my program yet. 
+
+So what I should do instead is take the function prototype, that is its name, its input, and its return value, and put it at the top of my program, often by convention, below my includes. And I'll follow it with a semicolon here, saying this is my function prototype. This is the line of code that tells C, I promise I'm going to define for you what print row is later. But for now, just let me use it when I say I'm going to use it. 
+
+So now in main, hopefully C doesn't actually complain when I use print_row because up top I told it exactly what I'm going to use as well. So now I'll type make mario, hit Enter, and that seems to work. So now I'll type ./mario, hit Enter, say the height is 6, hit Enter, and I get this line of only four hashes. 
+
+But what could I do to update this program to print out not just four hashes, but the same number that the user typed in? I want to modify this piece here. But how could I modify it? 
+
+Yeah, I'm seeing some ideas. I could probably use this variable called height. So we know that this variable called height is a container for the number I typed in, in this case, 6. So if I want to pass in that same value to print_row for it to print out a row of that length, I could instead say print_row parentheses height and save that. 
+
+Now I'll type make mario, ./mario, and type in a height of 5. Now I get, in this case, five hashes down below. And notice in particular that in this case, the name of the variable that I am, what we call, passing into, or inputting to, this function print_row that is not the same as the variable I said I would get down below, this integer called length. 
+
+What actually happens is height, we have storing a value, in this case, five down below, that value for height is given to print_row. And as long as I'm running the code in print_row, that value, 4, will be associated with this name, length, in this case. So I took the value that height stored, 5, I gave it to print_row. And as long as print_row is running, that value, 5, is now called length in the context of this function print_row. We call that this idea of scope in computer science. 
+
+So here we have a way to take the user's height and a way to print a row of that height. We're not quite all the way there yet. But what questions do we have on the code so far? 
+
+I'm seeing a question here. Is there any situation where not prototyping but declaring the function above main would be better? So notice here we had the prototype for print_row above main. But we had the definition for print_row below it. 
+
+Now, I think the question is asking, is it ever useful to do essentially this, to cut and paste this and put it above main, a bit like this? You certainly could. But I find it more readable, in this case, to have the main function up first because when we run our program, the main function will always be the first to run, so more style for style's sake than anything else, in this case. 
+
+Question here. In line 4 and 12, you have declared void print_row int length two times. Why is that OK because we can't do that with variables? That's actually a good observation. So if I were to, for instance on line eight, create a variable called height and then later on create a new variable called height, like this, I would find that C, when I try to compile my program, doesn't like that. 
+
+I can only have one variable under one name at the same time. I can't have two variables with the same name. Here though it seems like I have two functions with the same name. I have one called print_row up here and print_row down below. I think the answer to this is that built in to C is this syntax that if you have a function you want to use and to define later in your code, you simply copy and paste the prototype, its name, its input, its output, put it at the top of your file, and C knows this is a function that will later be defined. It's on a separate function with the same name. 
+
+And one more question here. Why is height printing length when logically height is up and down and not left to right? That's a great question. We're going to fix that in just a moment. 
+
+So here we notice that, in my separate file-- I'm going to make code pyramid.txt. If I wanted a pyramid of height, let's say, three, notice how the bottom row has length three, in this case. So a pyramid of height three, the bottom most row, that has the length of three. But also notice how above this has length two and then length one up top. 
+
+So there's probably an association between the height and the actual length of these rows I'm printing. So what if we tried something a bit like this. I know I want to print more than one row. And I probably want to do it in a way that involves a loop. We saw a loop as a way to do things more than once. 
+
+So I could say maybe something like, for int i equals 0 i is less than-- well, how many rows should I print in this case? If I have a pyramid of height three, how many rows should I print? Seems like three. 
+
+So I think, in this case, it's safe to loop height number of times and increase i by one every time we go. So now inside this loop, I'll print_row. And maybe I'll keep it the same with this input called height. So let's try that. 
+
+I'll say make mario, ./mario, height of three. And I got a square. So it seems like we're getting there. But I need to change something about this program. What should I change do you think? 
+
+So I'm seeing a few ideas. One is actually to use this variable here, i, that we declared and initialized inside of our for loop. So as long as we are within this for loop, within its curly braces, I actually have access to this variable, i. i is what's called in scope. I could use it throughout this portion of my code. 
+
+So maybe I don't want to print a row that is of length height, but maybe of length i. So first, i would be zero. And then it would be one. And then it would be two and so on. So actually, if I look at my pyramid, my very first row is one, then two, then three. 
+
+So maybe I don't want to first print out zero, I want to print out one. But how could I change this to not print out zero first, but one? Any ideas? I'm seeing maybe I could just add one as we go. So that's actually a good idea. 
+
+Why don't I say, first i is zero. But when i is zero, I want to print out one hash. So I'll say, just take i and increase it by one. Well, next, i will be one after going through this loop. 
+
+Then I'll say, well, how many hashes do I want to print? Well, just one more than what i currently is. So I'll maybe say that's print out a row of length i plus one again. And then i will be two. I want three hashes. So I'll just say i plus one again. And so maybe this should work. 
+
+So I'll say, make mario and then ./mario, pyramid of height three. And now I seem to be getting somewhere. So I'll make my terminal bigger. I'll say, make mario, ./mario again, height of five. And I seem to be getting what I'm looking for, this left-aligned pyramid. 
+
+So let me ask, what questions do we have on this implementation of Mario using left-aligned pyramids and functions in general? All right. So seeing none here. And, again, the goal for these sections is to give you some tools to which you can go off and solve this week's problem set. 
+
+And now, one more tool I'll give to you is to think about how you could use the same idea of defining a function to actually work in your favor on this next Mario problem that asks you to write not a left-aligned pyramid, but a right-aligned pyramid. So we saw just now we created some function that looked a bit like this called print_row. In this case, it takes an input called bricks. We called it length, same thing. 
+
+Here we're able to take a length of hashes to print and then just print that out as we go. But now you could consider expanding that function's capability to take not just one input, but two, maybe one for some number of spaces before the actual bricks or hashes come up and then one that takes in the number of bricks to actually print out those hashes as you go. 
+
+So notice how over here, in pyramid.txt, if I want this to be right-aligned, I first print out some number of spaces and then my hashes as we go to move this pyramid from being left-aligned to now being right-aligned. So we'll leave you with that to consider as you solve Mario this week. But that was section one here for CS50. We'll hope to see you in future weeks. Thank you all for joining and see you next time. 
