@@ -1,0 +1,15 @@
+Lecture:        https://video.cs50.io/4vU4aEFmTSo?screen=m8eEPLU4kUQ
+                https://video.cs50.io/K1yC1xshF40
+Section:        https://video.cs50.io/tnbPMzwSN7A
+Shorts:
+    - Functions:            https://video.cs50.io/n1glFqt3g38
+    - Variables and Scope:  https://video.cs50.io/GiFbdVGjF9I
+    - Debug (Step Through): https://video.cs50.io/---HbbANxDQ
+    - Debug (Step into):    https://video.cs50.io/tk3cl8hyfqM
+    - Arrays:               https://video.cs50.io/K1yC1xshF40
+    - Command Line Args:    https://video.cs50.io/K1yC1xshF40
+
+
+- Passing any variable (except arrays) is passing via value (a copy of the variable with the same value), which means if the variables value has changed in the function (calee), it won't be changed in the other that passed it (caller)
+- Passing arrays is passing via reference (the same array is passed) which means if the array is changed within the function, the passed one will ba also changed
+- The strings equality cannot be checked / compared with "==", we must use strcmp() from the string.h library

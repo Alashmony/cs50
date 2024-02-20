@@ -1,0 +1,319 @@
+CARTER ZENKE: OK, well, hello one and all and welcome to CS50's week two section. This week we learned about arrays. That is how to store data inside of a computer using our very first data structure, if you will, this way of storing data back to back in a computer's memory. 
+
+So the goal of these sections here is to help you bridge the gap between lecture and this week's problem set. So we'll go through a few of the lecture topics, have you all ask the questions you want to ask, and get some practice that might help you as you go off and work on the problem set individually on your own. 
+
+So to begin, my, name is Carter Zenke. I'm one of the course's preceptors here on campus. If you want to be in touch with me, feel free to email me at this email right here, carter@cs50.harvard.edu. 
+
+But a brief overview of today. Today will look a bit like this. We'll begin focusing on this idea of compilation. How do we take the code that we write in C, for instance, that source code we write in a file, and how do we convert that to the zeros and ones that a computer actually understands and can run? 
+
+We'll then focus on this idea of arrays. How do we store data more efficiently than we've seen before? And then we'll focus in particular on this idea of a string. How do we store characters that then themselves form entire words or sentences inside of our computers? And finally, towards the end, we'll focus on this idea of command line arguments. 
+
+So you've already been using programs that use command line arguments in CS50 already. But now you get to see exactly what they are and how you could write programs that actually use them yourself. So let's dive right into compilation then. 
+
+So in lecture, we learned that compilation was a way of taking the source code we write, let's say some code in C, and converting it into the actual binary a computer understands. And our computer, as much as we might like to think so, it doesn't understand C as a language itself. There's an extra step that we have to follow called compilation that takes that source code and converts it to the binary that our computer actually understands at the end of the day. 
+
+So here, for example, is some piece of source code in C. And I'm curious, for those of you who are here, can you spot the bug in this source code? This is some C code here. If I were to run, make to compile this code, I might get some error. And I'm curious if you can spot what that error might be. 
+
+So I'm seeing a few people saying that we're missing the F in printf. There is no function in C called just print, at least in the standard library. So we have to say this is printf. And the point here is that when you're using source code, these kinds of bugs are, well, they're more obvious to catch. 
+
+If you're writing source code, it's kind of obvious, at least more so in other cases, what bugs you might have. But now let's consider, like we learned from lecture, that the next step in compilation is taking this source code and converting it into this middle language called assembly code. And this is an example of assembly code here. 
+
+And I'm curious, for those of you in this room, can you spot the bug in this program? Or could you tell me if there is a bug in this program at all? Feel free to take a look at this code, even if you're not familiar with assembly. 
+
+I'm seeing some shaking heads here. So the point here is that you get this lower level language, going beyond C, which is our source code, moving to assembly code, it gets a little harder to spot the kinds of bugs that arise in our programs. And now let's take it one step further. Let's go from assembly code down to the binary itself. And I'll ask the same question. Could you spot the bug in this code? 
+
+Feel free to chime in if you think you have it. I'm hearing some folks say, not a chance. You can't find the bug in this code. That's to be expected, right? Nobody among us is going to be an expert in binary that can kind of parse through each individual 0 and 1 and find the bug in this code. 
+
+So there's this idea of trust in computer science, that when you run this program, called Make at least in cs50, or other programs, like compile other source code, you're kind of trusting that it's going to take your source code as you have it and compile it exactly as is down in to binary. But you might not know if somebody were to be a bit of like a hacker and try to maliciously alter your compile to introduce a bug on the way of converting your source code down to machine code, like 0s and 1s. 
+
+So it goes to show you that often in computer science we use programs that we need to-- we use programs that we aren't quite sure whether we should trust or we shouldn't. And the only way to find out is to actually be trustworthy individuals. So as you go off in the world of computer science and you write your own programs, write your own source code that converts things perhaps from source code to machine code, you have to kind of trust yourself to be trustworthy in these cases to help us make the programs we want to make at the end of the day. 
+
+So we'll focus not so much on technical parts of compiling here, but more so on the actual ethical aspects of it too. So questions then on compilation, this idea of converting source code to machine code? Any questions so far? 
+
+All right, so the key thing to take away here is just that when you are in CS50 and you're working on compiling your code, you'll use this program called Make that converts your source code in C down to machine code. As you go off and learn more computer science, you'll see just how up in the air these things can be and how much you have to actually trust the programs you're using along the way. 
+
+All right, and a question here. What will we be using in the real world to compile our C code? So in the real world, just like in CS50, you'll likely use a program called Make. And there are various options that Make can have. In this case, in CS50 we've kind of specified those for you. 
+
+As you go off in the world of computer science and you try to expand your horizons, you might yourself set the options for Make to more clearly specify what you want the end result to be when you convert that source code to machine code. 
+
+All right, so let's keep going here. And our next topic from this week's lecture was this idea of arrays that is a way of storing data in a computer's memory. So in this week's problem set, you'll also get to see a bit of a game that's popular I believe kind of around the world, one called Scrabble. And if you're not familiar, in Scrabble you get these individual letter pieces, like ones for W, or ones for H, or ones for D, for instance. 
+
+And each of those letters has on it a certain point value. So let's see. Letter H, that little square that has H on it, that has four points that has been awarded. D, that little square that has D on it, that has two points associated with it. And as you play this game, the goal is to take these letters and convert them into entire words. 
+
+So if you had, for instance, something that looked a bit like this, you had these five letters, what word could you make from these five letters? You could probably make hello. So you can take all these five letters, convert them into this word, hello. And in Scrabble you'll play a word that looks a bit like this. 
+
+So notice here that H is worth four points. E is worth one point. L is worth one point. And O is worth one point. And if you add all of these points up, 4 plus 1, plus 1, plus 1, plus 1, well, you get a total of 8 points for playing this word. Now there's actually a correspondence conceptually between this idea of Scrabble and this idea of arrays. 
+
+So in the same way that we're taking individual pieces of data or individual squares of letters and convert them into one long word or one long space in computer memory, we're doing the same thing with arrays. We're taking these individual pieces of data and lining them up back to back to back in a computer's memory to store that data even better as we go and work on our programs. 
+
+So let's think ahead. And in CS50 you'll actually get to make your very own final project. And here is, for example, one student's final project in CS50. They wrote a website that allowed you to keep track of your hours of sleep each night. So maybe you yourself could make something similar to this by the end of the course. 
+
+But they allowed you to go to their website, type in the number of hours you slept that previous night. And they would store it for you and keep track of that day after day after day, so you could look back and see how many hours you've slept over time. 
+
+Now, if we only had things like variables and not arrays, we might be for something a bit like this. We might have to store this data in individual pieces kind of around our computer's memory. And we might even give them individual name, something like, well, on night one, we slept seven hours. On night two we slept eight hours. On night three we slept six hours. 
+
+And now I'm going to ask you this question here. Why might this not be very well designed? If we had to create one variable for every single night of sleep, why might that program not be very well designed? And what can we do better perhaps? Any ideas? 
+
+If we wanted to add more nights, that might not work. In this case, I would say if we're using one variable for every night, I mean, I think you're right. So if we wanted to later on edit our program, we generally specify all the variables that are part of that program at the beginning. So if we wanted to add more, I couldn't quite do that. 
+
+We'd have to find them all over again if we wanted to add them up. That's a nice idea. So we'd have to think back and be like, OK, did I use the variable night1 for this, or night2, or night3. Which one belongs to this particular number? So I would say that this isn't the best way to store our data using all these individual variables because it can get very hard to keep track of. 
+
+And so arrays here actually help us solve this problem. They let us take our individual pieces of data and put them all in a metaphorical and actually kind of physical line inside of our computer back to back to back in our computer's memory. So for instance, here's what it might look like to have each of these hours inside of an array. 
+
+We'd again, just put them back to back to back in our computer's memory. And we would then give this entire collection a single name, let's say nights. And so now we could see, well, on this first night, it looks like we slept about seven hours. On that next night, the next integer here, we slept eight hours, and then six, and then seven, and then eight, again, for a total of five nights of data. 
+
+Now, if we wanted to access not just this entire list of values, but some in particular, well, we have some special syntax we can use that C gives us. We could say something like this, night[0]. And that will return to us, that will give us that very first value in our array, so in this case, 7. 
+
+And you might be asking here, why not nights[1]? Well, in computer science, it's kind of a convention that we start counting from 0. As you saw when we wrote our very own for loops, we began them by saying often that i equals 0 or j equals 0. We start counting from 0. 
+
+And in this case, I would argue it actually kind of makes sense. Like nights[0], 0 means start at the beginning of this array called nights and don't move any further, move 0 places. If we're looking at the beginning of our array called nights and we move 0 places, well, we get back this number called seven. But what if we did this, we said night[1]? 
+
+Well, we begin. We'd look at the first place in our nights array. And we'd say let's move one step over. OK, now we found that second value. In this case, it was 8. And in the same way, we could say nights[2]. Well, let's begin at the very beginning. And let's find 7 here. But then we're moving two spaces over. So we go 8, and then 6. 
+
+And now we have that very third value in our array. So key idea here, we start counting from 0 as we're working with arrays. And there's a technical name for this, which is that arrays are 0 indexed. And what we're doing here is using this index, or this number, to find the value of the array that we're actually looking for. 
+
+So to make this a little more apparent too, you might often draw out an array. And you might try to assign an index to each of its elements. For instance here, we have this same nights array. But down at the bottom, we've indexed each of the elements. So the very first one is assigned the 0 index, the next one the 1 index, the next one the 2 index, and so on. 
+
+So we could use nights bracket any of these numbers on the bottom to get whatever number we're looking for. Now, questions here on arrays, this indexing process here? What questions do we have? 
+
+OK, seeing none for now. But feel free to keep chiming in if you'd like. Now, one common question we get is, how can we then actually create an array? We've seen the structure of an array, visually what they look like. But how do we actually create a structure for one? 
+
+And for that we actually need to keep in mind three different aspects of an array. If we want to create an array, C needs to know three things about that array. So for instance, one of the things it needs to know is, what is the name of the array? What should we call this collection of data in our computer's memory? 
+
+The next thing it needs to know is, what is the size of this array? How many elements are we storing? In this case, our size is five. It also needs to know though what kind of data we're storing or what type of data is inside this array. So we also tell it what type it will store. 
+
+And in C arrays only store a single type of data. So in this case, what type might we be storing? It seems like we were storing integers. So to combine these three ideas of the name, the type, and the size of the array, we put all this together in C syntax that looks a bit like this int nights[5]. 
+
+And so to break this down, we first say the type of whatever we're storing in the array, in this case, an integer. Then we say the name of the array, nights like that. And then in brackets we put the maximum size of that array, how many elements are going to be inside of it. In this case, we had five. And note that this counting is not zero indexed. 
+
+If I said int nights[0] here, I would be saying I have an array of 0 elements, which doesn't make sense. If I'm going to have an array, I need to have at least one element in it. So make sure that you keep in mind this is not zero indexed, even though later on when you actually try to access values in your array, that will be zero indexed at the end. 
+
+Now, if we wanted to add items to this array off the bat, let's say we wanted to create the array, declare it like we did here, tell C what type it is, what its name is, how many elements it had, and also initialize it with some values, we could do it with this syntax right here, using braces and then followed by the values we're going to input into that array spaced out by commas here, So 7 comma 8 comma six comma 7 comma 8. 
+
+Now, one question I see coming up is, can we change the size of an array? So notice here we declared that this array had a size of five. And in C you cannot change the size of an array. If I say it's five at the beginning, it has to be exactly five. We'll see ways later on in the course that you can actually try to allocate more memory and change the size of an array. 
+
+But a lot of it just involves copying what you currently have in one space of memory into a new space overall. More on that in week four. But for now, you can say that there's really no way to change the size of an array. So if you think you might need a lot of values, you might need to make a lot of spaces to have those values in your array. 
+
+Let's see what other questions we have here. So let me find a few. Can an array exist on multiple planes, like a 3D array for instance? So you could think-- this is getting a little advanced here-- of an array that actually contains arrays inside of itself. And that is a perfectly valid thing to do in C. You could have an array, where each element of that array is an array in itself. 
+
+And that way you have kind of like a 2D array, a bit like a grid. And then if you think even further, well, you could have an array where each element is itself an array. And each of those elements then have arrays as their elements too. And that gets you to this like 3D kind of structure. No need to worry if that made no sense to you. But generally, you can take arrays and put other arrays inside of them at whatever level you'd like to do that at. 
+
+Other questions here too. Let's see. A question here about negative one indexes. So if you've programmed in Python, you may have seen this kind of similar syntax of writing the name of some list, and then typing bracket negative some value, like negative 1 for instance. I believe in C this is not possible. 
+
+So that's a feature of Python, which gives you, I believe, the last element in your list. But in C there's no such thing as a negative one index. Indexes must be positive. 
+
+I have a question here. Let's say we have this array of five elements here. Could we add maybe only three and later on add the other two? You certainly could. So if you were to go back to this model of declaring your array, you could specify values for the first three in this array and later on add the other two. 
+
+Now, you have to be careful, though, because if you don't specify what those values should be, those final two values, they could probably be literally anything. So you don't want to touch them unless you're sure you've already set them from the beginning. Now, if you follow this kind of syntax here, you have to specify every single element of your array. You can't leave any out. 
+
+All right, so I think that covers most of our questions here about arrays. So let's keep going. Let's actually get some practice using arrays here. So we have a brief exercise in which you're going to write a program that takes an array of integers or actually builds an array of integers. And we want it to be the case that each integer is 2 times the value of the previous integer. 
+
+So for instance, you could think of a list like 1 and then 2. And then what's 2 times 2? Well, 4. And then what's 2 times 4? Well, 8. And then 2 times 8 is 16. So the entire list is 1, 2, 4, 8, 16. And we want to in this program print the entire array integer by integer. 
+
+So let's try this out. I'll go over to my code space here. And I'll write up this program. I'll call it, let's say, just double.c, meaning I'm going to double each element of this array. And now I can see here that I have a file called double.c. Now, what's the first thing I should do if I'm writing a new program in C? Any ideas what should I usually do? 
+
+I want to include the header file. So I'll say I want to include the CS50 header file, which gives me access to things like strings and so on. And I also want to include stdio.h, which will allow me to print things out to the screen. Notice that the standard io library, or stdio library, contains functions like printf. 
+
+So I'll include that here. And I'll write the beginning of my program int main void and follow it up with what? Well, I probably first want to declare this array, that is to tell C exactly the important features of it, like what type will it be storing? What name will it have? What size will it be? 
+
+And so on this very first line I'll do that. We're probably going to be storing what type of data here? We want to be doubling numbers, and whole numbers in particular. So we're going to be storing integers. So I'll say int here. Now what should the name of this array be? It could be generally anything. 
+
+But I think for me I'll just call it something like sequence, that is some sequence of values that will double every time. And then how many elements should we store? I might just say let's go ahead and store five off the bat. We could change this later if we want to. So here I have an array called sequence that stores five values. 
+
+And what type are those values? Well, they're integers here. So if we go back to our problem statement, we saw that the first element of this array is 1. Now my question for you, how do I access the first element of this array using the syntax we saw earlier? What could I write to find the first element of sequence? 
+
+You could probably try something like this. I could write the name of sequence and then bracket 0. So bracket 0 means start at the beginning of sequence and move 0 steps, find that very first element in this array. And if I want to assign it some value, well, I could do that here in C. I could say sequence[0] equals some value. In this case, I'll say it equals 1. 
+
+So now I set the very first value of sequence. And why don't I print it out while I'm here? I'll say printf % i for that integer format code, backslash n. And now I'll say sequence[0]. So to be clear here, what I'm doing is holding a placeholder for an integer. I'm going to put inside that placeholder the value of sequence[0], which according to line 8 we just set to be 1. 
+
+So now here comes the trickier part. How do I try to go through this array and update each of its values over time? Well, I set the very first one. But now I want to more dynamically set the rest of them. I don't want to do this. I don't want to say sequence[1] equals 2, sequence[2] equals 4. That's getting a little in the weeds. 
+
+I want to automate this process for me. What kind of structure that we've already seen could we use? I'm seeing this idea of maybe some kind of loop. And we learned in our last section that a for loop is good when we know how many times we want to loop over all. 
+
+So here we saw our sequence had a total of five values. We already set the first one. So I think we want to loop a total of four times to set the second value, the third value, the fourth value, and the fifth value. So I could write a for loop like that. I could say for int i equals. 
+
+And now here's a question. What should i be equal to? Well, i in this case, let's say it refers to the index of the array we're trying to set. So what's the very first index we want to set? We already did 0. But now we should do 1. So int i equals 1. 
+
+Now, how long do we want to iterate for? Well, at least until we get to i is still less than 5. So I'll say i less than 5 and then i++. So now we have i going from 1 to 2 to 3 to 4. And that will update our next four values. It will not go to 5 because, again, in this array, there is no sequence[5]. That would be going beyond the bounds of our array. 
+
+Even though there are five elements, again, we index from 0. We can't move five spaces total. We can't move forward five spaces from the beginning of our array. OK, so now we have this. And the question becomes, how would I set this value of sequence? Well, I know I want to set sequence[i] in the first iteration. This will be sequence one. 
+
+And the next iteration it'll be sequence two. But how should I configure this value? I know I want it to be 2 times the previous one. I'm seeing a few ideas here. Some of them involve actually doing a bit of math inside of the brackets here. And that's something you can actually do in C. 
+
+So I could say maybe let me get the previous value. What is that value? I'll say sequence[i]. And then to look behind this value, I'll say minus 1. So if I'm currently at i equals 1, I'll be saying sequence[i] sequence one, equals sequence bracket i minus 1 or 0, sequence[0], so the previous value here. Now, if I want to multiply that by 2, I could do the very same thing I've done before in C. I could say star 2, which means multiply this particular value by 2. 
+
+So again, if i is 1 here, I'll say sequence[1] equals sequence bracket-- well, 1 minus 1 is 0. sequence[0] times 2, well, that will set the next value of sequence, and so on and so forth. So once I do that, I can say maybe I'll print out this value. What is the new value of sequence[i]? And then I will go ahead here. And I'll say printf backslash n. 
+
+Actually, I don't think I need backslash n here. I already have it up there. So I'll leave things as is. And this is our entire program. So let's see if we can run it. I'll go back to my terminal. And I will say make double, make double to compile it. I see no errors. I'll now try this. I'll say ./double. And I seem to be getting somewhere. 
+
+I have 1, 2, 4, 8, and 16. So I'll go back to my code here. Let me ask, what questions do we have on creating an array, cycling through its values with a for loop, setting them as we go? For those of you who are feeling a little more comfortable, there's another way to do this too that doesn't involve separately setting a sequence[0]. 
+
+You could simply declare your array and have a single for loop that sets things for you. I'll leave that piece up to you, though, to do on your own. Now a question I see here about this program's design, wouldn't it be better designed to have a variable that says what the size of this array is? 
+
+For instance, let's say I'll set int size equals 5, like this. And now, maybe I'll replace this with size and replace this with size. And now I could change this it seems in one place. I could make this 10. I can make it 7, or 6, or so on. So I'll leave it at 5 for now. And let's see if that actually works here. 
+
+So I'll go back to my terminal. And I will do this. I'll type make double. And I'll run it again, ./double. And that seems to work. So I'll go back to my program. Maybe I now want-- let's go with eight numbers overall. I'll go back to my terminal. And now I'll say make double again, ./double. And I seem to have allowed myself to pretty quickly change the size of this array and print out a longer sequence as I go just now by changing one particular value. 
+
+And this is actually a common, let's say, pattern you'll see in writing well-designed programs. It's not really a good practice to specify what we call a magic number, that is a number in here that we're not quite sure what it is, what it refers to. And it might repeat throughout our program. If you have a number like that, best to create a variable and change it in one place, so you don't have to go through later and update all the places we had, for instance, 5. 
+
+Now, another question I see here is, could we use getint? Well, we know in the CS50 library we have this function called getint lets the user type in what value they want to give. I'll try that. I'll say size is getint. And I'll say enter a size, like this. And now I'll go back to my terminal. 
+
+And I'll say make double. And I'll run ./double. Now I'll say, let's go back to-- maybe let's go back to 6. That seems to be right, one, two, three, four, five, six. Now I'll type make double and then ./double again. And now I'll type 9. 
+
+And I'll see I have an even longer list. So it seems like we could even take user input and then decide the size of our array after that. All right, other questions here on this program? 
+
+All right, so let's keep moving on. And let's focus now on this idea of strings. So we've seen this idea of arrays, which is this structure we have to store data back to back to back in a computer's memory. And it turns out that strings are actually not all that dissimilar from arrays. 
+
+In fact, strings themselves are a special kind of array. So consider here, again, our Scrabble example. We had these individual pieces of letters, like H, E, L, L, and O. And they all formed together this word hello when we put them all together back to back. Well, in the same way do strings actually work. We can take individual letters like these. And we can then do something a bit like this. 
+
+We can put them all together and make entire what we might call in this case a phrase. So strings are nothing more than arrays, where the elements are characters. So here we're now seeing that we have this array called phrase with the letters H, E, L, L, and O. And we can use the very same syntax that we saw earlier. 
+
+I could say phrase[0], which gives me the very first element of phrase. I could use phrase[1], which gives me the E here, and then phrase[2], which gives me the L. So I'm able to do the very same things I could do with arrays, but now with strings. One fancy feature though that you should pay attention to, particularly for this week's problem set, is that we represent characters in C underneath the hood using integers or numbers. 
+
+Remember from an earlier lecture we learned about this idea of ASCII, or the American Standard Code for Information Interchange. And we saw a mapping a bit like this, where A maps to this integer 65. B maps to this integer 66. C maps to this integer 67. 
+
+And so when we see these numbers, 65, 66, 67, and they're the type of character, we then actually convert that to a character. We print it out as a character overall. So consider then that this phrase that we see here, hello, well, it could also be a set of numbers, 72, 69, 76, 76, and 79. These are the ASCII codes that correspond to those letters we saw a little earlier. 
+
+So with that in mind, let's think about writing a new program, one that actually tells us if a string has characters that are in alphabetical order or not. Now, we can assume here that all the characters are uppercase. So let's begin. 
+
+I'll go back to my code space. And I'll now create a new program. I'll call this one alphabetical.c. And I'll do the very same things I did with double.c. I'll make sure to include CS50.h. I'll make sure to include stdio as well, include stdio. And then I'll also say int main void. And now I can write the rest of my program. 
+
+So maybe the first thing I want to do is get a string from the user. So I could say, string phrase equals get string enter a phrase. So I'm using the CS50 libraries get string function. And now I'm able to ask the user for some phrase. But now I want to ask that question, is this phrase in alphabetical order or is it not? 
+
+And it seems to me like the very first step there would be to go through every individual character in our string. We have to have a way of looking at every character to test, is every character in alphabetical order or is it not? So what can we do to loop through this string or really this array of characters? 
+
+I'm seeing this idea of a for loop again. So we used it for our array of numbers. And there's no reason that same approach can't work now when working with a string because, again, a string is just an array, but an array of characters. So I'll say this. For int i equals 0. We'll begin at the very first character in our phrase, i is less than. What should i be less than? 
+
+I mean, I don't know quite how long this string is. If I typed in hello, it would be five characters. If I typed in goodbye, it would be longer. What could I do to find the length of this phrase? So I'm seeing a few folks who are catching on to this, which is that in lecture I believe we saw this function called strlen, S-T-R-L-E-N. And strlen actually can tell us the length of a string if we call it and give it our string as input. 
+
+So strlen lives in this library called string.h, or our string in general. And the header file is string.h. Now, if I want to test how long this string is, I could say int length equals strlen, and then pass in my string, in this case, the one called phrase. So now I have this variable called length that I could use in for loop, i is less than length i++. So whatever the length is, I'll make sure to first calculate that and then will I test every individual character in my string making sure not to go past the length of that string. 
+
+Now, a few other ways to do this too. I could also say int i equals 0 comma length equals strlen of phrase, like this. And this is getting a little long. And I have to zoom out for this. But this allows me to put everything on a single line. And it's implied here that if the very first variable i type is of type int, if I type a comma, the next variable will be that same type, in this case, an integer. And I can assign it some value, like the length of phrase. 
+
+This puts everything in one for loop. What I probably wouldn't want to do is this. I might not want to say i less than strlen of phrase. But why might I not want to do that? Let me show you the full line here. Why would it be better to define length here in this initialization step than here, which is my condition that's checked every loop? 
+
+So I'm seeing a few good answers, which is that if I know I'm going to be checking this condition every single loop, well, why do I have to run strlen every single time? The length of the string isn't really going to change. And in fact, we'll just add more time to my program as it runs, probably not a whole ton of time if computers are so fast these days. 
+
+But it still adds some time. So best to put it elsewhere to calculate it once and then use that variable throughout your code. So I'll say int length is the result of calling strlen with phrase. And I'll do it this way, keeping things separate just for line length sake at this point. 
+
+OK, so now I'm able to access every individual character in my phrase. And to kind of make this a reality, I could say printf %c for an individual character. And now, I'll print out, let's say, phrase[i]. And now I'll open up my terminal. And I'll see if my code actually compiles. 
+
+I'll say make alphabetical. Seems to compile. I'll run ./alphabetical, type in my phrase, which is hello, hit Enter. And I see it printed back to me. I probably need a backslash n at the end here to make sure that I'm actually returning my prompt down below the result of my program. But I can fix that here. I'll go back in. And I'll scroll down. And at the very end, I'll include a backslash n, like this. 
+
+Now, though, I think we should take kind of a broader look at this. If I type make alphabetical and I say ./alphabetical hello, I know I'm able to access the H, the E, the L, the L, the O. But now there's a question of, how do I know if something is in alphabetical order? 
+
+I can't really say-- there's no function I believe in C, at least that I know, that tells me does A come before B or does B come before A. What could I pay attention to instead? If we look back at this mapping here, what pattern do you see? 
+
+So one thing I notice here is that as we go forward in the alphabet from A to B to C, we notice that the integer representation is actually increasing as we go. So first 65, then 66, then 67. So maybe we could use that pattern in our own code here. I could go back to it. And let me change the format code from %c to %i. 
+
+That means I want to print whatever data is stored at phrase[i], whatever index of phrase. But I want to print it not as a character, but as an integer. I want to see what underlying number is being represented. So I'll try this now. I'll recompile alphabetical. Then I'll say ./alphabetical. And I'll give it hello. And now I see a lot of numbers. 
+
+So I mean, that makes sense. I told it to print out now the numeric representation of the characters it's storing. But let me try this again. I'll make it a little clearer. I'll go back to my program. And I'll add a space between every character to separate these numbers apart. And now I'll recompile. 
+
+I will say make alphabetical, make alphabetical, ./alphabetical. I'll say hello, in this case. And I see 104, 101, 108, 108, and 111. Now these don't seem to match. If I go back here I see A for 65, B for 66, C for 67. Why might they not match do you think? 
+
+Yeah, so notice how in here I've been actually typing things in lowercase. And lowercase letters have different numeric representations. Let me try this with capital. I'll say ./alphabetical HELLO in all caps, hit Enter. And now I see those familiar numbers, 72, 69, 76, 76, and 79. 
+
+So we can assume at least in this that all of our words to check for alphabetical order will be all in capitals. So let's keep going now. So I'm able to access each phrase or each character in this phrase. But now, what questions should I be asking? What should I ask maybe if something is not in alphabetical order? Or should I ask if something is in alphabetical order? And how would I convert that here to an actual condition? Any ideas? 
+
+Yeah, so I'm seeing we could maybe compare letters as we loop through our phrase here. So maybe we could do something a bit like this. I could say if there's some condition here. And maybe this condition is we'll check if characters are not alphabetical, like this because we know that if the characters are not alphabetical, if any two characters are not in alphabetical order, well, then the entire thing is in alphabetical order. 
+
+So what should I check? What should my condition be to determine if two characters are not in alphabetical order? Well, I could probably look at the first one. I could say phrase[i]. That gives me this very first letter. But now, what condition would be true if the following character is not in alphabetical order? 
+
+Maybe I could say if this current letter is greater than, let's say, phrase i plus 1, that is the next letter. So here's what we have. If this current letter has a numeric representation that is greater than the previous one, well, that means it's not in alphabetical order. And to this more concrete, let's go back to our slides. 
+
+Let's say we had B followed by A. Well, we'd first look at B. We'd say the B integer is 66. Then we look at the next one, A. That's 65. So we're seeing now that B has a greater value than A. That means they're not in alphabetical order. We can do the same thing for C and B, for C and A, and so on. 
+
+So I think we're on to something here. Now, what should we do in this case if these are not in alphabetical order? Well, we could probably print out something like not in alphabetical order. And now logically, what could we do? We know that our program is done. We don't need to check any more letters. If something is not in alphabetical order, if any two characters are not in alphabetical order, we can return and call it good. 
+
+So I'll return 0 here. And if you're not familiar, as we saw in lecture, return 0 basically means end my program here. Don't do anything else. As soon as you see this line, just quit and end my program. Now, though, let's try this. So I will say go back to my terminal. I'll compile. I'll say make alphabetical. And I'll type in ./alphabetical. 
+
+And now I'll type in something like CBA, which we know is not in alphabetical order. I'll hit Enter. And we see not in alphabetical order. So what if I did this? I could say ./alphabetical. Now I'll try ABC. Hmm. And I get not in alphabetical order. What might be wrong here? 
+
+Go back to my program. What do we see? Any ideas? Here's the full screen code again. So I did remove the correct line down here. So I haven't actually said when these things are in alphabetical order. So maybe that's something to consider here. There's a slightly more subtle bug though. 
+
+And that is let's consider what happens if we go back to our alphabetical order array here. So let's say we checked A and B. Those seem to be in alphabetical order, right? We did that when i was equal to 0. Now, when i was equal to 1, we checked B and C. That seems fair. 
+
+OK, so those are in alphabetical order as well. Now, when i was 2, we checked C. And what? I mean, what comes after C? I don't think there's really anything out there past C. So I think we made a mistake here. We don't want to be checking against values that are outside of our array. And in fact, that's kind of a common bug, but also a very dangerous one. 
+
+We don't want to be looking at places in memory that we actually shouldn't be looking because one, we'll get bugs and two, we might touch things we're not supposed to touch in our computer. So let me fix this. I'll go back to our code. And how should we adjust this? 
+
+Maybe we go from i equals 0 up to length but minus 1. So we get the very end of our phrase. Let's go back to our example here. We check A and B. We check B and C. And if those are in alphabetical order, well, we know the rest is in alphabetical order. We don't need to check C and whatever else comes after it, in this case, some empty value. 
+
+So let's go and try this again. I will now go back to my terminal. And I'll say make alphabetical ./alphabetical. And I'll run hello. And I see well, that's not in alphabetical order. Now I'll do ./alphabetical again. And I'll type ABC, hit Enter. I don't see anything. Now there's two options here. I could say if this. And I know they're not alphabetical. 
+
+I could try else maybe print alphabetical order, like this, and then return zero. But I would argue that might not be wise. And why do you think that wouldn't be wise? Yeah, so I'm seeing that we'll probably only check the very first two characters. So notice here, we begin with i equals 0. So i equals 0. We check. 
+
+Are the characters in alphabetical order or are they not? If they're not, we'll break out our program. That seems fine. If they are though, we'll say everything's in alphabetical order and return 0. But we didn't yet check the rest of our phrase, which we really should be doing. And then further return zero again means exit the program at this particular moment. So we're going to exit and never look at the rest of our code. 
+
+So this should be really elsewhere. And in fact, it should be probably at the end of our loop. We can only say for sure that this is an alphabetical order after we've gone through every pair of letters and checked that they are, let's say, not not in alphabetical order or that they are, in fact, in alphabetical order. So I'll say printf these are in alphabetical order, like this, backslash n semicolon and return 0 down below. 
+
+So this then is our entire program. And I'll run it now to test it out. I'll say make alphabetical ./alphabetical. And now I'll type in ABC. I see that's in alphabetical order. I'll do it again with CBA. And those are not in alphabetical order. So questions then on this implementation of our program, or on strings or arrays more generally? 
+
+OK, so seeing none right now. But feel free to keep chiming in if you'd like. Let's continue on then and focus on this new idea of command line arguments. So our final topic for today is this idea of running programs and giving them input not necessarily while they run, but even before they run. And now you've probably seen similar kinds of programs. 
+
+In fact, every time I went to my terminal and I typed make alphabetical, until I hit Enter, Make has not yet run. But notice how I'm not just typing Make, the name of the program, I'm giving Make some input or some argument, telling it what to make. I'm telling it here to make the program alphabetical. Now, you've also probably seen something like check50. 
+
+I can run check50. And this is the program itself, check50. I can hit Enter. And I'll see I get a bit of a help message here. But I also see the following arguments or inputs are required when I run check50. The slug in this case is required. And the slug refers to the problem I'm going to check, something like cs50/problems/ and so on. 
+
+But notice here how before I even run check50 I'm giving it some input, some additional context to go off of to run as a program. And we can do the very same thing for our own programs. So for instance, in mario, when you first wrote it, you might have done something a bit like this. You might have run ./mario and then while the program was running prompted the user for a height, in this case H. And maybe you typed in eight. 
+
+Well, in your actual C code you probably had something like this. You had your int main void, your main function in your program. And you had some variable perhaps named height that received the value of getint after we finished running. Now, we're going to transition here and make sure that we allow the user to actually give input before the program is even running. 
+
+So you can imagine Mario being run like this, ./mario space 8. So before Mario even runs, the user can tell us how high they want that pyramid to be. And if you do something like this and you want to capture this input, well, you need to change your C code. And it turns out you have to change it a little bit like this. 
+
+What do you notice that's different now? We still have int and main. But what looks different now? Yes, I'm seeing that void is replaced. So before we had void inside parentheses. But now we have what seems to be two different things, int argc and string argv with some braces. So let's go through first conceptually what's happening here. 
+
+So in our prior version of Mario, notice that when the user ran it, they only ran ./mario. They didn't give any other input. And that's actually reflected in our main function here. You can think of the main function as being the function that represents our entire program. 
+
+The int tells us the exit status code. If it's 0, that means all was OK. If it's non-zero, something bad happened. But either way, our program will return an integer. Now, main is the name of this function kind of by convention. And here inside parentheses we see void. 
+
+Our program or this function takes no arguments. And we saw this above. The user just typed ./mario. But they didn't add any arguments. But now if we change this, if the user actually types in an 8, we have to change our C code to take some input now. So our entire program now takes what seems to be a total of two arguments or two inputs. 
+
+One is called argc, which is of the type integer. The other is called argv, which is itself a string, but actually not just a string, an array of strings. So notice here we see that array syntax coming back? Argv with the braces here, that means argv is an array of strings. And in fact, we'll see it holds the arguments we actually give to our program. 
+
+So here let's take a look. We're going to write a program here that prints each command line argument given to our program just to kind of practice and get a feel for what argc and argv can do. So I'll go back to my terminal. And I'll type code argv. Actually, I'll just type-- yeah, code argv.c. 
+
+And now inside of this we're going to get a sense for what these command line arguments are doing for us. So I'll include, let's say, cs50.h. I'll include stdio.h. And now I'll type int main and not int main void. I now want my program to take some input at the command line. I could say int argc and string argv to say my program now has access to something called argc, which is a number, and something called argv, which is, in this case, an array of strings. 
+
+So now in particular argc is the number of arguments that my program received, the number of inputs it received, including the actual name of the program itself. So for instance, if I go back to that mario example, I type ./mario 8. In that case, argc would be equal to 2. I'm giving two inputs, the name of my program and the number eight. 
+
+Now, argv would itself have two strings inside. One would be the name of my program. And the other would be the input that I gave, in this case, eight. So let's try this. I'll go back to my code here. And I will try to loop through all the values in argv. I'll say for int i equals 0. i is less than-- how do I know how long argv is? I can rely on argc. 
+
+I'll say argc then i++. And now I'll print out something like this, argv %i is %s backslash n. And I'll fill this in with a few variables here. I'm going to refer to argv bracket i. So I'll substitute i in there. And then I'll also substitute argv bracket i here. So now I can see when I run this program, I should be able to print out argv bracket 0 is whatever argv bracket 0 is. 
+
+Argv bracket 1 is whatever argv bracket 1 is. So now I'll go back. And I'll try to compile this program. I'll say, in this case, make argv. I'll type ./argv. And give it some input, let's say, 1, 2, and 3 separated by spaces. Now I hit Enter. And I see my program had a total of four inputs. 
+
+The first was the actual name of my program. So argv bracket 0 is equal to ./argv. argv bracket 1 is 1, as we saw up here. 2 is 2. And 3 is 3. So let me try this. I can say ./argv. I could even type in something like my name, Carter. And now I see argv bracket 1, name of my program. argv bracket 1 is Carter. Argv bracket 0 is the name of my program here. 
+
+So to be clear, argc then is the total number of arguments we get. We can use it to figure out how long argv will be. But all the interesting stuff, all the actual input to our program will be stored in argv as a set of strings. So questions then on argc and argv? What questions do we have? 
+
+OK, so while we're here, I actually see a good question, which is asking, we noticed that argv is storing a collection of strings. But what if we wanted to get a number and use it in our program, like in that Mario example, for instance? So let's consider trying to re-implement Mario, but now using command line arguments. 
+
+So what if I did this? I can go back to my terminal. And I'll type code mario.c. I'm not going to write the whole thing. But I will try to make it so that I'm able to run Mario using command line arguments. So instead of, in this case, running int main void, I'll start off with int main int argc string argv. 
+
+And again, this is allowing my program to take inputs at the command line. And it will store them for me in this array called argv. And it will tell me how many there are using argc. So let's try this. I know I want to get the-- I know I want to allow the user to do this, to say ./mario followed by 8, for instance. 
+
+And now I'm curious. To get this value of 8, in which index of argv should I look, based on what we saw earlier? Seems like argv bracket 1. So keep in mind that ./mario, that will be the value for argv bracket 0. This value though will be the value for argv bracket 1. So now I'll try that. 
+
+I'll say, well, why don't I make a variable called height and say that it gets whatever is stored in argv bracket 1? Try it. Now I'll compile my program. I'll go up top. I'll say make Mario. I get an error. And this isn't a particularly helpful error. But I do see this. Initializing int with an expression of type string. 
+
+So it seems like I'm not able to store a string inside of this variable I said was an integer. So what can I do? I have to first convert this value to an integer. And it turns out there is a function for that, one included in the not string.h, included in the standard library. stdlib.h gives me access to those functions. 
+
+And this function is called a to i. a to i effectively converts any string to an integer, assuming it's able to. If you give it one, like the string one, it will convert that to the integer 1 overall. So I'll try this. I'll say, make Mario. And now I don't get any errors. So it seems like using a to i I'm able to convert this argument, which was previously a string into an integer and now assign it to this value of height. 
+
+But now, what if I do this? What if I say make Mario ./mario and I don't give any input, I just hit Enter? Why would I have gotten this error? Segmentation faults often occur when I look beyond the bounds of my array. Why would typing just ./mario make me look beyond the bounds of my array, in this case argv? 
+
+If I only type ./mario, I think I really only have a value for argv. Let's see. argc will be one, which means that argv will only have one element. And I can't look beyond the bounds of argv. So if I had only one element, I could use argv bracket 0. But argv bracket 1 assumes I have two elements. So here's another use case for argc. 
+
+I could first check. Before I do anything, let me first check if argc does not equal 2. If there are any fewer or any more than two arguments to my program, I want to do something. I want to tell the user that the usage of this program is ./mario followed by some number, like this, backslash n. And then I'll return 1, meaning something went wrong, not 0. You actually use this program incorrectly. 
+
+So that actually assures me that if I recompile my program now, I do make Mario ./mario, I get this error instead of a segmentation fault. I'm able to catch this error before my program actually runs as a whole. So here, again, is our program. What questions do we have on argc and argv? 
+
+A question here for, again, the summary of what argc and argv are. In a single sentence argc is the number of inputs to our program at the command line. And in a single sentence argv is the array of strings, the array of inputs to our program at the command line. Other questions too. 
+
+Another question. Yeah, good question here. So the question is, what counts as being at the command line? And in general, when we say command line, we're also referring to this terminal here. So when I type ./mario and include any options outside of this, like 8, or my own name, or so on, that's at the command line. And in lecture, we saw this other program called cowsay that lets me actually specify what kind of animal. 
+
+I want to say some kind of text. I could say, give me a dragon that says roar, like this. Let me zoom out so you can see it. Here is that dragon. So notice here in one single command I ran cowsay, but gave it some input. Dash f dragon means configure the animal I show to be a dragon. And then roar is the other input that says what should the dragon be saying here down below? 
+
+All right, other questions too? All right, so seeing no additional questions here. I think we'll go ahead and call this section a wrap. Thank you all so much for coming and joining us here. We'll see you all next week. 
