@@ -1,0 +1,11 @@
+Lecture:            https://video.cs50.io/jZzyERW7h1A?screen=Mxgh1eRQVCU
+                    https://cs50.harvard.edu/x/2024/notes/3/
+Section:            https://video.cs50.io/DdaRHPGhe-E
+Shorts:
+    - Linear Search:    https://video.cs50.io/TwsgCHYmbbA
+    - Binary search:    https://video.cs50.io/T98PIp4omUA
+    - Bubble sort:      https://video.cs50.io/RT-hUXUWQ2I
+    - Selection sort:   https://video.cs50.io/3hH8kTHFw2A
+    - Recursion:        https://video.cs50.io/mz6tAJMVmfM
+    - Merge sort:       https://video.cs50.io/Ns7tGNbtvV4
+Problem Set 3:      https://cs50.harvard.edu/x/2024/psets/3/
