@@ -1,0 +1,12 @@
+sort1 uses: Bubble sort
+
+How do you know?: All are tested againest the 50K files, it took exteremly long time except when data is already sorted
+
+sort2 uses: Merge sort
+
+How do you know?: When tested againest 50K files, took almost the same time
+
+sort3 uses: Selection sort
+
+How do you know?: It took the same time sorting files even when they are already sorted
+submit50 cs50/problems/2024/x/sort
