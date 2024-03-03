@@ -1,0 +1,11 @@
+Lecture:        https://video.cs50.io/F9-yqoS7b8w?screen=5E0bd2AgNEI
+                https://cs50.harvard.edu/x/2024/notes/4/
+Section:        https://video.cs50.io/m2WzPVd4QIc
+Shorts:
+    - Hexadecimal:                  https://video.cs50.io/u_atXp-
+    - Pointers:                     https://video.cs50.io/XISnO2YhnsY
+    - Defining Custom Types:        https://video.cs50.io/crxfzK3Oc9M
+    - Dynamic Memory Allocation:    https://video.cs50.io/xa4ugmMDhiE
+    - Call Stacks:                  https://video.cs50.io/aCPkszeKRa4
+    - File Pointers:                https://video.cs50.io/bOF-SpEAYgk
+ProblemSet4:    https://cs50.harvard.edu/x/2024/psets/4/

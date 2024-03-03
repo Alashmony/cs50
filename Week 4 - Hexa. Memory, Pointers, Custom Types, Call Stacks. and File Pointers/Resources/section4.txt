@@ -1,0 +1,337 @@
+CARTER ZENKE: OK, well, hello one and all and welcome to CS50's fourth section this week. My name is Carter Zenke, and I am the course's preceptor here on campus. And this week, week 4, we learned about memory and how our computer actually stores things in bits and bytes across its own landscape of bits and bytes. And so our goal today will be to talk about a few different topics, most of them from lecture, and to give you the chance to ask the questions you want to ask so you can prepare yourself for this week's problem set. 
+
+So among these topics are this idea of pointers and why we would even use them. So as we saw in lecture, a pointer is a way of storing some address in a computer's memory, kind of similar to a variable. 
+
+We'll also talk about how we can read and write data to files. So up until now, you've been writing programs that maybe take user input and print something back to the screen. By the end of this section and by the end of this week, you'll be able to write programs that actually open up files and can actually write data to files, getting more advanced along the way. And all of this will hopefully prepare you for problem set 4 at the very end. So I'm excited to dive into these topics today. 
+
+Now, the first topic will be this idea of pointers. And they are admittedly a little bit scary. I've seen a lot of fear around pointers when we talk about them. I think they're scary because they introduce some new syntax that doesn't feel quite familiar yet. And so the goal is to help you become familiar with that syntax so you can actually leave feeling a little bit less scared of pointers and more empowered to use them at the end of the day. 
+
+So I think one thing that makes pointers less scary is this idea that they really tie closely to an idea you already know about, and that is this idea of a variable. So if you remember back in, let's say, week 1 or so, we talked about this idea of a variable. And in this section, we had this idea of trying to make a contact application to store, let's say, the number of times we had called somebody on the phone. 
+
+And so we had this variable named calls, and this was our visual of that variable. We had a box that had some value in it, like the number 3, and that box had a name called calls. And we said that a variable was exactly this. It is a name for some value that can change. That is, the value of that variable could change. Could be three calls right now. But when I call somebody new, it could be then, later on, four calls. So some value that can change. 
+
+What we didn't see in week 1, which we'll now see this week, is that this value has to be stored somewhere in our computer. It can't just be out in the ether. It has to have some actual physical location among all the bits and bytes inside of our computer, and that is what we called an address. This value has some address inside of our computer. 
+
+And so in lecture, we saw this grid of addresses of bits and bytes, kind of like a yellow grid. We could store number 50, a pointer, and so on. I want to give you one other visual of which to think about pointers and addresses too. So you could think about it, as well, as kind of like this table here, where your computer has keeping track of both the addresses of values and the values themselves. That is, what is the value I'm storing, and where, among all the possible bits and bytes, am I storing that value? 
+
+And so notice here that we have addresses that begin with 0x, 0x. And I'm curious, as a question for you all, what do you remember 0x meaning or signifying? Why do we always append or really prepend this 0x? So I'm seeing some right answers here, which is that this means hexadecimal. So whatever comes after 0x is a hexadecimal value, which is to say it's a base-16 value. 
+
+So you're probably used to the base-10 system, like decimal. You've seen, in this class, the base-2 system, like binary. And now we're introducing a new one called base 16, which is just handy because we can count up to larger numbers without using so many digits. Like if we're talking about the many billions of bits that are inside of a computer, it's worth representing them in a way we can count pretty high with some fewer number of actual digits we'll see as part of our number we're writing out. 
+
+So that's the background for this address here. But to keep going with this idea, our computer wants to store some value somewhere in memory. And so for that calls variable we saw earlier, well, that could be stored at this address right here. 0x-- let's see-- 50-- a 5, 000-- 5 and seven 0's. So 0x5 and seven 0's. 
+
+Somewhere-- doesn't quite matter-- it has some address in our computer. And the way we put it there was this C syntax on the right. We simply said, we're going to create some new integer whose name is calls that will get the value 3. And we're going to store it somewhere in memory. 
+
+Now, a pointer is this exact same idea, but the only difference is that we're not going to store an integer or a character or really a string or anything else. We're going to store, instead, an address itself. So here's what we would say if we're going to make a pointer. If we go here, notice how on the next table row, I'm not storing an integer or a character. I'm storing an address itself at some address inside the computer. 
+
+And notice in particular that this address I'm storing, 0x5 and then seven 0's afterwards, that seems to reference some other address in my computer's memory. That is the place where the 3 is stored. So we could say that this value, 0x5 and seven 0's, that is pointing to this other address where the 3 is stored, and, therefore, it is a pointer. So the only difference here is we're no longer storing integers or characters or so on. We're now just storing addresses at some place inside our computer. 
+
+So let me ask, what questions do we have on this so far, on this mental model or on this idea of now storing addresses and not just actual values like numbers or characters? OK. Not seeing any so far. Actually, let me ask you a question here. How can we dereference this pointer? It's a good vocabulary word we learned in lecture, which is to follow a pointer to the place it is pointing to. 
+
+So let's begin with a bit of syntax here. And here, if I show you this in full screen, you'll see that this is the syntax we could use to do exactly what we did on the table on the left. Let's create now a pointer whose name is p, and we're going to store the address of this variable named calls. 
+
+So notice a few pieces of syntax here. We have int *, which means this is no longer an integer, but it is a pointer to an integer. It is going to direct us-- if we dereference this pointer, we're going to get-- we're going to end up at an integer in our computer's memory. 
+
+And notice, too, this ampersand, which means we should store the address of whatever calls is storing. In which case, we see in the table here, that is 0x5 and then seven 0's afterwards. So the data type of p here is a pointer, but it is a pointer to an integer and not a character, for instance. 
+
+So to highlight here as well, let's try setting this up and visualizing it a little bit more. So all we're doing is saying the same thing we did for a variable-- that p, this value named p, should store this particular address now. And I think it's worth breaking down the syntax on the left so we actually see it, and you can use it later on in your own programs. 
+
+So one common point of confusion here is that this variable, this pointer, is not called star p. That is not its name. In fact, it is just called p. But it is confusing though because we see int *p, like the star is right next to the p. And so we kind of assume, well, this pointer is just going to be called star p later on. But in fact, it's just a syntactic trick. 
+
+All we're doing here is saying this is a pointer named p, and its type is int *, or a pointer to an integer. So when you see this star being used to initialize or declare some value, be careful here and think, what is the name of the variable that I'm working with or the pointer that I have, and what is its type? Because it might not be quite apparent to you, if you're new, that you might say, OK, well, the star is next to the p. Maybe that's its name. It's not. p is its name. Int * is its type. 
+
+Now, it's more obvious on the right-hand side here that the value is simply the address of calls using the ampersand here. And as we saw in lecture, I like to think of this as ampersand for address. Both begin with A in this case. 
+
+And a question here is, could we actually modify this syntax and say, maybe, int* p? That's absolutely possible, as we saw in lecture. We could also have int * p, which would be maybe a little more confusing in my opinion, but that would work as well. So white space doesn't quite matter. But by convention, we tend to use this syntax you're going to see here, int * followed by the variable name. 
+
+Now, a question here too is, what if we wanted to store not just an integer or a pointer to an integer, but a pointer to a character, which, as we saw, is kind of like what a string would be? Well, in that case, we'd simply replace the int part of this syntax with a char or "kayr"-- C-H-A-R. That would then store a pointer to a character. 
+
+And the follow-on question is, well, if we can store a pointer to an integer, a pointer to a character, could we have a pointer to a pointer? You could. There's nothing stopping you. You can have a pointer to a pointer to a pointer and so on and so forth. But at that point, I'd say we're getting a little bit ridiculous. We can pause and say, what are we actually doing here? But you could possibly do it. 
+
+So to recap here, some key syntax to study, to practice with, is going to be the following. You could say the type *-- just get it in your head-- is a pointer that stores the address of a certain type. But then later on, as we'll see, if I want to dereference that value-- that is, get the value that that pointer is pointing to-- I would use the star in a different way. I would say star and then the name of that pointer. 
+
+So *x, for example, takes a pointer named x and gets the value that is stored at that address. As we just discussed here, &x takes x and gets its address. Ampersand for address, A for A in this case. So questions on this syntax here? 
+
+Question about how pointers work with arrays. So we'll see this probably a little bit more as you work on the problem set and go on with the course. But you could think of a pointer as pointing to the beginning of some chunk of memory. 
+
+In the previous example, we saw a pointer pointing to one particular value like one integer or one character. But there's nothing stopping us from having a pointer that points to an array of values or a list of values all back to back to back in a computer's memory. So we can have pointers to arrays. Other questions too? 
+
+OK, so I think one question that comes to my mind when I first see this idea of pointers is, that's all fine and good. I love pointers. I love addresses. But why would I ever use them, because at this point, it seems kind of confusing? Why would I use this syntax versus the one I already know, and why is it worth getting into the weeds about all these addresses when I can just store things wherever? I don't quite care. 
+
+Well, there are a few reasons you might want to use pointers, and pointers can enable you to do things you actually couldn't do before. So among them are these things that you can now do with pointers. You could now write a function that allows you to pass something in by reference and not just by copy. 
+
+So that is to say, I could have a function that modifies some value right where it currently is. And this is helpful more so as you will see next week when we make these very big data structures. I could write functions that modify those data structures without copying all of them somewhere else. 
+
+And perhaps more resonant probably this week is this one, which is you can use what we call dynamic memory. That is, up until now, you've been writing programs that use some fixed amount of memory. The user might type something in. Maybe it uses maybe 5 bytes or 10 bytes or so on. 
+
+But you could now, as the program runs, actually ask your program for more and more memory depending on what the user actually needs. And you can use pointers to manage the memory for you. So more again on that in some future weeks. But pointers here are setting up these additional capabilities that you can use as we go through the course as well. So I hope you find at least some of this exciting. 
+
+And I want to focus in particular on what we can actually do because of this. So in this first step, it's like, OK, great, I can write functions that pass things by reference and not by copy. But what does that get me ultimately? Well, ultimately, if you write functions that allow you to pass values by reference, not just by copy, you can write code that's ultimately cleaner as a result. And as I said before, you can also now scale your usage of memory in your application by using pointers to actually manage that memory and make your programs all the more efficient too. 
+
+All right, so let's keep going here and show a bit of a visual example of what it means now to pass things by reference and not just by copy. So we saw in lecture we had this idea of trying to swap two values around and trying to write a function to do that. So let's revisit that and get a visual example here in our slides so we understand exactly what it means to now pass things by copy as opposed to passing things by reference. 
+
+So you could imagine here, we have some code on the left-hand side and what we call our call stack on the right-hand side here. So you could imagine we have already called main, the main function of our program. And we've set two variables-- one equal to 10, called a, and one equal to 50, called b. 
+
+And in our first implementation of swap, we had the following code that swap would take an integer named a, an integer named b, and it would swap them around, trying to store the value of b in the place of a and the value of a in the place of b. So, visually, it looks a bit like this, where I have main running. But now as soon as I call or use swap, I'm able to have another function call. I'm copying down those values from main. 
+
+So to try animation one more time, we had main running, but now we call swap. We pass in these values a and b. We pass them by copy. This space that swap has gets a copy of the values for a and b. And then, of course, within swap, we do swap them. So the value of a gets 50-- or the variable a gets 50, and the variable b now gets 10. 
+
+But what's the problem? Like if I finish now running swap, what do you notice? They seem to be swapped in swap, but what hasn't happened, actually? Yeah. So in main, they're still the same. I see that a is still equal to 10, and b is still equal to 50. 
+
+So if we call a function without using pointers, we're essentially saying, let's go ahead and take a copy of these values, put them somewhere else, and do something to them. We won't actually impact the variables we were hoping to impact when we set them or use them in main. So once swap finishes, we're still left here with the same values in the same places. 
+
+So what do we do to fix this in lecture? What do we do to fix this problem? Any ideas? So we did end up using pointers. And what we did in particular is we didn't copy in the actual values of a and b. We copied their locations or their addresses-- that is, the pointer to a and the pointer to b. 
+
+So another option here is to rewrite swap so that it does this instead. So notice in the syntax now, this swap function is taking two arguments, one that is now a pointer to a and one that is now a pointer to b-- that is, the address of a and the address of b. And then, down below, it's going to use the dereference syntax to go and get those values and swap them in place. 
+
+So although we're still running swap, and we're copying in some value, the ultimate result, though, is that we actually copy in the address, and we change the values exactly where those values currently are in memory. So, for instance, let's visualize this. I'll show you. We're going to call swap here. Here's swap. And what we pass into swap now is not the value 10 or the value 50, but the address of a and the address of b. 
+
+So now we have a link from swap's location memory back to main, where a and b originally are. Now, if we follow the steps in swap, we can follow these pointers and swap the values all at once in place. So now a is 50 and b is 10. 
+
+And so as you go on in the course, you'll be able to write functions that do this not just for two variables but perhaps for entire data structures and that allow you to ultimately build up much more complex ways of storing data in your programs. So questions, then, on this idea of swapping and passing by reference and passing by copy? 
+
+A question here. If you wanted to access the address, wouldn't you write &a and &b? And, in fact, you would. In this case, though, as we see in void swap(int *a, int *b), we're defining here is the definition of swap. 
+
+And you'll see swap takes two arguments. The first argument is a pointer to a. But how do we know it's a pointer to a? Well, we see here, it has the type int *. And then the same thing here, a pointer to b. We know it's a pointer to b because the type is int *, and the name is b. 
+
+So I think it's helpful actually to show you the entire code for this as well. And for that, I'll pull up my codespace, and I'll actually walk through each step of this now with debug50 so we can see the exact values of each variable here and understand exactly what's going on in our program. So I'll come to my codespace. 
+
+And now I will code swap.c. So swap.c is already done for me. I already wrote this code. But let me show you a few pieces here. So on line 4, I have the prototype for my function swap. swap will take a pointer called a and a pointer called b. It won't return us anything. It will simply have the side effect of swapping those two values. 
+
+Now, in our function called main, the very first function to run in our program, I'll create this variable named a, put it someplace in memory, and give it the value 10. Similarly, I'll create this variable named b, put it someplace in memory, and give it now the value of 50. 
+
+So, first, I'll print out what is a and what is b. I'll call the function swap. And notice now. I'm going to give it not the value of a but the address of a. That is, wherever a is stored, I'll pass that into swap. And in the same way, I'll do that for b. And then once that's done, I'll call printf, and I'll tell us again what is a and what is b. 
+
+Now, down below, here's swap, the same implementation we had before. We're going to take in a pointer called a and a pointer called b. And through what we saw in lecture, we're going to swap them all at once down here. 
+
+So let's go ahead and write a bit of syntax here to actually debug this program and see it step by step. So if you're familiar with debug50, we can actually pause our program and walk through it step by step, seeing the values of variables as we go. So I might pause this program here, right where we're about to call swap. 
+
+And now if I make swap to compile it and run debug50 ./swap and hit Enter, I should be whisked away to the debug50 environment. And I should hopefully see here soon that I'm able to see my program running but paused at this point. So now I want to show you where we are. 
+
+Notice in my terminal, I see that a is 10, and b is 50. And, actually, in this tab over here called Variables, I can see that in real-time. I do see a is 10, and b is 50. So it's true, right? 
+
+Now, down in my Call Stack, notice that main() is currently running. It's the highest thing in my Call Stack. So now I want to run swap. But if I want to see the workings of swap, how swap is actually going to swap these two values, I should use step into, which means, run this function but show me each step along the way. 
+
+So I'll step into swap here. And notice how I change my variables. These are the variables that have been passed into swap. I see this variable named temp that currently has value 257. Why do you think it has that value? Any ideas? Doesn't seem to make much sense to me. 
+
+And we learned a name for this value in lecture or rather this type of value. I'm seeing some people say a junk value or a garbage value. That's exactly what it is. There's some garbage value. It is a value that is just kind of already there in memory. We haven't assigned it anything yet. 
+
+But once I actually step over this line of code, we should see what? Well, int temp, this value here, is currently 257. But once I run this, I'll set it equal to the result of dereferencing the pointer a. Notice the value of a here is 0x7ffd26c1790c. 
+
+OK, but what is at the end of that pointer? If I follow it, what will I find? I'll find 10 here. So notice that it gives us the value not just for a, but the value of *a-- that is, following the pointer going to that location memory and finding whatever value is there. In that case, that value is 10. 
+
+So it goes to say that if I were to run this line of code, line 18, I should set temp equal to 10-- that is, the value that I would get if I dereferenced a. So now I'll step over it, and I'll see temp becomes 10. 
+
+Now, what's the next step? Well, this says *a = *b, which is kind of confusing. But keep in mind what *a is. Well, *a is currently 10. It is the value at the location that a is stored. Now I want to put in the value that is-- the value that I get if I follow the pointer b, which is 50. 
+
+So notice here *b is 50. If I follow this 0x7ffd26c17908, wherever that is in memory, if I follow that pointer and find that location, I will then get the value 50. And I'll then assign that value to the dereferenced part of this pointer a, which is currently 10. So I'll step over this now, and we'll see, well, *a becomes 50. I follow that pointer to the location of a and set it equal to 50. 
+
+Now then, I'll say *b gets the value of temp. Well, *b is currently 50. I'm going to follow this pointer b to its value, which is 50. And then I'll set it equal to 10. I'll step over, and now I'll see *a is 50, and *b is 10. 
+
+Now, if I end this program, finish swap, what do we see? Well, a is now 50, and b is now 10. I'll step over and finish my program again. And now I'll see a is 50. b is 10. I've swapped these two values right there in place, walking through step by step. So I'll close this program, and let me ask, what questions do we have on swapping or on pointers so far? 
+
+Question here. Why is swap defined on line 4 and then again called on line 16? It's a good question. So to be clear, on line 4, what I'm doing is setting up the prototype for swap. I'm not so much defining it as I am declaring it. 
+
+I'm telling C that, hey, look, up ahead, you should see a function called swap that takes these two inputs and returns this value-- in this case, nothing. And down below, when I, on line 16, have that same prototype followed by some brackets and some code here, that's where I'm defining swap in itself. A good question though. 
+
+Another good question. Why aren't we returning in this function? So often we'll see if we want to get some value back in, let's say, main, we have the function we call return us some value. In this case, though, swap doesn't need to return much of anything. In fact, its entire purpose is to have this side effect of swapping values in place because we give to swap the addresses of two variables in memory. 
+
+We have it follow those pointers to where those values are and move them around a bit like this. So we don't need to return anything. Because swap already has access to that place in memory, we're going to move those two values around. All right. Other questions too? 
+
+A question here. Would this work without the &a and &b because swap is defined above? Let's see. I'm not sure if this is answering your question, but we do see here that swap is taking in these values, *a and *b. 
+
+And it's important here that we actually give swap the address of these values, not the values themselves. If I said a and b here, I would now be passing by copy. I would say, swap, take the value of a, which is 10, and take the value of b, which is 50, and do whatever you want with it. 
+
+But in this case, beyond the fact that swap is expecting a pointer, if I were to do that, I'm not actually telling swap where my values currently are so it can move them around. I'm just giving it a copy of those values for it to do whatever it wants with it. Here, though, I should make sure that swap is able to take in the address of these values so it can move them around right where they are. 
+
+Another question. Why don't we declare swap instead of prototyping it? So we do. So this is the prototype and declaration for swap. We're telling C exactly what swap will be. And down below, we define it as well. 
+
+All right, so that was a bit of a lot. And our goal here is I'm going to show you all what you can now do with pointers. It's not so much interesting to swap things around like this and that. But what is powerful, what is fun, is actually opening up files, reading data from them, and writing data to those files, allowing you to write even more complex programs as you go. 
+
+So here we'll talk about this idea of file I/O. And file I/O stands for file input and file output, how we can write data to files and how we can read data to files. So as a visual here, let's think of how we can both open and close files first. 
+
+When we work with files in C, there's this idea of opening up a file and closing a file, similar to what you would do on your own computer. If you were to open up, let's say, a Microsoft Word document, you open it up. And later on, when you're done, you just close it. Hit that X button, and it's gone and stored away. In a similar way, your programs can open and close files too. 
+
+So there are two key functions here for opening and closing files in C. One is called fopen, which stands for file open. Going to open up a file for future reading or writing. If we're reading, it is looking at the data, and writing is adding data or modifying data. Now, fclose goes ahead and closes that file for us. 
+
+And now there's a bit of a hint here you saw in lecture a bit and one you should keep in mind as well, which is you should always fclose all files you fopen. And I'm curious to get a sense of your intuition for this. Why is it important that we always close files we open? Why, do you think? 
+
+I'm seeing to free up memory, which is a good idea. Why else? So memory isn't wasted, another good idea. Maybe you won't be able to use the file later if you don't close it. Preventing memory leaks That is like a ballooning program using more and more memory over time. These are all good ideas. 
+
+And I think you could really draw a parallel between you working on your own computer and just always opening files, opening files, opening files but never closing them. One, it would just be a mess if your computer, every time you opened it, just had all these open files on it, right? 
+
+But the other thing is that if you ever want to send that file to somebody else, you had better close it so they can modify it without you also modifying it at the same time. So, generally, it's good practice to make sure you open files when you're going to use them and close them when you're done with them to save memory and also to ensure that no two programs are opening a file at the same time. 
+
+OK, so let's get a visual here for how we can actually write to our file. So here we see a actual file on the right-hand side and some piece of syntax we could use to open that file. In this case, we're going to use the fopen function. 
+
+So fopen takes two particular arguments or inputs. It takes the name of the file. And let's say this file here is called hi.txt, as we see down below. So it's a text file that just says "Hi!" on the inside. And now fopen takes another argument, another input, which is r. That is the mode we're going to use to open this file. 
+
+There are two modes, read and write. And so what do you think r stands for? Well, read. We're going to open this file just so we can see what's inside of it. We can read some data from it. 
+
+And now what do you think fopen returns to us, based on what you see on the left-hand side? What does fopen return to us? You could look at the type on the left-hand side here. 
+
+So I'm seeing a few ideas. One is that it returns the contents of hi.txt, which is close, but not quite. I'm seeing another idea that it's a pointer to the file in memory, which is a good idea. And I think we could get this intuition-wise if we said, well, it looks like we have this variable named f. And its type is FILE *. And whenever we see type *, well, we should assume that is a pointer to that type. 
+
+So in this case, in C, there is a type called, all caps, FILE, which is basically a way of trying to access the file. It's a bit of a fancy type. But suffice to say for now, it allows you to access some file. And it has a pointer to that particular file type. 
+
+Now, as a bit of an oversimplification here, you could imagine that this variable named f now just points to, let's say, this location in memory or this file we're trying to open. It points to the very beginning of that file. In reality, there is more going on underneath the hood. There is a very special file type, like we discussed. C tends to move some of the data of that file to its own program. 
+
+But for now, you could just think of fopen as returning to you the location of this file in memory so you can actually see where it's stored. Much like you trying to find a file to open it, you first have to figure out, what directory is it in, where is it located, and so on. So questions, then, on fopen and how we can try to find files to open them with our own programs? OK. 
+
+Oh, a question. Why do the modes matter? That's a great question. So here we see we're going to open hi.txt using the mode r, which stands for read. There's also the mode w, which stands for write, which allows us to actually write some data into the file to change or modify it in some way. 
+
+I would say, for now, just keep in mind that fopen might do two different things. It might set up the file in different ways, for reading and for writing, because reading just requires us to look at that file and see what it is right now. Whereas writing, we have to set up the entire process of being able to change that file in some way. You can also, I believe, have both modes together, able to read and write at the same time. There are also other kinds of modes you could look up as well in the C standard library. 
+
+OK. So here we're able to open up a file, and it's easy to close it simply using fclose and then giving fclose the pointer to that file. So here we see f pointing to this file, telling us where it is in memory. We can simply say fclose and give it the pointer to that file. And now that file will, afterwards, be closed. We can no longer read or write from it. 
+
+But let's say, along the way, we do want to read or write data from our file. So let's get a visual now for what it means to read and write from a file. So, often, one thing we'll see is having a file a bit like this one, hi.txt, and our program on the left-hand side with some variable like text. And maybe we want to store whatever is inside this file in some variable. We want to get it into our program so we can modify it or use it in some way. 
+
+Well, if we were to read this data, it's basically like taking a copy of some chunk of our file and putting it inside of our program. So here I see this text, "Hi!" I'll take a copy of it and put it inside this variable called text. And now it's inside my program. I could use it, modify it as I wish. It's simply a copy of whatever is inside this file. 
+
+But now if I want to write data or modify this file, you could imagine maybe I have some value, like what's currently in text, and I want to put that in the file. Well, I could write data by copying what I have in this particular variable and appending it-- that is, adding it to this file here. I'll take "Hi!", and now I'll put it at the very end of this file. I've written data or added data to this file here. 
+
+So what questions, then, on this visual for reading and for writing? Question on the syntax, I think, which is a good question. So we've seen how to open and close files with fopen and fclose. But now how do we actually add data to them and read data from them? 
+
+So for that, we have two other functions, one called fread and one called fwrite. And more on these as we go. But suffice to say for now that fread lets us read data from a file into our program. And fwrite allows us to read data or to take data from our program and add it to a file. 
+
+Now, in particular, there's a new vocabulary word here called a buffer. And a buffer is simply a place we can temporarily store some data in our program. So let's say we have a file, and like we saw before, I wanted to read, let's say, three characters from that file-- H, i, exclamation point. I would have a variable, which serves as a buffer that is some place to store that data inside my program temporarily. So a buffer is simply some particular name for a kind of variable that stores often file contents. 
+
+So let's consider then why we might even want to use idea of a buffer. I'm curious what you all might think here. If a buffer is simply some place to store part of a file, not all of it, why would we use a buffer? 
+
+Another way of asking this question is this. Why might we not want to read the entirety of our file into memory all at once? Why do we need a buffer in this case? If the goal of buffer is to break our file into smaller bits, why might we need that? 
+
+So I'm seeing this idea of saving up memory, trying to use less memory overall, which is a good one. Let's see. Trying to avoid overflow, which makes sense. Maybe we don't quite know how big the file is. 
+
+Trying to avoid segmentation fault. So I'm seeing some themes here. And among them are this idea that maybe our file is really big, like we don't want to have that entire file loaded up at once and put into memory. That's a good idea. 
+
+The other idea is we often don't know exactly how big a file is. So the best we can do is look at small bits of it one at a time until we get to the end of our file at the end of the day. So that's why I might want to use a buffer. This allows us to look at some particular pieces of our file and not the entire file all at once. 
+
+So if we have this buffer now, it's worth asking, how could we get data into that buffer? And for that, we'll see this idea of reading from a file. So if I wanted to read from a file, there are really two questions I should answer. 
+
+The first is, from where am I reading data? What file am I trying to get data from? And then where am I trying to read that data into? What buffer am I trying to put it into? And it turns out that fread requires us to answer these two questions before it can do what we want it to do. 
+
+So let's see one example of fread here. So this is fread. And fread takes four inputs or four arguments. One of the first ones you might care about is this one, which is, from where are we reading data? From what file are we trying to read data? And for that, we give fread a file pointer, some way of finding the location of our file in the computer's memory. 
+
+So, for instance, let's say we have this file here. The pointer to that file is called f. I could run fread a bit like this, by slotting in f as that fourth argument. So now fread knows from where to get the data from this file. 
+
+But the next question, we said, is where is the data going to go? Where in my program should I put this temporary piece of data I'm going to get from the file? Well, in that case, we might have something like a buffer, and that is going to be the first input to fread. 
+
+So here now is our visual. Let's say we have a pointer to our file called f, and we have some place in our program called buffer, some place to store this data. Well, we could then just call that variable buffer. And now when we call fread, we could say, we want to read into the buffer. That is, that will be a pointer to some place in our computer's memory, some address we want to put that data in. 
+
+So now we've seen two out of the four arguments so fread can function. Where are we getting data, and where are we going to put it in the end? So questions here as well. And we'll see some examples later on. 
+
+Good question. So buffer is a variable? Buffer is a variable. And in this case, it is the address of some place in memory where we want to store the file's contents. Good question. 
+
+OK. So now the next thing is there are still two arguments we haven't yet defined. What are these arguments? Well, it turns out that these two are answering these questions here, which is, what size is the block of data I want to read, and how many blocks do I want to read? 
+
+So it turns out that files themselves are composed of individual blocks of data. So you could imagine, let's say, a text file. And I want to ask you, what might be the file-- what might be the individual chunks of a text file? If I'm storing some text, what do you think might compose those individual chunks of the file? 
+
+How would you break up that file if I were to ask you to break it up into smaller pieces? You could certainly break it up into lines or sentences or so on. But I would argue, maybe the smallest unit we could get is an individual character of text-- so maybe a character like a or a character like e. 
+
+So we saw our hi.txt earlier had H, i, exclamation point. Well, that file is probably just three chunks of memory, each 1 byte long. H is one chunk. i is one chunk. Exclamation point is another chunk. 
+
+And we know that characters are 1 byte long. So you can probably assume that text file is broken up into individual pieces, individual bytes in this case. So some files do have individual bytes that make them up. 
+
+Other files, though, are a little fancier. So while text files might have chunks that are 1 byte long, you could imagine a file like an image that stores color. Well, to store individual pixels, it turns out each pixel needs about 3 bytes. And so we could probably best think of an image file as being broken up into not one-byte chunks but three-byte chunks, a bit like this visually. 
+
+So as we read files, it's important we figure out, well, how big are the individual pieces of data that make up this file? In the case of a text file, it's those characters that are 1 byte long. In the case of an image though, it's those pixels that could be up to 3 bytes long as well to store all the possible colors that pixel could be. 
+
+And the question is, how do we know that? Well, often, you just know that from convention. So if you're working with text files, by convention, we store them character by character. If you're working with images, you were able to maybe look up documentation for, let's say, the .png or .bmp file type. It tells you that those pixels are stored in three-byte chunks. So often you don't know yourself, but somebody else, the maker of that file, will tell you how their data is stored. A good question. 
+
+So it stands to reason, then, if we know how to break a file into smaller chunks, we need to answer these two questions, which is, how big are those chunks, and how many do we want to read at once? So let's answer that first question. What size are these chunks? And this question is in bytes. 
+
+So if we're working now with, let's say, a file that looks a bit like this-- maybe it's a text file, has individual characters-- we could say the individual chunks of this file are simply 1 byte long. So we could tell fread we're going to read chunks that are 1 byte big. 
+
+But now the next question is, OK, I know my file is made of one-byte chunks. But how many of those should I read all at once? Well, we could say, maybe we want to read 4 at a time or 8 at a time or 2 or 1 at a time, whatever it is. In this case, let's say, I want to read just 4 bytes at a time, able to see my file in 4 byte sliding windows, if you will. 
+
+So here, if I read 4 bytes, visually, it looks a bit like this. I'm looking at my file here, and I want to read whatever is in these first four chunks. My pointer f points to the first one. I'll take out the first four and put them in my buffer. I've made a copy of them from my file into my program, and now my file pointer points at whatever is still left to read. 
+
+So if I have some sentence here, maybe I'm reading it four characters at a time. I see those first four characters. My file pointer gets updated and points to the rest of my file. If I call fread again and again and again, I'll keep moving further and further and further and further down my file 4 bytes at a time, 4 bytes at a time. 
+
+So questions on this, whether visually or syntax-wise? This is our final call or usage of fread. And we'll see this in action in just a bit. 
+
+Good question. How do we decide how many chunks to take out? Often it will depend on a few things. So one is, how much memory do you want to use at any one time? So if you were to take a big chunk out of your file, that's a lot of memory to store in your program, perhaps. 
+
+At the same time, maybe you care about seeing all that data at once. That would be a good reason to do that. If you don't, though, quite care about seeing all your data all at once, you could read things in smaller chunks just to make sure you're not using up too much memory at any one time. 
+
+The other reason you might make this value smaller or larger is it tends to be a little bit faster to read things in bigger chunks, like to read, let's say, 100 individual bytes versus, let's say, 10 bytes ten times, for instance. Or to make it even simpler, it's easier to read 10 bytes all at once than it is to read 10 bytes individually over and over again. So that's a consideration as well, though probably not as much a consideration for the kind of work you'll do in CS50 in particular. 
+
+Another question here. Is f able to return to the beginning of the file after doing the reading? It is. There is a special function you would call to move the file pointer back to the top. So when you use fread, as we said before, this file pointer continues through the file, through the file, through the file, gradually getting to the end. When you get to the end, you have to kind of rewind it back to the top. 
+
+And if you're familiar with this idea of a cassette player, where you have some tape that goes and spins and spins and spins, that's kind of what this file pointer is doing. It starts at the beginning, spins all the way to the end. Once you get there, you have to rewind it all the way back to the very beginning. Or a VHS tape as well-- nice metaphor there. Yeah. 
+
+And then another question here. How do we find how many chunks there are in the file? Well, actually, I would argue, you can't quite know at the very beginning. Your computer is able to tell you roughly how many bytes are inside a file. But if you were to write a program to find the size of a file that you didn't know beforehand, logically, the only way you can find the end of that file or how big it is by starting at the beginning, reading byte by byte by byte by byte until you get to the end. 
+
+And you'll notice, well, there's no more file left to read. And so, often, at the end of your file, you will see a special signifier, maybe a null terminating character or some other kind of special character called an EOF or End of File character. That tells you there are no more bytes to read. But it's a bit like strlen, as we saw a bit in lecture, where you can't quite know how long the string is until you go character by character or byte by byte to the very end of it, and you see that ending character, like a null character or an EOF, end of file character. Good questions. 
+
+OK, so let's make this a little more concrete, and we'll write a program here to actually check what kind of type a file is. So one interesting fact about a file-- let me find this problem right here-- is that, generally, files have a signature of bytes at the very beginning that tell your program and tell you what kind of file it is. 
+
+So, for instance, a PDF tends to begin with these 4 bytes. Or rather, 4 bytes represent these numbers when stored as integers-- so 37, 80, 68, and 70. If you see 4 bytes at the beginning of a file that look like 37, 80, 68, and 70, that file, turns out, will most likely be a PDF. And other files have their own signatures that they can tell you what kind of file they are at the very beginning of them. 
+
+So what we'll do is write a program that actually opens up any given file and tells us whether that file is a PDF or is not a PDF based on those first 4 bytes. So let's go ahead and do that. I'll go back to my program here, and I'll refresh the window so I'm able to set up my codespace. And I'll wait for that to load. And while we do, let me ask what questions we have on this prompt here, if any-- on file signatures. 
+
+A question I see is, what happens if my chunk is bigger than the last bit in the file? A good question. So you could imagine, let's say you're reading maybe 8 bytes at a time. And you get to the end of your file, and there are only 4 bytes left to read. Well, what might happen with fread is it actually won't read past the end of your file. And instead of giving you 8 bytes, it'll give you 4 back. 
+
+And the cool thing about fread is that it'll return to you the number of elements it has read. So if you say, read me eight elements of 1 byte size each, it'll return to you the number 8 if it successfully did that. If it only read four it'll return to you 4. Or if it only read three, it'll return to you 3. Or zero, it'll return to you 0. So fread does have a return value you can use to figure out, are you at the end of your file, or are you not? 
+
+So I think here my codespace is loaded, so I will get set up here. And we're going to finish this pdf.c program. So I will code pdf.c. And here I have the beginnings of my program. So the goal is to use pdf.c a bit like this-- ./pdf and then typing in some file name, like, let's say, test.pdf. And my program will say, yes, this is a PDF, or no, it's not a PDF. 
+
+So the very first thing I should probably do is figure out how I can get that file name. And it turns out that that file name is going to be the first command line argument to my program. So if I do ./pdf test.pdf, I could access that file name using argv bracket 1, as we learned in a prior week. 
+
+So here I'll go ahead and write the following. I'll say that I'm going to get a string called filename, and it will be equal to argv bracket 1. So not the very first argument, which is PDF, this ./pdf part here, but the second part, which is test.pdf right here. So now I have a string called filename. 
+
+And now I have to try to open up that file. So what function could we use to open up a file? Any ideas? We could use fopen. So fopen allows us to open up a file, find where it is, and return to us a pointer to that file we can use in our program. So I'll use fopen here. 
+
+And it turns out fopen takes a file name as its first input. So whatever file name is in argv bracket 1, I'll give that as input to fopen. And I'll try to open that file using just the mode r for reading. I don't want to modify the file. I just want to read from it. 
+
+But now I have to keep track of the pointer to this file. So to create a file pointer, I can use this FILE * type and make sure I give it a name. In this case, I'll call it f for consistency. And I'll say I have a pointer to a file called f. It is of type FILE *, FILE pointer. And it is the result of calling fopen on some file name to open up that file and tell me exactly where it is in memory. 
+
+OK, so now with f available, I need to figure out how I can read from my file. But to read from my file, what do I need first? Thinking back to what we had seen earlier about fread, there are a few questions to answer. I think we know where we're going to read from, but what do we still need? 
+
+Probably, I'm seeing some people say, a place to read to. So we're going to read from our file. But now, in our own program, we need to have some space to store those values. So, in this case, it's probably worth thinking about, first, we want to read into a certain place. But then again, how many chunks are we going to read, and how big are those chunks? 
+
+Turns out that a PDF is full of one-byte chunks of memory, and we want to read the first four. So one way we could do that is by reading 1 byte one at a time four times. Or we could use an array and store those first 4 bytes back to back to back. So, often, buffers will be arrays of values. 
+
+And in this case, I'll try doing that. I'll make an array of integers because we're going to look at those first 4 bytes in the PDF and think of them as integers and ask, is this equal to some value, like in this case 37, 80, 68, and 70, those first 4 bytes? 
+
+So I'll create some space in my program to store four integers. And this, as we saw in prior weeks, is the syntax to do that. I now have an array called buffer that stores four types, and those types are int back to back to back. 
+
+Now, this is good but not quite particular enough. So if you recall from lecture, we might have this idea of an integer being worth about 4 bytes in size. And notice here that, well, we want to read things in individual bytes, like 1 byte at a time, not 4 bytes at a time. 
+
+So we're going to use an integer type but a special kind of integer type. And that is one called a uint8_t, which looks a little weird. But, basically, all this is doing is saying, I want not just the generic integer type, which is 4 bytes long. I want, in particular, an integer that is 8 bits or 1 byte long that is unsigned, that is only positive, and that entire thing is its own type. So uint8_t. 
+
+This is essentially a particular kind of integer, and it comes as part of the standard int library here. So I only know this because I looked it up beforehand. But when you're reading files, you could look up what kind of type is best suited for reading data from that file. Turns out that is a uint8_t for this particular kind of file. And in CS50, we'll tell you in advance what kind of type you should use when you're going to read from a particular kind of file, all right? 
+
+So here I have my buffer. And now I need to ask how I could read into that buffer. Probably going to use fread here. And does anyone remember what the first argument to fread is going to be? We were answering four questions here. Where we're reading from, where we're reading to-- and the first one is indeed where we're going to read to. So we're going to read into our buffer here. 
+
+And the next question is, how big are the chunks? Well, they're 1 byte long, as we said before. The next question is, how many chunks to read all at once? Well, four to read all at once. And now we're going to read from our file pointer. So notice we're not doing filename, not the name of our file, but instead the file pointer, f in this case. 
+
+So with that, we actually successfully have some data inside our buffer. And we can prove it. So I will write a for loop here-- for int i = 0; i is less than 4; i++ to go from 0 to 3 and read through our entire buffer. 
+
+I'll print out whatever's inside that buffer as an integer, like this, and I'll say buffer bracket i. And then at the very end, I will close our file like this to make sure we're being safe with our memory. I'll make pdf, run ./pdf test.pdf, and now we see those first 4 bytes in our file. 
+
+I have another file here too. I could say ./pdf or dot slash-- yeah, sorry, ./pdf and then test.jpg, I believe. Hit Enter. And notice now these are very different values for this JPEG. 
+
+So the very first 4 bytes are 255, 216, 255, and then 224. So we see here this signature of what this file is telling us its type might be. And we said before, well, a PDF seems to have these first 4 bytes of 37, 80, 68, and 70. 
+
+So questions here on how this is working. We first opened our file, created a buffer, used fread to read 4 individual bytes from that file, and then printed those out as we went. A question here on, does this apply to all file types? Generally, all file types will have some signature or some metadata that tells you what type of file they're going to be. 
+
+A question. What if we used int instead of uint8_t? I'm actually curious about this too, so I'll try int here as well. I will recompile PDF. I'll do ./pdf test.pdf. That doesn't look as good. And I'm curious why you think this might have happened. What might have gone wrong? 
+
+So remember that the reason we used uint8_t is that it was the right size of value to use. So the key thing about a uint8_t is that it is only a single byte big. A regular integer, though, is 4 bytes big. So here what we see is that we're trying to perhaps create an array of up to 16 bytes if an integer is 4 bytes long. But we're only going to read four of them into that particular buffer. 
+
+So if we take 4 bytes and store them inside this buffer, well, we might not get the values we expect. And that's why it's important, when you're reading files, to make sure you're using the appropriate types and getting particular about the kinds of types you're going to use. So I revert this back to uint8_t, which basically means an integer that is going to be always positive, that is 8 bits or 1 byte long. I can now recompile-- make pdf, ./pdf test.pdf, and I'll see the numbers as I expect them to be. 
+
+And a good follow-on question here. This program is decent, but I wouldn't say it's quite all the way, let's say, safe. So you can imagine me doing this. If I type in ./pdf and leave this last argument blank, who knows what could happen, right, because we're going to try to move beyond argv and access some value. So there is some more work to do here, which I'll leave up to you to make sure we have the right number of command line arguments and so on. 
+
+Other questions conceptually on reading and writing? Question on the _t here. So _t basically identifies this as its very own type. So it's kind of a convention here. And this is broken out into a few parts. u stands for unsigned only positive. int stands, of course, for integer. 8 stands for the number of bits used. We have 8. We have 16 as well. And then _t means all of that is its very own type. 
+
+And a question here. What is the return value of fread? That's an interesting question. So why don't I try that out? I could say int blocks_read because I know fread returns to me the number of blocks that it did read successfully. So maybe I'll print out the buffer, and at the end, I'll also print out "Blocks read %i backslash n". I'll substitute blocks_read in here like this. 
+
+I will then make pdf and do ./pdf test.pdf. And I'll see I successfully read four blocks. If I got to the end of my file, I might see fewer, or I might see none at all. Good question. 
+
+OK, so I think this brings us close to the end of our section. Suffice to say, in problem set this week, we get a lot more practice using fread and fwrite even. Before we go off to our own studies, I want to remind you all of fwrite as well. And one handy trick here is that fwrite is basically the same ordering as fread. 
+
+Notice we have buffer, size of the chunk, number of chunks, and the place to now write into. The only difference, as I just said before, is that we're now not just reading from the file into our buffer. We're copying from our buffer into the file and adding data as we go. All right. 
+
+So that, I think, should hopefully set you up very well for this week. Feel free to reach out if you have any questions. And, hopefully, see you next time. 
