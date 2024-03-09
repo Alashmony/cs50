@@ -9,3 +9,30 @@ Shorts:
     - Call Stacks:                  https://video.cs50.io/aCPkszeKRa4
     - File Pointers:                https://video.cs50.io/bOF-SpEAYgk
 ProblemSet4:    https://cs50.harvard.edu/x/2024/psets/4/
+
+Notes:
+    - In C, you can use the "&" to get the location in memory, or the "*" to go to its location.
+    - to declare a variable that stores the address in memory, its data type is "Pointer" and here is the code use the "datatype *var_name = &variable"
+        ```
+        int n = 18;
+        int *p = &n;
+        printf("%p\n", p);
+        ```
+        >>> 0xXXXXXXXXXXXXXX
+
+    - "%p" is a place holder for a pointer
+    - to call the data in the address again, use the "*" to tell the computer to go to that address, for example 
+        ```printf("%i", *p)``` 
+        >>> 18
+
+    - The string is just a pointer to the first character location in memory "char *" 
+    - When we assign a pointer value to the other one, we pass by reference (copy the same lcoation in memory) which means that any changes in one variable, will change the other
+    - Variables stored as pointers like strings "char *" and arrays []
+
+    - malloc(n) (memory allocate) reserves a location on memory with the size of n bytes
+    - malloc(n) returns NULL if there is no available memory.
+    - strcpy(destination, source) copies the string in the "source" variable and stores it as the "destination" variable
+    - free(var_name) will free the memory malloc reserved.
+    - Null is the very first space in the memory
+    
+    - valgrind is an old app you can use to track memory usage
