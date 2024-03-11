@@ -1,0 +1,773 @@
+1
+00:00:00,000 --> 00:00:01,110
+DOUG LLOYD: So at this
+point, we're pretty
+
+2
+00:00:01,110 --> 00:00:02,985
+familiar with all of
+the data types that come
+
+3
+00:00:02,985 --> 00:00:08,100
+native to C. We have characters, and
+floats, and integers, and doubles,
+
+4
+00:00:08,100 --> 00:00:13,680
+and we're also familiar now with the
+CS50 data types of strings and Booles.
+
+5
+00:00:13,680 --> 00:00:15,810
+But that doesn't limit
+everything that we can do.
+
+6
+00:00:15,810 --> 00:00:17,220
+We surely can do more.
+
+7
+00:00:17,220 --> 00:00:19,410
+Indeed, with structures,
+that gives us an ability
+
+8
+00:00:19,410 --> 00:00:21,270
+to start to define our
+own data types that
+
+9
+00:00:21,270 --> 00:00:23,640
+might be useful for our own programs.
+
+10
+00:00:23,640 --> 00:00:25,440
+What's cool about
+structures is they allow
+
+11
+00:00:25,440 --> 00:00:29,130
+us to unify many different
+variables of different data types
+
+12
+00:00:29,130 --> 00:00:31,710
+into a single brand new type.
+
+13
+00:00:31,710 --> 00:00:34,290
+And we can give that new
+type its own unique type
+
+14
+00:00:34,290 --> 00:00:36,330
+name as a way to identify it.
+
+15
+00:00:36,330 --> 00:00:38,340
+This isn't the first time
+we've seen the ability
+
+16
+00:00:38,340 --> 00:00:40,683
+to combine multiple variables together.
+
+17
+00:00:40,683 --> 00:00:41,850
+We've seen that with arrays.
+
+18
+00:00:41,850 --> 00:00:43,740
+Remember, the restriction with
+arrays is that we can only
+
+19
+00:00:43,740 --> 00:00:45,073
+combine things of the same type.
+
+20
+00:00:45,073 --> 00:00:47,820
+We can have a whole bunch of
+integers or a whole bunch of floats.
+
+21
+00:00:47,820 --> 00:00:49,830
+But we can't mix them up.
+
+22
+00:00:49,830 --> 00:00:51,720
+With structures, we actually can.
+
+23
+00:00:51,720 --> 00:00:53,012
+We can group together logical--
+
+24
+00:00:53,012 --> 00:00:56,220
+we can group together elements that have
+a logical connection to one another.
+
+25
+00:00:56,220 --> 00:00:58,590
+So for example, we can
+group together a structure
+
+26
+00:00:58,590 --> 00:01:01,458
+for say a student, where
+a student would have an ID
+
+27
+00:01:01,458 --> 00:01:03,000
+number, which is probably an integer.
+
+28
+00:01:03,000 --> 00:01:05,250
+But they also have a
+name, which is a string.
+
+29
+00:01:05,250 --> 00:01:07,410
+And they might have a
+GPA, which is a float.
+
+30
+00:01:07,410 --> 00:01:10,560
+And we can have all of these
+things tied together in basically
+
+31
+00:01:10,560 --> 00:01:11,880
+what's a super variable.
+
+32
+00:01:11,880 --> 00:01:15,960
+It's a variable that has
+other variables within it.
+
+33
+00:01:15,960 --> 00:01:18,570
+The way to do this in C is
+actually pretty straightforward.
+
+34
+00:01:18,570 --> 00:01:20,020
+Some syntax might look like this.
+
+35
+00:01:20,020 --> 00:01:23,010
+Instead of a student in this
+example, let's use a car.
+
+36
+00:01:23,010 --> 00:01:26,670
+We introduced the concept of
+a structure by saying, struct.
+
+37
+00:01:26,670 --> 00:01:28,860
+We're about to define a structure type.
+
+38
+00:01:28,860 --> 00:01:32,010
+And in particular, we're
+going to define a struct car.
+
+39
+00:01:32,010 --> 00:01:35,370
+And struct car actually
+now becomes our type name.
+
+40
+00:01:35,370 --> 00:01:36,510
+It's not just car.
+
+41
+00:01:36,510 --> 00:01:38,370
+It's struct car.
+
+42
+00:01:38,370 --> 00:01:40,800
+Inside of the curly braces
+from this point forward,
+
+43
+00:01:40,800 --> 00:01:42,900
+we can define all of
+the different variables
+
+44
+00:01:42,900 --> 00:01:45,340
+that we want inside
+of our super variable.
+
+45
+00:01:45,340 --> 00:01:48,030
+So for example, here are some
+things that are common to cars.
+
+46
+00:01:48,030 --> 00:01:51,090
+They have a year, the year
+they were manufactured.
+
+47
+00:01:51,090 --> 00:01:55,865
+We have a model, and a license
+plate, and an odometer, which
+
+48
+00:01:55,865 --> 00:01:58,240
+is a number of miles, and
+maybe they have an engine size,
+
+49
+00:01:58,240 --> 00:02:00,282
+which in the United States
+is usually represented
+
+50
+00:02:00,282 --> 00:02:04,140
+as a float for how many
+leaders the engine capacity is.
+
+51
+00:02:04,140 --> 00:02:07,140
+And notice that these are all different
+data types being mixed together.
+
+52
+00:02:07,140 --> 00:02:09,150
+We have integers, and
+we have two strings,
+
+53
+00:02:09,150 --> 00:02:13,880
+and we have a float, or a double all
+mixed up inside of one super variable.
+
+54
+00:02:13,880 --> 00:02:15,630
+To finish our definition
+of the structure,
+
+55
+00:02:15,630 --> 00:02:16,880
+we have a closing curly brace.
+
+56
+00:02:16,880 --> 00:02:19,020
+And then really important,
+a common syntax error
+
+57
+00:02:19,020 --> 00:02:21,660
+is a semicolon at the
+end, which completes
+
+58
+00:02:21,660 --> 00:02:25,137
+our definition of a struct car.
+
+59
+00:02:25,137 --> 00:02:26,970
+Once we define the
+structure, and usually we
+
+60
+00:02:26,970 --> 00:02:29,160
+define our structure at
+the very top of our program
+
+61
+00:02:29,160 --> 00:02:31,950
+up near our pound includes,
+and our pound defines,
+
+62
+00:02:31,950 --> 00:02:34,650
+but we also might define
+them in a separate dot H file
+
+63
+00:02:34,650 --> 00:02:39,430
+because maybe we're using this type
+definition in several different files,
+
+64
+00:02:39,430 --> 00:02:40,680
+or several different programs.
+
+65
+00:02:40,680 --> 00:02:44,603
+And so it makes sense to define
+it somewhere outside of one--
+
+66
+00:02:44,603 --> 00:02:47,520
+outside of a single file and have
+it be a dot H file that we can pound
+
+67
+00:02:47,520 --> 00:02:50,530
+include in multiple different contexts.
+
+68
+00:02:50,530 --> 00:02:54,070
+Now we have effectively created this
+new type and we can start to use it.
+
+69
+00:02:54,070 --> 00:02:56,425
+And we can create variables
+of this type just like we
+
+70
+00:02:56,425 --> 00:02:58,050
+can create variables of any other type.
+
+71
+00:02:58,050 --> 00:03:00,870
+Int x, that's how we
+create an integer called x.
+
+72
+00:03:00,870 --> 00:03:06,060
+Struct car y, that's how we create a
+variable called y of type struct car.
+
+73
+00:03:06,060 --> 00:03:08,880
+So that's how we create
+the variable overall.
+
+74
+00:03:08,880 --> 00:03:12,900
+How do we create the individual
+fields, or members of that?
+
+75
+00:03:12,900 --> 00:03:15,420
+Or rather, how do we access the
+individual fields or members
+
+76
+00:03:15,420 --> 00:03:16,170
+of that structure?
+
+77
+00:03:16,170 --> 00:03:19,350
+We can do so using something
+called the dot operator.
+
+78
+00:03:19,350 --> 00:03:21,100
+Let's take a look at
+what that looks like.
+
+79
+00:03:21,100 --> 00:03:23,430
+So the top here, I have
+a variable declaration.
+
+80
+00:03:23,430 --> 00:03:25,200
+Struct car, my car.
+
+81
+00:03:25,200 --> 00:03:28,590
+Again, here the type is struct car.
+
+82
+00:03:28,590 --> 00:03:31,590
+And the variable name is my car.
+
+83
+00:03:31,590 --> 00:03:35,940
+From this point forward, whenever
+I want to refer to a field,
+
+84
+00:03:35,940 --> 00:03:39,010
+or a member within my car, which
+is again, the variable name,
+
+85
+00:03:39,010 --> 00:03:43,620
+I can use the dot operator to access
+those individual fields within my car.
+
+86
+00:03:43,620 --> 00:03:47,190
+So I can say, for example,
+mycar.year equals 2011.
+
+87
+00:03:47,190 --> 00:03:49,410
+I can't just say year equals 2011.
+
+88
+00:03:49,410 --> 00:03:52,590
+Year is something that
+is part of my car.
+
+89
+00:03:52,590 --> 00:03:56,250
+So I have to always refer to
+it in the context of my car.
+
+90
+00:03:56,250 --> 00:04:00,110
+I can say strcpy(mycar.plate, "CS50").
+
+91
+00:04:00,110 --> 00:04:01,200
+Remember, it's a string.
+
+92
+00:04:01,200 --> 00:04:02,700
+I can't just assign it.
+
+93
+00:04:02,700 --> 00:04:06,930
+I have to copy that
+string into the variable.
+
+94
+00:04:06,930 --> 00:04:11,400
+I can say, mycar.odometer equals 50505
+or anything else that I want to do.
+
+95
+00:04:11,400 --> 00:04:14,880
+I can set the engine size,
+and I can set the model.
+
+96
+00:04:14,880 --> 00:04:18,240
+I can do whatever else I
+want to do just by accessing
+
+97
+00:04:18,240 --> 00:04:21,390
+the fields similar to this.
+
+98
+00:04:21,390 --> 00:04:23,650
+But structures like variables
+of all other data types,
+
+99
+00:04:23,650 --> 00:04:25,740
+we don't have to just
+use the stack for this.
+
+100
+00:04:25,740 --> 00:04:29,580
+We don't just have to say
+struct car, my car, semicolon.
+
+101
+00:04:29,580 --> 00:04:31,497
+We could dynamically
+allocate this if we don't
+
+102
+00:04:31,497 --> 00:04:33,580
+know at the beginning of
+our program, for example,
+
+103
+00:04:33,580 --> 00:04:36,060
+that we're going to need a
+certain number of these things.
+
+104
+00:04:36,060 --> 00:04:41,640
+We can just declare this on the fly
+dynamically using pointers of course.
+
+105
+00:04:41,640 --> 00:04:43,770
+In order to access our
+fields in that situation,
+
+106
+00:04:43,770 --> 00:04:46,340
+we don't use just the
+dot operator because we
+
+107
+00:04:46,340 --> 00:04:47,590
+have a pointer to a structure.
+
+108
+00:04:47,590 --> 00:04:50,940
+We also have to first, as you may
+recall, dereference that pointer
+
+109
+00:04:50,940 --> 00:04:52,770
+and then access its fields.
+
+110
+00:04:52,770 --> 00:04:55,990
+It adds a little bit of extra stuff,
+but let's take a look again here.
+
+111
+00:04:55,990 --> 00:05:00,680
+So here now, instead of statically
+declaring a struct car called my car,
+
+112
+00:05:00,680 --> 00:05:04,340
+I'm going to dynamically allocate
+a struct car called my car.
+
+113
+00:05:04,340 --> 00:05:10,550
+So struct car star my car, and then I'm
+going to malloc space for a struct car.
+
+114
+00:05:10,550 --> 00:05:12,170
+And here's a cool thing about size of.
+
+115
+00:05:12,170 --> 00:05:14,000
+Size of is not just built in.
+
+116
+00:05:14,000 --> 00:05:17,540
+It doesn't just happen to know just the
+size of integers, characters, floats,
+
+117
+00:05:17,540 --> 00:05:18,140
+and doubles.
+
+118
+00:05:18,140 --> 00:05:21,020
+It can also figure out on the
+fly exactly how much space
+
+119
+00:05:21,020 --> 00:05:22,247
+is required for a struct car.
+
+120
+00:05:22,247 --> 00:05:24,830
+So you don't have to go through
+and figure out, OK, well, this
+
+121
+00:05:24,830 --> 00:05:26,570
+is probably like 30 bytes or something.
+
+122
+00:05:26,570 --> 00:05:28,445
+You can just say, size
+of struct car, and let
+
+123
+00:05:28,445 --> 00:05:30,270
+the computer figure it out for you.
+
+124
+00:05:30,270 --> 00:05:34,220
+So struct car star my car equals
+malloc size of struct car.
+
+125
+00:05:34,220 --> 00:05:39,800
+That dynamically allocates on the
+heap one chunk of memory large enough
+
+126
+00:05:39,800 --> 00:05:42,680
+to hold a single struct car within it.
+
+127
+00:05:42,680 --> 00:05:47,600
+And then I can access my fields by
+first dereferencing the pointer.
+
+128
+00:05:47,600 --> 00:05:49,490
+And then once I've
+dereferenced the pointer,
+
+129
+00:05:49,490 --> 00:05:52,935
+I can then use the dot
+operator to access the fields.
+
+130
+00:05:52,935 --> 00:05:54,810
+Again, it's very similar
+to what we just saw.
+
+131
+00:05:54,810 --> 00:05:56,602
+But the syntax here is
+a little cumbersome.
+
+132
+00:05:56,602 --> 00:05:59,570
+Now we have extra parentheses, we
+have this star, we have this dot,
+
+133
+00:05:59,570 --> 00:06:01,610
+surely there's got to be an easier way.
+
+134
+00:06:01,610 --> 00:06:04,160
+C programmers love for there
+to be easier ways to do things.
+
+135
+00:06:04,160 --> 00:06:07,850
+And in fact, there is
+a shortcut for this.
+
+136
+00:06:07,850 --> 00:06:12,530
+It so happens that accessing the
+field of a structure via its pointer
+
+137
+00:06:12,530 --> 00:06:16,580
+is a common enough operation that there
+is an entirely different operator that
+
+138
+00:06:16,580 --> 00:06:19,060
+allows us to do this
+much more succinctly.
+
+139
+00:06:19,060 --> 00:06:20,810
+And it is called the
+arrow operator, which
+
+140
+00:06:20,810 --> 00:06:23,450
+is a hyphen and then
+a greater than symbol,
+
+141
+00:06:23,450 --> 00:06:26,060
+literally making it
+look like it's an arrow.
+
+142
+00:06:26,060 --> 00:06:29,090
+It does two operations back to back.
+
+143
+00:06:29,090 --> 00:06:32,270
+So for the first thing it does is
+it dereferences the pointer, which
+
+144
+00:06:32,270 --> 00:06:34,470
+is on the left of the arrow.
+
+145
+00:06:34,470 --> 00:06:38,160
+And then it's going to access the field,
+which is on the right of the arrow.
+
+146
+00:06:38,160 --> 00:06:41,587
+So for example, this is what
+the code looked like before.
+
+147
+00:06:41,587 --> 00:06:43,670
+This is what we just had
+on the slide a second ago
+
+148
+00:06:43,670 --> 00:06:45,350
+where I'm dereferencing pointers.
+
+149
+00:06:45,350 --> 00:06:49,160
+And then I'm using the dot
+operator to access the fields.
+
+150
+00:06:49,160 --> 00:06:52,218
+Here is what the same code would
+look like with the arrow syntax.
+
+151
+00:06:52,218 --> 00:06:53,760
+And the same thing is happening here.
+
+152
+00:06:53,760 --> 00:06:56,463
+The first thing I'm doing
+is I'm dereferencing my car.
+
+153
+00:06:56,463 --> 00:06:58,130
+But the arrow operator does that for me.
+
+154
+00:06:58,130 --> 00:06:59,630
+I don't have to use the star syntax.
+
+155
+00:06:59,630 --> 00:07:01,970
+It just knows if I
+have an arrow there, I
+
+156
+00:07:01,970 --> 00:07:04,490
+need to first dereference
+the thing on the left,
+
+157
+00:07:04,490 --> 00:07:07,360
+and then I can access
+the field on the right.
+
+158
+00:07:07,360 --> 00:07:09,110
+So using the arrow
+operator is a great way
+
+159
+00:07:09,110 --> 00:07:13,850
+to have a shorthand for accessing the
+field of a structure to which you only
+
+160
+00:07:13,850 --> 00:07:14,720
+have a pointer.
+
+161
+00:07:14,720 --> 00:07:17,070
+And you'll probably
+use this a fair amount.
+
+162
+00:07:17,070 --> 00:07:21,530
+So it's syntax definitely to
+befriend and to get used to.
+
+163
+00:07:21,530 --> 00:07:22,490
+I'm Doug Lloyd.
+
+164
+00:07:22,490 --> 00:07:24,410
+This is CS50.
+
+165
+00:07:24,410 --> 00:07:26,000

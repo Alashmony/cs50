@@ -1,0 +1,12 @@
+Lecture:    https://video.cs50.io/0euvEdPwQnQ?screen=TSzgTX-zMqM
+            https://cs50.harvard.edu/x/2024/notes/5/
+Section:    https://video.cs50.io/VqCbWinLqsc
+Shorts:
+    - Data Structure:       https://video.cs50.io/3uGchQbk7g8
+    - Structures:           https://video.cs50.io/E4lb2gkyXr8
+    - Singly-Linked lists:  https://video.cs50.io/zQI3FyWm144
+    - Doubly-Linked lists:  https://video.cs50.io/FHMPswJDCvU
+    - Hash Tables:          https://video.cs50.io/nvzVHwrrub0
+    - Tries:                https://video.cs50.io/MC-iQHFdEDI
+    - Queues:               https://video.cs50.io/3TmUv1uS92s
+    - Stacks:               https://video.cs50.io/hVsNqhEthOk

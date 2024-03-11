@@ -1,0 +1,327 @@
+YULIIA: Welcome to week five supersection. This is CS50. And my name is Yuliia. I'm one of the preceptors at Harvard for CS50, and Charlie is joining me today from Yale. 
+
+CHARLIE: Yes, and my name is Charlie, like Yuliia said. I'm one of the head teaching assistants for CS50 at Yale. And it is great to be with all of you today. 
+
+YULIIA: Great, so why don't we go ahead and get started? So today we're going to be talking about data structures. So a lot of the things that David talked about in the lecture. We're going to cover linked lists and hash tables. Very briefly talk about tries, and then we're going to go into the inheritance problem set or lab if you are joining from Yale. 
+
+So just to give a quick overview of different operations you can do with these data structures, there is deletion, insertion, and search. And they can go in various priorities. You can search first and then maybe insert delete, or do something like insertion, search, deletion then. We're going to cover insertion and deletion in section today but feel free to play around with the search operations a little bit more. 
+
+So as in lectures, there are a few data structures that we're going to be talking about today. First one is linked list, which essentially is kind of like a chain of nodes, something that David illustrated with balloons in lecture on Wednesday. And Charlie's going to talk a little bit more about the structure of linked nodes. How we insert and how we delete it and all the different operations you can do with them. 
+
+And next one on is hash tables, which actually are really fun. And essentially, a hash table is just an array of linked lists. So on the left side, you can see that it is just an array with different buckets corresponding to letters. And on the right side, they kind of expand into these bigger linked lists. 
+
+Next one is a trie, which we actually don't really talk about a lot in CS50, but it's one of the other data structures that makes it really easy to look for things. And kind of on the similar note of looking for things and doing searches, are trade-offs between memory and time. 
+
+So this is something that you might see when you will start working in Speller. This is our board for the Speller problem set, where your job will be to load the dictionary and then find if the words are spelled correctly. So here you can see that Thomas implemented Speller in such a way that it takes one less second to implement than, for example, Karger's solution, but you can also see that it takes up almost twice as much memory than Curtis solution. 
+
+So while we do want to emphasize the efficiency and how quick the program can be, memory is some kind of is the other trade-off that we want to keep in mind while we are coding our program and talking about data structures this week. So with that being said, I'm going to pass it on to Charlie, who is really going to jump into nodes, the linked list, and explain all the good stuff about it. 
+
+CHARLIE: Absolutely, so let's go ahead and jump into nodes here. And we're going to get started by taking a look at some of the base code that we'll use to define exactly what a node is in C. So we take a look at this slide right here. We have a little bit of code on our screen right now, and we're going to break down exactly what each component inside this code is. 
+
+We're going to start off with this struct node definition. So this tells C that we're going to create a custom structure, or struct and we're going to call it a node. Then we're going to define what's contained inside of this custom data structure. This node that we're defining. 
+
+So the first thing that we want is a box that represents a string called phrase. So if we take a look on the right side of your screen here, we have this new box to store a phrase which is of data type string. Then we can store any string value that we want, such as "Hi," for example, inside this box. We can also store "Bye" and any other valid string value as long as we enclose it within the double quotes as seen on the screen here. 
+
+Now let's move on to the second part of what's contained inside of this node. Notice how on this line, we have node *next. This is what we're going to use to link this node to the rest of our nodes inside of a linked list. We use node * because we want to have a pointer pointing to the next node in our linked list. 
+
+If you take a look on your screen over here to the right, you can now see a new box, below phrase, that we are calling "next" to store the pointer to the next node. You can see that we fill in the value here with a pointer address. 
+
+And this pointer address is represented in hexadecimal. So that's why you have the 0x in front as the prefix denoting this as hexadecimal. And then we have a random address value, in this case, an example value of 123. This value could be anything. It could be 1, 2, 3. It could be 4, 5, 6 or it could be anything else wherever that next node is located within the memory of your computer. 
+
+So now let's jump back out to the definition of this as a whole and take a look at what this extra typedef part is over here. As you can see, we already said struct node earlier at the top, but we also have typedef node surrounding this entire definition. And the reason why we have this here is because if I wanted to use this node data structure throughout my code, I would constantly have to type struct node and then the rest of my code without this typedef part if I didn't have it here. 
+
+But by including typedef node in this definition, I can simply refer to this data structure just as node throughout my code. And we'll see here in a second how this actually works as we start building our very own linked list. Now, before I move on, do we have any questions on how this node is structured, quite literally, as a struct in C? Feel free to put your questions in the chat, and I'll wait a second here. If not, we'll move on to building our very own linked list. 
+
+OK, great, no questions, so let's go ahead and move on to the next part now. So with this struct node in place, we can now start building our linked list. And the very first thing that we're going to want to do, is we want to define our list as a pointer to a node. And the reason for this is because our linked list is a chain of nodes that are all linked with each other. 
+
+So we want to define this node * list, so this is a list variable that represents a pointer to a node. And we're going to start off with null. Or in other words, right now, we don't really have a linked list. It's just empty at the moment. And if you look below, at the bottom half of this slide, you'll see that we have this arrow called list representing a pointer to nothing at the moment. 
+
+But now let's go ahead and create our very first node for this linked list. So notice how we've went ahead and changed our variable name to "n" now to represent a new node. And we're going to now allocate memory within our computer to create this node. We're going to use the malloc function, and with the malloc function, you have to tell it exactly how much space you want it to allocate within memory. 
+
+So what we're going to do is called sizeof(node). So that allows us to tell the computer we want exactly just enough space to allocate one node struct and from there, we're all good. So if we go to the next slide here, you'll see now that we have this familiar two-box structure that we defined earlier in this presentation. 
+
+And then if you take a look on this slide here, we're now going to define what phrase is within this node. So we're going to call the phrase attribute of n, which is our node, and we're going to set it equal to Hi! So now if you take a look at that first box at the bottom, you see that Hi! Is now populated within the phrase box of our node n. 
+
+We then want to make sure we have something set for next since this is a linked list. So we want to make sure we have a chain going. And so far, we only have one node within our linked list. So I'm going to go ahead and set next to null for the time being. But foreshadowing for later on, you'll see that we'll want to modify this value so that we can chain all of these nodes together to form our linked list. 
+
+Now, there's one more thing that we have to do, and it's really important. Notice how so far, we've been working with the variable n to represent this new node that we created. We want to make sure that we also point our list towards this n node because without doing that, our list value wouldn't actually point towards anything. It would still be pointing to null if you remember from the slides earlier. 
+
+So by saying list = n we have successfully one, created this new node object and two, we've then pointed this list that we're creating to this first node. And you might be wondering, why do we need these two variables n and list to create this node struct if they're all going to point to the same thing? Well, you'll see here in a second, when we create our second node, why it's important to have two variables separating these from each other. 
+
+So now let's go and talk about how we're going to insert nodes into this linked list that we just created. We're going to start off by creating another node, and this is where the importance of having two variables n and list comes into play. We want our list variable to still point towards that first node that we just created earlier, but now, we want to create a brand new node. 
+
+So we're going to, once again, call malloc. And the parameter or argument that we want to give to it is sizeof(node) because we want to, again, allocate exactly just enough space to create another node within our memory. So once we do that, n is now pointing to this brand new node struct with these two empty boxes down there at the bottom of your screen. 
+
+And we're going to now fill in the phrase box. So we're going to assign the value Hey! to this box. And now, for next, you'll see that we're going to point to list instead of null. And the reason for that is because we're creating a linked list, emphasis on the linked component. So we want to make sure that this node is pointing to the one that's supposed to be after it, which in this case, is the one with Hi! as its phrase value. 
+
+So if we take a look at what we have here now, there's one more thing that we have to do. And it's that we have to go back and update list to be n again. And that's because a linked list is tracked by its head value, or the first node within the list. So by doing list = n, we move that list pointer back to the start of our list, and then we have successfully inserted a value into our linked list. 
+
+Now, let's go ahead and start cleaning up what we have here. Let's say, after I've used this linked list in my code, I want to go ahead and safely deallocate or remove all the memory that I've allocated for this before ending my program because as you remember from lecture, it's always important to make sure you free any memory that you malloc. Every time you malloc something, you must free it. 
+
+So let's try out one thing here, for now. Let's go ahead and try free(list) because list represents my linked list, right? So why not just free the list? So as you see down here, we have that first box blacked out representing that is now removed from memory. But you might notice that we still have that second node with Hi! floating around in our memory. 
+
+And this is a common mistake that some people might make when they're trying to free a linked list. If you only free the variable that represents the head or the start of your linked list, in our case that variable is called list, you will only free the first node. And by doing that, you will miss all the nodes connected after that first node in your linked list. So you'll have memory floating around on your computer, and your computer will not be very happy with that. 
+
+So in order to correctly free this linked list, we're going to go back to the start here. And what we're going to do now, is we're going to create this temporary pointer variable to represent the next element in this linked list. So that way, if I go ahead and free the list, so we gotta black out that first node box, we can still see that we have a pointer called ptr pointing to the second node. So this allows us to then reference ptr and free that so that last box is not floating around in memory space lost. 
+
+What we're going to do now, is say list = ptr so that we can then reference that second box again. And then, once we say pointer = list next, that ensures that before we free what we currently have, we're referencing whatever's after this. 
+
+Now in this case, it's important to note that there is nothing after this second node. So in our case, when we run ptr = list next, we end up with null. But that's OK because that's how we can tell our program later on that, hey, once you reach null, that means you reach the end of your linked list. So there's nothing else to free in this case. 
+
+Now, let's go ahead and free(list) because list is now pointing to this second node. And once you've done that, you can do list equals ptr again because we want to make sure that we freed everything in this list. But you will see that there is nothing left because ptr is currently equal to null. So now I'm going to go ahead and hand it back to Yuliia for a quick interactive activity involving linked lists. 
+
+YULIIA: Great, Thank you, Charlie. So yeah, this was, hopefully, a very clear visual representation of how linked lists works. We went through insertion, deletion, there is also search that I mentioned in the very beginning of the slides. Today, we're only going to focus on inserting and unloading and linked lists. 
+
+So hopefully, you're able to download and open list.c at cs50.ly/supersection1. Feel free to download it, open in your VS code and follow along. But I'm going to go ahead and do the same thing on my end. So here, I have the CS50 ID, where I had pre-downloaded the list.c file that we will work with today. 
+
+So to go back and look through our to-dos for today, first thing we're going to do is implement code to add a node to the linked list, something that Charlie just talked about. We're going to ensure that the list always points to the head of the linked list. And we also need to ensure that our new node contains the phrase. 
+
+And our second to-do is implementing the unload function such that all nodes in the linked list are freed when the function is called. As always, remember, if you use malloc, you want to use free in the end. And then once the function successfully freed, all the memory malloced, we want to return true to indicate our main that the memory was successfully freed. 
+
+So going back to our code here, should be very familiar structure. On very top, we have our headers. Then we define our nodes struct that we're going to use to create our linked list, write the typedef struct node and the string phrase struct node pointer next. The structure that Charlie just talked about, which is really just a box that where the first half is some word and the second half is kind of like a block of memory that stores the address that we're pointing to. 
+
+And going ahead, we have prototypes for two functions onload and visualizer. Something that Carter already implemented for us, just a nice representation of how everything looks like. And jumping right into the first to-do, so here in main, we have already created a pointer list. Right now it's pointing to null because we haven't implemented our linked list yet. And one of our first to-dos is adding phrases to new nodes in the list. Namely, we're going to add two nodes per the definition of list size to above. 
+
+So going off what Charlie just talked about, does anyone want to help me out was the first thing that we need to do here. So if we want to add a new node to the list, we already have a pointer list null, what do people think is kind of like the first action here? Feel free to drop it in the chat any guesses of what our first line of code might be. 
+
+So first we want to create that node. And let's call it n to keep it consistent. So we can just create a node. We want to allocate some memory to it. And for that, we want to use the malloc function. And I can use malloc(1). Would that be right? Probably not, right, because I want to keep my size consistent with the kind of variables I want to create. 
+
+So I probably want to use sizeof(node), since that's what I'm interested in. And once I malloc my memory, it is always important to double check if the memory exists. So for that, I'm going to create an if statement where I'm going to say, well, if n is actually equal to null, I just want to return 1 and quit this program altogether. The memory was not allocated properly. There is nothing I can do about it. So I'm just going to quit. 
+
+If that is not true, we want to continue on. So now that we have our box, our node, we want to start populating it. And the first thing that we want to add is our phrase that we get_string on line 25. So to do that, I'm actually going to go back to check, OK, what are my attributes in this struct? 
+
+I see that I have string phrase and struct node *next, so I probably want to store my word in the attribute phrase. To do that, remember that you have the arrow operator. And I'm going to do n phrase = phrase. And that way I'm going to store whatever word I got from the user earlier. And I'm going to set my next = to null because there is nothing to store there yet. 
+
+So this is our basic setup for one of the first nodes. Now we actually want to connect them in one linked list. So far it's just one node, but we're going to add one more. You can add 5, 10, 20 more, so we just want to keep those links together. 
+
+To do that, what I'm going to do now, is I'm going to set n next equal to list because I want to point my next chunk to whatever is list pointing to to keep the links together. And because list is always pointing to the first node in the linked list, I'm going to set list equal to n. So now whatever n was pointing to when we created the node on line 28, I'm going to reset for list to point to it. 
+
+I think that should look good. So let's test it out. So I'm going to cd into supersection. I'm going to make my file, make list. It compiles, which is always a great sign. And let's run it. So enter a new phrase can be Julia, good. So now you can see that I created a node at location 0x557 et cetera. It's choice phrase Yuliia. And max is pointing to null or nil, which is the same thing, because there's only one node in the linked list right now. 
+
+Well, I can go ahead and enter the second phrase, Charlie, and let's take a guess in the chat here. What do we think is going to be first in our linked list, the node Charlie or the node Yuliia? I'm going to give you guys just a second to think about that. 
+
+So just based on the way that I set up my connections here, does anyone want to take a guess? Yeah, Dani, that's a great answer. So when I entered the next phase Charlie, we can actually see that node Charlie is allocated some memory. It contains phrase Charlie. And now it's actually pointing to the location in memory where Yuliia node is stored, and node Yuliia is now pointing to null. 
+
+So do we have any questions about the code part of how we insert or add a new phrase to a linked list? And I see just one question in the chat here. Do you set n next to null to ensure it's no longer garbage value? That's a great question. Yeah, so we really just want to make sure we pre-set our nodes with a phrase that is given. 
+
+But since we don't really know what we're going to store in that next, it's always good to just error check it, make sure we set it to null, that we occupy that memory. And then we can reassign it to be pointing to whatever list is pointing to. 
+
+OK, seems like there are no more questions. So we can go ahead and move to the implementation of the onload function. So as you can see here in the terminal we're still getting error in freeing our list because we're not really freeing it right now. So what we're going to do, we're going to go ahead into our bool unload function where we want to free all of the allocated nodes. 
+
+So as you can see here, onload takes in list as a pointer to a node as an argument and returns a Boolean, which is true or false. Currently we are returning false because we haven't really implemented the onload of the list. So what we're going to do next, is we're going to work through the freeing the memory of all the allocated nodes. 
+
+So first I want to do is create a temporary variable, I like calling them a helper variable, that is going to help us traverse through that list making sure that we're keeping track of all of our nodes. So once I do that, I want to set some kind of a condition to make sure I traverse through the whole list, and I'm freeing all of my nodes. 
+
+To do that, I'm going to set a condition while pointer is != to null, I want to keep going and freeing all of my nodes. I could do free(list) list and just be done with it, but is that a right solution, or am I making a mistake here if anyone wants to chime in the chat? 
+
+Right, yeah, it's a mistake because as Charlie mentioned earlier, if we just call free(list) we will free the first node in our chain, but we will lose access to all of the nodes in the end. So I'm just going to delete this and start over, OK. 
+
+So what I'm going to do is, I'm going to make use of my pointer variable. I'm going to set pointer = list next, just so that I can keep track of whatever node is coming after the node that list is pointing to. I'm going to go ahead and free the list, just like I tried doing before, but now I'm safe because I pre-saved the location of the next node I'm interested in. 
+
+And then what I'm going to do, I'm going to reset what list is pointing to because list is always pointing to the first node in the linked list. And I just always want to keep track of that. So I think we should be all set here. Assuming everything runs correct, we can just return true. 
+
+So let's compile it. It compiles. Let's run it. Yuliia, Charlie, it's freed the list. well I told it that we freed it correctly. But now actually let's run valgrind to see if there are any memory leaks so I'll enter Yuliia. I'll enter Charlie. And all used blocks were freed. No leaks are possible. So we indeed ensure to free all the memory that we malloced before. We freed our linked list. So we successfully unloaded the nodes we created earlier. 
+
+Do we have any questions about inserting the node, any of the syntax? I guess I should mention valgrind a little bit more. It's a really great tool, especially now that we're entering the mysterious land of memory this week, where you're playing with a lot of linked lists and mallocing a lot of stuff. 
+
+So it's always useful to quickly run valgrind to make sure there are no memory leaks because if you're running into some, it's very likely that check50 is going to stop you and indicate that something's going wrong. 
+
+But if there are no more questions in the chat, we can go back to our slides, where Charlie will talk more about-- oh, I see a question in the chat. So I'm just going to go back really quickly. OK, so can you explain list next? 
+
+Yeah, so in the very beginning, we create pointer list to just be equal to null. It's pointing to something. But as we're creating our nodes, we want to make sure that we're always reassigning lists to be pointing to the first node in our chain. 
+
+So here, after I set up my node n that I just malloced, I want to change list to be equal to n in the sense that-- if maybe I go back to the slides, it will be easier, sorry. So yeah, so for example here, I have list pointing to null, right, nothing. I created n that's pointing to my node. And I want to reassign list to be equal to n to make sure that list is now the pointer that is keeping track of the beginning of my list. 
+
+And then as I go through the rest of the insertion process where I'm inserting more nodes, I want to keep reassigning list to be pointing to whatever new node was inserted into my chain. Does that answer the question? Do we have anything else we'd like to talk about before we jump into hash tables? OK, sounds great. I'm going to pass it back to Charlie where he's going to talk more about the hash tables. 
+
+CHARLIE: Let's go and jump into hash tables. So let me go and share the slides here again. But before we go into hash tables, I want to start off with a structure that we are very familiar with so far. 
+
+So we've been talking about linked lists. And let's go and take a look at this linked list that we have on the screen here. It contains three nodes. It has Hey! Hello! And Lo there! And that's about it, just three nodes inside this linked list. 
+
+Now, let's go ahead and do a virtual exercise here. And I have the chat pulled up this time on my iPad, so I will not miss your questions in case you have any. But let's go ahead and try finding where is Hey! In this list, knowing that it is a linked list. 
+
+Well, it's pretty simple because with this linked list, we'll have a pointer pointing to the head or the first node of this list. So we can immediately find Hey! because it's at the start, so easy one and done. 
+
+But now let's try something a little bit further down this chain of nodes in this linked list. Let's say I wanted to find Lo there! Well, it's really easy for you and I, as humans, because we can see on the screen here, well, Lo there! is just in the third position. But from the computer point of view, it can't see anything past what its head, or the start of the list, is looking at because that's where the pointer for this linked list is currently looking at. 
+
+So all we can see is Hey! And then what it will have to do is traverse this linked list by going to the next element, and then the next, and then the next, and so on and so forth until it reaches the end. Each time looking at one node one by one trying to figure out if that one is Lo there! 
+
+So let's go and pretend like we're going to walk through this and try to find Lo there! So I'm going to look at Hey! and pretend you can't see the rest of this linked list. And let's go and check if Hey! is equal to Lo there! We obviously know that Hey! Is not equal to Lo there! So let's go to the next one. 
+
+Now let's take a look at Hello! Is this equal to Lo there? Well, of course not, so let's then go to the next one. Now, is Lo there! Equal to Lo there? And the answer is yes. So we successfully found Lo there! inside this linked list, But notice how we had to go through so many elements beforehand, we practically had to go through the entire linked list in this case to find Lo there! 
+
+Now, imagine if we had a much longer linked list. Let's say with thousands of phrases inside this linked list. If we wanted to find one specific phrase, whether or not it's in that linked list, we would have to go through every single element in this linked list until we either find it, or we don't find it. 
+
+And you can quickly see how this might be very time inefficient if we're working with very, very large linked lists. Now, some of you might be thinking, well, Charlie, I know that with an array, I can immediately access specific elements with an index if you happen to know what index you want to go to. And you're exactly correct with that thinking. But in this case, we're working with a linked list currently. However, pause on that thought for now because we're going to use the concept of indexing with arrays, a little bit later on, once we start talking about hash tables. 
+
+So let's go and jump into hash tables now. Taking a look over here, I went ahead and deconstructed that linked list that we had and sort it based on the starting letter of each word, or phrase, rather. So in this case, I put Hey! and Hello! together because they both start with H. And then I put Lo there! next to L because it starts with an L. 
+
+Now another word or term that you might have heard to refer to hash tables is a dictionary. And that word has quite a resemblance here because we basically sorted this linked list into a literal dictionary, where we have the first letter of each phrase, and we're sorting based on that first letter. 
+
+So let's go and pause here for a quick second and think about what data structure this might actually resemble now. Does anyone have any ideas? Feel free to put them in the chat. Yeah, so you're absolutely right. This is starting to look somewhat like an array. 
+
+And what I'm going to do now, is I'm going to put a list of indices over here to the left of my letters to represent an "array" quote unquote. But notice how this array happens to have linked lists located at each index position. So for example, we take a look at H here. At index 7, I have a linked list of, Hey! and Hello! and then if I go down to index 11 with the letter L, I also have another linked list that just happens to have only one node in it Lo there! 
+
+And notice how now this can be a lot faster in terms of trying to find what I want to look for inside this linked list. Say, for instance, I wanted to look for Yuliia in this new structure. Well, what I can do, is I can jump immediately to the letter Y, skipping everything else, and that immediately narrows down the size of the area that I need to look through before I can find Yuliia in that linked list, whether or not it's there. 
+
+Now, going back to the other term that we use to define this structure, I call this a dictionary just now, but now let's go back to the other term that we also use that is synonymous with dictionary, a hash table. We call it a hash table because we use this thing called a hash function to generate those index values that you saw earlier on the screen. 
+
+Basically, by giving you any value, in this case, Hey! we feed it into this black box. this hash function that will then give us a number representing the index of where in the hash table we should store this new element. And a good hash function is the difference between a good dictionary or a good hash table or an inefficient one. And what I'm going to do now, is pass it back to Yuliia here to give you a quick walkthrough of how to define your own hash function. 
+
+YULIIA: Thank you, Charlie. Yeah, so now we're going to jump into hash functions. So as Charlie mentioned, we have hash functions that take some input and then produce an output. So right now, I want you guys to download and open table.c at cs50.ly/supersection2. 
+
+What we're going to do here, is we're going to complete function hash to return a number 0 to 25 depending on the first character in the word. We've already pre-made the solution. So we're just going to walk through it together. 
+
+So to just give a quick overview of what's going on here, we can see our familiar struct node with phrase and node next, which is very similar to our nodes and linked lists. But now, the addition is the table of size 26, aka 26 letters of the alphabet, where we're actually going to store all of our words in a linked list inside of an array fashion. 
+
+There's a lot of stuff that's already implemented for us. For example, it's already adding the items through the for loop get_string function. But what we actually have to implement is the hash function itself. So I'm going to jump into the table solution tab, where we've pre-made our hash functions. 
+
+Since our implementation spec called for a hash function that would output the number based on the first letter in the word, what we've done is we said, OK, we're going to take phrase 0, which is the first letter in the word that we're storing in string phrase, we're going to toupper it because we want to make sure that we're keeping all the inputs uniform no matter how a user is inputting it, and then we're going to subtract capital A to actually be able to bucket in within indexes 0 to 25. 
+
+So for example, if I run make table_solution, I'm going to compiles and then I'm going to run table_solution. OK, so for example, I can enter Apple, and it should have a bucket 0 because the first letter is A, and even if it's lowercase or uppercase, it should still return the same hashed output. Same with banana, it should just return 1 because it's the second letter of the alphabet. 
+
+And the reason why it works that way, is because we're returning an int in our hash function that takes in a string. And by subtracting a capital A in this case, we're just resetting it on the spectrum of 0 to 25 versus-- I don't remember exactly where the ASCII for capital A stands, but somewhere in the 60s, right? We don't really want that. We want to reset it back to 0. 
+
+However, I have a question for you all. So on the bottom here, I have another implementation of this function-- 65, thank you, Carter. I have another implementation of this function using a tolower function instead of a toupper. Do we think it's going to give the same output? Or is it going to be different from the first implementation that we just saw? 
+
+Feel free to chime in the chat. Send your suggestions. Is it going to be the same? Is it going to be different? I'm seeing some answers in my direct messages. Right, it's going to be the same because, essentially, it doesn't matter as long as we keep it uniform. If I'm bringing my first letter to the uppercase and I'm subtracting uppercase A, it's resetting it on the same scale in the same way that bringing the first letter to the lowercase and subtracting lowercase a does. 
+
+So I'm just going to recompile it. I'm going to go ahead and run it again. So if I say Apple, it hashes to A again. If I say Yuliia, hashes to 24. Even if I use uppercase Apple again, it still hashes to 0. 
+
+So going off of that, we want to talk what a good hash function is. As you noticed, it gives the same value for the same inputs. So for example, in this case, we didn't really want to distinguish between uppercase or lowercase words. We want to treat them in the same way. Therefore, it was a good hash function. 
+
+You might start asking yourself questions like, OK, but what if I have 100 words that start with letter H and then it just becomes a really big linked list? Well, then you can start thinking about something like, maybe I want to separate it by the first two letters. Or maybe I want to come up with a formula that would spread them evenly across all buckets. And you'll get to explore that in this [INAUDIBLE] set yourself this weekend. 
+
+But a few other attributes that a good hash function has is, it produces an even distribution across all buckets. We don't want to see a case where, for example, we have in the index 2, we have a linked list of 100 words and index 5 there's only one word. Then the hash function is doing something wrong, and we want to revisit our implementation of that and make sure it provides output so that it's evenly distributed across buckets. 
+
+So with that being said, before we jump into the inheritance problem set, does anyone have questions about a hash function, a hash table, going back to nodes and linked lists, anything of the content that we've talked about so far? 
+
+OK, seems like there are no questions. So we're going to go ahead. I'm going to get started with problem set inheritance. So we're just going to give a quick overview of what you have to implement in this problem set. So to do that, I'm just going to go ahead and share my iPad. 
+
+So in the inheritance lab, essentially what you want to do is create a family of three generations. And to do that, we have set up a struct called person that has two components. It has an array of two characters called alleles that are produced based on the parents of a given person. And then next, it has an array called parents that are actually pointers to a struct person of the given person's parents. It's a little bit confusing, so we're really going to break it down to make sure you understand the structure of the nodes, and what's going on. 
+
+So I have my pointers for parents here. I have my alleles. You can imagine it can be like A, B, or whatever the parent's alleles have. And so what's on here is I have a pointer to another person node called person that has the same structure where we have alleles being an array of two characters. And then in the same way, we have our array parents that are pointers to the following parents again. 
+
+So I actually draw out a much better representation of this before section. There's a lot going on. So I'm just going to walk through it again. So essentially, what we have is our main generation one person. And then based on that, we have our parent zero, and we have our parent one that in turn have their own parent one and parent zero and parent one, which are now in generation three. 
+
+So this is the ultimate final product you want to create. And to point out a few tweaks in this problem set, is that the alleles of second and first generations are going to be based on the alleles of their parents. The alleles of the third generation are going to be picked randomly. In this case, I've pre-populated them with some random values either A, O, or B. 
+
+But the caveat is that the parents of the third generation actually pointing to null because it's the last generation that we're interested in. And given that this is the final product, what do you need to implement in the function itself is create_family that will create this whole structure. 
+
+So what I'm actually going to do is I'm going to switch back to my code and walk through the overall structure of create_family, and what's going on here. So here we have a setup for create_family that takes in generations and returns a pointer to a node person, which is going to be our first person in the generation generation one. 
+
+So essentially, what the code is doing is like, OK, if there are more than one generation left, I want to keep creating families. Notice that it's a recursive function, which is a function that calls itself. So within create_family, we're calling create_family again. 
+
+And here you can see that it's subtracting one generation every time. So when I call create_family for the first time, I'm passing in 3, but on line 48 and 49, I'll be passing in 2 because we want to subtract one generation at a time. 
+
+So with that in mind, I'm just going to go back to my iPad to really illustrate how this recursive function is going to work. So at first we're going to create-- and I'm going to get rid of these because these don't exist yet. So what's going on, is that we pre-populate kind of like we malloc our first node person, and then we're looking at parent zero right here. 
+
+And so as you remember from the previous slide, we want to call create_family again. So it doesn't really populate the allele array just yet. So it looks at parent zero, and so it calls create_family again, which in turn creates this node called person. It still has the empty alleles, and so following the same structure, it goes into parent zero again, so following it in a binary tree sort of fashion. 
+
+And so it gets to parent zero and generation three, at which point we know that we've reached our last generation. So now we don't want to create parents anymore. We just want to set them to null. Pick random alleles, as this is our third generation, and go back to our parent zero here. 
+
+Now go into creating parent one for this person. In the same fashion, we see that this is our third generation. We set parent pointers to null. We pick the alleles randomly, and we go back to this person. Now that we've had parent zero, parent one allocated and populated, we can pick alleles based on parent zero and parent one. For example, I'm going to call it A and O. If you're a biology major, and I'm doing this entirely wrong, please forgive me. I majored in data science. 
+
+So now that we have our parent zero for our gen 1 person, we're done with this branch. We've already created it. It's all set. So now we're kind of moving back up again. 
+
+We're going to do the same process of creating the right branch by going into parent one first, then parent zero, parent one again, going back to generation two and then finally wrapping it up in our gen one person where it already has all the parents populated and now based on the alleles that we picked for them before, say B0, it will now populate its alleles. And in the end, create_family is going to return a pointer that's pointing to our gen one person. 
+
+So this was a very quick run through of what you have to implement in inheritance. There's also a unload function that Charlie's going to talk more about, as well as actually coding out how the create_family implementation will look like. So with that being said, I'm going to switch back to my slides and give it to Charlie. 
+
+CHARLIE: Thanks, Yuliia. So let's go ahead and work through this inheritance lab or problem set together. So I'm going to go ahead and share my screen here. Can everyone see my code screen? Yes, it does look like so. 
+
+So if you haven't already, make sure that you have this code file inheritance.c downloaded and opened on your CS50 VS Code space as well. So I'm going to go and pause here for a quick minute, actually, to let you go to the link that Carter dropped in the chat and make sure you follow the setup instructions in that page to successfully download, unzip, and then open up this file in your own editor. 
+
+All right, let's go ahead and jump in now. So what I'm going to do, is I'm going to scroll to the very top of inheritance.c, this code file, and let's start reading through what code we've actually been given first. Because oftentimes, the most important thing with understanding a problem that you're tackling, is figuring out what you've been given in the first place and what you have to do with that code that you were given. 
+
+So like Yuliia mentioned, we are starting off with this person struct over here. And like Yuliia draw on her iPad, there's two things inside this person struct. There's going to be a list of two parents, both of which are also person structs. And then over here, I have an array with two alleles. Both of which are represented as chars because like Yuliia drew out on her iPad, these are just single letters A, B, O. 
+
+So once we understood that, we now recognize what this part over here is. Let's go and take a look at what we have next. We have a couple constant values that we'll have to use throughout this code, but don't worry. You don't have to worry about these for now. 
+
+And we also have a couple of function prototypes, essentially we're saying to see, hey, expect for us to define these functions later on. Well, we're going to define all of these at the top here, so we can reference them within each other later on in our file. 
+
+Now we're going to take a look at our main function real quick. All we're doing is getting this random number generator ready before we get going because we'll need this later to generate our alleles. We're going to call this function that we're going to define in a second here to create this family tree with three generations, like Yuliia drew on her iPad. 
+
+And then, we're just going to print out this family, and of course, free this family once we're done with it, because every time we malloc something in memory, we have to make sure we free it. 
+
+So let's go and take a look at what we have here. Looking at the create_family function, I see a couple to do items. So let's go ahead and start off with the first one. We want to allocate memory for a new person. So the very first thing that should come to mind, hopefully, is the malloc function. 
+
+So I'm going to go ahead and do, is just write down malloc. But first, what has to go inside of malloc? Anyone got any ideas in the chat here? Yes, exactly, thank you. We want to have the size of how much memory we want to allocate inside of here, right? 
+
+So I can put in any number. I can eyeball it roughly and say, maybe 1,000. But this wouldn't be appropriate because we might be allocating too much memory in this case, most likely. Or if you put a number that's too small, like 1, we'd be allocating too little memory. 
+
+So the easiest way to make sure you allocate just exactly the right amount of memory is use sizeof. And thank you, Todd, for the suggestion there in the chat. If I go in and type in sizeof, this is a function that we can use to determine the size of something. And how much memory do we want to allocate? Well, I'm creating a new person. So probably makes sense to say sizeof(person) inside of here. 
+
+Now there's one more thing we have to do, though. Malloc does return something. And what will return? Well, in our case, it's going to be returning a pointer to a new person. So let's go ahead and create a variable to store the return value of malloc. 
+
+I'm going to go ahead and define a new person pointer. So that's why I have person *. I'm going to call it new_person. Set a equal sign, and now on this line, what we're doing is allocating a person's size space inside our memory. And then we're storing it inside this new person variable. Any questions before we move on? 
+
+And if not, let's go ahead and move on to the next to-do. Before I do that, though, let's take a look at this if statement that we have here. I see that we have if generations greater than 1. We're doing something by creating two new parents by using a recursive function call so that just means we're calling this function in itself but with a different value for generations this time. And then if generations is not greater than 1, so there's no generations left to create, we'll do something else. 
+
+So let's go and actually start with the bottom part here because it actually might be a little bit easier to understand the top part once we complete the bottom part here. So let's take a look at this else clause. And let's start off with this first to-do. 
+
+It says here, set parent pointers to null. So how might we want to do that? Well, we know by looking at the top here, that parents is an array of size 2 persons. And we want to go ahead and assign each one of those persons to null. 
+
+So what I'm going to do, as I go back down here, your first instinct might be, well, let's go ahead and call parents. I know I want to access that first index. So that would be index 0 because we index by 0 in arrays. And I'm going to just set that equal to null. And I'm going to go ahead and just do the exact same thing for that second parent at index 1 and set it equal to null. 
+
+But if I were to go ahead and run this program, something wouldn't be working. There's a bug in this code currently. There's two of them actually, which is a hint. What might be wrong with this code that we have here at this moment? 
+
+Yeah, you're exactly correct. We haven't specified which parents we're modifying. Right now, we're just referencing a parents variable, but this parents variable actually doesn't exist inside of this function. If you take a look up here, we're within a function, so we have to check to see inside this function if this variable exists. There is no parents variable. And if you look up in global scope, so inside the entire program, there's also no parents variable. 
+
+Now, you might say, well, Charlie, wait a second. We just defined parents here, but this is inside our person struct. So what you have to do is you have to go back down and reference a specific person's parents that you want to set to null. So you're absolutely correct, Isaac, thank you very much. And what we're going to do now is say new person. New person's parents should be null. I'm going to go ahead and do the exact same thing down here. 
+
+Now, let's go ahead and move on to the next to-do. I want you to go ahead and randomly assign alleles for this new person. So how can we do that? Well, if I go back to the top of my struct here, I can see that we have this alleles attribute of our person. So just like how I access this specific new person's parents, I'm going to use the same arrow syntax to access this new person's alleles. 
+
+So I'm going to go ahead and say new person alleles if I can spell that correctly. And we're going to start off with 0 because this is the first allele out of two. And what do I want to set this equal to? Well, I know I want to set this to a random allele, but how do I do that? Anyone have any suggestions on that? 
+
+Yeah, exactly, you're exactly correct, we can use random_allele. So if you scroll down here, actually, to the very bottom of this file, you can see that there's already a helper function defined for us called random_allele That will return a random allele A, B, or 0 based on a random number that will be generated and use some math to then convert that into a letter. 
+
+So if I go back up here, I can say, new person's first allele should be equal to a random allele generated by this function that we have. And I'm also going to do the exact same thing but for index 1. So I can also assign that second allele. I'm going to pause here for a quick second. See if there's any questions. And if not, let's go ahead and move back up to the top part of this function, which is the if statement. 
+
+Now, before we do that, there's actually one very important thing that we have to do. And thank you very much to the person in the chat who brought this up. We have to check to see if we actually successfully malloced memory for this new person. 
+
+So just like what Yuliia did in one of the earlier exercises, we're going to use a conditional statement or an if statement to say if new person == null. And what this means is, if new person equal null, we didn't allocate that memory. So what should we do? Well, we can go ahead and maybe print out a helpful message. So let's say, we had an error allocating memory for our new person. I'm going to add a new line at the end of this. And then what we want to do after that is just return null. 
+
+So that way whoever's calling this function create_family will see null as the return value, and then they can appropriately do what they might want to do from that point onwards in the program. 
+
+So now let's go and jump back into this if clause over here. Our first to-do is to set parent pointers for the current person. And this is very similar to what we did in the else clause, but there's something different. This time we actually have parents that we want to set. 
+
+So just like last time, I'm going to go ahead and call or reference the parents, the first parent, specifically, of my new person. Sorry, my voice is currently dying out a little bit. What I want to do, is now assign a parent to this new person's first parent. What parent might I want to assign here? Do we have a variable by chance that we want to assign to this? 
+
+Yeah, you're absolutely correct. So if we actually take a look at this code up here, we see that we just created two new parents by recursively calling the create_family function. Now I know recurse is a little bit tricky, but what you can do here, essentially, is trust that by the time this call of create_family returns a value, it will be a new parent represented as a person object for us to use. 
+
+So what I'm going to do, is just put down parent 0 here. So we're saying that this new person's first parent should be parent 0. And I'm going to do the exact same thing for this new person's second parent. So this is going to be equal to parent 1. 
+
+And now let's go and create the code for the second and final to-do inside of create_family. We now need to randomly assign a current person's alleles based on the alleles of their parents. So I'm going to go ahead and reference my new person's alleles, just like how we did below. And I'll put that on the screen, so you can take a look at it too. 
+
+We're going to say new person's alleles, and we're going to access that first one. And now the question is, how do I randomly assign this current person's alleles based on the alleles of their parents? Well, let's break down this problem into smaller components. 
+
+First, let's start off by just getting parent 0's or the first parent's alleles. So I can say, parent 0, get their alleles. But then we have a little bit of a tricky problem here. How do I randomly pick one of this parent's alleles, either the one at index 0 or the one at index 1? Anyone have any ideas on how I might do that? 
+
+yeah you're exactly correct. We can use a random number generator to generate a random number, and then use the modulus operator, that percentage sign, to determine a number between 0 and 1 randomly. So let me go and write this down. And then I'll explain in a little bit more detail what exactly we're doing here. 
+
+So we're going to use rand() to generate a random number and this is a function so make sure you have those two parentheses right after it. And then we're going to use the modulo operator with the %2 to generate a 0 or 1. 
+
+And if you think back to when we used the modulo operator previously in the past lecture or problem set, modulo means get the remainder after dividing by the number after the percentage sign. 
+
+So if you think about any number, and you divide by 2, there's only two possibilities. It's either an even number, which in that case your remainder is 0, or you have an odd number, which in that case, your remainder is 1. Those are the only two possibilities with any number. So in that case, if we go ahead and do rand(). Get a random number modulo 2 will always end up with either 0 or 1, which is exactly what we need in this case. 
+
+Then what I'm going to do here, is do the exact same thing that we did above before the second allele for this new person, so index 1. I'm going to get parent 1 this time because there's two parents. I want to make sure I get a random allele from both of them. I'm going to say, alleles and use the exact same trick that we used earlier to get a random allele from this second parent. So rand() % 2. 
+
+I'm going to go ahead and pause here for a quick second. There's a question in the chat. Is the whitespace in between the new person variable, the arrow, and the parents attribute matter? The spaces do not matter, to my knowledge. See, we'll ignore those. Although, for style purposes, in CS50, we prefer that you don't have the spaces in between the variables and the arrows. So notice how here, for example, I just have the variable new person arrow parents, no spaces. 
+
+All right, I'm going to pause here to see if there's any questions with create_family. And if not, I'm then going to introduce to you one more function that you have to implement free_family, but we're actually going to leave this one up to you to implement based on what you've learned from supersection today. 
+
+So there are no questions in the chat here. Let's go ahead and take a look at what you'll have to do on your own with free_family. So free_family is a function that we call after creating the family and printing out that family so that we can then deallocate or remove the memory that we allocated earlier for this family. And there's three things that you have to do. 
+
+You have to first, handle the base case. So this means you have to figure out what should I do when I've reached the end of this recursive staircase. And I call it a staircase because if you were to draw out the recursive calls of this free_family function, it would probably resemble a staircase if you were to draw it 1 and then after another below, and then so on, so forth. 
+
+Then you want to write some code to free the actual parents that you have recursively. And what we mean by recursive, is that you want to call the free_family function again, but with a different set of arguments. And then the last thing you want to do is free the current person that you're looking at. So with that, I'm going to go ahead and hand it back to Yuliia to cap off this session. And if you have any questions, feel free to put them in the chat. 
+
+YULIIA: Thank you, Charlie. So this was inheritance. And hopefully, this was a helpful walkthrough through an overall logic of the final product that you need to implement. It kind of looks like a binary tree. It has a recursive function to it. So it's a little complicated. So if you really want to figure out how it works, feel free to check out the solutions on the CS50 website and walk through it by yourself in the VS Code. 
+
+This was inheritance, and this was CS50 super section. My name is Yuliia. I'm one of the preceptors at Harvard, and I'll pass it back to Charlie to wrap it up on his end, as well. 
+
+CHARLIE: Yeah, and my name is Charlie. I'm one of the head teaching assistants at CS50. And it was great joining all of you today for week five super section. This was CS50. 
+
+YULIIA: Thank you all. Good luck on the problem set five. 
