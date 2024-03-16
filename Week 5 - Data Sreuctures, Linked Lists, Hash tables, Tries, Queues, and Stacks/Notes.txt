@@ -10,3 +10,5 @@ Shorts:
     - Tries:                https://video.cs50.io/MC-iQHFdEDI
     - Queues:               https://video.cs50.io/3TmUv1uS92s
     - Stacks:               https://video.cs50.io/hVsNqhEthOk
+    
+Problem Set5:   https://cs50.harvard.edu/x/2024/psets/5/
