@@ -5,3 +5,6 @@ Short:
     - Python      https://video.cs50.io/mgBpcQRDtl0
 
 Notes:
+    - print() function has arguments like "end" which enables you to change the new line string
+    - for loop has an else: if the loop did not break
+    - print() can be used without input to create a new line 
