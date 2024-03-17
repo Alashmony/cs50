@@ -1,0 +1,7 @@
+Lecture:    https://video.cs50.io/EHi0RDZ31VA?screen=McWg6eGT7dU
+            https://cs50.harvard.edu/x/2024/notes/6/
+Section:    https://video.cs50.io/Y07zwrbq4Lc
+Short:
+    - Python      https://video.cs50.io/mgBpcQRDtl0
+
+Notes:

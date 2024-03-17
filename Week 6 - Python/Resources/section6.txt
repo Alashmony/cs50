@@ -1,0 +1,347 @@
+CARTER ZENKE: OK. Well, hello one and all, and welcome to CS50'S Week 6 session. My name is Carter Zenke. I'm the course's Preceptor here on campus. And the goal of these sections is to help you bridge the gap between lecture and this week's problem set. So this week, we learned all about this new language called Python, which is hopefully a little bit more high level than C, a little bit easier to grasp the syntax of. So I hope you are as excited as I am to dive in and learn even more about how Python can serve us in this week's problem set. 
+
+Now I have a few topics for today. These are among them. We'll talk about Python generally, but focus in particular on this idea of strings and loops, and this new type, if you will, called a dictionary, where we can store keys and values. 
+
+We'll also, at a higher level, talk about the idea of a library, where we can actually have some code somebody else has written, including that in our own Python code. And then, towards the end, we'll talk about file I/O, or file input and file output, in particular, how we can read data from files and write data to files. And even more particularly, talking about CSVs, or comma-separated value files. 
+
+So let's jump right in here and talk about strings to begin with. Strings, as we saw earlier, are these collections of text. We have individual characters, like A, and B, and C. But if we wanted to string those characters together, like into a word, let's say, we would get what we call a string. And one of my favorite examples of strings in the real world are really just these books. And one of my favorite books as a kid was this one called Goodnight Moon, where, if you're not familiar, basically, you get to read a book and say goodnight to the various household objects, like the fireplace, the picture of the cow jumping over the moon, and finally, the moon itself. 
+
+And there are a few lines in this book, like the following, "In the great green room," is how this book begins. And actually, I think it's interesting now how we can take these strings, and we have things like AI that can actually generate pictures for us from these strings. So just for fun, I gave this string to this model called DALL-E 2 by OpenAI, and here's what it came up with. In the great green room gave me a room with some blinds, and you see some green in the back there. 
+
+I gave it that next piece of text, this string here, which is, "There was a telephone and a red balloon." And here's what DALL-E came up with here, a telephone attached to a red balloon, so kind of creative in some ways. So that's all just for fun, but I thought we'd see the applications of strings, and also where they can come from, too, in this case, from some of our favorite childhood books. 
+
+So let's compare then how C and Python actually work with strings. And here is one example where we see C on the top and Python on the bottom. And I'm curious, if you're here live, go ahead and tell me a few differences you spot. Let's play a find-the-difference game. What do you see different between the top and the bottom? 
+
+I'm seeing there's no more semicolon in Python, so that's correct. Generally, in Python, you shouldn't be ending your lines with a semicolon. There's no what we call char star, or this idea of a pointer to a character. So in C, we have to tell C that a string is literally a pointer to the first character of a string. 
+
+In Python, though, it's more abstract. It's a higher level. It doesn't care too much about pointers. We just tell it we want this string in general. You go figure it out and find out where to put the pointers to make that string to begin with. Another observation here is that we didn't even have to declare the data type. 
+
+So up above, you'll see we had this variable called text, and we declared it as a type char star, or a pointer to a character. Down below, there's no type declaration at all. Python just infers for us what type we might want to use in this particular case. So those are a few key differences between C and Python here that you'll keep in mind as you go off and work now in Python, and less so in C. 
+
+Here's another example here. Here's comparing two strings. So let's again play spot the difference. Let's look up above and down below, where the above is in C, and the bottom is in Python. What do you see different here? 
+
+I see no curly braces. That is certainly a big difference between C and Python. So C, up above, specifies things like the blocks for an if statement, or the blocks for a loop by putting that code inside of curly braces. 
+
+Python, though, focuses on indentation. So notice how if I wanted to have a block of code that executes in response to this conditional here, I have to indent it by one level. Let's see, what else? 
+
+There are no parentheses, so that's fair. Up above, we had parentheses for our if statement, down below, not so. We also don't have to call our very own function. So up above, in C, we had to call a function to compare two strings. 
+
+In Python, it just kind of infers that if I want to compare two strings, it better do, basically, the same procedure that strcmp, up above, in C, would do. So it's much more, I would say, intuitive. In this case, no need to call any particular function. Python just knows what we'd like to do in this case. 
+
+And let's maybe do one more here. The code above, in C, and the code down below, in Python, trying to access some character of a string. Let's play spot the difference here. And I'm seeing some hesitancy. There's no difference. So that's the idea here, is that in C, in Python, these are both the same. In order to access some individual character of some string, we simply use the bracket notation and put in the index of the character you want to actually get. 
+
+So for instance, text bracket 0 would give us that very first character in this string called text. Text bracket one would give us that second character, and so on, and so forth. In Python and C, these are both what we call zero indexed. 
+
+So let's pause here and ask, what questions do you have on some of these differences so far between C and Python? Any that I can answer while we're here? I'll give folks just a minute to think. A good question I see, so do we not have pointers in Python? 
+
+I think it is possible. I'm going to go out on a limb here and say, in base Python, you're not going to be dealing with pointers at all. There are probably ways to work with pointers in Python if you want to. But the creators of Python made it so you do not have to deal with pointers at all. 
+
+A good question, how does Python know when a string ends? So in C, we saw that strings end with what we called the NUL character, N-U-L, which denotes the end of this particular string. The fascinating thing about Python is that it probably does the very same thing, that strings in Python do have, underneath the hood, pointers to the initial character, and a NUL character at the end of that string. 
+
+But what Python does for us is it allows us to not think about these underlying details and instead think at a higher level. So at the end of the day, in terms of our actual memory inside a computer, Python and C might be doing similar things. But we can tell Python to do those things with much less precision, and in this case, a little more intuition and taking advantage of some of its syntax it offers us at the end. 
+
+And one final question we'll take here, if I go back to this particular comparison, we said that Python infers the type of this text is a string. And that's because this input function here returns to us a string. So this function input always returns to us a string. And it's up to us to cast it, to change it to an integer or some other type if we want to at the end. 
+
+OK, so let's keep going. And one of the nice features about Python is that it's able to have a lot of built-in functions that simplify things that we saw in C. And some of these built-in functions we can use using Python's new dot notation. 
+
+So we saw this a bit in lecture, but let's say I want to get some input from the user. And here is my line of code to do so. I say, let's make this new variable called text. And I'm going to set it equal to the result of calling the function input. And let's say the user types in this particular string on the right. 
+
+Now what do you notice that's a bit, well, not so clean about the string on the right? What's the matter with it? Yes, there are spaces at the start and the end of it. So often when I'm filling out a form, I might be doing so very quickly. And I might actually add in a space at the end, some spaces at the beginning just by a typo on my keyboard. 
+
+So it's common that users will actually give us data that is dirty in this way, that it has extra spaces, it's not capitalized correctly, and so on. So there's this interesting Python function that we could use that looks a bit like this. I could say text.strip, text.strip. And what would happen is, I would take that same text and I would then convert it to this. 
+
+So notice the difference here? I had spaces at the beginning and spaces at the end. With text.strip, I can strip those and be left with just the characters that are inside this particular string. So the purpose of dot strip is to take out beginning and trailing whitespace characters. 
+
+Now notice here how strip isn't actually a standalone function. I didn't say, strip, and then gave the input as text. I instead said, text.strip. So this is Python's dot notation coming into play. And we'll see why this actually happens in just a little bit. 
+
+Let's focus on some other ones we could use that are a bit handy for working with strings. Here we have, let's say, a new kind of input from the user. And what looks wrong about this one? The capitalization is just a little bit off. I think they might have had some typos here. 
+
+So one way to fix this is to use the dot capital-- or, well, in this case, the dot lower method, or dot lower function. So I could say text.lower, and what would that do? Well, it would convert these characters all to lowercase. So I would take this with mixed capitalization and then bring it down to all lowercase. 
+
+And as I just said before, we also have this one we could use called dot capitalize, where dot capitalize takes a string and makes the first character only uppercase, so some options there. Now with dot lower, we also have dot upper. And there's actually a lot of these we can ever use in Python. 
+
+We can find all of these in the Python documentation. So one note of caution here is that when I actually do text.capitalize, I need to reassign the result back to my variable, otherwise the changes won't actually stay. So, for example, I'll go back to my code space. And I'll open up here, let's say this one is just capitalize.py. 
+
+And I'll have the same piece of code. I'll say, text equals input, and maybe for cleanliness sake, I'll say, Enter a string. And then I'll say, text.input, or text.capitalize, like this, hoping to uppercase that text. Then I'll say, text. I'll say, let's print out text here to see the result. 
+
+I'll say, python of capitalize.py to run this program, as we saw in lecture. And now I'll say, In THE GREAT green Room. And if I hit Enter, hopefully I should see this text being capitalized, such that that very first character at the beginning is capital, but all the rest are lowercase. 
+
+So I'll hit Enter here. And do you see any changes? I don't seem to. So I think what we should do is say, text equals text.capitalized, so reassign the capitalized version of text back to text, and then print the result. So let's try this. I'll say python of capitalize.py, and I'll say, In the GREAT GREEN room. Hit Enter, and now I see my text being capitalized. 
+
+So let's again ask, what questions do we have? We've seen a few what we call string methods. A question, can we still make functions in Python? We certainly can. So you'll be able to see in this week's problem set some of the syntax via which you can make your very own functions in Python. 
+
+A question about reassignment being necessary for dot upper and dot lower? Yes. So if I were to use dot lower or dot upper, which would make these lowercase or uppercase all characters respectively, I should still reassign the result if I want to change text as a whole in my program. 
+
+Question about dot strip. Does it allow us to, let's say, take out a middle whitespace character? So let's try this. It's no longer capitalizing, but I'll still say, python capitalize.py. I'll enter a string, like H, and then space, ell, space, o, hit Enter, and I still see the whitespace in the middle. So strip only removes white space at the beginning and at the end of our string, or what we call the leading and trailing whitespace. 
+
+A question, can we make our own dot notation functions, or more precisely, methods? You could, and we'll see a bit more about how you could just now. So let's dive underneath the hood and talk about where these dot functions, dot methods actually come from. So unlike in C, in Python, this string is actually what we call an object. 
+
+So an object in programming is basically some particular element you can reuse throughout your code. And it has accessible to it not just certain values, like pieces of data, but also, certain functions. And we actually call those, because they're associated with an object, methods. So functions associated with objects are often called methods. 
+
+And for your own benefit, Python actually tells you all of the possible string methods in the Python documentation. So if you go to Docs.Python.org, you'll be able to see the entire Python manual that tells you all the possible methods, and functions, and objects that are built into Python. And if you're first encountering this idea of an object, I think it's a little bit abstract. I said it was some entity you can use multiple times in your code. So I want to make it a little more concrete for you, hopefully. 
+
+Now if you recall from an earlier problem set, let's say, problem set 3, I believe, we had this idea of a candidate. And do you remember how we implemented the idea of a candidate? What did we do in code to create a candidate? What did we do in code? 
+
+So we had the idea of creating some kind of struct. So in C, we had a struct that allowed us to combine different data types. We could have a string for the candidate's name and an integer for the number of votes. And that, as a whole, was what we called a candidate. 
+
+So to visualize here, we had a single candidate, and we gave that candidate some name, which we accessed via candidate.name. We also perhaps gave that candidate some number of votes, which we accessed via candidate.vote. So these are what we called attributes of this struct, different data values that were associated with this idea of a candidate. 
+
+Now an object is very much like this. We can assign it some particular data that composes that object. In this case, a candidate could itself be an object that has some attributes, like name and votes. But where things differ is where we actually allow us to have not just values, but actually functions associated with some particular object. 
+
+So let's say here, a str, which is itself an object in Python, the str represents a string, it has not just certain attributes like a link. It also has some functions associated with it, like, in this case, capitalize. So you could think of it as taking out a toolbox and being able to modify this particular value, the value it's storing. 
+
+You could think of this, too, with dot lower. This is another function, another tool in your toolbox by which you could update this value of a string. So, again, the key difference here is that objects allow us to have functions associated with them and not just values, as we saw with structs in C. 
+
+Let me pause here and ask for questions. What questions do you have after this high-level overview of an object in Python? Question, so lower is actually a function? It is, so lower is a function. It takes as input, let's say, the value that the string holds, the text that's inside of it. And it returns to us the lowercase version of that. 
+
+In that case, it is a function but it's also associated with an object. I can't use lower on anything. I can only use it on strs. So in that case, it is what we call a method, a function associated with some object, in this case. 
+
+Question, is int an object? So a spoiler is that everything in Python is an object. So if you want to learn more about this, you could learn about object-oriented programming. But Python is an object-oriented language. You'll often learn more about that as you take higher level computer science courses and get into differences in how we can actually program things and design languages. 
+
+Let's see, are capitalize and upper the very same functions? They're different. So upper takes the entire string and uppercases all characters. Capitalize takes that string and uppercases only the very first character. So think of it like you'd capitalize a sentence, the very first character is capitalized. 
+
+Question, is there a summary somewhere of the most important objects and their associated methods? Yes, that is called the Python Documentation. So if you go to Docs.Python.org, you'll be able to find all of the important, really, actually, not just the important ones, really every possible object and its associated methods in the Python Documentation. 
+
+OK, so let's keep going. And I think now that we have this idea of strings, what we can do with them, it's also interesting to bring in loops to the mix. So loops, we saw earlier, are about going through some piece of code multiple times. And actually, in Python we get access to a very special kind of loop. 
+
+So in lecture, we saw for loops and while loops. But I find this one to be maybe the most exciting for new Python programmers. So this loop looks a bit like this. For c in text, print c. For c in text, print c. 
+
+And I'm going to ask you in the chat, what do you think is going to happen here? What will we see on our screen? If we have the following input, which is, in the great green room, what do you think we'll see? 
+
+Yeah, so I'm seeing people saying that we're going to see the string printed out character by character. Now how would this happen? Well, Python just has a special kind of loop called this for blank in blank loop, where I can simply take something like a string and say, for blank, it could be c, could be x, could be y. And then I could, let's say, print that value. And every iteration of the loop, the value of C will update to be the next, let's say, character in this string, for instance. 
+
+So to visualize this, I decided to call this element c So on the very first iteration of this loop, c will equal capital I. On the very next iteration, c will equal N. On the next iteration, c will equal space, and then T, and then H, and so on. 
+
+Now it's not special I called this c. I could have called it x, or y, or z. As long as I'm being consistent and say, for x in text, print x, or for y in text, print y, I'll get the very same result. So that's how we can go through character by character and look at these strings. 
+
+Now there's one more thing we could do that we could use these types of loops for. They're not just good for breaking apart strings in individual characters. They're also good for working with lists. So let's say I want to take this text, In the great green room, and I want to put every individual word into its own string, but then have those strings be part of some list, let's say. 
+
+So if I use text.split, what this will do is break apart this string at all of the whitespace characters, in this case, the space characters. And I'll say, get this list at the end. The first element is In, the next element is the, the next element is great, and so on, then green, then room. So I've basically taken this string, split it at all the spaces, and now I have a list of individual words. 
+
+And this kind of loop is good for going through lists as well. So I could say something like, for word in words, let's print that particular word. And the result will be like this. First word will equal In, and I'll print In. Then, word will update and go to the next word. And I'll print the, and so on, and so forth. I could go to great and print great, and find at the very end, I would print the entire piece of text, but word by word. 
+
+So I'm seeing a few questions here that I can answer. Let's see, so then words is not a string but a list. That is actually true. So in this case, when I take a string, like text, and decide to split it using the string method split, I get back a list of the strings that were found by splitting on a whitespace character, in this case, the space itself. 
+
+Does text.split always return a list? Yes, it does. So it will always return to us a list, whether it's empty or not. And a question here, let me find it again. So I don't have to specify what I want c to equal? I'll go back to this one here. 
+
+It's a good question. So here it's kind of confusing. I just magically said c, and suddenly c popped into existence, which is kind of what happened. I could say for c in text, and magically c is now some variable I can use for the duration of this particular loop. So I can't use c on indented. That's not part of this loop anymore. But I can use c while I'm indented inside of this particular for loop. 
+
+And in this case, Python has some various heuristics it uses to determine what c should equal. If I say for blank in some string, I'll get back every individual character in that string. And whatever I say, like c, will equal every individual character in that string. If, as we saw here, as we saw here, I give it a list, it will then equal every individual element of that list, if that makes sense. 
+
+Other questions here? Can you declare c before the loop? I believe-- not quite sure. We can test it out. I'll go over to my Python code here. I'll say, code loop.py. Let's say our text is In the great green room. And we wanted to figure out, maybe c is first text bracket 0. Then I'll say, for c in text, print c. I'll say python loop.py. I don't seem to get an error, so I think you could. 
+
+My guess, though, is that it will simply overwrite c, and set it first equal to that very first character. So it doesn't quite matter what c is assigned before. You're going to update it during your loop at the very end. So I hope that answers your question there. OK, what if we had a list of integers? A good question. It would still be the same thing. I'd go through the list element by element. 
+
+So we have a few rules here, or a few pieces of advice. So generally, Python's for-in syntax helps you iterate through components of what we call an iterable, while referring to them by some convenient name. So before I said c, and then I said words, I could have used any name for those. If the iterable, the thing I could iterate over in a loop, is a list, I'll iterate over every element of that list. And if it's a string, I'll iterate over every character of that string. 
+
+So feel free to keep these in mind as you work in Python with these particular kinds of loops. And indeed, this vocabulary word called an iterable just stands for anything we could really have a loop over, whether a string, or a list, or other data types, other objects altogether, too. OK, so let's get into some practice. 
+
+Here I have several files called text.py. And we'll play a game where I'll show you a loop in Python, and you'll tell me what you think should come out of it. And we'll run that program and see if our guess is correct. 
+
+So I'll go back to my terminal and I'll code text0.py, where I have this particular example. So I'm curious, for those of you who are here, what do you think we'll see if I run Python of text0.py? Yeah, so I'm seeing some good examples here. 
+
+Basically, we will see every word printed to our screen. So I'll say Python text0.py, hit Enter. And now I see, In the great green room. And now a question here is, why are we seeing these new lines, In, new line, the, new line, great, new line, and so on? Where do you think that's coming from? 
+
+So as you saw in lecture, when we use print, print automatically appends a new line for us. So when I say, for word in text.split, I'm taking this string called text, turning it into a list of the individual words. And then I'm calling every element just this basic convenient name called word. I'll print it out as I go. So first, word will be equal to In, then the, then great. And as I print these out, I'm printing out not just In, or the, or great, I'm also printing out the new line associated with it. 
+
+I could override this if I say end equals nothing here, perhaps end equals space. And now I've just recreated that same string but going through it as a list, if that makes sense. So I'll put this back to what it was. 
+
+All right, let's find another example here. I'll code up text1.py, our next challenge. What do you think we'll see here? What do you think we'll see here? Yeah, so I'm seeing we should see every character, but no spaces. So let's try that out. 
+
+Let's say, python text1.py to run this program. And I think you just about hit the nail on the head. I see I-N T-H-E, so it seems like we're going to have every character, but there are no longer any spaces. And I'm curious, what happened to those spaces? Where do you think they went? 
+
+Yeah. So when we used dot split here, the split string method, we said, let's take this piece of text and turn it into a list of words. And when we do that, we're getting rid of the spaces between the words, such that we just have a list of individual words, no spaces at all. So word here still refers to an individual word in our list of words, but then c goes through every individual word we have and prints them out character by character. 
+
+All right. So let's keep going. Let's do code text2.py. What do you think we'll see here? Some new syntax. Intuitively, what do you think will happen? Yeah, so maybe we only see those words that have g in them. A good guess. 
+
+So I'll say python of text2.py, hit Enter, and here I only see great and green. So here we see another use of this in syntax in Python. So when it's used with a for loop, I'm able to iterate over something like a list or a string and extract those sub elements. Here, though, if I use it with a conditional, if g in word, I could do something like linear search and say, is this character g inside this particular string that I'm giving you? And if so, it will then say, yes, it is, and do whatever is indented, or if not, it will say no, it isn't, and just pass right on through. 
+
+So I'll say, do this again, and we see great and green. The question is, what if the word doesn't start with g but has g inside of it? This will still work. So let me try this. I'll say, have a typo here intentionally. I'll change great to rgeat and say python text2.py. And I'm still printing out rgeat because g is in that type of word I just created. I hope that makes sense. 
+
+All right. And let's do a few more, text3.py. Here also is some new syntax. What do you think we'll see here? It's OK if you don't know. We'll explain. I'm seeing maybe we'll print out every two words. Maybe we'll print out just great green room. 
+
+I think we're on the right track. I like these ideas. So let me try python of text3.py and see what we get. Looks like we get only great, green, and room. So notice here we have some familiar things. We have text.split. We have for word in text.split, print word. But the only addition here is the addition of the brackets with some syntax in the middle, like this 2 and this colon. 
+
+So let me hopefully give you an idea of how these particular things work if you'd like to use them. Let me go ahead and say, code brackets.py, just so you can see how to use these. I'll make my text the very same. And I will now have words equals text.split. And let's see what happens if I print words bracket 2 colon. I'll say python brackets.py. 
+
+And now I see a list but it only includes great, green, and room. What if I did this? What if I did words bracket 1 colon? Well, now I see the great green room. What if I did this, words, maybe 0 colon python of brackets.py? Now I see, In the great green room, the entire list. 
+
+So now let me ask you again, what do you think this syntax is doing? Yeah, so it's changing where our list starts. And if you remember, we can still use bracket notation to access some particular element of our list. If I say words bracket 0, I'll get the first word, In, words bracket 1, I'll get that second word, the. 
+
+But if I want to get not just that first or second word, but all the rest as well, I can include a colon after it. And now I get the very element I'm asking for and all the rest. I could further decide to subset my list. I could say maybe 1 to 2, like this, and I get just the. 
+
+Let me try 1 to 3. Now I get the great. So it turns out that in Python, this index, if you're using this colon here, is inclusive. It's going to give you that particular indexed value, followed by a colon. I could say, I want everything with no index here. But I could also say, let's stop at some particular index. And don't give me back that particular index. 
+
+So I'll say, give me back 1 and 2, not including 3. I'll get back, the great. I could say 1 through 4, not including 4. Now I get, the great green. So I'm able to manipulate my list and extract certain pieces of it as I would like to. So it can sometimes be handy for you as you're working in Python to manipulate your lists. 
+
+The question, is it like an automatic loop? So there's nothing about this that is particular to loops in general. I could use this with or without a loop. But it does help you if you want to only loop through some elements of your list, and not, let's say, all of them. A good question. 
+
+Yeah, and a question here is, it's like start and stop, so very similar, where the first number is the index to start at, inclusive, the next number is the index to end at, exclusive. I won't get whatever value is indicated by this number here. OK, other questions, too? 
+
+OK, seeing none for now, so let's learn some more exciting things about Python. One of my favorite new structures in Python is this idea of a dictionary. And dictionaries are so handy. So we spent all this time in the last problem set making our very own dictionary of sorts in speller, where you were able to add words to a hash table and look them up to see, are they actually in this hash table, or are they not? So a dictionary allows you to have some very similar functionality, but it all comes so easily in Python. 
+
+So to help us conceptualize what a dictionary actually is, I want to go through a bit of a diagram here. You could think of it very similar to a real dictionary. So here, let's say I have a blank piece of paper. And I want to associate some authors with the book that they have written. So let's assume that every book is written by one author, and every author writes one book. 
+
+So here I could say, I have a dictionary called authors, and there are a few keys in this dictionary, like Goodnight Moon, like Corduroy, like Curious George. And if I look up those particular titles just below, I'll then see the author that wrote that book. So let's say I want to look up Goodnight Moon. Who wrote-- who is the author for Goodnight Moon? Well, it's Margaret Wise Brown. 
+
+Same for Corduroy. Who wrote Corduroy? Well, that was, let's see, Don Freeman. So this is the idea of associating, in this case, book titles with their authors. And more particularly, we say, this is the key in our dictionary. And the result that we get by using that key is the value. 
+
+Now there are other ways to use dictionaries. And ideally, we'd probably want something a bit like this. Maybe I want to store information on books. Well, I could very well do that. I could say, let's make a dictionary called book and give it two keys, like title and author. 
+
+And if I had many of these dictionaries, I could give different values for those keys. So I have a book here, the title of which is Goodnight Moon, and the author is Margaret Wise Brown. But you could imagine I have maybe perhaps many of these dictionaries with different titles and different authors in the end. So different ways to use dictionaries, one to keep track of just all authors and their book titles, or here, keeping track of individual books and the information on that single book as well. 
+
+So let's dive in and see some syntax where we can actually create dictionaries. So here I have one example, book equals dict. Now dict is the way to create some new blank dictionary. And to visualize what this is doing on the right-hand side, I get the following, basically a blank piece of paper, if you will, that's called book. 
+
+Now let's say I want to add a title to this book. Well, I want to add a key called title, and I want to set the value equal to some book title. So I could do that like this, book, bracket, and then the key name, in this case, title, and then equals some particular book title, like Corduroy, which is another children's book here. So notice how my bracket syntax is back but I'm no longer using an index for this dictionary. I'm using a string which functions as my key. 
+
+Now let's go on and I'll say, I want not just the title for this book, I also want to add in, let's say, the author. So I'll add a new key and set it equal to some value. So book, bracket, author now equals Don Freeman. So now I'm able to see that, in this particular book, the title is Corduroy and the author is Don Freeman. 
+
+And maybe later on in my code I want to print out, let's say, the author, or the, let's see, print out the title of this book. I could do so like this. I could say, print, book, bracket, title. And without the assignment operator, I should just see printed the title of the book, which is Corduroy. So here we see not just how to create a dictionary and assign some keys and values, but also how to access the values at certain keys. 
+
+Let me ask then, what questions do we have on this syntax here? Book is just one book, right? So it is. So this is a single book. It wouldn't make sense for this book dictionary to have more than one title in it because it's only a single book. And in fact, a limitation of a dictionary is you can only have one particular value for a particular key. So I couldn't, let's say, have more than one key called title in here. 
+
+Are dictionaries like structs in C? So it's a interesting comparison. I think that there's some similar functionality, where with a struct in C, you could give certain attributes a name. Like in candidate, we had name and votes, that's a similar idea to assigning keys and values, where the attribute name is the key, and the value is the value that you store there. 
+
+They are functioning, I believe, a little bit differently underneath the hood. So a dictionary is good for just straight up storing keys and values as a whole. You can store a lot of them. A struct often represents some particular entity, like a candidate. Although, I guess this is also representing a book. Let's just say, they're very similar in use case, but different in actually how they're implemented underneath the hood. 
+
+Could we have a list of values for a key like title? We absolutely could. So although you can only have one particular key and associate it with one particular value, that value could be a list. It could be itself a dictionary. It could be any object in Python you'd like to associate with that particular key. 
+
+And a question here, if we have a list of books and authors, how would we actually get that to work? So it's a good question. And we're going to see that in just a moment here. I want to pose one scenario, though. Let's say I mess up and I do something a bit like this. I print not book title, but I confuse things and I say Corduroy as my key instead. What do you think might happen? 
+
+You might not know unless you've programmed in Python before, but the result here is I'll get what we call a key error. So the key error says, Corduroy is not a key in this dictionary. It's a value, but it's not a key. I can't look some value up by using this name, Corduroy. I can only do that with my keys, which in this case, are title and author. 
+
+And I actually see a good-- someone saved me here with comparing structs and dictionaries. With a struct, you have specified attributes. You can't really go ahead and add or remove the attributes later. With a dictionary, you can. You can add or remove keys and values. So that's another difference between dictionaries and structs in C. Good question. 
+
+All right. So we've seen here how we could have a single book. If you wanted to actually define it all the way up front, you could use this syntax as well using curly braces, followed by, let's say, the key, colon, the value. We saw this in lecture. But we could also create not just a single book but a list of books, too. 
+
+So here is what this visually would look like. Notice how I have some square brackets? And in this list, separated by commas are my individual dictionaries. These dictionaries have the same key, which is OK because they're different dictionaries. But now I could see how I could develop a list of books. 
+
+Here I have the list itself. And here I have the individual dictionaries. So I'm taking multiple dictionaries and putting them in the same list. And now it's kind of similar to having a list of books. 
+
+Now let's see an example of this so we can make it a little more concrete. I have this program called books.py. And I'm going to complete it so that a user is able to add books to their bookshelf. So I'll go back to my code space and I'll open up books.py. 
+
+And we'll see here, I have some pieces of code already. I have a list called books. I know this is a list because it has braces here, square braces. I have a for loop here that will loop three times, we saw in lecture. And I want to complete this part where I'm able to add three books to my shelf, or really, my books list up top. 
+
+And then, finally, I'm going to print out that list of books down below. So let's think about just adding a single book inside this for loop. What could I do? Well, we saw earlier, I could make a new dictionary by giving it some name, like book, and saying that is equal to dict. That gives me a blank dictionary called book, some blank piece of paper that I could use to associate keys and values. 
+
+And now my question to you is, let's say I want to add a key called author. How could I add a key called author? What syntax could I use now? I could use some syntax like this. I'd say book, and then bracket, the key name. So the key name is author. 
+
+And I'll then set that equal to-- well, before we saw something hard coded, like maybe Margaret Wise Brown, but I want to get input from the user. So I could very well do this. I could say, it's the result of calling input. And I'll say Enter an author, like this. 
+
+So now whatever the user types in will be associated with the author key inside this dictionary called book. Let's try this. I'll say, book, and I want to have a key called title. So I'll say book, bracket, title, in quotes, input, Enter a title. So now I'm doing the same thing twice for different keys. 
+
+And now I can do that final step where I'm trying to add this dictionary to my list of books. Now we saw in lecture that to add some item to a list, I could simply say the name of that list, and then dot append to add some new item. And I'll say book, books.append, book, which is this new dictionary I created. 
+
+So every loop will create this new blank dictionary, call it book, add in a new key and value for author and title, and then add that book to our list. Let's try that out here. I'll say python books.py. I'll say Margaret Wise Brown. And then I'll say, Goodnight Moon is one book. 
+
+Notice how I'm prompted again for another book. I'll say Corduroy and Don Freeman. One more book, I'll say Curious George, and then H.A. Ray. Hit Enter, and then what happened? What can we do down below? I still need to print my list of books. 
+
+So I'm curious, for those of you who are here, what kind of loop do you think would be good for looping over every individual dictionary and printing out what's inside? Yeah, so I'm seeing maybe a for loop. I'll say for, and I could take advantage of Python's special for-loop syntax. I could say something like, for book in books, colon, and then figure out what to do inside that loop. 
+
+But this is pretty much why people like Python so much. I could say, write in English, for every book in my list of books, do something, right? I could call this anything. I could say, for novel in books, that's also valid as long as I use novel down below here. But here I'll stick to book. 
+
+That's actually kind of a convention. If you have a list that is a plural, like books, and you have a for loop like this, it's often convention to make this the singular version of that noun, and this the plural version of that noun. So let's see what we can do. I could print out book, let's say. 
+
+So I'll say python books.py, and let me hit Enter. I'll say Goodnight Moon. Oh, actually, that's wrong. That is not the author of this book. That is the title of this book. So if you want to exit your Python program, you can Control-C, and I will then do Python books again. And I will say Margaret Wise Brown, and then type in Goodnight Moon. 
+
+I'll then do Don Freeman and Corduroy. And then I'll do H.A. Ray, and then I'll do Curious George, so three new books here. I'll hit Enter, and now I'll see those three dictionaries printed to the screen. So notice here we have them denoted in curly braces, the key author, and the key title, all associated, hopefully, as I would like them to be. 
+
+So questions then on this short program we wrote to add books to our list? Any questions? What if we want to print the keys? It's a good question. 
+
+Maybe this is helpful here. So one thing you'll learn as you do more Python is that dictionaries themselves have their own methods. And one of these methods is the dot keys method. So I could say, print book.keys, and that should return to me all the keys that are in this dictionary without their values. 
+
+So let me try this. I'll say, python of books.py, and I'll go through this very quickly. I'll just say 1, 2, 3, 4, 5, 6. And notice here how when I said print book.keys, I'm now actually getting the keys associated with that particular dictionary. And notice how all three dictionaries have the same keys in this case. 
+
+Let's see, other questions, too? If there is a book with the same name but different author, could you have it search for the right one? You probably could. So there is a way that's a little more advanced here. I could say something like, for book in books, if the author equals, let's say, Margaret Wise Brown, then print the book, like this. 
+
+There's all kinds of different logic you could use here in Python. You could, in that way, differentiate between different, let's say a book has the same title but it's written by Margaret Wise Brown versus somebody else. You could differentiate books like this. So I hope that gives you some idea of what you could do to help filter your books. 
+
+Let's see, the question, is it possible to remove the curly braces in the answer, which is a good one. If I scroll up a little bit, notice how we saw here curly braces when we print out the dictionary. That's just Python's default printing for dictionaries. 
+
+But if I wanted to get fancy and make this a little prettier, I certainly could. I could, for book in books, print not just the dictionary itself, but let's say have a full sentence I print. Let's say I wanted something like this. I could say, Author wrote book. That's the structure of my sentence here, Author wrote book, where author is the author, the actual author of that book, and book is the title of that book. 
+
+Well, we saw in lecture, Python allows us to interpolate certain values using f-strings. So here I'll mark it as an f-string. We're putting f at the beginning. And I could use curly braces to substitute in some value of a variable. I'll say, book, bracket, author, which will give me, in this case, book, bracket, author, the author associated with a particular book and interpolate that in my sentence. 
+
+Now I'll do this. I'll say, book, bracket, title, like this. And now I should be able to have three sentences that say, Margaret Wise Brown wrote Goodnight Moon, or Don Freeman wrote Corduroy, or H.A. Ray wrote Curious George. If you're curious, I'll invite you to try this out on your own computer on your own code space to see how that works well for you. 
+
+All right. Other questions, too? A question, how could we print it like key 1 equals value 1? You could do something like, author wrote book, or author equals book author, title equals book title. Either way you have to access the value associated with that particular key using an f-string, and then substitute it in to your string at the end. 
+
+So I hope that helps. There are other ways to do this besides f-strings, though. You could use pluses and so on. We'll focus here on f-strings given time. All right. So just a few more things to wrap us up, one of which is this idea of working with libraries and modules. 
+
+So we saw here how to build up our very own bookshelf of books by having the user type in their books manually. But odds are, nobody wants to sit around typing in manually all the books they own. It's better if we could use some kind of file to actually read in all possible books. 
+
+So I want to introduce you to this idea of libraries and modules, and in particular, this idea of being able to load in some list of books. So let's say I am very conscientious. I want to keep track of all the books that I own and I have a spreadsheet, a bit like this, where I have a title column and an author column. And each of these rows is some particular book with the title and author associated between them. 
+
+So in Excel, it'll look a bit like this. But actually, I could export this file into what we call a CSV, or comma-separated values file. This is a very common file format because it's so portable, because it's so useful, and it's actually pretty simple. So here, notice how the first row is title, comma, author. These are the names of my columns. Then, for every new line that I have in this file, books.csv, I have a title, comma, the author, so Goodnight Moon, comma, Margaret Wise Brown, Corduroy, comma, Don Freeman, and so on, and so forth. 
+
+So basically, I have the same kind of idea here, but now in a single file, where every element is separated by a comma to associate the titles and the authors. So Python actually works very well with CSV files. And they have a very own library or a module called CSV that gives you access to functions, methods you can use to read a CSV file. 
+
+So let's actually try reading in some CSV file and visualizing what would happen along the way. So here I have, at the top of my Python program, import csv. This tells Python I want to load in this library, this module, called csv. Import csv. Now it's kind of similar to me telling my program, give me that big box of stuff called csv. And it has many features inside of it, many functionalities, et cetera, but I just want that entire box of things that you call csv. 
+
+And maybe inside that box, there are some particular books, there are some particular values or functions I could use, like DictReader, DictWriter, reader, and writer. I would only know these things if I read the Python Documentation. But I could say, Python, give me that entire box, and give me access to the functions that are inside of it, among them these here. 
+
+So if I wanted to use, let's say, DictReader, which is a function that allows me to read a CSV as a dictionary, every row as a dictionary, I could say csv.DictReader. So I'm saying, csv, the module name, and then dot the function, method, object, whatever it is I want from that particular module or that particular library. So that gives me access to DictReader. 
+
+Let's say I want reader as well. I could use csv.reader. So here, again, is some example of Python's dot syntax, where I'm now using the library name, and then dot the function, or object, or whatever it is I want that's inside that particular library or module. 
+
+I could also do things a bit like this. I could say, import csv, but then only give me some particular function or object. Import csv, or let's say, from csv import DictReader. This is another way of importing modules, or functions, et cetera, from csv import some particular element of it. So here, I'm only getting DictReader. 
+
+And I could then use DictReader without the csv dot in front of it, because Python knows, well, DictReader comes from the csv library. So two ways here, often folks will tend to import an entire library if they're using many pieces of that library. If they're only using one or two, though, they might be more particular and say, from csv import that particular function or object they want from that library, if that makes sense. 
+
+So let's get into how we could use this to read and write from files. So here, generally the syntax we'll use to work with reading and writing files in Python, with open FILENAME as file, with open FILENAME as file. Now this is allowing us to open up some file using this function called open, and open it up with the file name. 
+
+So let's say I want to open up books.csv. I could say, with open books.csv as file, colon. And now, as long as I'm indented in this block of code here, I'm able to access that file through the name I gave it, file, in this case. 
+
+So let's say I want to read in all the text from that file. I could do something a bit like this. I could say, create a new variable called text, and set it equal to the result of calling file.read. So when I use open, open returns to me some file object. And one of the methods of that file object is read. 
+
+So if I called my file, just plain old file here, I could say file.read to simply take all the data inside of it and store it inside a Python variable, this one called text. That works really well for plain text files, like dot txt files, for instance. I can just get and grab all the contents and put it inside some particular text variable. 
+
+For a CSV, though, I might want to use Python's CSV module, CSV library. So for that, I could say, maybe I need to make a particular kind of reader for this file. I could say, file_reader equals csv.DictReader given the particular file. And we'll see how this works in just a little bit, but DictReader basically lets me say, I want to read every row of this CSV file as a dictionary. 
+
+And by specifying this variable that I called file_reader, it will serve as a helper for me to read this file. And it will return to me every row of that CSV as a dictionary that I could actually iterate as a dictionary. And I could iterate over all those dictionaries in my particular file. 
+
+So let's try this step here. For row in file_reader, this is me iterating over my file_reader. And every time I do, it will return to me some dictionary I could use in my program. And I could do something with it in the end. 
+
+So I think it's worth being a little more concrete here and seeing this actually in action. So I'll go to my code space. And I'll show you what we could do to import a file called books.csv using a Python program called reads.py so you can build up a list of children's books. 
+
+So I'll go to my code space here and I'll do this. I'll say, code reads.py. And notice what I already have here. I have imported the csv library. I have a blank list of books. And my first step is to add book to the shelf by reading from books.csv. 
+
+So to open up this file, it's generally good practice in Python to use the with syntax. So I'll say, with open, and I'll give it some file name, like books.csv. I want to open the file that's already stored on my computer called books.csv. I want to call that file in my program simply file, like this. 
+
+Now if I say text equals file.read, and then, finally, maybe print text, let's see what we get. I'll say python of reads.py, and now I see, printed to my screen, the contents of books.csv. To prove it to you, I could say code books.csv. And here is the contents of books.csv. 
+
+Notice how I just saw those printed to my terminal all by using file.read and this with open syntax. So to answer your question here, dot read does not read only one line, and in fact, reads all the lines in a particular file. Now this isn't quite helpful to me because I don't want to read just everything all at once. If I have this, let's see, if I have just all this text all in the same variable, not super helpful for me. 
+
+What I would love is if we could do the same thing as earlier, where I instead have a list of dictionaries. So for that, I could make use of the CSV library's DictReader function. So I could do this. I could say, let's create a reader for my CSV, a reader that is csv.DictReader, given my file. Now this is simply a helper the makers of the Python CSV module, they decided that they would create this helper called DictReader that, when given a file, allows you to iterate over it and get a dictionary for every row in the CSV. 
+
+So let's try this. I'll say, iterate over this reader for row in reader, and let's see what's happening. I'll just print row. I'll go back to my terminal and I will then say, python of reads.py. And now I see something a little better formatted. 
+
+I actually see dictionaries, where they have a title, and an author key, and values associated with them. So Python basically converted my books.csv file into a list of dictionaries with the given keys and values I gave it in books.csv. Notice that the key title and key author are each in the dictionaries I have available to me here. 
+
+So now what do I want to do as I loop over this reader which gives me every row as a single dictionary? Well, I could probably just add it to my list of books. I could say, books.append, and I want to append a given row I read from my CSV. So if I do now, for book in books, print book, let's see what happens. I'll say python of reads.py, and I should see the same thing, which I could tidy up, as we saw in the last one to say, for example, Margaret Wise Brown wrote Goodnight Moon, Don Freeman wrote Corduroy, et cetera. 
+
+So let's pause here and let me ask, what questions do we have? I see a few already. One is, what happens if the file has no header? So in books.csv, I had title and author. What happens if I actually remove this from books.csv? We could try it and see what happens. 
+
+I'll say python of reads.py, and something odd has happened here. I seem to be saying my key is Goodnight Moon. Another key is Margaret Wise Brown. Why do you think that happened? 
+
+It seems like, to me, the first line, whatever it is, is interpreted as the keys I want in my dictionaries, so long as I'm using DictReader. So I better be sure to include the key names that I want in my CSV, otherwise they'll be interpreted as key values even when I don't want them to. Let's see, other questions here? 
+
+What data type is reader? Reader, if it's helpful, is a kind of iterable. Remember earlier we said an iterable is anything you can iterate over, like in a loop? So it is an iterator or iterable that returns to us every loop a given row as a dictionary from our CSV. Other questions here? 
+
+Are the words module and library synonymous? Great question. They are technically different in Python. This varies by language. A module and a library are two different things. I've been saying both interchangeably because it doesn't quite matter for our purposes here. But if you want to, you can go off and read more about the difference between a library and a module in Python. They are two distinct things that have very slightly different definitions. 
+
+Let's see, other ones, too? Do we have to specify the mode that we're reading the file in? You can if you'd like to, often good practice. So in C, remember, we had reading and writing mode, and other modes, too. In Python, we have the same thing. I could give it the filename, comma, the mode I want to use. In this case, I'm just reading so I'll say the mode is R. I could also create a new file using w. And there are other modes, too, if you want to read, write, et cetera. To files as well. 
+
+Let's see, why do we use with? So another good question here. With basically handles a few things for us that we might otherwise forget. So in Python, we could very much do this same thing as follows. I could say, file equals open books.csv in reading mode. And then I could unindent these, and I have access to file, because I said file equals open books.csv. But now, if I run this program python reads.py, I see it still works. 
+
+But for those of you who are observant or know Python a bit already, what have I forgotten to do? Any ideas? I've forgotten to close the file. So just like in C where we opened a file and had to remember to close it at the end, here I didn't close this file. I think I can do so with file.close, and that should take care of that for me. 
+
+But I don't want to have to remember every time I open the file to close it later on. So I use with instead. And what with does, with open as file, indent these, as long as I'm indented inside this with statement, my file is open, I can use it as I'd like. But as soon as I unindent, my file is automatically closed for me. 
+
+I don't have to call file.close. Python does that for me automatically. So it's a special way of reading and writing files where it just makes things easier to open and close things for me automatically. Other good questions here, like how to get the user to upload a file? That is more in the realm of web development. So if you're interested in that, go and check out CS50W with Brian. 
+
+All right. Any other questions here? OK, not seeing too many. Oh, one more. Do you need to specify the stored location of the CSV file? Yes. So here, let me show you, if I'm in my terminal and I type something like ls, notice how books.csv and books.py are in the same folder? That is what allows me to simply use books.csv. 
+
+If, though, this was in some other folder, like let's say it was in data slash books.csv, I would have to specify that to open so it can go ahead and find that file for me on my file system. Good questions. OK. 
+
+So that just about brings us to the end of this section, which we've been able to read and write to files, learn about strings, et cetera. This is kind of a lot as an introduction to Python. But I hope you enjoyed getting to dive in, and I hope you feel equipped to tackle this week's problem set. Certainly feel free to ask any questions you'd like to, but we'll hopefully see you next week. 
