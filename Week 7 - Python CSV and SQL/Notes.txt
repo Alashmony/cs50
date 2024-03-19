@@ -1,0 +1,5 @@
+Lecture:    https://video.cs50.io/1RCMYG8RUSE?screen=w4Bs1eiewLo
+            https://cs50.harvard.edu/x/2024/notes/7/
+Section:    https://video.cs50.io/DQ-OAvbaN4k
+Shorts:     
+    - SQL:  https://video.cs50.io/AywtnUjQ6X4
