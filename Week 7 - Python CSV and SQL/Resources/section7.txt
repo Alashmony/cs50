@@ -1,0 +1,397 @@
+SPEAKER: OK, well Hello one and all and welcome to our week seven section on SQL or Structured Query Language and also on databases too. So my name is Carter. The course is Preceptor. And my goal for this section is to help you bridge the gap between this week's lecture and this week's problems. I'll be touching on a few different topics that we'll get hands on practice with today. So among our topics for today are these. 
+
+We'll be talking about databases. What are they and how do we design them well? And we'll also talk a bit about SQL, this new language you can use to write queries on databases, basically to ask questions of data and find the answers to those questions. We'll do a bit of practice with problem set seven, working in particular on that songs problem. And we'll also do some practice with designing our very own databases too at the very beginning. 
+
+Now, I'm very excited about SQL. I love working with data. And one of the things I find so fascinating about data is just how long we as humans have been thinking about and using data. So you'll see today, we're working a lot with this idea of a table, like organizing data into rows and columns. But that idea is certainly not new, certainly not particular to the computer science age. 
+
+In fact, we have historical data showing that humans, as long ago as over 1,000 years ago, were working with data in tables. So this is a transcription of some table that was inscribed onto a stone tablet from about 1,000 plus years ago of worker stipends for a temple. So you'll see here that every row denotes some worker at the temple. And it tells us how much they were paid every month in the column portion here. So you'll see as we work with tables, we'll get to represent individual entities in individual rows and often some information about those entities in individual columns. So that's kind of a structure we're working with here today. 
+
+And you're probably a bit familiar with this if you've used software like this, Apple Numbers, Google Sheets, Microsoft Excel, this helps you organize data in the information age in terms of rows and in terms of columns. Now, if you've used this software, odds are it's performed pretty well for you. But it kind of motivates the question, like why would we go beyond this software? 
+
+Like these pieces of software here are not necessarily databases. But we still use them. They're useful. But there are still reasons to go beyond them too, to not use Apple Numbers, Google Sheets, or Microsoft Excel. What are those reasons? 
+
+Well, we can think of a database as being this way we can actually help us organize information so we can better read it, that is, figure out what is actually inside our database to update it, that is to change it, and then to delete it too. And so we talk about in lecture, there are really kinds of four operations the database can do for us, creating data, reading data, updating, and deleting data. And the thing about a database is, they're designed to do all of these things very fast and very well. 
+
+In fact, a database is very good for working with data at scale. If you think about a company like Google or like Amazon, they're working with, not just hundreds of rows, not just thousands of rows, but often millions, even billions of rows of data. And a database works really well for that context when Google Sheets just might not be able to handle billions of rows. 
+
+You could also use a database because it helps you access data very frequently. If you think of something like again, like Google or Amazon, people are often searching for a product very, very frequently. You can query data very fast when you have a database at hand. 
+
+And similarly databases just work faster in general. They have structures built into them that allow you to find data all the more quickly because you've been able to think about how best to store it and best to retrieve it using some of these data structures you've seen in earlier weeks too. So in summary then, you might want to graduate from a spreadsheet software to a database when these kinds of things matter to you, being able to have lots of data, to access it frequently, and to do all of that at a very fast speed. 
+
+So we saw in lecture too, that there's this idea of a database management system. And we saw in particular one kind of database management system one called SQLite. So you can think of a database and this database manager system as being kind of two separate things. A database is anything that allows you to store data. But this DBMS, database management system allows you to access that database in certain ways with certain, let's say, paradigms or certain patterns. 
+
+So there are many different options for you as you're working with DBMSs. A few of them are these. You might have heard of MySQL or Oracle or PostgreSQL SQLite. These are all software you can use to access data in databases. And in CS50, you'll actually get to use SQLite, because it's portable it's lightweight, but it still offers many, many features for you to use, both in your code space online and also on the real world, like in applications and across the web and on your phone and so on. So it's very much a real world software, even though it is very lightweight. 
+
+Now we'll also talk about SQL, which is this idea of being able to write these queries in terms of some structured syntax. And SQL actually stands for Structured Query Language. So actually hopefully reveal to you the structure of this query language and help you actually write those queries to update, delete, create and read data overall. 
+
+Now we'll begin here with a bit of an exercise on database design. So we talked about storing data in terms of tables and in terms of rows and columns. And I like to think about how I could design something a bit more real world. So maybe you've heard of this database called Goodreads or this website called Goodreads. 
+
+They allow you to actually choose a book, see a rating for that book, and see how other people actually rated that book as well. So it's this database of book titles and authors and ratings and so on. We actually begin by trying to imagine what Goodreads database looks like underneath the hood. So, I'll go to Google Sheets here. 
+
+And let me actually ask you all, I want to probably store a few things about books and about authors. I want to store, let's say the book title, maybe it's publication date, the author, the author's birth date, and maybe some idea of a rating for that book. So if we only had one table here-- let me actually ask you all if you're here live, what kinds of columns should I have, in this table? I want to store some of those ideas. 
+
+Maybe one called a title, which makes sense. So this could be my book title here. I'll put it in bold to denote that it is the header, the column name here. I'm seeing, maybe author, which could stand for the author's name. That's a good idea. 
+
+I see like something like publish date, publication date. So I'll go ahead and add that in. I'll just call this one published, let's say, the date this book was published. What else do we have? Maybe one called-- I see rating. That could be a good one. So a rating column. And we also want to store, let's say, the author's birth date. So I'll say author birth here, for the author birth date. 
+
+So let me organize these a little bit. With Google Sheets I can just drag and drop here. So I'll move author over here. So I have some title, published, rating for the books, and then author, and the author's birth date here. So let's go and actually add in some books. And I have a few here already. 
+
+These come from the International Booker Prize Long List. If you're not familiar, is a prize for books that have been translated from around the world into English. And it's basically a way of keeping track of what are the really good books from this past year. So one of the books that made the long list over the past several years has been this one called Flights that was published in 2017. 05 17 here. 
+
+Let's say the rating. I don't quite know the rating. Let's say it was four. And the author was Olga Tokarczuk like this. And Olga was born in 1962. So this is our very first row in our database table, let's say. So notice here that one row corresponds to one book, Flights, right? 
+
+Now notice here that the published column has a certain format to it. This is a date. It is the year, followed by the month, followed by the day. So this would be May 17, 2017. And in SQLite as we'll see, it is often important to note that your dates are in a certain format. So this is the format SQLite has standardize on to store certain dates, at least in terms of years and months and days where you do y, y, y, a four digit year, a two digit month, and a two digit day. 
+
+And the rest I simply have a rating out of, let's say five stars, the author's name, and the author's birth year here. So I'll go ahead and add a few more. Olga also wrote The Books of Jacob. And this was also long listed for this prize called the International Booker Prize. And that was published in 2021, November 15. Let's say that got a five out of five rating. And it's also by Olga who was born in 1962. 
+
+I'll keep going. Why don't I add one called Paradais. This one was published in 2020, March, let's say 23, and got a four out of five. This one was by Fernanda, Fernanda Melchor. And they were born in 1982. 
+
+Now Fernanda also wrote another book. They wrote Hurricane Season, which was published, let's say, in 2020 in February 19. And that got a five out of five. Also, of course, by Fernanda, born in 1982. 
+
+So here is my basic database table. Perhaps Goodreads has something very similar. Now I want to ask you, what could be better designed about this table? Any ideas? If I were to keep adding more and more books, what could be better designed? 
+
+Certainly, I could maybe have more tables, more information . Here that could be a good idea. Why don't I add in a few more pieces of data and see if we can get another sense here? I'll add in the other name, which published in 2019, October 10, by John-- oops. The rating let's say, was, let's go with a five. Was published by John Fosse in 1959. 
+
+And John Fosse also had another book as well. They had A New Name, A New Name, which was published in 2021. 09/08. That got a four out of five. That of course, is by John Foss, who was born in 1959. 
+
+So here is our total table. And I'm seeing a few ideas now coming up. So one is, we could sort this data. That would be a very good idea. Maybe we sort it by title, alphabetically. Maybe we sort it by publication date, earliest to latest and so on. Those are all good ideas. 
+
+Here though, I want to think about the best way to structure our columns and our tables themselves. So I see a few ideas, which is that we're often repeating a few things in this table. So notice that Olga comes up twice. So does Fernanda and so does John. And notice how we have to duplicate their birth years, 1962, 1962, or 1982, 1982, 1959, 1959. 
+
+So although this is a table trying to store books, we're necessarily repeating author names and author birth years to make sure we have that information in the same table. So when it comes to organizing our databases, there's one principle you can keep in mind, which is that let's try to have tables that represent one and only one thing. So here we wanted to store books, originally, just individual books. 
+
+So maybe what we do is, I'll go down to this bottom piece here, and I'll say this is my books table right here. But now, I shouldn't have information about authors in my books table. I should make those authors a separate table. So I'll go and create a new table. 
+
+I'll call this one perhaps, authors like this. Now let me add in my columns for authors over to this table. So now I have Olga, Fernanda, and John. But I don't want to duplicate them. So I'll remove row three. I'll just delete this row. I'll remove row four with duplicate Fernanda, row five with John Fosse. And now I have a table of authors and a table of just books. 
+
+But now I think I have another problem, right? If I have a table of books and a table of authors, what information did I lose by doing this? Let's say you're just seeing this table or these tables for the first time, what did I lose? I lost who wrote which book. I don't know anymore. 
+
+Did Olga write Flights or was that perhaps John? I don't have association, this relationship between these books and these authors. So this is where this idea of a relational database comes into play. So we don't just have individual tables. We also have relationships between them, that some author wrote some particular book, or some book was written by some particular author. 
+
+And so to actually represent these relationships, we have this idea of a primary key and a foreign key column that we saw in lecture. So let me clean this up a little bit. I'll go to my ratings column. I'll shorten it just to visualize it here. And why don't I do something I should have done from the very beginning, which is give each of these books its very own unique ID. 
+
+So why don't we start with one here. I'll say one, two, three, four, five, and six. So each of these books has its own unique number that refers to it. And the idea of a primary key is that I cannot repeat it. Every book should have one and only one number that is unique to that book. So when I talk about book number six, that is a new name and only a new name. It won't change. It won't ever be something else. It is always going to refer to a new name. 
+
+And this is helpful because I now don't have to repeat all the information on, let's say this particular book. I can just say, well, it's book number six, right? That's pretty easy enough. So now I'll go to authors here and I will try the same thing. I'll go insert new column left. I'll say why don't I give every author their own ID too. 
+
+So Olga has ID one. Fernanda has ID two. John has ID three. And now every author has its own unique ID. And it is OK here that I repeat certain numbers. Because here I could say, well, it's book number one or author number one. Now I'm able to differentiate between books and authors, even though they have the same ID associated, with them. So this is helpful. But have I solved my problem really? If you look at this table have I solved my problem? 
+
+I'm seeing some head shaking. So no, not really. What could I do? Well, I could try to associate these particular primary keys with each other. And any ideas on how I could do that? What could I create to associate these IDs? 
+
+I could use this idea of a foreign key. So we saw in lecture that a primary key used in some other table becomes what we call a foreign key. I think that hints at the answer here, which is, we probably need another table to represent this relationship between the authors and the book. So why don't I go ahead and create that. 
+
+I'll call this new table maybe I'll call it authorship, who wrote which book. Or actually instead of authorship, why don't I make it like a verb like authored. So like this author authored this particular book. So maybe here what I should do is have one column called author id, which will be like a foreign key. It will refer to authors and the authors table. 
+
+And maybe I'll have another column here called book id. And this will refer to books in the books table. So now if I want to, let's say, associate some particular author with some particular book, well, I could find the author id, like Olga, who is one, and then add in whatever book id Olga authored. So I'll go to the book table, and I know Olga authored Flights which is also ID one. So now I see in this author table that the author with the ID of one wrote the book with the ID of one. 
+
+And now I can keep going. I could say, well, Olga also wrote the book with ID two, The Flights of Jacob. Let's say, who is two? Fernanda. Fernanda also wrote Paradais and Hurricane Season. So two with three, and two with four. 
+
+And, finally John. John wrote both five and six, the other name and a new name. So three and five, and then three and six. And this has solved some of my problems from before. I'm no longer duplicating information in a particular table. I have just the information organized into its own separate tables. And now I still have a way of trying to organize the information together and have the relationships exist between them. 
+
+So let me pause here and ask what questions do we have on this idea of organizing our tables and relating information between them? What questions do we have? 
+
+A good question. What do we call this kind of table? So, often we will see the particular kind of format for our tables. This table has many names. It is sometimes called an associative entity, sometimes called a junction table, sometimes called a join table. The idea of this table associating certain two foreign keys has many names. But among those are the ones I just said here. 
+
+Individually though, these individual columns are each foreign keys. Because they refer to the primary key of some other table. So remember, a primary key is that unique ID for every row in that table. But when it's using some other table, like the authored table, it becomes what we call a foreign key. 
+
+Question, a good one here, is making a call to three separate tables as efficient as making a single call to a single table even though that single table is bigger? So remember, we first began, we had only one single table with duplicate authors in it. Now I mean, you've kind of hit the nail on the head here. 
+
+We have three different tables. And if I want to figure out who wrote which book, I have to go to all three tables. It could take more time. Often though as you get much bigger data sets, this pays off. And having this kind of organization helps you avoid what we call data anomalies, helping to make sure your data is what we call normalized, able to stay organized over time. So, often you'll see these kinds of trade offs more, let's say, clear when you have lots of data. And it becomes a little more clear that this is going to be a superior way of organizing your data. 
+
+Let's see. Wouldn't it be better if we had the author id column in the books table? That's a decent idea. So what if I had not just this authors-- actually, let's say I got rid of the authored table. I go to books. And couldn't I have something a bit like this. I could have an author id column here. 
+
+And then I could say, well, author id one wrote one and two. And then author id two wrote three and four. Author id three wrote five and six. And this is kind of the same idea. But notice here, I'm still kind of repeating this idea. I could do it, but I think it's better to have just books in their own table and then just authors in their own table as well. 
+
+And actually, as we saw in lecture, there's this idea of a one to many relationship, a many to many relationship, and because authors and books have a many to many relationship, that is one author could write multiple books, and one book could be written by multiple authors, it's often helpful to have a joined table or a junction table to represent that kind of relationship. If though you have a one to many relationship that is a book is only ever written by one author, it could make sense to have this kind of design here, with the author id column inside the books table. So it does depend on the kind of relationship you are trying to represent between your entities, if that makes sense. 
+
+All right. So I think we've pretty thoroughly explored this idea of designing databases, at least for now. And it's worth thinking about how we can try to represent this idea in terms of an actual database. So here I have done this in Google Sheets. But what could I do to create these tables inside of a database management system, perhaps like SQLite? 
+
+So I'll go now to my terminal here. And I will let it reload. Let me go ahead and confirm those. Actually, OK, it's going to reload for me here. And while it does that, let me also talk to you a bit about some design principles to keep in mind as you design your databases. 
+
+So I'll go back to my slides here. And as you go off into CS50 and beyond, I would keep in mind these three ideas, that is best often to have one table for each entity in your data set. So an entity could be something like a book or an author, for instance. Those are two different entities. , Second every table should often have its very own primary key, some unique ID, like a number, that identifies it and differentiates it from every other row in that table. 
+
+And then like we discussed here, the information in that table should depend on the primary key only. Or another way of saying this is that every table should have only the information on that particular entity, so only information on books in the books table and only information on authors in the authors table. All right. So let's go back to our code space here. And let me try to set up an example here. 
+
+So why don't we try to make this idea into a reality? I will type SQLite3 reads dot dB. And what this will do is create for me a new database file called reads.dB. And it'll open with this program called SQLite3. So SQLite3 is the software that allows us to open up a database and use SQLite with it. So I'll hit Enter here. And it'll ask if I want to create read.dB. I do. It's brand new. I'll hit Yes here. 
+
+And now I'm brought to a new prompt. So notice above I have a dollar sign, which is my bash terminal. You often use it for typing LS or CD to move around your code space. Now though, I'm in SQLite, this brand new software I could use to actually access my database. So one of the first things I could do is try to create some table inside this database. And for that we need some new syntax. 
+
+So I'll go back to my slides. And here is the SQL syntax for creating some new table. Notice how I have create table, which is this SQL keyword that says, create me a new table, and then table name. So table name is the name I give to my table. And then in parentheses, I have a variety of columns I could add to this table, much like we did in Google Sheets. 
+
+Here though, I have to decide actually two things. First, the column name, so column zero, column one, column two, column three. Those are all placeholders here for actual column names. And then in caps, the type of that column. So there are many different kinds of types in SQL, actually not necessarily many, there are really only a handful of them. But here are a few. 
+
+So one is the idea of an integer, having a column that stores whole numbers. Another is text, having a column that stores text. Another is numeric, numeric could store either integers or floating points, like with decimals and so on, like 1.2 for instance, and real, which stores just let's say floats, just 1.2 or 2.5, any number with a decimal point inside of it. Numeric is often used for things like dates as well. So it's more flexible than, let's say, just integer or just real, which is why people might use it in the end. 
+
+So these are our various types at our disposal. So let's go ahead and try to actually create this table here. I'll go back to my code space. And I will try to create our very own, let's say books table first. So I'll type create table books. And then I'll have parentheses here. And I'll hit Enter, just for style's sake. And now indent 4 times, one, two, three, four spaces. 
+
+Now I can give my very first column name. So our column name if I go back here was, well first ID. So I'll say ID. And what kind of information was stored in ID? What type do you think is best for this kind of column? 
+
+Probably integer. So we stored whole numbers there. So I'll say ID space integer, and followed by a comma for adding on additional columns here. I'll hit Enter, hit Space four times to indent just for style's sake. Now I'll go my next column, which was title. Now what information is stored in title? What type might be best? 
+
+Probably text, we're just storing characters here. So I will say title text. And this is idea of storing like strings or characters. Often that's good for a text column. Now I'll go ahead and I'll make a new one called published. OK, published. And published is a bit tricky. Like we could use text because I see dashes in here. But actually SQLite lets us store dates like this as a numeric kind of column. 
+
+So I'll use numeric here to store a date. Another comma, because we want to keep adding new columns. Our last one is rating. So I'll go ahead and say rating here. And the type is probably going to be integer. So I could call this good. I could close this statement. But I don't want to do that just yet. There's one thing I'm forgetting which is what? Any ideas? 
+
+I have all my columns. But I should specify one thing more. Yeah. So I'm seeing some ideas. I need to specify which of these columns is my primary key. So in SQLite to do this, I can use the following syntax. At the end of all my column definitions I can say primary key and inside parentheses, tell SQLite which of these columns is my primary key. 
+
+So let me go back and I'll have another comma here. I'll indent four times again, just for style. I'll say primary key in all caps to indicate this is a SQL keyword. And then I'll tell it what kind of column I want to include in my primary key. In this case, it's the ID column. So now that I'm done, I can hit Enter, no comma, close out this beginning parentheses, semicolon, and fingers crossed, hit Enter. 
+
+I don't see anything which is actually a good thing. So now maybe I'll try this. I'll say dot schema. Actually before I do that, let me type dot tables. This is not a SQL keyword, but a SQLite statement that tells me what tables do I have in this database. I'll hit Enter. And I see I have a table called books. 
+
+If I want to actually figure out later on, let's say I clear my screen like this. I could Control L. If I want to clear my screen and figure out what the columns I had in books were, I could type dot schema, space books. Hit Enter. And that tells me the create table statement that was used to create this table called books. So I have the very same idea that I had in Google Sheets, but now in this database, in SQLite. And we'll see later on how to actually add data to this table here. 
+
+So let's go ahead and now create our author's table. I will try to create table here. And I'll call this one authors. Create table authors. And then I'll add in the columns. We had the ID column like this, which was an integer. We had the author column, which was text. And we had the author birth column. Author birth, which was an integer as well for the year. 
+
+Our primary key, our primary key is still the ID column in this particular table. I'll hit Enter, semicolon, and then type .tables. I have two tables now, .schema authors. And I'll see that same create table statement here. Now a few questions have come up. One is, can you have multiple primary keys? 
+
+In general, you can't have-- well, how to answer this. You can have a primary key that is composed of multiple columns, which means that those columns have to be unique across all of them. And they together form your primary key. You can't though have multiple different primary keys for your table. The idea of a primary key is that it is the single unique identifier in your table. 
+
+Let's see. A question about the ratings. So we used-- if I go back to .schema rating or .schema books here. We chose integer for the rating column. You're asking, could I also store like 4.5 in this? An interesting question. So, even though this column is an integer, it has what we call an integer affinity, I could if I really wanted to, store something like 4.5 in it. 
+
+In SQLite, these column affinities are not so much strict in the sense that it will convert 4.5 to 4 for me. If I inserted the value 4.5, SQLite would say, OK, fine, you want to float, I'll give it to you in that column. But it's just generally good practice to say what you're going to do in SQLite. So here I'd probably going to stick to just whole star ratings. I won't actually include let's say 4.5 or 3.2 or so on. But a good question. If you want to learn more about that you could look up this idea of type affinities in SQLite. Other questions too. I think that's all for now. 
+
+So why don't we go ahead and actually implement the last bit of this. So we wanted to create the authored table too. So I will create a table called authored. And this one's a little interesting. So maybe in this particular table, it seems like we didn't have a primary key. Like I didn't have a unique identifier for every row in this table. 
+
+But if we think about it, let's go back to that question of, could we have multiple primary keys, maybe the combinations of these two columns will always be unique. Like I wouldn't want to duplicate, let's say, duplicate 1 and 1 because I already know that, let's say Fernanda wrote, or let's say Olga wrote Flights. I wouldn't want to duplicate that. So maybe here what I could do is have a primary key composed of these two columns. And I'll show you how to do that syntactically in just a second. 
+
+The other thing to keep in mind here is that these two columns are themselves foreign keys that reference primary keys in other tables. So let's go ahead and first create these columns in our table and then decide how to define them as primary keys and foreign keys kind of at the same time. So I'll go back to my statement here. And I had at the beginning, author id which is an integer. And I also had book id, which is an integer as well. 
+
+So now I get to the tricky part, which is, which one of these is my primary key? And the answer kind of is, well, they both are. Like together the values in both those two columns form something unique about every row. So I could do this. I could say primary key author id comma book id like this. And that then says that the combination of my author id and the book id should always be unique and can uniquely identify every row in this table. 
+
+This is a design choice. I could very well have a separate column called ID, as you will see in the movies problem set and make that my primary key. It's kind of up to you what you like to do. Each one has slightly different effects on the database. And just because you all asked, I want to show you this particular way of doing it here. 
+
+But another way to continue on here is, I want to make sure that each of these columns has a constraint that says they are a foreign key too. So to make sure that the author id column is known to be referencing the primary key and the authors table, I could say this. Foreign key foreign key author id references the authors table and the ID column in it, like this. 
+
+So this is just a SQL syntax to do so. I'll continue on and I'll say that the foreign key of this table, another foreign key, is the book id and that references the books table and the ID column in it. So now I will hit Enter here, have a closing parentheses, semicolon, and fingers crossed. Seems to have worked for me here. 
+
+A few questions I see. Does the order of the keys matter? So let me answer that from a few different angles. I could put these in any order. I could put book id first, then author id. It doesn't quite matter for my table here. In my primary key column, the order here does matter in the sense that if I do it in the opposite way, I will get a very slightly different effect. 
+
+The different effect is going to be a little bit too high level for what we're going to talk about today. But if you are curious, I have a full class on this called [INAUDIBLE] construction database with SQL where you might learn some of those kinds of things. But in general, it doesn't quite matter what order you put these in even though it has some slight underlying effects on your database, if that makes sense. 
+
+All right. So I'll clear my screen. I'll type .tables. And I'll see I have authored, authors, and books. So all three of these tables are now in my database. All right. So we've seen how to create these tables. And the next step then is to actually try to insert some data. So let's get an idea of what syntax we could use there. 
+
+So if I want to insert some values into a table, we saw in lecture that I could do the following. I could say insert into and then the table name, followed by the columns I want to insert into, and then the values I want to insert into those particular columns. So let's try adding, just for the sake of fun here, a new book into our books table. 
+
+I can go back to my SQLite prompt. I could say insert, insert into the books table. And what column should I maybe include? What should I include here? Maybe the title, the author, and what else do we have? We had published and rating, published and rating. 
+
+So now I'll hit Enter, just for style's sake, to continue on with my query. And now I can define what values should go into-- oh, we didn't have author, did we? Books, title, nope. Oh no. OK, so if you get to this point and you're like, oh, no, I made a mistake. What should you do? 
+
+You could, I think, type control-- oh, you could hit semicolon, Enter, and it will tell you that your query was malformed, which is true. I didn't finish the query. But semicolon can get you out of a problematic query like that. So let's redo that one. 
+
+I'll hit up arrow twice to get back to that very first thing I typed. And we had title, published, and rating. Notice here, I actually don't have to include the ID column. So the ID column, because this is a primary key, gets automatically added for me. 
+
+So I'll now do values and the values are let's say, Flights, which is single quoted because it's a string, publication which is also a string, 2017, 05 17. And then I'll add in the rating, which is just the number four here like this. Now I'll close this particular statement, hit Enter. Nothing happens. But now if I use that SQL statement select star from let's say books, I'll now see I have a single book inside of my books table. And it automatically added the primary key called ID. 
+
+Let's say I want to delete this what I could do is simply use delete from books like this. But why might I not want to do that? Let's say I had more than one book in here, what would be wrong with doing delete from books? It'll delete everything. It'll literally delete my entire book table. 
+
+So I don't want to do this. What I should do instead is I could say delete from books where some condition is true and maybe I'll say I want to delete from books where the title equals Flights. To remove Flights in particular, I'll hit Enter I'll select star from books. And now I see that it's gone from my table. There are no rows inside of it. All right. So what questions do we have on creating these tables, inserting data, and deleting data? 
+
+I think I saw one earlier, one about the-- I think the junction table we had, or that associative entity, that authored table. Do those tables know about each other? They do in some senses. So if I go back and show you the schema of the authored table here, when I define for SQLite that the foreign key, author id, references the authors table and the ID column in it, that then tells SQLite to make sure if I ever insert some piece of data to this authored table that it is able to reference some value of a primary key in the authors table. So this is-- it helps me make sure my data is all organized, et cetera. 
+
+One thing in particular though, is that you have to make sure that SQLite is doing what we call foreign key checks. So you could disable this check when you insert into the author table. Maybe SQLite just doesn't check anything at all. You have to make sure you enable that check to make sure that it does look in the other table to make sure you do have that particular primary key it can associate with the author table row. Does that make sense? 
+
+All right. Can we insert many rows at the same time? You absolutely can. So to insert many rows-- let me go back to my slides --you would simply at the end of this statement here, you would not have a semicolon, you would have a comma and you keep adding parentheses of values. So it's like values, then you can imagine values 0 comma value one end parentheses comma, maybe a next line. And then another parentheses values 0 comma value one parentheses. And keep going and going and going as you would like to. Good question. 
+
+OK. So we've seen how to design some databases, which hopefully will be helpful to you not just this week, but in future weeks as you design your very own final project. I want to make sure we get to actually querying on our database and using some of our SQL syntax to ask and answer questions about some pieces of data. So why don't we go ahead and look at one of the very first problems in this week's problem set, which is called songs. 
+
+And in songs, you're given a list of the 100 I believe most popular songs in 2018 or so. And your job is to answer some questions about those particular songs. So to begin, why don't we actually go to the specification page and see what we're trying to do here. So when I download the distribution code for this particular problem, I get a few different things. 
+
+I get a file called songs dot dB. And I also get a bunch of dot SQL files. So I can write some queries to use on my database. Now songs dot DB is the database. It has all the information on the songs. And here these dot SQL files they allow me to keep track of the queries I'm writing to answer these questions here. So let me go ahead and actually get my songs dot dB into my code space. 
+
+And to do that, I need to first leave SQLite here. So to leave SQLite, you can type dot quit, dot quit, and you'll leave SQLite and be brought back to your terminal prompt here. Now if I type LS, I should see I already have songs downloaded. You can do the same on the problem set page. 
+
+I'll go CD songs to change directory into songs. Now if I type Ls to list my files, I should see I have my dot SQL files and my songs dot dB as well as this answers dot txt that I'll use at the very end if I'd like to. So let's actually open up songs dot DB and see what's inside. I'll type SQLite 3 songs dot dB to open up this database using SQLite 3. 
+
+Now I'll clear my screen and I will type dot schema. Schema alone tells me what kinds of tables are in this database and the create table statements that were used to create them. So I'll hit Enter. And here I'll see, how many tables do we have? How many tables do we see? 
+
+We see two. So there are two create table statements. It looks like one of these tables is called songs and another of these is called artists. The songs table has several columns. It seems to have the ID, the name, the artist ID, danceability, energy, loudness, [INAUDIBLE]. There's a lot of information about these songs here that we could use to ask and answer questions about these songs. 
+
+In the meantime, the artists table does have an ID column and a name column. So pretty straightforward here. And notice that for the sake of simplicity in this problem, we haven't actually defined the primary keys, the foreign keys. Although if you were working on your own you probably should define these particular features data of your actual database tables. 
+
+So to get a sense of what we're working with here one thing to do is to just select and see what we actually have. So I could try this query. Select star from the, let's say, the songs table. Remember, select means give me some data back. It's a tool for reading some data. 
+
+Star is this idea that says, give me back all the columns. I don't really care which ones. I want all the columns from this particular table. And from says, where are we actually getting the data from? Which table do you want to query? In this case songs. 
+
+So I'll hit Enter here and I'll get back, if I zoom out, a lot of songs in this particular database. In fact, there are 100 total, because we have 100 at the very bottom here. So often though, if you're working with much bigger databases, you don't want to just print out everything to your screen. A good way to actually get a peek at what's inside is to do this. 
+
+Maybe select a particular column. I'll say select title. Select title from songs. But then I only want the first, let's say, five titles just to see what's inside here. Take a literal peek at our data set. Limit five. Hit Enter. Oops. Is there no column title? Let me do dot schema songs. 
+
+And it's not called title but it is called name. So I will go ahead and change this query. I'll say select name from songs. And limit five. So now I see, these are the first five songs on this list of the top 100 songs in 2018, at least in the US. So now I can figure out, OK, how do I start answering these next particular questions in this songs problem? 
+
+So I'll go back to the specification. And I'll look at this very first question here. In one dot SQL, write a SQL query to list the names of all songs in the database. So let me ask you all, which column should we be querying? If our goal is to list the names of all songs in the database, which column should we be selecting? 
+
+Probably name if you just want the names of all songs. So I'll go back and I'll select name. Now this in itself is not quite enough. I need to say, where am I selecting name from? Like where does the name column come from? Well, it comes from the songs table. So I'll say select name from songs. Hit Enter. And that is our query. Notice how we got back all 100, all 100 names from this table. 
+
+So now that I think I've solved this first question, Why don't I go ahead and try to write that query inside of one dot SQL. I'll make myself a new terminal. I'll hit this plus button here. Now I'm back at my bash prompt. And this is kind of handy. I can have SQLite open in one and my other bash prompt open in the other. 
+
+I could then type LS CD into songs. And now I could code one dot SQL to open it up. And I have a blank SQL file here. But to keep track of this query, what I could do is say select name from songs, that same query we used before. And now I have it documented for myself inside of one dot SQL. 
+
+Let's say I also want to maybe not just keep track of it, but run what I write in one dot SQL. Well, I could use a SQLite keyword. This one called dot read. So I could say dot read one dot SQL. And that will see whatever is inside one dot SQL and read it into SQLite, running any SQL statements it sees. 
+
+So I'll hit Enter here. And notice how I got the very same results. So dot read one dot SQL simply executes the query I wrote in one dot SQL. Enter again just to show you I can use dot read as well. So questions on this very first bit of querying with our songs database? Any questions? 
+
+Oh good question. So how would you specify what data you want, and how would you get multiple pieces of data from multiple different tables? So two questions here. How do you specify what data you want? So for that, you often have to use a select keyword in SQL. Select allows you to select certain columns from individual tables. So we could say select name or select author id or so on, and then from some particular table. 
+
+If though, you want to query multiple tables at once, like look at data in the artist table and look at data in the songs table, that would require more advanced techniques we'll see a little later, either called a subquery or a join so more on that in just a bit. But to more formally introduce some of these tools in your toolkit as you answer these questions, I want to show you some keywords you might want to be familiar with as you work on songs. 
+
+So, once you open up SQLite3 with your database name, you might go ahead and type SQLite3 songs dot dB. You could then type your query here. And then you could do dot tables to see the tables involved. And you can kind of visualize songs dot dB like this. It's having both songs and artist tables. And each of course, has different schema, like schema songs as we saw before or select star from songs limit 3 to find those top few rows. And you get back something like this. 
+
+You can do the same for artists a bit like that. And as you go ahead and solve some of these, like queries one through five, these are the kinds of keywords you might want to be familiar with as you work. So select where, like and order by to begin with. So select, we saw helps us select certain rows from our-- or select certain columns from our table, where it lets us actually filter to only certain rows. 
+
+So let's try our next query. This one is listing names of all songs in increasing order of tempo. So for that, we might want to actually use order by. Order by lets us change the order of certain rows as they return to us. So let me go ahead and go back to my SQLite prompt. 
+
+And now I want to list the names of all songs in increasing order of tempo. So to begin, all SQL statements begin with a select. Let me ask you, what should we be selecting here, which column? Probably selecting the names of songs. We could say select name to begin with. And then of course from the songs table. Now, as my queries get longer, it's often good to not include them all on the same line, but to break them up into individual lines. 
+
+So I'll select name. Hit Enter from songs. Hit Enter again. And there's one final piece of this query. I've selected the name column from the table, but now I want the songs in increasing order of tempo. So to do that, I could use order by. Order by often comes at the end of a statement to tell me what order my results are given back to me. 
+
+So I'll say order by, order by tempo, in this case. Semicolon and Enter. So now I should see that I have these songs in a slightly different order, in this case by tempo. And to prove it, why don't I go ahead and modify this query. I'll say select name, not just name, but tempo as well. 
+
+So now I'm selecting two columns name comma tempo from songs. I'll order by tempo. Hit Enter. And now I should see that I have these songs ordered by tempo in increasing order, so smallest to largest, just like that. Now once this particular query is done, why don't I go ahead and add it into two dot SQL. I'll say code two dot SQL. And I will then say select name from songs. Order by tempo like this. So now I've used order by. 
+
+Let's take a look at our next one. So three dot SQL. The names of the top five longest songs in descending order of length, the top five longest songs in descending order of length. So here, I think we can reuse this idea of order by. We're trying to figure out the top five longest songs. And they should be in some particular order, descending order of length. 
+
+So maybe I'll go back to my SQLite prompt. And I want to again select names. Select name from songs. But which column should I be ordering on? Any ideas? The top five longest songs. Let's go ahead and type dot schema, dot schema songs. Do any of these columns seem to specify the length of a song? 
+
+So I'm seeing duration, so duration in milliseconds. So this is like, how long that song actually is. So I could order by that particular column there. So I'll try select name from songs and order by duration ms. Now the problem here is I want the songs in decreasing order of length, descending order of length. Notice how before, when we used order by, we went in increasing order from lowest to highest. But here I want highest to lowest. 
+
+So to change this, I could modify order by. And I could say desc or asc for ascending or descending. So descending or desc means give me the largest values first, and then give me the smaller ones as you go down this particular list. So once I have that, I'll hit Enter. And I've gotten the songs, I think in decreasing order of duration. 
+
+I could say select name duration ms from songs, order by duration ms in descending order. I think I've ordered them properly, based on what I see here. But how could I find only the top five? What can I add on to my query? A limit 5 is what I'm seeing. So I'll go ahead and try that. 
+
+I will go here, scroll down, and I'll say, let's select name again from songs, order by duration ms in descending order. And now, limit myself to the top five results. Now in general, as you're working with SQL syntax like this, knowing the ordering that these statements go in is often helpful. So to give you a guide, often select goes first, followed by an order by, trying to order the result in some particular order. Then at the very end of your query, do you have limit. So limit tells me, give me back all of the results, but only take those top five. 
+
+I'll hit Enter here. And now I'll see these are the top five songs in terms of duration, the longest five songs to be exact. So I'll go back to my other terminal, type code three dot SQL. Let me just document this query here. I'll say select name from songs, order by duration ms in descending order. And then I'll limit myself to the top five songs. So this is that particular query now done for me here. 
+
+Let's keep going. Let's see four dot SQL. So four dot SQL lists the names of any songs that have a danceability energy and valence greater than 0.75. Well, let's take a peek at what that actually means. So, I'll go back to my database. And why don't I just select the title or the name of a song. And then why don't I also select the danceability, energy, and valence, see what those numbers are. 
+
+Select name, danceability, energy, and valence, all in one go from songs. And I'll just take the top song here to see what it is. Hit Enter. So it seems like the very first song is called God's Plan and the danceability of it is 0.754. The energy is 0.449. And the valence is 0.357. So if you're not familiar, this data actually comes from Spotify. And Spotify has various metrics they make to help characterize certain songs on a zero to one scale. 
+
+So danceability is how danceable that song is, how much you can kind of jive to the beat. Energy here is like how much intensity it has. Is it something you kind of mellow out to or like play at a club? And then valence is like how happy is this song, where one is like it's a happy, very positive song. Zero is kind of like a minor key, kind of dark kind of song. So it's like a way of characterizing the song in terms of actual numeric output, which is kind of cool. 
+
+So our goal here is to find generally, those songs that are pretty danceable, pretty energetic, and pretty happy, it seems like. So we're going to try to find the titles of those particular songs. So I again want to list the names of songs. Maybe I'll go back to my SQLite prompt. I'll say select name from songs. 
+
+But here's where I get into trouble. How do I exclude certain songs and only include those that have a danceability, energy, and valence greater than 0.75? Which keyword do you think we should probably use here? I'm seeing where. So often, when you want to filter the rows, you're going to use where. Where often comes immediately after you use a select and a from. 
+
+So I'll say select name from songs. And now I'll have my condition. Well, where, first part of my condition is the danceability should be greater than 0.75. So it should be a pretty danceable song. I'll go and say where, danceability is greater than 0.75. 
+
+But that's not the only condition here. I also want to make sure that the energy and the valence are similarly at least that big. So if I want to add on more conditions, I can use and. I could say and the energy is greater than 0.75. And let's say, the valence is greater than 0.75. I could also use or, capital O, capital R to say either this or that as well. 
+
+But I'll take this. And I think this should satisfy my query. Any songs that danceability, energy, and valence greater than 0.75. I'll hit Enter. And I should see that there are about, let's see, five songs that are pretty danceable, pretty energetic, and pretty happy, according to Spotify at least. 
+
+So I'll go back to my other terminal. And I'll say code, what was this? This was four dot SQL. Code four dot SQL. And now I'll type in that very same query, which was selecting names from songs where the danceability was greater than 0.75 and the energy was greater than 0.75 and the valence was greater than 0.75. And that was my entire query. All right. Questions, then, on what we've seen so far? What questions do you have? 
+
+All right, seeing none for right now. So let's keep going and do something a little more interesting. Our next question asks us to return the average energy of all the songs, the average energy. So this is a little bit different, because I don't think I can select any particular row and get back the average energy. Because if I go ahead and I do something like select energy from songs, like this, I get back all the values in the energy column. 
+
+So I need something a little special to answer this question. That is what we call in SQLite, this idea of an aggregate function. So an aggregate function takes in something. Let me try to find this slide here. An aggregate function takes in lots of data and spits out one particular number. So you can take a whole column of data and give you one summary number, if you will. 
+
+Now there are a few of these. And you could use them like this. Where you often have a query, it looks a bit like select column from name or some condition is true, you could say select count of the values there. How many values do we have that are not null? 
+
+You could select the average of those numbers, like what is the average number across all these in a particular column? You could select the minimum, the maximum, and so on. So we'll actually use these for queries, five through seven in the songs problem. But often you simply use them by taking your column name and sticking it inside some parentheses after your aggregate function in particular. So like average count min or so on. 
+
+So why don't I try average. Select AVG for average. Select average energy from songs. Hit Enter. And now I see that the average energy is about a 0.65906 out of one. Now there's a bit of a bonus here. I don't quite care if it's like 906 at the end. It could be 0.65. 
+
+So to adjust this, I could try select but say the rounded average. I could around the average energy to two decimal places from songs. From songs. And now I get back just the rounded version to two decimal places if I'd like. So round is one other function you can use, not an aggregate function, but it does let you round your results from a particular column. 
+
+In this case though, we want the non-rounded version. So I'll go to my terminal. I'll type code five dot SQL. And now I'll say select the average energy from songs. And that should answer the question for five dot SQL. All right. Questions on aggregate functions here? 
+
+All right. Not seeing any. Now I think we'll go back to another question, which said, how do we get data from multiple tables. And we'll see a few approaches actually here today. So in six dot SQL, it's asking us to write a SQL query that lists the names of songs that are by Post Malone. So Post Malone in the US is an artist and a rapper. So how could we find the songs by Post Malone? 
+
+Well, if I type dot schema songs. Oops. This is my SQLite prompt. If I type dot schema songs. Do I see any information about the authors here or the artists of this song? What information do I have to work with? I see artist ID. So I could probably filter these songs using where to a particular artist ID. 
+
+But then the next question is, well, which ID should I be using? Like I don't quite know right now Post Malone's ID. So how could I filter the songs to those that have Post Malone's ID? Well, there's probably a few ways I could go about this. And I want to show you one visualization and one example of how you can actually use this technique not just for this scenario, but for other ones too. 
+
+So go back to some slides. And let's go ahead and take a look at how we can solve ways to-- queries that ask us to combine tables and gather data from multiple sources. So in general, there are two ways to do this. One is to use subqueries. And one is to actually join those tables together. We'll focus here first on using this idea of a subquery. 
+
+So to motivate them, I think it's worth going through a particular example, where maybe I now have two tables, one for movies and one for ratings. And let's say I want to find the rating of Cars 3, my own personal favorite movie. Where could I find the rating of Cars 3? Well, it seems like it's in the ratings table. 
+
+But if I were to just query movies, I wouldn't actually see the rating there. So you need to reference both tables to figure out what is the rating of Cars 3? Now let me ask you, what do you notice about these two tables? What allows me to reference data between them? What could I do? 
+
+So the ID column in movies and the movie ID column and ratings, those seem to correspond. In fact, the movie ID column seems to be a foreign key referencing the primary key ID in movies. So notice here, these two kind of align. They reference each other. So I could use this to my advantage. 
+
+Maybe I could do in SQLite, I could do this. I could say, why don't I find the ID for Cars 3, where the title is Cars 3. And that would give me back 3606752. OK. That's helpful for me. Maybe my next query then could be this. Select rating from ratings where the movie ID equals 3606752. And that would give me back the rating for Cars 3. But what could I be doing better, or at least what seems annoying about this? Any ideas? 
+
+I would just think about, would you want to type this query? I mean it's kind of like, the idea is just kind of long to type. I don't want to have to do that really multiple times. And let's say the ID of Cars changes. Like that is not something I want to actually keep track of. So there's probably a better way to do this that actually allows me to abstract away or not even think about the ID of what Cars 3-- of Cars 3 at all. 
+
+So why don't I reformulate my query. And why don't I try this. Select rating from ratings where the movie ID equals something, but I don't know what yet. There's a question mark there. I need to figure out, well, what is the ID of Cars 3? And to fill in that question mark, I could use some other SQL query. 
+
+I could organize it like this. And now I could say, why don't I put in this query that finds me that ID for Cars 3. In this case, I'll say select ID from movies where the title equals Cars 3. OK. So now I'm trying to build up a single query that doesn't even care what the ID of Cars is. I'm now able to just find the rating from it. 
+
+And as a bit of a side note here, I think, let me check. Yes. So this particular quote, these quotes here, double quotes. Don't do what I did. That's not good. Only use single quotes. So this is often hard to keep track of as evidenced here. But you should only be using single quotes when you actually use strings in SQL. So my bad. But don't use double quotes. 
+
+All right, so let's say we have this inner query here. Select ID from movies where title equals Cars 3. First, that query will run and return to us the ID of Cars 3. So whatever is the innermost query in parentheses will run first. And in that case we'll get back, let's say, 3606752. And our query kind of becomes this query here. Select rating from ratings where the movie ID equals that ID for Cars. And of course, we can then get back the rating we're looking for all along. 
+
+So let's try this with, let's say, this idea of Post Malone. So I want to find the songs by Post Malone. Well I know first I want to select, select names from songs. And I want to do so where the artist ID equals, equals something. I don't quite know what yet. 
+
+So I might write a subquery. I could say, let's have some parentheses. And I'll hit Enter and indent four times for style's sake. Now I'm trying to answer that question, like what is Post Malone's artist ID? Any ideas for how I could get access to that particular ID? What kind of query could I use here to find the ID of Post Malone? 
+
+Probably want to select. I want to select the ID column, probably from the artist table. So I'll say select ID from artists and you could probably find this if you went back and checked the schema of the artist table too. Select ID from artists. And now I want to only get one ID, which is the ID of the artist where their name equals Post Malone with single quotes importantly. 
+
+Now I'll hit Enter. And that is my entire subquery. And parentheses, semicolon, hit Enter. And now I see these are the six songs Post Malone had in the top 100 list in 2018. So questions then on subqueries. And now we're using them here. 
+
+Why single quotes? So you could use double quotes if you wanted to. I think it would still work. Technically in SQLite, single quotes are used for strings like Post Malone. And double quotes are used for identifiers, like table names and column names. You don't have to use them. Here I'm not using them as you'll see. But it's good not to mix those up. So in general, strings like Post Malone, single quotes, column names, table names, double quotes are what you would use there if you are using quotes at all. Good questions. 
+
+Can you show data from both tables with the queries? What an excellent question. So can you show data with both tables from-- show data from both tables with the queries? You absolutely can. That would require you, though, to use a join. So subqueries are great when you want to filter your data based on something in another table. If you want to actually see column from multiple tables all together in one, you want to join those tables together. So more on that in just a bit. 
+
+Actually, why don't we go ahead and turn to it right now? So our next query is seven dot SQL. And here, we're trying to return the average energy of songs that are by Drake. Average energy of songs that are by Drake. Well, what could we do? Well first we probably have to find what is Drake's ID. 
+
+And we could simply use our subquery again. That would work perfectly fine. But let's say we want to see, not just the average energy of songs that are by Drake, but also maybe Drake's name somewhere in there too. So I want to kind of join my tables together a bit like this. And let me actually give you a visualization for what that could look like. Go back to my slides here. 
+
+Let's focus now on joining up our tables and trying to answer that same question we did earlier about what is the rating of Cars 3, the movie. So here again I have my movies and ratings tables. And we noticed earlier that these two columns had a relationship. That is the movie ID column was the foreign key referencing the primary key called ID in movies. 
+
+So now I could answer this question the same way I did before, or maybe even more simply, I could try to push these tables together so that I align the movie's ID column with the values of the ratings movie ID column. So I could visually do this. And notice here how I'm matching up rows based on where the ID column in movies and the movie ID column in ratings are the same value. 
+
+To visualize again, I know I should put this rating 8.3, 8.3, next to Toy Story because movie ID 114709 matches the ID column movies 114709. So when I join these tables, those will be the rows I match up. Same thing for Cars. And now I have a single table here that shows me the title, Cars 3, and the rating. So I could abstract away this movie ID column. And now I'm left with basically a single table that has IDs for movies but now also has some additional data like the ratings piece as well. 
+
+So this is how we could solve this problem using join. Let's try it now to figure out, what is the average energy of songs that are by Drake? Well, to actually implement a join, I need to actually type this join keyword. So why don't I try this? I'll say select, the name energy and let's say artist. Let's see, actually let me see what is the-- if I use dot schema artist, the name. 
+
+So notice how artists has a name column. I want to, let's say get back the name of Drake songs, the energy associated with them, and the name of Drake. So I can actually see in one table, like, whatever Drake's song name is the energy of that song and then the name Drake right next to it. So I could say select name from, let's say, the song table. Select energy as well. And now select well, the name column from artist. So why might this be a little confusing? 
+
+I have two columns named name in two different tables. So, I probably want to specify where I'm getting which one. And to do this, if you have this problem, you could do the following. I could say, not just name, but songs dot name, or for instance, artists dot name. This allows me to say, I want in particular the name column from songs and the name column from artists. 
+
+And now, why don't I say from, let's go ahead and say from the songs table. But the songs table, of course, doesn't have the name column in artists. So I need to join that table in. I'll say from songs join artists. And now I have to specify which two columns should SQLite use to know which rows to put together across these two tables. 
+
+So I'll say join artists on, in this case, I know I should use the artists.id column and set that, that should be the same as the songs dot artist, ID column, like this. So I'm telling SQLite, when you join these tables, make sure that the ID column in artists matches the artist ID column in songs. 
+
+Now I'll hit Enter. And why don't I try specify, where artists dot name equals Drake. And hopefully, fingers crossed, I'll hit Enter here. This is all improvised. I should see that the I have the names of Drake songs and the energy of them, and of course, Drake's name right next to them. So questions on these joins then? What questions do we have? 
+
+So we saw in lecture that joins can be pretty slow. Why is that the case? Let's see, in general, joins don't need to be any slower than subqueries. What can seem slow off the bat is when you have many joins all together, because it takes a lot of work for SQLite to go through and figure out, how do these rows match up across all these different tables. 
+
+It can speed up joins if you have the right kinds of indexes. In lecture, we saw this idea of an index that speeds up queries on a particular column. So if you have the right indexes, joins aren't necessarily any slower than subqueries. It just turns out in lecture, we didn't have the right kinds of indexes to make that particular query very fast with those joins. 
+
+Can you join more than two tables? You certainly can. You can join as many tables to your heart's content as you would like. Just keep in mind performance as well. And if you're doing more than three or four, I'd question why you're doing that in the first place. You need to, if you need to. 
+
+When joining tables, does order matter? It can. Very unlikely that it would in particular. If you have a particular ordering, you want the rows in, it might vary that order. But that's why, at the very end of your query, you can use order by to set the order you get those things back in. 
+
+And if you are feeling more comfortable with these kinds of things, I want to propose that you could learn a bit more about how SQLite is doing or learn more about what SQLite is doing underneath the hood, by typing this. Let's say, explain query plan. Hit Enter. And now I'll try joining again. 
+
+I'll say I want to select, lets go for songs dot name, and artists dot name. And then I'll join, or from songs join artists on artists dot ID equals songs dot artist ID. So I'm basically telling SQLite, I want you to join these two tables. But the very first thing I said is, explain to me how you're going to do this. Explain to me how you're going to join these two tables together. 
+
+I'll hit semicolon Enter here. And this tells me exactly how it is planning to join these tables together. If you want to, you can learn more about this. If you don't want to, totally OK. But if you are feeling more comfortable, you could learn about what SQULite is doing underneath the hood, if that makes sense. 
+
+All right. So let's finish up our Drake query here. We said we would select the average energy of songs that are by Drake. So to finish this out, I could say select average energy from songs. And maybe I'll join, join, the artists table on artist dot ID equals songs dot artist ID. And then I could say where the artist or the name well, or the artist name, artist dot name is Drake. Like this. 
+
+Hit Enter. Oh. It's artist, isn't it? OK. So, case in point, it's not artist, it's artists. So I'll say select average energy from songs. Join. And then where artists dot name is Drake. And we find that Drake's songs have an average energy of 0.599. All right. 
+
+Now our one final query here before we wrap up. This is going to ask us to find all the names of songs that feature other artists. So notice how songs feature others will include the word feet in the title. So to figure out this one, we should introduce this idea of like. And like, as we saw in lecture allows us to specify a pattern to match in our text. 
+
+So I want to figure out if feet is anywhere in some particular song title. I can use like similar to where. But it allows me to specify something like, not just particularly equal to, but matching some particular pattern. So I will find the names of songs to feature other artists. I'll say select name from songs and then where, let's say, let's say where the name is not equal to something, but is like some pattern. 
+
+And in this case, I could say percent feet percent to say, I want to match any name that has feet somewhere in its name. If I wanted to say feet only at the end, I could omit this percent sign and say percent feet. If I wanted to find feet at the very beginning, I could say feet and then percent at the end here. 
+
+Basically, this percent sign allows me to say, you can match any characters, any characters at all, but make sure it has feet somewhere in this particular title. So I'll hit Enter here. And I should see, I get back all the names of songs that in this case have feet in the title. 
+
+All right. The questions then on these past few queries. A good question. Is all the syntax and keywords common to all of SQL software or do they only work in SQLite? So there are a few things that only work in SQLite. I don't know off the top of my head. In general, SQLite is very cross compatible. So you could use the same kinds of things in SQLite that you would be able to use in things like MySQL or PostgreSQL. 
+
+A question about, how do you find the mode of artists, such the top artists that appears in the table? We didn't see this here today. We did see it briefly in lecture. There's this idea of group by. Let's say you want to figure out how many times some artist appears in the table. 
+
+Well, I could try to find that out for you. I could say, let's try to find the artist name. Well, how should I do this? I want to find artists dot name. And I also want to select the count of times that artist dot name appears. I want to select that from the songs table, but joining let's say, the artist table on artists dot id equals songs dot artist id 
+
+And I want to in the end, do what we call a group by. So I'll group by artist dot name. And what this will do for me is this. So we saw earlier that this join allows me to think of my two tables as one table. Basically I'm now able to see songs and their artist names. Once I have that, I want to select the name column from the artists table. And then I want to select the count of times that artist name appears in the table. 
+
+But in order to make this work, I want to group by artist dot name. So when I type count here, I'm going to figure out how many times does each artist name appear, and not just how many times this artist name happened in general, if that makes sense. I'll hit Enter and see what I get. I'll see here. That seems to have worked. Five Seconds of Summer appears one time. Ed Sheeran appears three times. And so on. 
+
+So if you want to learn more about group by, I'd encourage you to try to just do a bit of googling around, see some visualizations. Or actually rewatch part of lecture you can see David talk more about group by too. Let's see. How would you find all the songs that have a specific word for them? You could use like for that. So like is good for often trying to match patterns of text. 
+
+And the question, so join joins artists to songs. It does. In this case, we could specify, we are starting with songs and joining in artists. And then question about SQLite type of entities. We use text here because you use char or varchar instead of text. So char and varchar are particular to MySQL or Postgres. They aren't part of SQLite in this case, but good question. 
+
+All right, so I think what we'll do is go ahead and wrap officially here. We've gone through how to design our databases, how to solve particular songs problem, and if any of this interested you, I'd encourage you to go ahead and check out one of our very own courses, Our Introduction to Databases with SQL, which you can find more about at this URL down here. Let's take you into a deep dive with databases and designing your very own final project, focused on databases in particular. So with that, we'll end our week seven section. And I hope to see you next time. 

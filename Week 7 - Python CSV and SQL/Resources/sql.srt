@@ -1,0 +1,2265 @@
+1
+00:00:05,250 --> 00:00:07,250
+DOUG LLOYD: So in our
+videos on web development,
+
+2
+00:00:07,250 --> 00:00:10,420
+we've talked a couple of times
+now about what a database is.
+
+3
+00:00:10,420 --> 00:00:12,920
+And in this video, we're goingww
+to get into a bit more detail
+
+4
+00:00:12,920 --> 00:00:16,820
+and show you exactly what a
+database is, why we would use it,
+
+5
+00:00:16,820 --> 00:00:18,920
+and how we might manipulate it.
+
+6
+00:00:18,920 --> 00:00:23,844
+In order for us to build websites that
+are sort of more complex than just
+
+7
+00:00:23,844 --> 00:00:26,010
+a page where they just go
+and see news, for example,
+
+8
+00:00:26,010 --> 00:00:27,926
+we might need a database
+to store information,
+
+9
+00:00:27,926 --> 00:00:30,620
+such as username and
+password combinations
+
+10
+00:00:30,620 --> 00:00:32,830
+so that a user attempts to log in.
+
+11
+00:00:32,830 --> 00:00:34,830
+That log-in information
+is sent to the database.
+
+12
+00:00:34,830 --> 00:00:36,740
+It is checked against
+information in the database
+
+13
+00:00:36,740 --> 00:00:39,230
+to see whether that username-password
+combination matches.
+
+14
+00:00:39,230 --> 00:00:41,400
+And if so, it lets the user in.
+
+15
+00:00:41,400 --> 00:00:44,990
+We might also store other stuff for
+users, like their shopping history
+
+16
+00:00:44,990 --> 00:00:47,510
+or really any other
+information that you might
+
+17
+00:00:47,510 --> 00:00:50,750
+want to keep long-term for a user.
+
+18
+00:00:50,750 --> 00:00:54,740
+Now, if you ever used programs like
+Microsoft Excel or Google Sheets
+
+19
+00:00:54,740 --> 00:01:00,830
+or Numbers, you're probably familiar
+with the basic idea of a database.
+
+20
+00:01:00,830 --> 00:01:03,584
+A database consists of a couple
+of different levels of hierarchy.
+
+21
+00:01:03,584 --> 00:01:05,000
+Within a database, we have tables.
+
+22
+00:01:05,000 --> 00:01:08,130
+And within each of those tables,
+we have rows and columns.
+
+23
+00:01:08,130 --> 00:01:10,880
+And if you are familiar with Excel,
+or perhaps even if you're not,
+
+24
+00:01:10,880 --> 00:01:14,420
+let's take a quick second and
+I can draw this analogy for you
+
+25
+00:01:14,420 --> 00:01:17,700
+about what a database, a
+table, a row, a column is.
+
+26
+00:01:17,700 --> 00:01:22,700
+And then we can translate that in
+just a moment to the same idea in SQL.
+
+27
+00:01:22,700 --> 00:01:26,769
+So on my screen here, I've
+opened up an Excel file.
+
+28
+00:01:26,769 --> 00:01:29,060
+And across the top here, you
+see I have these letters--
+
+29
+00:01:29,060 --> 00:01:34,400
+A, B, C, D, E. These would be
+different columns in my file.
+
+30
+00:01:34,400 --> 00:01:37,800
+Down the left side, I have numbered
+rows, where I might put information.
+
+31
+00:01:37,800 --> 00:01:41,130
+So, for example, I might just
+put my name here in cell A1.
+
+32
+00:01:41,130 --> 00:01:43,672
+So it's in the A column
+in the first row.
+
+33
+00:01:43,672 --> 00:01:45,380
+Now, down at the bottom
+left is a feature
+
+34
+00:01:45,380 --> 00:01:48,830
+that you may not have used too much if
+you don't use Excel very frequently.
+
+35
+00:01:48,830 --> 00:01:50,660
+But there's these notions of sheets.
+
+36
+00:01:50,660 --> 00:01:53,060
+Sheets are sort of akin
+to different tables.
+
+37
+00:01:53,060 --> 00:01:56,780
+Notice that when I switch to sheet 2,
+the data that was in sheet 1, my name,
+
+38
+00:01:56,780 --> 00:01:57,870
+is no longer there.
+
+39
+00:01:57,870 --> 00:02:02,000
+So each sheet has its own
+unique set of rows and columns.
+
+40
+00:02:02,000 --> 00:02:06,480
+But all of these sheets are still bound
+up in one single file called Book 1.
+
+41
+00:02:06,480 --> 00:02:09,380
+So the analogy here is that
+Book 1 is our database, which
+
+42
+00:02:09,380 --> 00:02:12,770
+contains a different number of
+tables, which in Excel parlance
+
+43
+00:02:12,770 --> 00:02:14,090
+is just a sheet.
+
+44
+00:02:14,090 --> 00:02:16,850
+And each sheet has columns
+that we can put data in
+
+45
+00:02:16,850 --> 00:02:20,010
+and rows that we can
+put data in, as well.
+
+46
+00:02:20,010 --> 00:02:23,120
+So there are a couple of different
+types of database engines
+
+47
+00:02:23,120 --> 00:02:24,860
+that we can use in our programs.
+
+48
+00:02:24,860 --> 00:02:29,780
+We're going to talk about SQL, S-Q-L,
+which stands for the Structured Query
+
+49
+00:02:29,780 --> 00:02:30,921
+Language.
+
+50
+00:02:30,921 --> 00:02:33,170
+The Structure Query Language
+is a programming language
+
+51
+00:02:33,170 --> 00:02:37,160
+whose sole purpose in life is to query
+or ask questions of or retrieve data
+
+52
+00:02:37,160 --> 00:02:39,120
+from a database.
+
+53
+00:02:39,120 --> 00:02:42,361
+And there are many different
+implementations of SQL.
+
+54
+00:02:42,361 --> 00:02:44,360
+Two of the most popular
+are as follows-- we have
+
+55
+00:02:44,360 --> 00:02:47,510
+MySQL which is an open-source platform.
+
+56
+00:02:47,510 --> 00:02:50,230
+It is very commonly used to
+establish relational databases.
+
+57
+00:02:50,230 --> 00:02:51,260
+We're not going to get
+into a lot of detail
+
+58
+00:02:51,260 --> 00:02:53,359
+in this video about what
+a relational database is
+
+59
+00:02:53,359 --> 00:02:54,650
+versus other types of database.
+
+60
+00:02:54,650 --> 00:02:56,649
+But just know that there
+are more than one type,
+
+61
+00:02:56,649 --> 00:02:59,640
+and we cover relational
+databases in this course.
+
+62
+00:02:59,640 --> 00:03:03,380
+Another type, which we actually
+have used in CS50 since 2016,
+
+63
+00:03:03,380 --> 00:03:07,834
+is SQLite, which has a very
+similar feature set to MySQL.
+
+64
+00:03:07,834 --> 00:03:09,500
+But it's just a little more lightweight.
+
+65
+00:03:09,500 --> 00:03:12,020
+It's a little easier to use on CS50 IDE.
+
+66
+00:03:12,020 --> 00:03:15,140
+And so that's why we're actually going
+to be using that one in the class.
+
+67
+00:03:15,140 --> 00:03:20,540
+Now, regardless of which implementation
+of SQL that you use, a lot of them
+
+68
+00:03:20,540 --> 00:03:25,280
+will come with a tool called phpMyAdmin,
+which is a GUI or Graphical User
+
+69
+00:03:25,280 --> 00:03:28,760
+Interface tool that is
+used to execute some
+
+70
+00:03:28,760 --> 00:03:33,410
+of the more tedious or mundane database
+queries in a more user-m friendly way
+
+71
+00:03:33,410 --> 00:03:36,070
+because you can just click and
+do things in the web browser.
+
+72
+00:03:36,070 --> 00:03:39,620
+And those are most commonly used to
+build databases in the first place
+
+73
+00:03:39,620 --> 00:03:44,030
+and to set up tables because
+that's the first thing you're
+
+74
+00:03:44,030 --> 00:03:47,522
+going to do once you get your database
+configured, is to create a table.
+
+75
+00:03:47,522 --> 00:03:49,730
+Because without a table, we
+have no rows and columns.
+
+76
+00:03:49,730 --> 00:03:52,430
+And without rows and columns,
+we can't store any data.
+
+77
+00:03:52,430 --> 00:03:55,340
+Tables have very cumbersome syntax
+that is used to set them up.
+
+78
+00:03:55,340 --> 00:04:00,200
+And so using phpMyAdmin, the graphical
+interface, to build your table
+
+79
+00:04:00,200 --> 00:04:02,420
+is definitely gonna come in handy.
+
+80
+00:04:02,420 --> 00:04:04,910
+In the process of building
+your table, you're
+
+81
+00:04:04,910 --> 00:04:08,149
+going to have to specify
+exactly which columns
+
+82
+00:04:08,149 --> 00:04:09,690
+are going to be stored in that table.
+
+83
+00:04:09,690 --> 00:04:12,273
+So at the very beginning, when
+you create your table, you say,
+
+84
+00:04:12,273 --> 00:04:14,850
+my table's going to store
+usernames and passwords
+
+85
+00:04:14,850 --> 00:04:16,850
+and whatever sort of other
+information you want.
+
+86
+00:04:16,850 --> 00:04:20,150
+and you have to specify that before you
+have inserted any data into the table.
+
+87
+00:04:20,150 --> 00:04:24,410
+So you have to design ahead of time
+what your table is going to look like.
+
+88
+00:04:24,410 --> 00:04:27,650
+Once you've done that, pretty
+much every query except for, like,
+
+89
+00:04:27,650 --> 00:04:29,744
+deleting the database
+and deleting the table
+
+90
+00:04:29,744 --> 00:04:31,910
+that you're going to use
+on that table going forward
+
+91
+00:04:31,910 --> 00:04:33,620
+is going to refer to
+data which is stored
+
+92
+00:04:33,620 --> 00:04:37,700
+in the different rows of the table.
+
+93
+00:04:37,700 --> 00:04:40,310
+Just like in C, every
+column of our SQL table
+
+94
+00:04:40,310 --> 00:04:43,420
+is capable of holding data
+of different data types.
+
+95
+00:04:43,420 --> 00:04:48,080
+So in C, for example, we had characters
+and strings and integers and floats.
+
+96
+00:04:48,080 --> 00:04:51,110
+And SQL has a few more
+data types than that.
+
+97
+00:04:51,110 --> 00:04:54,030
+This is just 20 of them, and this
+is not even an exhaustive list.
+
+98
+00:04:54,030 --> 00:04:55,610
+But some of these things
+should look familiar.
+
+99
+00:04:55,610 --> 00:04:57,901
+So, for example, we have int,
+which can store integers.
+
+100
+00:04:57,901 --> 00:05:00,830
+But we also have these four other
+types, which can hold integers
+
+101
+00:05:00,830 --> 00:05:02,360
+with different upper bounds.
+
+102
+00:05:02,360 --> 00:05:05,200
+So you may recall from C that
+the upper bound of integer
+
+103
+00:05:05,200 --> 00:05:10,220
+is 2 to the 31st power, or 2 to the
+32nd power if they're unsigned integers.
+
+104
+00:05:10,220 --> 00:05:12,620
+But here we can say
+small ints or tiny ints
+
+105
+00:05:12,620 --> 00:05:14,990
+or medium or big ints,
+each of which have
+
+106
+00:05:14,990 --> 00:05:17,690
+different upper bounds on the values.
+
+107
+00:05:17,690 --> 00:05:21,500
+Decimal and float stand in
+place of double and float,
+
+108
+00:05:21,500 --> 00:05:25,850
+which we're familiar with from C. We
+can also store date and time stamps
+
+109
+00:05:25,850 --> 00:05:27,590
+in SQL databases.
+
+110
+00:05:27,590 --> 00:05:29,860
+There's no data type for
+that that's native to C.
+
+111
+00:05:29,860 --> 00:05:32,760
+But in SQL, there are a couple
+of different ways to do this.
+
+112
+00:05:32,760 --> 00:05:35,940
+We can even do more exotic things
+like store geometry or line strings.
+
+113
+00:05:35,940 --> 00:05:36,830
+And what are these?
+
+114
+00:05:36,830 --> 00:05:41,330
+Well, geometry and line strings can
+be used to store in a SQL database
+
+115
+00:05:41,330 --> 00:05:45,820
+a mapping out or a drawing out of an
+area on a map, such as using GIS data.
+
+116
+00:05:45,820 --> 00:05:48,440
+And we can actually store
+that in our SQL table
+
+117
+00:05:48,440 --> 00:05:52,310
+and recreate that exact
+drawing a little bit later on.
+
+118
+00:05:52,310 --> 00:05:55,160
+Text sort of stands in
+the stead of strings
+
+119
+00:05:55,160 --> 00:06:00,200
+for just arbitrarily
+large chunks of text.
+
+120
+00:06:00,200 --> 00:06:04,170
+Enums are also a type that exists in C,
+but we don't talk about them too much
+
+121
+00:06:04,170 --> 00:06:08,650
+in C. But really quickly, what an enum
+is is it is a column of your table
+
+122
+00:06:08,650 --> 00:06:11,645
+that can be used to store
+a limited set of values.
+
+123
+00:06:11,645 --> 00:06:14,930
+So, for example, I could
+have an enum that is called,
+
+124
+00:06:14,930 --> 00:06:17,034
+like, favorite colors, for example.
+
+125
+00:06:17,034 --> 00:06:18,950
+And I could specify when
+I'm building my table
+
+126
+00:06:18,950 --> 00:06:22,670
+that it can only be capable of
+holding red, green, and blue.
+
+127
+00:06:22,670 --> 00:06:25,880
+If you tried to insert a row
+that had purple in that place,
+
+128
+00:06:25,880 --> 00:06:29,510
+that wouldn't work because it is not
+one of the enumerated values that
+
+129
+00:06:29,510 --> 00:06:31,520
+can be stored in that column.
+
+130
+00:06:31,520 --> 00:06:34,310
+There are also char and varchar.
+
+131
+00:06:34,310 --> 00:06:38,057
+And these are not quite the same as
+what you might think they are in C.
+
+132
+00:06:38,057 --> 00:06:39,890
+So let's just take a
+quick second to explain
+
+133
+00:06:39,890 --> 00:06:43,520
+the difference between these two data
+types, which are pretty important.
+
+134
+00:06:43,520 --> 00:06:47,600
+So unlike in C, char does not
+refer to a single character.
+
+135
+00:06:47,600 --> 00:06:51,180
+It is actually sort of akin
+to our notion of a string,
+
+136
+00:06:51,180 --> 00:06:54,620
+but with a caveat that that
+string is a fixed length.
+
+137
+00:06:54,620 --> 00:06:57,500
+And typically when we specify
+a char or a varchar type,
+
+138
+00:06:57,500 --> 00:07:00,680
+we have to specify the length
+of that string at the outset,
+
+139
+00:07:00,680 --> 00:07:02,810
+just like we do in c.
+
+140
+00:07:02,810 --> 00:07:07,460
+So, for example, my column
+type might be a char 10.
+
+141
+00:07:07,460 --> 00:07:10,940
+That means that I can
+store 10 character strings
+
+142
+00:07:10,940 --> 00:07:15,005
+in that column of my table,
+exactly 10 character strings.
+
+143
+00:07:15,005 --> 00:07:16,880
+So if I tried to store,
+for example, the word
+
+144
+00:07:16,880 --> 00:07:21,420
+"hi," H-I, which is just two letters,
+that would go into the column OK.
+
+145
+00:07:21,420 --> 00:07:24,020
+But it would also store 8 extra--
+
+146
+00:07:24,020 --> 00:07:28,130
+the equivalent of null bytes, basically,
+so that I still had 10 characters,
+
+147
+00:07:28,130 --> 00:07:34,145
+per se, in that column for that row.
+
+148
+00:07:34,145 --> 00:07:37,089
+And if I tried to store,
+like, a 15-character string,
+
+149
+00:07:37,089 --> 00:07:37,880
+that wouldn't work.
+
+150
+00:07:37,880 --> 00:07:40,100
+I'd only end up storing
+the first 10 letters.
+
+151
+00:07:40,100 --> 00:07:43,430
+So it's always going
+to be 10, every time.
+
+152
+00:07:43,430 --> 00:07:46,490
+A varchar, on the other hand,
+refers to a variable-length string.
+
+153
+00:07:46,490 --> 00:07:49,490
+So if I said that my
+column was varchar 99,
+
+154
+00:07:49,490 --> 00:07:54,740
+I can store 1, 2, 3, 4, 5 character
+strings, up to 99 characters
+
+155
+00:07:54,740 --> 00:07:59,090
+long, without having to have all
+of this extra sort of slack space
+
+156
+00:07:59,090 --> 00:08:02,360
+or null bytes or zeros
+tacked onto the end.
+
+157
+00:08:02,360 --> 00:08:05,100
+So char, fixed-length strings.
+
+158
+00:08:05,100 --> 00:08:06,557
+Varchar, variable-length strings.
+
+159
+00:08:06,557 --> 00:08:08,390
+We won't get into the
+difference between why
+
+160
+00:08:08,390 --> 00:08:09,440
+you might want to use one or the other.
+
+161
+00:08:09,440 --> 00:08:12,315
+But there are reasons why you might
+not always want to use a varchar,
+
+162
+00:08:12,315 --> 00:08:15,790
+and you might want to use
+a char in some situations.
+
+163
+00:08:15,790 --> 00:08:19,840
+Now, SQLite actually has many
+or all of these same data types.
+
+164
+00:08:19,840 --> 00:08:22,480
+But the difference there is
+that each of those data types
+
+165
+00:08:22,480 --> 00:08:26,220
+is affiliated with what's called a
+type affinity to simplify things.
+
+166
+00:08:26,220 --> 00:08:28,150
+So that whole list of 20--
+
+167
+00:08:28,150 --> 00:08:32,110
+or more, really-- can be reduced to one
+of these five different affinities--
+
+168
+00:08:32,110 --> 00:08:34,660
+null, integer, real, text, and blob.
+
+169
+00:08:34,660 --> 00:08:36,700
+Null is probably pretty
+obvious-- nothing.
+
+170
+00:08:36,700 --> 00:08:37,919
+Integer-- whole numbers.
+
+171
+00:08:37,919 --> 00:08:40,929
+Real-- that would include
+things like decimal and float.
+
+172
+00:08:40,929 --> 00:08:43,780
+Text would include things
+like char and varchar.
+
+173
+00:08:43,780 --> 00:08:48,010
+Blob is just-- that would be more like
+the geometry or data that isn't really
+
+174
+00:08:48,010 --> 00:08:51,070
+text, but it's just a large
+number of bits or bytes.
+
+175
+00:08:51,070 --> 00:08:52,060
+That would be a blob.
+
+176
+00:08:52,060 --> 00:08:55,420
+And everything can reduce to one of
+these five different type affinities.
+
+177
+00:08:55,420 --> 00:08:58,720
+So after specifying the columns, it's
+also really important in our SQL table
+
+178
+00:08:58,720 --> 00:09:01,480
+to have one other
+consideration, which is to have
+
+179
+00:09:01,480 --> 00:09:04,150
+one column which is our primary key.
+
+180
+00:09:04,150 --> 00:09:06,550
+Why do we need a primary key?
+
+181
+00:09:06,550 --> 00:09:09,220
+The reason is every row
+of our table, in order
+
+182
+00:09:09,220 --> 00:09:13,810
+to make our SQL queries most effective,
+should be able to be uniquely
+
+183
+00:09:13,810 --> 00:09:15,520
+and quickly identified.
+
+184
+00:09:15,520 --> 00:09:17,890
+So choosing the right
+primary key will allow
+
+185
+00:09:17,890 --> 00:09:23,980
+us to make sure that there is one value
+in every row that is completely unique.
+
+186
+00:09:23,980 --> 00:09:27,550
+And if that is true, if there is one
+column in every row that's unique,
+
+187
+00:09:27,550 --> 00:09:30,130
+then we can uniquely identify
+or very quickly identify
+
+188
+00:09:30,130 --> 00:09:32,500
+which row we're talking about.
+
+189
+00:09:32,500 --> 00:09:35,090
+Now, it's also possible to
+establish a joint primary key,
+
+190
+00:09:35,090 --> 00:09:37,241
+which is just a combination
+of, say, two columns--
+
+191
+00:09:37,241 --> 00:09:39,490
+but it can be an arbitrarily
+large number of columns--
+
+192
+00:09:39,490 --> 00:09:41,114
+that is always guaranteed to be unique.
+
+193
+00:09:41,114 --> 00:09:44,200
+So I could have one column that
+could always have A's or B's or C's.
+
+194
+00:09:44,200 --> 00:09:47,200
+I could have another column that has
+ones and twos and threes and fours.
+
+195
+00:09:47,200 --> 00:09:50,440
+I could have multiple A's and multiple
+B's and multiple C's, multiple ones,
+
+196
+00:09:50,440 --> 00:09:51,940
+twos, and threes.
+
+197
+00:09:51,940 --> 00:09:54,080
+But across all of those
+rows, I'm only ever allowed
+
+198
+00:09:54,080 --> 00:09:57,160
+to have 1 combination of A1.
+
+199
+00:09:57,160 --> 00:09:58,630
+I can have B1, C1.
+
+200
+00:09:58,630 --> 00:10:00,370
+I can have A2, A3, A4.
+
+201
+00:10:00,370 --> 00:10:04,450
+But there's only ever one combination
+of those two columns that is unique.
+
+202
+00:10:04,450 --> 00:10:08,457
+That would also be acceptable
+because that is a joint primary key.
+
+203
+00:10:08,457 --> 00:10:11,290
+Now, SQL is a programming language,
+like other programming languages
+
+204
+00:10:11,290 --> 00:10:12,190
+that we've discussed.
+
+205
+00:10:12,190 --> 00:10:14,557
+But it has a very limited vocabulary.
+
+206
+00:10:14,557 --> 00:10:17,140
+Now, there are more things that
+you can do with SQL than we're
+
+207
+00:10:17,140 --> 00:10:18,820
+going to talk about in this
+video because in this video
+
+208
+00:10:18,820 --> 00:10:21,191
+we're just going to talk
+about the four operations
+
+209
+00:10:21,191 --> 00:10:24,190
+that one can perform on a table, or
+the four main operations that you'll
+
+210
+00:10:24,190 --> 00:10:26,260
+most likely perform on the table--
+
+211
+00:10:26,260 --> 00:10:29,161
+INSERT, SELECT, UPDATE, and DELETE.
+
+212
+00:10:29,161 --> 00:10:32,410
+And these four things we'll get into a
+bit more detail in just a second about.
+
+213
+00:10:32,410 --> 00:10:34,630
+But these are definitely
+the most common four things
+
+214
+00:10:34,630 --> 00:10:36,370
+you'll be doing with the
+tables that you're building,
+
+215
+00:10:36,370 --> 00:10:39,460
+certainly in CS50, but also probably
+more generally whenever you're
+
+216
+00:10:39,460 --> 00:10:41,269
+working with databases.
+
+217
+00:10:41,269 --> 00:10:44,060
+So for all of the examples that
+we're going to cover in this video,
+
+218
+00:10:44,060 --> 00:10:46,450
+we're going to consider
+a database that contains
+
+219
+00:10:46,450 --> 00:10:50,530
+these two tables called users and moms.
+
+220
+00:10:50,530 --> 00:10:54,370
+And you can see users has four different
+columns-- idnum, username, password,
+
+221
+00:10:54,370 --> 00:10:55,720
+and fullname.
+
+222
+00:10:55,720 --> 00:10:59,684
+And moms has two different
+columns, username and mother.
+
+223
+00:10:59,684 --> 00:11:01,600
+And let's now start to
+work with these and see
+
+224
+00:11:01,600 --> 00:11:05,860
+how we can manipulate this database
+and the tables within it to--
+
+225
+00:11:05,860 --> 00:11:09,190
+for whatever reason we need them
+to-- be updated in our website.
+
+226
+00:11:09,190 --> 00:11:11,320
+So the first operation
+we'll cover is insert.
+
+227
+00:11:11,320 --> 00:11:14,230
+And as you might expect, it
+adds information to a table.
+
+228
+00:11:14,230 --> 00:11:17,604
+Now, SQL queries have a
+certain structure to them.
+
+229
+00:11:17,604 --> 00:11:20,020
+And so with each of these
+operations, what I'm going to do
+
+230
+00:11:20,020 --> 00:11:24,680
+is give you the general sort of skeleton
+of what a query might look like.
+
+231
+00:11:24,680 --> 00:11:27,070
+And then we'll use a couple
+of examples of that query
+
+232
+00:11:27,070 --> 00:11:29,350
+to see how it affects our table.
+
+233
+00:11:29,350 --> 00:11:33,190
+So an insert query, in general,
+looks something like this--
+
+234
+00:11:33,190 --> 00:11:35,110
+INSERT INTO table.
+
+235
+00:11:35,110 --> 00:11:37,690
+So we specify what table
+we want to insert into.
+
+236
+00:11:37,690 --> 00:11:39,610
+And then we have
+parentheses, columns-- which
+
+237
+00:11:39,610 --> 00:11:43,180
+is a comma-separated list of
+all of the columns of our table
+
+238
+00:11:43,180 --> 00:11:45,730
+that we want to insert data into.
+
+239
+00:11:45,730 --> 00:11:49,510
+Then we have VALUES, and then a
+comma-separated list of the values
+
+240
+00:11:49,510 --> 00:11:53,150
+that we want to put into those
+columns in the same order.
+
+241
+00:11:53,150 --> 00:11:59,110
+So for example, I might want to INSERT
+INTO users into these three columns--
+
+242
+00:11:59,110 --> 00:12:01,540
+username, password, name.
+
+243
+00:12:01,540 --> 00:12:06,417
+The values, respectively--
+newman, in lowercase, USMAIL--
+
+244
+00:12:06,417 --> 00:12:08,500
+that's going to be
+corresponding to the password--
+
+245
+00:12:08,500 --> 00:12:11,650
+and then capital-N Newman for fullname.
+
+246
+00:12:11,650 --> 00:12:17,140
+So assuming that I execute this
+query on the users table shown here,
+
+247
+00:12:17,140 --> 00:12:18,279
+what's going to happen?
+
+248
+00:12:18,279 --> 00:12:19,820
+Well, this is what's going to happen.
+
+249
+00:12:19,820 --> 00:12:24,350
+We're going to add this row because
+we inserted into the users table.
+
+250
+00:12:24,350 --> 00:12:26,350
+But you might be asking
+yourself, wait a minute.
+
+251
+00:12:26,350 --> 00:12:29,150
+You never specified ID number.
+
+252
+00:12:29,150 --> 00:12:31,030
+So how exactly did ID number get there?
+
+253
+00:12:31,030 --> 00:12:34,740
+I mean, you specified newman
+and USMAIL and Newman.
+
+254
+00:12:34,740 --> 00:12:37,120
+But that 12, that was
+never part of our query.
+
+255
+00:12:37,120 --> 00:12:38,064
+And you're right.
+
+256
+00:12:38,064 --> 00:12:40,480
+Because when you define the
+column that ultimately ends up
+
+257
+00:12:40,480 --> 00:12:43,414
+being your table's primary
+key, it's usually a good idea
+
+258
+00:12:43,414 --> 00:12:44,830
+to have that column be an integer.
+
+259
+00:12:44,830 --> 00:12:49,150
+It's not a requirement, but
+it's usually a good idea.
+
+260
+00:12:49,150 --> 00:12:53,110
+And because having a
+primary key is so important,
+
+261
+00:12:53,110 --> 00:12:55,600
+you might want to specify
+it to autoincrement.
+
+262
+00:12:55,600 --> 00:12:58,450
+And what this basically
+means is you can forget
+
+263
+00:12:58,450 --> 00:13:01,030
+to include it as part of your query.
+
+264
+00:13:01,030 --> 00:13:05,080
+And if you do, it will
+automatically insert a value there
+
+265
+00:13:05,080 --> 00:13:07,930
+that is unique from every
+other value in that column,
+
+266
+00:13:07,930 --> 00:13:10,737
+typically by just incrementing
+by one every time,
+
+267
+00:13:10,737 --> 00:13:12,820
+so that that row is still
+guaranteed to be unique.
+
+268
+00:13:12,820 --> 00:13:15,170
+Because if it wasn't
+set to autoincrement
+
+269
+00:13:15,170 --> 00:13:18,690
+and we just forgot to
+omit it, there might
+
+270
+00:13:18,690 --> 00:13:22,830
+be a couple of rows that are
+actually blank or null there.
+
+271
+00:13:22,830 --> 00:13:25,740
+But if that's our primary key,
+if ID number is our primary key,
+
+272
+00:13:25,740 --> 00:13:30,040
+and we have a couple of rows that are
+blank there, now they're not unique.
+
+273
+00:13:30,040 --> 00:13:31,707
+We have two rows that are blank.
+
+274
+00:13:31,707 --> 00:13:33,040
+We can't uniquely identify them.
+
+275
+00:13:33,040 --> 00:13:36,359
+And so when you set up your primary key,
+you usually want it to be an integer,
+
+276
+00:13:36,359 --> 00:13:39,150
+and you usually want it to
+autoincrement so that you can completely
+
+277
+00:13:39,150 --> 00:13:42,740
+forget about having to worry about
+that and let the table do it for you.
+
+278
+00:13:42,740 --> 00:13:44,100
+So that's how 12 got there.
+
+279
+00:13:44,100 --> 00:13:48,540
+I had specified my idnum column
+do autoincrement every time I
+
+280
+00:13:48,540 --> 00:13:52,010
+make an insert into the table.
+
+281
+00:13:52,010 --> 00:13:53,230
+Let's do this another time.
+
+282
+00:13:53,230 --> 00:13:55,813
+Let's insert into the other
+table, insert into the moms table,
+
+283
+00:13:55,813 --> 00:13:58,300
+the following values into
+these following columns.
+
+284
+00:13:58,300 --> 00:14:01,980
+We can INSERT INTO the username and
+mother columns of the users table
+
+285
+00:14:01,980 --> 00:14:05,069
+the VALUES kramer and Babs Kramer.
+
+286
+00:14:05,069 --> 00:14:08,110
+And just like what we saw before, this
+is what we would have as a result.
+
+287
+00:14:08,110 --> 00:14:10,068
+We would just insert that
+row, and it would now
+
+288
+00:14:10,068 --> 00:14:13,449
+be part of our database
+and part of our tables.
+
+289
+00:14:13,449 --> 00:14:14,740
+So that's the insert operation.
+
+290
+00:14:14,740 --> 00:14:17,260
+Now let's talk about the second
+operation, which is select.
+
+291
+00:14:17,260 --> 00:14:20,200
+So if insert is used to put
+information into a table,
+
+292
+00:14:20,200 --> 00:14:23,110
+select is used to get that
+information back out of the table
+
+293
+00:14:23,110 --> 00:14:24,850
+so that we can do something with it.
+
+294
+00:14:24,850 --> 00:14:28,630
+Select queries also have
+a very similar skeleton.
+
+295
+00:14:28,630 --> 00:14:29,770
+And they look like this--
+
+296
+00:14:29,770 --> 00:14:32,110
+SELECT and then whatever
+columns you want
+
+297
+00:14:32,110 --> 00:14:35,766
+to choose FROM whichever table
+you want to choose them from.
+
+298
+00:14:35,766 --> 00:14:38,140
+And then optionally in red
+here, these two other things--
+
+299
+00:14:38,140 --> 00:14:40,550
+WHERE some condition is satisfied.
+
+300
+00:14:40,550 --> 00:14:43,900
+And we usually, in the context of SQL,
+refer to a condition as a predicate.
+
+301
+00:14:43,900 --> 00:14:47,740
+But basically, we're just checking
+to see that some situation is true.
+
+302
+00:14:47,740 --> 00:14:51,160
+And we might want to, for example,
+order them by a specific column so
+
+303
+00:14:51,160 --> 00:14:54,940
+that they are organized alphabetically
+by the values in some column
+
+304
+00:14:54,940 --> 00:14:55,750
+or whatever else.
+
+305
+00:14:55,750 --> 00:14:58,770
+We don't have to do
+either WHERE or ORDER BY.
+
+306
+00:14:58,770 --> 00:15:00,520
+But generally WHERE
+in particular is going
+
+307
+00:15:00,520 --> 00:15:03,700
+to be used so that you don't
+get your entire database back.
+
+308
+00:15:03,700 --> 00:15:06,580
+And ORDER BY just helps to keep
+things a little more organized.
+
+309
+00:15:06,580 --> 00:15:09,670
+So, for example, here's a
+select query that we could use--
+
+310
+00:15:09,670 --> 00:15:13,712
+SELECT idnum, fullname
+from the users table.
+
+311
+00:15:13,712 --> 00:15:15,420
+So let's see what's
+going to happen here.
+
+312
+00:15:15,420 --> 00:15:19,690
+So remember, I'm selecting idnum
+and fullname from the users table.
+
+313
+00:15:19,690 --> 00:15:22,420
+Well, what is the select
+query going to return to me?
+
+314
+00:15:22,420 --> 00:15:23,647
+This information here.
+
+315
+00:15:23,647 --> 00:15:25,480
+It's going to look at
+each row of the table,
+
+316
+00:15:25,480 --> 00:15:28,960
+and it's going to just pull out
+the ID number and the full name
+
+317
+00:15:28,960 --> 00:15:32,050
+and give me all of those
+down the entire users table.
+
+318
+00:15:32,050 --> 00:15:34,100
+My user table only
+consists of three rows,
+
+319
+00:15:34,100 --> 00:15:36,370
+so it's given me three
+pairs of information,
+
+320
+00:15:36,370 --> 00:15:39,930
+three idnum-fullname combinations.
+
+321
+00:15:39,930 --> 00:15:41,680
+Now let's say I want
+to restrict my search
+
+322
+00:15:41,680 --> 00:15:43,180
+a little bit, my query a little bit.
+
+323
+00:15:43,180 --> 00:15:48,200
+SELECT password FROM users
+WHERE idnum is less than 12.
+
+324
+00:15:48,200 --> 00:15:51,704
+So now I'm adding a predicate or
+a condition to my select query.
+
+325
+00:15:51,704 --> 00:15:52,870
+What's going to happen here?
+
+326
+00:15:52,870 --> 00:15:55,480
+Well, I'm going to get this information.
+
+327
+00:15:55,480 --> 00:15:58,990
+This is just the password
+column from the users table
+
+328
+00:15:58,990 --> 00:16:02,360
+where the ID number in
+that row is less than 12.
+
+329
+00:16:02,360 --> 00:16:05,830
+So only rows 10 and 11's
+password get given back to me.
+
+330
+00:16:05,830 --> 00:16:09,610
+12's does not because
+12 is not less than 12.
+
+331
+00:16:09,610 --> 00:16:13,540
+There's one other thing we can do with
+a select query, and that's to select *.
+
+332
+00:16:13,540 --> 00:16:17,750
+SELECT * from moms where
+username equals jerry.
+
+333
+00:16:17,750 --> 00:16:20,800
+* is just shorthand for every column.
+
+334
+00:16:20,800 --> 00:16:24,040
+So instead of having to specify
+username, mother, the two columns here,
+
+335
+00:16:24,040 --> 00:16:26,740
+or, if I was using the users
+table, having to specify idnum,
+
+336
+00:16:26,740 --> 00:16:29,650
+username, password, fullname,
+I can just say SELECT *.
+
+337
+00:16:29,650 --> 00:16:31,680
+Give me everything in that row.
+
+338
+00:16:31,680 --> 00:16:35,170
+And if I SELECT * from moms
+where username equals jerry,
+
+339
+00:16:35,170 --> 00:16:39,096
+I am given this set of information back.
+
+340
+00:16:39,096 --> 00:16:41,550
+So here's the thing that's
+cool about databases,
+
+341
+00:16:41,550 --> 00:16:44,249
+though-- we don't have
+to just have two tables.
+
+342
+00:16:44,249 --> 00:16:46,290
+And in particular, we
+don't have to have just one
+
+343
+00:16:46,290 --> 00:16:50,130
+table that stores every relevant
+piece of information about a user.
+
+344
+00:16:50,130 --> 00:16:53,050
+If we wanted to store, in addition
+to what we have there, information
+
+345
+00:16:53,050 --> 00:16:57,754
+like their address and their date of
+birth and their social security number
+
+346
+00:16:57,754 --> 00:16:59,670
+or whatever else we
+wanted to keep about them,
+
+347
+00:16:59,670 --> 00:17:02,169
+this table could get bigger and
+bigger and bigger and bigger
+
+348
+00:17:02,169 --> 00:17:05,760
+to the point where it becomes
+almost annoying to have to use it.
+
+349
+00:17:05,760 --> 00:17:08,930
+But we can use relationships
+between different tables.
+
+350
+00:17:08,930 --> 00:17:10,680
+And that's where the
+term relational comes
+
+351
+00:17:10,680 --> 00:17:12,599
+into play for a relational database.
+
+352
+00:17:12,599 --> 00:17:15,089
+We can set up our tables
+within our databases
+
+353
+00:17:15,089 --> 00:17:18,900
+carefully enough that we can
+use relationships between them
+
+354
+00:17:18,900 --> 00:17:22,319
+to pull information from where we need
+it without all that information having
+
+355
+00:17:22,319 --> 00:17:25,270
+to be located in the same
+table in the first place.
+
+356
+00:17:25,270 --> 00:17:30,480
+So, for example, here is our database
+as we last left it, with three rows
+
+357
+00:17:30,480 --> 00:17:35,231
+in each of the users
+and the moms tables.
+
+358
+00:17:35,231 --> 00:17:36,980
+Now let's imagine a
+hypothetical situation
+
+359
+00:17:36,980 --> 00:17:41,720
+where we want to pair a user's full
+name, which is currently only stored
+
+360
+00:17:41,720 --> 00:17:45,080
+in the users table, with
+their mother's name, which
+
+361
+00:17:45,080 --> 00:17:47,474
+is only stored in the mother table.
+
+362
+00:17:47,474 --> 00:17:49,140
+They're not on the same table right now.
+
+363
+00:17:49,140 --> 00:17:52,190
+So we can't use the same sort of
+select query that we used before.
+
+364
+00:17:52,190 --> 00:17:56,000
+We have to use what's
+called a select join query.
+
+365
+00:17:56,000 --> 00:17:58,700
+It looks pretty similar to
+the select query before.
+
+366
+00:17:58,700 --> 00:18:01,250
+But we're adding one extra
+piece of information, which
+
+367
+00:18:01,250 --> 00:18:03,360
+is what tables we're joining together.
+
+368
+00:18:03,360 --> 00:18:07,610
+So I want to select a specific
+set of columns from one table,
+
+369
+00:18:07,610 --> 00:18:10,302
+joining another table
+onto it just temporarily.
+
+370
+00:18:10,302 --> 00:18:11,510
+It doesn't really merge them.
+
+371
+00:18:11,510 --> 00:18:16,700
+But it creates this sort of
+hypothetical table that does merge them.
+
+372
+00:18:16,700 --> 00:18:18,679
+On predicate, where
+predicate is-- basically,
+
+373
+00:18:18,679 --> 00:18:20,720
+we're trying to find where
+the two tables overlap
+
+374
+00:18:20,720 --> 00:18:23,930
+so that we can create this
+merged table just temporarily
+
+375
+00:18:23,930 --> 00:18:27,140
+for purposes of this query, and
+then have them separate again.
+
+376
+00:18:27,140 --> 00:18:30,320
+So, for example, I might have
+a query that looks like this--
+
+377
+00:18:30,320 --> 00:18:36,620
+SELECT users.fullname, comma,
+moms.mother FROM users joining the moms
+
+378
+00:18:36,620 --> 00:18:41,090
+table onto it temporarily ON--
+
+379
+00:18:41,090 --> 00:18:44,220
+which is akin to WHERE--
+
+380
+00:18:44,220 --> 00:18:48,055
+users.username equals moms.username.
+
+381
+00:18:48,055 --> 00:18:50,180
+And this syntax is also a
+little unfamiliar, right?
+
+382
+00:18:50,180 --> 00:18:53,820
+I'm now prepending some of my
+column names with table names.
+
+383
+00:18:53,820 --> 00:18:56,570
+The reason I'm doing this is
+particularly because of the last line
+
+384
+00:18:56,570 --> 00:19:03,050
+there, where in each of those two
+tables I had a column called username.
+
+385
+00:19:03,050 --> 00:19:05,180
+I need to disambiguate between them.
+
+386
+00:19:05,180 --> 00:19:07,640
+So I need to specify what
+table and what column.
+
+387
+00:19:07,640 --> 00:19:10,931
+That's all that's happening here, is I'm
+being very explicit about which column
+
+388
+00:19:10,931 --> 00:19:15,240
+I want by specifying not only the
+column name, but also the table name.
+
+389
+00:19:15,240 --> 00:19:19,400
+So here is what would happen if
+I executed this select query.
+
+390
+00:19:19,400 --> 00:19:21,980
+Here are our two tables at the outset.
+
+391
+00:19:21,980 --> 00:19:25,520
+This is all of the information that
+I'm trying to get to start with.
+
+392
+00:19:25,520 --> 00:19:31,970
+I'm going to join these two tables
+together where where users.username
+
+393
+00:19:31,970 --> 00:19:34,130
+equals moms.username.
+
+394
+00:19:34,130 --> 00:19:35,730
+Newman does not appear in both tables.
+
+395
+00:19:35,730 --> 00:19:38,600
+So I'm not going to even come close to
+extracting that piece of information.
+
+396
+00:19:38,600 --> 00:19:41,420
+Kramer does not appear in both
+tables, so that one's out too.
+
+397
+00:19:41,420 --> 00:19:45,050
+But jerry and gcostanza
+both appear in both tables.
+
+398
+00:19:45,050 --> 00:19:47,990
+And so that is sort
+of the overlap point.
+
+399
+00:19:47,990 --> 00:19:50,810
+And you can think about
+this as if we have
+
+400
+00:19:50,810 --> 00:19:54,600
+our users table, which is
+like one circle over here,
+
+401
+00:19:54,600 --> 00:19:56,699
+and our moms table, which
+is one circle over here.
+
+402
+00:19:56,699 --> 00:19:59,240
+When we're joining, it's sort
+of like if it's a Venn diagram.
+
+403
+00:19:59,240 --> 00:20:01,864
+We're trying to figure out what
+those two tables have in common
+
+404
+00:20:01,864 --> 00:20:04,805
+and using that as, like, our
+anchor point for the join tables.
+
+405
+00:20:04,805 --> 00:20:05,930
+So that's what we did here.
+
+406
+00:20:05,930 --> 00:20:08,660
+We found where the two
+tables have data in common.
+
+407
+00:20:08,660 --> 00:20:12,200
+And based on that, we create
+this hypothetical table
+
+408
+00:20:12,200 --> 00:20:15,800
+called users & moms that contains
+all of the information that
+
+409
+00:20:15,800 --> 00:20:18,740
+appears in both of those tables.
+
+410
+00:20:18,740 --> 00:20:22,490
+But notice that the second column
+there sort of indicates the overlap.
+
+411
+00:20:22,490 --> 00:20:27,489
+This column refers to data that is in
+both users.username and moms.username.
+
+412
+00:20:27,489 --> 00:20:29,030
+So that's what we're extracting here.
+
+413
+00:20:29,030 --> 00:20:31,363
+But remember that this query,
+we didn't want everything.
+
+414
+00:20:31,363 --> 00:20:35,947
+It wasn't SELECT * FROM users JOIN
+moms WHERE users.username equals
+
+415
+00:20:35,947 --> 00:20:36,530
+moms.username.
+
+416
+00:20:36,530 --> 00:20:40,650
+Username We just want the full
+name and the mother's name.
+
+417
+00:20:40,650 --> 00:20:42,200
+And so that's what we extract.
+
+418
+00:20:42,200 --> 00:20:44,210
+And so that really
+long query just results
+
+419
+00:20:44,210 --> 00:20:48,650
+in us getting this set of information--
+users.fullname and moms.mother
+
+420
+00:20:48,650 --> 00:20:52,920
+for every row in both tables where
+the username happens to be the same.
+
+421
+00:20:52,920 --> 00:20:53,532
+All right.
+
+422
+00:20:53,532 --> 00:20:54,990
+So that was a bit more complicated.
+
+423
+00:20:54,990 --> 00:20:56,540
+You probably won't do too many joins.
+
+424
+00:20:56,540 --> 00:21:00,210
+Fortunately, the last two
+operations are a little bit easier.
+
+425
+00:21:00,210 --> 00:21:02,510
+So update is the third of
+the four major operations.
+
+426
+00:21:02,510 --> 00:21:04,850
+This is what we use to modify
+information in the table
+
+427
+00:21:04,850 --> 00:21:06,901
+or change it or update information.
+
+428
+00:21:06,901 --> 00:21:08,150
+The skeleton looks like this--
+
+429
+00:21:08,150 --> 00:21:12,740
+UPDATE table SET column equals value--
+so we're updating some column to have
+
+430
+00:21:12,740 --> 00:21:14,510
+a new piece of data in it--
+
+431
+00:21:14,510 --> 00:21:15,459
+WHERE predicates.
+
+432
+00:21:15,459 --> 00:21:17,750
+We're trying to figure out
+which row we want to update,
+
+433
+00:21:17,750 --> 00:21:19,800
+and then we're updating that column.
+
+434
+00:21:19,800 --> 00:21:22,550
+So, for example, I want to
+UPDATE users SET password equals
+
+435
+00:21:22,550 --> 00:21:25,566
+yadayada WHERE idnum equals 10.
+
+436
+00:21:25,566 --> 00:21:27,690
+You can probably guess
+what's going to happen here.
+
+437
+00:21:27,690 --> 00:21:29,773
+We're going to find the
+row whose ID number is 10,
+
+438
+00:21:29,773 --> 00:21:34,520
+and we're going update the password
+there from "fusilli" to "yadayada."
+
+439
+00:21:34,520 --> 00:21:35,630
+Pretty straightforward.
+
+440
+00:21:35,630 --> 00:21:37,970
+And the fourth and final
+operation that we do in SQL
+
+441
+00:21:37,970 --> 00:21:41,120
+most commonly is to delete, which
+strikes or completely removes
+
+442
+00:21:41,120 --> 00:21:42,972
+information from a table.
+
+443
+00:21:42,972 --> 00:21:44,930
+The basic framework looks
+something like this--
+
+444
+00:21:44,930 --> 00:21:48,140
+DELETE from some table
+WHERE predicate, or, again,
+
+445
+00:21:48,140 --> 00:21:50,160
+where some condition is satisfied.
+
+446
+00:21:50,160 --> 00:21:53,360
+So, for example, you might want to
+DELETE from our users table WHERE
+
+447
+00:21:53,360 --> 00:21:54,994
+the user name equals 'newman.'
+
+448
+00:21:54,994 --> 00:21:57,410
+Now, if we did that, and this
+was our table to start with,
+
+449
+00:21:57,410 --> 00:21:59,326
+you can probably guess
+what's going to happen.
+
+450
+00:21:59,326 --> 00:22:02,420
+After that query executes, the
+row whose username is newman
+
+451
+00:22:02,420 --> 00:22:06,020
+is no longer in our table.
+
+452
+00:22:06,020 --> 00:22:09,170
+Now, all of the operations
+that we just showed
+
+453
+00:22:09,170 --> 00:22:12,924
+are really easy to do in the
+graphical interface of phpMyAdmin,
+
+454
+00:22:12,924 --> 00:22:15,090
+which, again, comes with
+most implementations of SQL
+
+455
+00:22:15,090 --> 00:22:16,574
+that you might download.
+
+456
+00:22:16,574 --> 00:22:18,740
+Here's the catch, though--
+phpMyAdmin, despite being
+
+457
+00:22:18,740 --> 00:22:22,640
+very user-friendly to use,
+requires manual intervention.
+
+458
+00:22:22,640 --> 00:22:25,640
+You're going to have to log
+in and click on some buttons
+
+459
+00:22:25,640 --> 00:22:27,740
+to delete information or
+update it or change it.
+
+460
+00:22:27,740 --> 00:22:29,009
+And we don't want to do that.
+
+461
+00:22:29,009 --> 00:22:30,050
+We're a webmaster, right?
+
+462
+00:22:30,050 --> 00:22:31,970
+We want things to happen
+automatically for us.
+
+463
+00:22:31,970 --> 00:22:35,147
+We want programs that we write
+to make those changes for us.
+
+464
+00:22:35,147 --> 00:22:37,730
+So we don't want to go into
+phpMyAdmin and make those changes.
+
+465
+00:22:37,730 --> 00:22:40,490
+We have to write code
+that does it for us.
+
+466
+00:22:40,490 --> 00:22:43,430
+Fortunately, SQL
+integrates really nicely
+
+467
+00:22:43,430 --> 00:22:46,760
+with a lot of modern programming
+languages such as Python or PHP
+
+468
+00:22:46,760 --> 00:22:50,570
+that have functions that you can
+use to connect to your database.
+
+469
+00:22:50,570 --> 00:22:55,040
+And then the programming
+language has other functions
+
+470
+00:22:55,040 --> 00:22:58,220
+that will query the database
+for you and make those changes.
+
+471
+00:22:58,220 --> 00:23:01,430
+Now, we're going to leave off for now
+exactly how those languages do that.
+
+472
+00:23:01,430 --> 00:23:04,007
+We'll save that for a video
+on those languages themselves.
+
+473
+00:23:04,007 --> 00:23:05,840
+But know that that is
+something that you can
+
+474
+00:23:05,840 --> 00:23:08,840
+do to avoid having to do any
+sort of manual intervention
+
+475
+00:23:08,840 --> 00:23:13,960
+when you want to update or do any sort
+of operation at all on your databases.
+
+476
+00:23:13,960 --> 00:23:15,220
+My name is Doug Lloyd.
+
+477
+00:23:15,220 --> 00:23:20,220
+This is CS50.
