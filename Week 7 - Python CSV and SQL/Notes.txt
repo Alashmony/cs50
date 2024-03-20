@@ -3,3 +3,22 @@ Lecture:    https://video.cs50.io/1RCMYG8RUSE?screen=w4Bs1eiewLo
 Section:    https://video.cs50.io/DQ-OAvbaN4k
 Shorts:     
     - SQL:  https://video.cs50.io/AywtnUjQ6X4
+
+- SQLite has the mode ".mode csv" that can be used to import csv files
+- SQLite has the .schema [table] to show the DDLs for the schema [table]
+- With SQLite, we can use .time to calculate the time the query take to get the results back
+- Within CS50, we have an SQL module to read from SQLite
+- the placeholder for the queries is "?" and use a comma to add the value in this placeholder
+    ```
+    # Read DB
+    db = SQL('sqlite///{somedb.db}')
+    #Get the results
+    results = db.execute("SELECT col1, col2 FROM table WHERE col1 = ?", "value")
+    #Access columns and rows
+    first_row = results[0]
+    first_column = resuls["col1"]
+    ```
+- transaction isolation:
+    To avoid multiple transaction at the same time (isolate transaction) use "BEGIN TRANSACTION" key word to start and "COMMIT" to end the transaction
+- SQL Injection:
+    Using the string formatter (%s in C or {} in python) instead of the SQL placeholder is dangrous, people might be able to change the query as they go
