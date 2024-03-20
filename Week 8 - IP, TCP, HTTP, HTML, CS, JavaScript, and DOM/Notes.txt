@@ -1,0 +1,13 @@
+Lecture:    https://video.cs50.io/ciz2UaifaNM?screen=0h4f9-SJwkc
+            https://cs50.harvard.edu/x/2024/notes/8/
+Section:    https://cs50.harvard.edu/x/2024/notes/8/
+Shorts:
+    - Internet Primer   https://video.cs50.io/04GztBlVo_s
+    - IP                https://video.cs50.io/A1g9SokDJSU
+    - TCP               https://video.cs50.io/GP7uvI_6uas
+    - HTTP              https://video.cs50.io/4axL8Gfw2nI
+    - HTML              https://video.cs50.io/YK78KhMf7bs
+    - CSS               https://video.cs50.io/Ub3FKU21ubk
+    - JavaScript        https://video.cs50.io/Ub3FKU21ubk
+    = DOM               https://video.cs50.io/LKWJpgvfH3U
+

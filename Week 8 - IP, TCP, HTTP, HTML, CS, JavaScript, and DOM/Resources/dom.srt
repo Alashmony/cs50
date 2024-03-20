@@ -1,0 +1,1984 @@
+1
+00:00:00,000 --> 00:00:02,335
+[MUSIC PLAYING]
+
+2
+00:00:02,335 --> 00:00:05,401
+
+
+3
+00:00:05,401 --> 00:00:07,150
+DOUG LLOYD: So in our
+video on JavaScript,
+
+4
+00:00:07,150 --> 00:00:09,900
+we introduced you to the
+concept of an object.
+
+5
+00:00:09,900 --> 00:00:12,580
+And in this video, I want to
+talk about a very specific object
+
+6
+00:00:12,580 --> 00:00:16,720
+that we can use to manipulate data
+and content on our web pages called
+
+7
+00:00:16,720 --> 00:00:18,104
+the document object.
+
+8
+00:00:18,104 --> 00:00:20,770
+Now, you may recall from that
+discussion in the JavaScript video
+
+9
+00:00:20,770 --> 00:00:23,980
+that objects contain two
+different things, basically.
+
+10
+00:00:23,980 --> 00:00:27,100
+They contain something
+called properties or data.
+
+11
+00:00:27,100 --> 00:00:28,990
+And they contain methods,
+which are functions
+
+12
+00:00:28,990 --> 00:00:31,437
+that apply just to those objects.
+
+13
+00:00:31,437 --> 00:00:33,520
+But what we didn't really
+get into a lot of detail
+
+14
+00:00:33,520 --> 00:00:37,252
+was that those objects, what you can
+put in them is actually pretty flexible.
+
+15
+00:00:37,252 --> 00:00:39,210
+You can do a lot of
+different things with them.
+
+16
+00:00:39,210 --> 00:00:41,110
+You can not only put data in there.
+
+17
+00:00:41,110 --> 00:00:44,950
+You can also put other objects
+or arrays inside of it.
+
+18
+00:00:44,950 --> 00:00:48,130
+And maybe those objects that you
+put inside of that bigger object
+
+19
+00:00:48,130 --> 00:00:49,750
+also have other objects in them.
+
+20
+00:00:49,750 --> 00:00:52,960
+So you can kind of create this
+nesting structure of objects
+
+21
+00:00:52,960 --> 00:00:55,240
+within a single
+JavaScript object, which,
+
+22
+00:00:55,240 --> 00:00:59,440
+if you think about it, thinking back
+to our discussion about C and trees,
+
+23
+00:00:59,440 --> 00:01:02,050
+it kind of creates a tree structure
+where you have one object,
+
+24
+00:01:02,050 --> 00:01:05,060
+inside of that there's another one,
+inside of those, there's other ones,
+
+25
+00:01:05,060 --> 00:01:05,980
+and so on.
+
+26
+00:01:05,980 --> 00:01:10,060
+One very specific object in JavaScript
+is called the document object.
+
+27
+00:01:10,060 --> 00:01:12,310
+And that is an object
+that basically organizes
+
+28
+00:01:12,310 --> 00:01:18,310
+the entire content of a single web
+page into a single JavaScript object.
+
+29
+00:01:18,310 --> 00:01:22,370
+And once you know the methods and
+properties of the document object,
+
+30
+00:01:22,370 --> 00:01:24,370
+you can change them in JavaScript.
+
+31
+00:01:24,370 --> 00:01:26,530
+You can assign the different
+properties to a value.
+
+32
+00:01:26,530 --> 00:01:30,490
+You can call methods on the object to
+change some of those properties, which
+
+33
+00:01:30,490 --> 00:01:35,170
+then allow you to manipulate the
+content or look and feel of your website
+
+34
+00:01:35,170 --> 00:01:38,640
+only using JavaScript, instead of
+going back and editing your HTML
+
+35
+00:01:38,640 --> 00:01:41,110
+or the Python that underlies it.
+
+36
+00:01:41,110 --> 00:01:44,360
+So here's an example of a
+very simple HTML website.
+
+37
+00:01:44,360 --> 00:01:45,970
+There's really not much going on here.
+
+38
+00:01:45,970 --> 00:01:48,160
+But as you can see, there's HTML tags.
+
+39
+00:01:48,160 --> 00:01:50,620
+We have inside of that
+a head and a body.
+
+40
+00:01:50,620 --> 00:01:52,990
+Inside of the head, we have
+a title, "Hello, world."
+
+41
+00:01:52,990 --> 00:01:57,010
+Inside of the body, we have a
+couple of different tags there.
+
+42
+00:01:57,010 --> 00:02:02,920
+We have an H2, or a second-level header
+tag, a paragraph tag, and a link.
+
+43
+00:02:02,920 --> 00:02:05,800
+And all of this can actually
+be represented in JavaScript
+
+44
+00:02:05,800 --> 00:02:07,180
+as a document object.
+
+45
+00:02:07,180 --> 00:02:09,420
+We can actually arrange
+all of this hierarchically,
+
+46
+00:02:09,420 --> 00:02:12,670
+sort of similar to what we're doing with
+the indentation, where clearly things
+
+47
+00:02:12,670 --> 00:02:17,170
+that are indented one level further
+in are nested with inside of another--
+
+48
+00:02:17,170 --> 00:02:21,290
+nested inside of another
+part of the HTML.
+
+49
+00:02:21,290 --> 00:02:25,630
+So for example, here is what a
+tree structure of that simple web
+
+50
+00:02:25,630 --> 00:02:27,734
+page we just looked at might be.
+
+51
+00:02:27,734 --> 00:02:28,650
+So we have a document.
+
+52
+00:02:28,650 --> 00:02:31,210
+And inside of that, we have HTML.
+
+53
+00:02:31,210 --> 00:02:36,100
+And that's kind of represented
+by the HTML tag that we have.
+
+54
+00:02:36,100 --> 00:02:39,750
+And everything inside of it is sort
+of nested below it, as you can see.
+
+55
+00:02:39,750 --> 00:02:43,180
+Within our HTML, there are two
+main things at the next level down.
+
+56
+00:02:43,180 --> 00:02:45,110
+There is the head and the body.
+
+57
+00:02:45,110 --> 00:02:46,960
+So we can look specifically at the head.
+
+58
+00:02:46,960 --> 00:02:49,570
+And we see that inside of
+the head, there is a title.
+
+59
+00:02:49,570 --> 00:02:52,570
+And inside of the title, there
+is some text, "Hello, world."
+
+60
+00:02:52,570 --> 00:02:55,570
+And we can also look at the body,
+which is an entirely different segment
+
+61
+00:02:55,570 --> 00:02:58,640
+of the object or of the
+tree, inside of which
+
+62
+00:02:58,640 --> 00:03:05,670
+is each of those three individual
+pieces, the h2, the p, and the a tag.
+
+63
+00:03:05,670 --> 00:03:07,420
+And all of that can
+be represented sort of
+
+64
+00:03:07,420 --> 00:03:10,000
+in a tree, which maps,
+as you can see, as I'm
+
+65
+00:03:10,000 --> 00:03:16,660
+highlighting the text in green on the
+HTML, to a section of our HTML as well.
+
+66
+00:03:16,660 --> 00:03:21,400
+So the document object has properties,
+just like any other object.
+
+67
+00:03:21,400 --> 00:03:23,340
+And it has a number of methods as well.
+
+68
+00:03:23,340 --> 00:03:24,440
+And if you, again--
+
+69
+00:03:24,440 --> 00:03:25,930
+and we're going to talk
+about this in just a moment--
+
+70
+00:03:25,930 --> 00:03:29,200
+know how to navigate through the
+document object, starting at the top
+
+71
+00:03:29,200 --> 00:03:32,500
+and drilling down to the section
+of the page that you want,
+
+72
+00:03:32,500 --> 00:03:35,410
+you can change what
+your site looks like.
+
+73
+00:03:35,410 --> 00:03:38,140
+So actually, let's go into
+the IDE and take a look
+
+74
+00:03:38,140 --> 00:03:41,600
+at how you can see the document
+object yourself in the browser.
+
+75
+00:03:41,600 --> 00:03:42,100
+OK.
+
+76
+00:03:42,100 --> 00:03:44,266
+So we're in my IDE and I'm
+really quickly just going
+
+77
+00:03:44,266 --> 00:03:49,000
+to show you that this is exactly the
+same HTML that we had just a moment ago
+
+78
+00:03:49,000 --> 00:03:49,900
+on a slide.
+
+79
+00:03:49,900 --> 00:03:53,180
+And I have page actually
+open in another tab here.
+
+80
+00:03:53,180 --> 00:03:56,120
+And you'll also notice that I
+popped open my Developer Console.
+
+81
+00:03:56,120 --> 00:03:58,150
+If you're using Google
+Chrome, you can usually
+
+82
+00:03:58,150 --> 00:04:02,800
+do that with Control-Shift-J on
+a PC, or Command-Shift-J a Mac.
+
+83
+00:04:02,800 --> 00:04:04,630
+And that just opens
+the JavaScript Console.
+
+84
+00:04:04,630 --> 00:04:06,463
+And recall from our
+JavaScript video that we
+
+85
+00:04:06,463 --> 00:04:09,310
+can use the Console using
+console.log, for instance,
+
+86
+00:04:09,310 --> 00:04:12,550
+to print out information to the Console
+as we're going through our page.
+
+87
+00:04:12,550 --> 00:04:15,133
+Well, there's other things we
+can do with the Console as well.
+
+88
+00:04:15,133 --> 00:04:18,357
+We can also type commands to
+it to have it do something.
+
+89
+00:04:18,357 --> 00:04:21,440
+And so what I'm going to do this time
+is something a little bit different.
+
+90
+00:04:21,440 --> 00:04:25,540
+Instead of typing console.log,
+I'm going to type console.dir.
+
+91
+00:04:25,540 --> 00:04:27,760
+And what console.dir
+is going to do is it's
+
+92
+00:04:27,760 --> 00:04:30,580
+going to basically try and
+organize the content of my page
+
+93
+00:04:30,580 --> 00:04:33,370
+here in a directory
+structure, which basically
+
+94
+00:04:33,370 --> 00:04:36,350
+is a fancy way of describing an object.
+
+95
+00:04:36,350 --> 00:04:38,639
+So we can kind of look and
+see what's in the object.
+
+96
+00:04:38,639 --> 00:04:40,180
+And what object do I want to look at?
+
+97
+00:04:40,180 --> 00:04:42,100
+Well, I want to look
+at the document object,
+
+98
+00:04:42,100 --> 00:04:44,530
+so I'm going to console.dir document.
+
+99
+00:04:44,530 --> 00:04:50,370
+And when I hit Enter here, we're
+going to see that I got an undefined.
+
+100
+00:04:50,370 --> 00:04:52,810
+But above that I have this
+sort of pound sign document.
+
+101
+00:04:52,810 --> 00:04:56,932
+That is the JavaScript Console
+returning to me the document object.
+
+102
+00:04:56,932 --> 00:04:59,640
+When this pops open, there's going
+to be a lot of stuff in there.
+
+103
+00:04:59,640 --> 00:05:01,848
+And a lot of it we're not
+going to really talk about.
+
+104
+00:05:01,848 --> 00:05:05,770
+I just want to show you how things
+are nested in that document object.
+
+105
+00:05:05,770 --> 00:05:07,260
+So I'm going to pop this open.
+
+106
+00:05:07,260 --> 00:05:08,885
+And again, there's a lot of stuff here.
+
+107
+00:05:08,885 --> 00:05:10,940
+But what I really want
+to take a look at is
+
+108
+00:05:10,940 --> 00:05:15,710
+the children, so just looking at the
+children property of the document
+
+109
+00:05:15,710 --> 00:05:16,760
+object.
+
+110
+00:05:16,760 --> 00:05:18,950
+And you can see that there is one.
+
+111
+00:05:18,950 --> 00:05:22,100
+If I pop that open,
+what do you see here?
+
+112
+00:05:22,100 --> 00:05:25,880
+Inside of the document
+object, there is one child
+
+113
+00:05:25,880 --> 00:05:30,140
+called HTML, which you might recall
+from our diagram a few slides ago.
+
+114
+00:05:30,140 --> 00:05:36,740
+If I pop that open,
+you'll see that it also
+
+115
+00:05:36,740 --> 00:05:43,877
+has children, two of them
+in fact, head and body.
+
+116
+00:05:43,877 --> 00:05:46,210
+And I can continue doing this
+exercise all the way down.
+
+117
+00:05:46,210 --> 00:05:48,480
+But in fact, if I kept doing that
+and I looked inside of the head,
+
+118
+00:05:48,480 --> 00:05:49,170
+I'd find the title tag.
+
+119
+00:05:49,170 --> 00:05:50,990
+I could open that and
+see what's in there.
+
+120
+00:05:50,990 --> 00:05:53,906
+Inside of the body I would find that
+there are three children, the h2,
+
+121
+00:05:53,906 --> 00:05:55,350
+the p, and the a tag.
+
+122
+00:05:55,350 --> 00:05:59,280
+All of them are nested inside
+of this big document object.
+
+123
+00:05:59,280 --> 00:06:02,970
+And we can actually manipulate
+this object using JavaScript.
+
+124
+00:06:02,970 --> 00:06:05,280
+Let's go back to the slides
+and talk a little bit
+
+125
+00:06:05,280 --> 00:06:06,864
+about how we might be able to do that.
+
+126
+00:06:06,864 --> 00:06:08,655
+So again, the document
+object, as you could
+
+127
+00:06:08,655 --> 00:06:11,787
+see from when we were just looking
+at it in the Console, is pretty big.
+
+128
+00:06:11,787 --> 00:06:13,120
+There's a lot of stuff in there.
+
+129
+00:06:13,120 --> 00:06:15,210
+We're not going to cover all
+of it, because not all of it's
+
+130
+00:06:15,210 --> 00:06:17,410
+going to be really necessary as
+you get started working with it.
+
+131
+00:06:17,410 --> 00:06:19,620
+But I want to cover a
+couple of the big properties
+
+132
+00:06:19,620 --> 00:06:22,800
+that you might use when you're working
+with the document object, as well
+
+133
+00:06:22,800 --> 00:06:25,030
+as a couple of the
+methods in just a moment.
+
+134
+00:06:25,030 --> 00:06:27,390
+So one of them, for
+example, is InnerHTML, which
+
+135
+00:06:27,390 --> 00:06:30,250
+holds the HTML inside of a set of tags.
+
+136
+00:06:30,250 --> 00:06:33,030
+So for example, the
+InnerHTML of the title tag,
+
+137
+00:06:33,030 --> 00:06:35,190
+if I was to go into
+that section, would be
+
+138
+00:06:35,190 --> 00:06:37,080
+"Hello, world" or whatever I called--
+
+139
+00:06:37,080 --> 00:06:39,270
+whatever my actual title of my page is.
+
+140
+00:06:39,270 --> 00:06:44,160
+That's the InnerHTML of the
+title tag or the title node
+
+141
+00:06:44,160 --> 00:06:48,300
+or the title object within
+the overall document object.
+
+142
+00:06:48,300 --> 00:06:51,890
+nodeName similarly would just be title
+for the node we were just describing,
+
+143
+00:06:51,890 --> 00:06:54,700
+or the section of the object
+we were just describing.
+
+144
+00:06:54,700 --> 00:06:55,320
+Id.
+
+145
+00:06:55,320 --> 00:06:58,260
+You may recall from our
+video on HTML and CSS
+
+146
+00:06:58,260 --> 00:07:02,820
+that we can specify an optional ID
+attribute to certain HTML elements.
+
+147
+00:07:02,820 --> 00:07:05,650
+We usually use this
+in the context of CSS,
+
+148
+00:07:05,650 --> 00:07:08,550
+for example, to style
+one particular node
+
+149
+00:07:08,550 --> 00:07:13,080
+or one particular set of tags in
+our HTML with a certain style.
+
+150
+00:07:13,080 --> 00:07:17,970
+We can give it an ID so that the
+CSS knows which section of the page
+
+151
+00:07:17,970 --> 00:07:19,620
+to apply that style to.
+
+152
+00:07:19,620 --> 00:07:21,750
+So this property would
+just allow us to figure out
+
+153
+00:07:21,750 --> 00:07:24,720
+what the ID of that particular node is.
+
+154
+00:07:24,720 --> 00:07:27,857
+parentNode is a reference
+to the node one level up.
+
+155
+00:07:27,857 --> 00:07:29,690
+So again, if I'm looking
+at the title node--
+
+156
+00:07:29,690 --> 00:07:32,190
+I'll just continue using
+that example for now--
+
+157
+00:07:32,190 --> 00:07:36,450
+the parent node of that would be
+head, because title is nested inside
+
+158
+00:07:36,450 --> 00:07:39,030
+of head in that tree structure.
+
+159
+00:07:39,030 --> 00:07:41,100
+childNodes is sort of
+the converse of that.
+
+160
+00:07:41,100 --> 00:07:43,650
+It is what is down from
+where I currently am.
+
+161
+00:07:43,650 --> 00:07:47,184
+So if I am now using the
+body node as an example,
+
+162
+00:07:47,184 --> 00:07:49,350
+so we've kind of nested to
+that section of the tree,
+
+163
+00:07:49,350 --> 00:07:56,520
+the child nodes of the body node would
+be that h2 and that p and that a.
+
+164
+00:07:56,520 --> 00:08:00,030
+Those would be the three
+child nodes from that area.
+
+165
+00:08:00,030 --> 00:08:03,300
+attributes, an array of
+attributes of an HTML element.
+
+166
+00:08:03,300 --> 00:08:05,240
+A good example here is the image tag.
+
+167
+00:08:05,240 --> 00:08:08,590
+So if I am, again, navigating through
+the document object using JavaScript
+
+168
+00:08:08,590 --> 00:08:12,082
+and I come to an image tag and I want
+to figure out what attributes it has,
+
+169
+00:08:12,082 --> 00:08:14,040
+well, you may recall that
+an image's attributes
+
+170
+00:08:14,040 --> 00:08:15,780
+include, for example, its source.
+
+171
+00:08:15,780 --> 00:08:16,920
+What is the source file?
+
+172
+00:08:16,920 --> 00:08:20,820
+Or perhaps I've also specified optional
+parameters of height and width.
+
+173
+00:08:20,820 --> 00:08:24,060
+Those would all the attributes
+associated with that particular node
+
+174
+00:08:24,060 --> 00:08:26,040
+of the document object.
+
+175
+00:08:26,040 --> 00:08:27,910
+And then style, which is one way--
+
+176
+00:08:27,910 --> 00:08:32,370
+which is another way we can actually
+style the look and feel of a page.
+
+177
+00:08:32,370 --> 00:08:34,440
+And in a few moments,
+we'll actually be going
+
+178
+00:08:34,440 --> 00:08:36,390
+through an example,
+where we specifically
+
+179
+00:08:36,390 --> 00:08:39,659
+manipulate this property, the style
+property, to change something.
+
+180
+00:08:39,659 --> 00:08:43,950
+But it is analogous to the CSS
+styling of a particular section
+
+181
+00:08:43,950 --> 00:08:45,630
+or portion of the page.
+
+182
+00:08:45,630 --> 00:08:47,630
+So those are some of the
+most common properties.
+
+183
+00:08:47,630 --> 00:08:49,880
+There are also four common
+methods that you might see.
+
+184
+00:08:49,880 --> 00:08:51,720
+And again, there are
+many more beyond this.
+
+185
+00:08:51,720 --> 00:08:54,053
+But here are four that you
+might use as you're beginning
+
+186
+00:08:54,053 --> 00:08:55,830
+to work with the document object.
+
+187
+00:08:55,830 --> 00:08:57,167
+getElementById.
+
+188
+00:08:57,167 --> 00:08:59,500
+And notice that now because
+we're talking about methods,
+
+189
+00:08:59,500 --> 00:09:02,760
+these are all functions that
+may optionally take parameters.
+
+190
+00:09:02,760 --> 00:09:06,270
+In this case, we're looking for
+an element with a specific ID.
+
+191
+00:09:06,270 --> 00:09:08,710
+That's the parameter
+being passed in there.
+
+192
+00:09:08,710 --> 00:09:12,550
+So if we maybe have styled a
+particular element using CSS
+
+193
+00:09:12,550 --> 00:09:15,510
+and we've given it that
+optional ID attribute,
+
+194
+00:09:15,510 --> 00:09:18,930
+this method would go and navigate
+through the entire document
+
+195
+00:09:18,930 --> 00:09:22,770
+object for us and find
+that specific node,
+
+196
+00:09:22,770 --> 00:09:27,060
+one of those further down the tree
+or further nested within the object.
+
+197
+00:09:27,060 --> 00:09:30,780
+It would find that section
+of the page and return to you
+
+198
+00:09:30,780 --> 00:09:34,020
+the M object from that point down.
+
+199
+00:09:34,020 --> 00:09:35,510
+getElementsByTagName.
+
+200
+00:09:35,510 --> 00:09:36,990
+Notice it's getElements.
+
+201
+00:09:36,990 --> 00:09:41,610
+This would, for example, maybe find all
+of the instances of me using a B tag.
+
+202
+00:09:41,610 --> 00:09:47,765
+So it would give me an array of all of
+the bold tagged sections of my site.
+
+203
+00:09:47,765 --> 00:09:51,960
+appendChild basically allows
+me to add an additional node
+
+204
+00:09:51,960 --> 00:09:55,500
+below where I currently am, so it allows
+me to expand the number of things.
+
+205
+00:09:55,500 --> 00:10:00,510
+I might want to add a new element on the
+fly to the body portion of my website.
+
+206
+00:10:00,510 --> 00:10:04,230
+I can append perhaps a
+new paragraph tag or an H3
+
+207
+00:10:04,230 --> 00:10:08,340
+or something else that wasn't there
+before using this method here.
+
+208
+00:10:08,340 --> 00:10:10,650
+And then removeChild is sort
+of the opposite of that.
+
+209
+00:10:10,650 --> 00:10:13,020
+It deletes a section
+of the page by removing
+
+210
+00:10:13,020 --> 00:10:17,550
+that portion of the HTML, that entire
+node, from the document object.
+
+211
+00:10:17,550 --> 00:10:19,800
+I do want to point out
+one thing here that causes
+
+212
+00:10:19,800 --> 00:10:21,330
+programmers a lot of heartache.
+
+213
+00:10:21,330 --> 00:10:23,150
+I know it's caused me
+a lot of heartache.
+
+214
+00:10:23,150 --> 00:10:28,560
+When you're using the getElementById
+attribute, notice that the D in Id
+
+215
+00:10:28,560 --> 00:10:29,370
+is lowercase.
+
+216
+00:10:29,370 --> 00:10:33,660
+Usually when we use the term ID for
+identification, it's usually capital I,
+
+217
+00:10:33,660 --> 00:10:37,800
+capital D. I can't even tell you
+how many times I have accidentally
+
+218
+00:10:37,800 --> 00:10:39,495
+typed capital I, capital D here.
+
+219
+00:10:39,495 --> 00:10:41,370
+And then I get a JavaScript
+error, because it
+
+220
+00:10:41,370 --> 00:10:42,870
+doesn't know what I'm talking about.
+
+221
+00:10:42,870 --> 00:10:46,620
+So calling this out specifically
+as a well-known common issue,
+
+222
+00:10:46,620 --> 00:10:51,030
+be really careful when using this
+to use a lowercase D there instead.
+
+223
+00:10:51,030 --> 00:10:54,720
+So because the document
+object is one big thing
+
+224
+00:10:54,720 --> 00:10:59,140
+with lots of objects nested
+within it, if we start at the top,
+
+225
+00:10:59,140 --> 00:11:02,160
+we can find our way using
+those properties and methods
+
+226
+00:11:02,160 --> 00:11:07,230
+to any other area within
+the document object.
+
+227
+00:11:07,230 --> 00:11:11,430
+Now, you may have seen that some of
+those terms, some of those property
+
+228
+00:11:11,430 --> 00:11:15,240
+names and some of those method
+names are really, really long.
+
+229
+00:11:15,240 --> 00:11:17,950
+It would be a lot to
+type out to do that.
+
+230
+00:11:17,950 --> 00:11:20,550
+And so it's actually
+quite common when you
+
+231
+00:11:20,550 --> 00:11:23,940
+are working on a project that has a
+lot of document object manipulation
+
+232
+00:11:23,940 --> 00:11:26,760
+to use a JavaScript
+library called jQuery.
+
+233
+00:11:26,760 --> 00:11:27,990
+jQuery is quite popular.
+
+234
+00:11:27,990 --> 00:11:30,781
+It's probably the most popular
+JavaScript library currently in use.
+
+235
+00:11:30,781 --> 00:11:33,094
+It's been around for about 10 years now.
+
+236
+00:11:33,094 --> 00:11:34,260
+It's an open source library.
+
+237
+00:11:34,260 --> 00:11:35,670
+And it does a lot of things.
+
+238
+00:11:35,670 --> 00:11:37,890
+But one of the things it
+does particularly well
+
+239
+00:11:37,890 --> 00:11:40,530
+is simplify what's called
+client-side scripting,
+
+240
+00:11:40,530 --> 00:11:47,700
+or where you are writing some code
+to change things on your computer
+
+241
+00:11:47,700 --> 00:11:50,220
+to affect the look and feel of a site.
+
+242
+00:11:50,220 --> 00:11:54,180
+Document object manipulation is one
+of those things it does really well.
+
+243
+00:11:54,180 --> 00:11:57,600
+And it also does AJAX
+queries, which we'll
+
+244
+00:11:57,600 --> 00:12:02,700
+talk about in another video
+on AJAX, quite well also.
+
+245
+00:12:02,700 --> 00:12:05,490
+So for example, the
+raw JavaScript version
+
+246
+00:12:05,490 --> 00:12:09,330
+of this, what we're doing
+here in this raw JavaScript
+
+247
+00:12:09,330 --> 00:12:11,040
+is changing one section of the page.
+
+248
+00:12:11,040 --> 00:12:14,725
+I'm finding the element of
+my page whose ID is colorDiv.
+
+249
+00:12:14,725 --> 00:12:16,600
+So I'm starting from
+the top of the document.
+
+250
+00:12:16,600 --> 00:12:19,440
+It's going to look through the
+entire document object, all of those
+
+251
+00:12:19,440 --> 00:12:23,870
+nested nodes below it, to find a
+section of the page called colorDiv.
+
+252
+00:12:23,870 --> 00:12:29,220
+And I'm going to go there and set that
+node's style property's backgroundColor
+
+253
+00:12:29,220 --> 00:12:30,621
+property to green.
+
+254
+00:12:30,621 --> 00:12:32,370
+So basically, all
+that's happening here is
+
+255
+00:12:32,370 --> 00:12:36,840
+I'm changing the background color
+of one section of my page to green.
+
+256
+00:12:36,840 --> 00:12:40,920
+That is a lot to type to
+do that in pure JavaScript.
+
+257
+00:12:40,920 --> 00:12:44,880
+In jQuery, the trade-off
+is you get a shorter--
+
+258
+00:12:44,880 --> 00:12:46,470
+you have to type less stuff.
+
+259
+00:12:46,470 --> 00:12:48,250
+You have a shorter line of code.
+
+260
+00:12:48,250 --> 00:12:52,440
+But it's going to look
+a little bit more weird.
+
+261
+00:12:52,440 --> 00:12:56,160
+So this would do exactly the
+same thing using jQuery syntax.
+
+262
+00:12:56,160 --> 00:13:00,834
+The dollar sign is a shorthand
+way of saying jQuery.
+
+263
+00:13:00,834 --> 00:13:03,750
+And it's going to be looking for a
+section of my page called colorDiv.
+
+264
+00:13:03,750 --> 00:13:05,640
+That's the jQuery syntax for it.
+
+265
+00:13:05,640 --> 00:13:10,080
+And I'm going to change that node's
+CSS background color to green.
+
+266
+00:13:10,080 --> 00:13:11,580
+Again, it's a little bit strange.
+
+267
+00:13:11,580 --> 00:13:13,920
+But it is a shorter way
+to do the same thing.
+
+268
+00:13:13,920 --> 00:13:19,600
+So you will often see this as opposed
+to the longer JavaScript version
+
+269
+00:13:19,600 --> 00:13:21,690
+when you're seeing some
+client-side scripting.
+
+270
+00:13:21,690 --> 00:13:23,760
+What I want to do now
+is go back into the IDE
+
+271
+00:13:23,760 --> 00:13:26,144
+and show you a little bit about how--
+
+272
+00:13:26,144 --> 00:13:29,310
+show you a couple of examples of how
+we can actually manipulate the document
+
+273
+00:13:29,310 --> 00:13:32,460
+object using JavaScript
+and jQuery to change
+
+274
+00:13:32,460 --> 00:13:34,380
+the color of a section of a web page.
+
+275
+00:13:34,380 --> 00:13:35,240
+All right.
+
+276
+00:13:35,240 --> 00:13:38,430
+So here is a very simple web page--
+and you can download this example when
+
+277
+00:13:38,430 --> 00:13:40,090
+you're reviewing this video--
+
+278
+00:13:40,090 --> 00:13:42,450
+that has a whole bunch
+of different buttons.
+
+279
+00:13:42,450 --> 00:13:44,760
+And as you can see at the top, there's
+a section that says "Change my color!"
+
+280
+00:13:44,760 --> 00:13:46,801
+We're going to be trying
+to change the background
+
+281
+00:13:46,801 --> 00:13:48,218
+color of that section of the page.
+
+282
+00:13:48,218 --> 00:13:50,509
+And apparently, I'm going to
+do it four different ways.
+
+283
+00:13:50,509 --> 00:13:53,620
+There's individual functions for
+background color written in JavaScript;
+
+284
+00:13:53,620 --> 00:13:55,940
+a single function to change
+the background color,
+
+285
+00:13:55,940 --> 00:13:59,550
+so a bit of a design improvement
+perhaps; an event handler--
+
+286
+00:13:59,550 --> 00:14:01,509
+recall from the end of
+our video on JavaScript,
+
+287
+00:14:01,509 --> 00:14:03,341
+we talked a little bit
+about event handlers,
+
+288
+00:14:03,341 --> 00:14:06,000
+so this will be another opportunity
+to see those in action--
+
+289
+00:14:06,000 --> 00:14:10,740
+and one example where we do the exact
+same thing using jQuery instead of
+
+290
+00:14:10,740 --> 00:14:12,210
+using raw JavaScript.
+
+291
+00:14:12,210 --> 00:14:15,210
+So let's take a look at what the code
+for this site actually looks like.
+
+292
+00:14:15,210 --> 00:14:17,190
+In my IDE we'll open this tab.
+
+293
+00:14:17,190 --> 00:14:20,415
+As you can see, I'm loading a couple
+of different JavaScript scripts
+
+294
+00:14:20,415 --> 00:14:22,290
+at the beginning of my
+page, so I'm basically
+
+295
+00:14:22,290 --> 00:14:25,440
+doing a pound include,
+the analogy here from C,
+
+296
+00:14:25,440 --> 00:14:27,610
+of a couple of JavaScript files.
+
+297
+00:14:27,610 --> 00:14:32,200
+And I have one file for each of the four
+different types of color manipulation
+
+298
+00:14:32,200 --> 00:14:33,330
+we're going to do.
+
+299
+00:14:33,330 --> 00:14:36,510
+And then here, it's not
+particularly well designed HTML,
+
+300
+00:14:36,510 --> 00:14:38,070
+but it kind of gets the job done.
+
+301
+00:14:38,070 --> 00:14:42,930
+I have one section with a set of five
+buttons for the background color ones,
+
+302
+00:14:42,930 --> 00:14:50,310
+one for the passing in the color as a
+parameter, one for the event handler,
+
+303
+00:14:50,310 --> 00:14:51,690
+and one for the jQuery ones.
+
+304
+00:14:51,690 --> 00:14:53,590
+And they all look a
+little bit different.
+
+305
+00:14:53,590 --> 00:14:59,400
+So let's start by looking at
+the individual color ones.
+
+306
+00:14:59,400 --> 00:15:04,330
+
+
+307
+00:15:04,330 --> 00:15:05,874
+So there's really not much to this.
+
+308
+00:15:05,874 --> 00:15:08,040
+You saw that I wrote those
+five different functions,
+
+309
+00:15:08,040 --> 00:15:11,010
+turn purple, turn green, turn
+orange, turn red, and turn blue.
+
+310
+00:15:11,010 --> 00:15:13,440
+And all they do is,
+using pure JavaScript,
+
+311
+00:15:13,440 --> 00:15:20,070
+they get the element by ID of colorDiv,
+which is the element that we're trying
+
+312
+00:15:20,070 --> 00:15:21,540
+to change the background color of.
+
+313
+00:15:21,540 --> 00:15:24,450
+And I set it's style
+backgroundColor attribute
+
+314
+00:15:24,450 --> 00:15:28,620
+to purple, green, orange,
+red or blue, as described.
+
+315
+00:15:28,620 --> 00:15:31,200
+So that's hopefully the most obvious.
+
+316
+00:15:31,200 --> 00:15:33,810
+Then we have sort of
+a general purpose one,
+
+317
+00:15:33,810 --> 00:15:37,475
+where instead we're passing
+in a color as a parameter.
+
+318
+00:15:37,475 --> 00:15:42,090
+So you may recall, looking back at
+our HTML for a second, for that one
+
+319
+00:15:42,090 --> 00:15:46,380
+I'm passing in the colors purple, green,
+orange, red, and blue as parameters
+
+320
+00:15:46,380 --> 00:15:47,640
+to that function.
+
+321
+00:15:47,640 --> 00:15:49,860
+And in the general purpose
+one, I'm just saying
+
+322
+00:15:49,860 --> 00:15:54,240
+whatever I passed in as a parameter,
+set the colorDiv's backgroundColor
+
+323
+00:15:54,240 --> 00:15:56,610
+to that color instead.
+
+324
+00:15:56,610 --> 00:15:58,470
+Then we have the event handler on.
+
+325
+00:15:58,470 --> 00:16:01,320
+So recall-- if we take a look
+at the event handler one,
+
+326
+00:16:01,320 --> 00:16:04,340
+the line looks exactly the
+same for all five of them.
+
+327
+00:16:04,340 --> 00:16:06,840
+But you might remember from our
+discussion on event handlers
+
+328
+00:16:06,840 --> 00:16:10,600
+that the way an event handler works
+is when you click on a button,
+
+329
+00:16:10,600 --> 00:16:14,520
+for instance, the event handler
+captures some information
+
+330
+00:16:14,520 --> 00:16:17,160
+about what triggered it to happen.
+
+331
+00:16:17,160 --> 00:16:20,727
+So it knows, for example,
+which button you clicked.
+
+332
+00:16:20,727 --> 00:16:21,810
+And all of those buttons--
+
+333
+00:16:21,810 --> 00:16:24,060
+I'm going to jump again
+to the HTML for a second.
+
+334
+00:16:24,060 --> 00:16:28,020
+All of those buttons have a different
+title, purple, green, orange, red,
+
+335
+00:16:28,020 --> 00:16:29,730
+and blue, with the
+capital letters there,
+
+336
+00:16:29,730 --> 00:16:33,460
+that is the word that is actually
+going to appear on the button.
+
+337
+00:16:33,460 --> 00:16:37,440
+So I have a little bit of a way to
+distinguish between all of them.
+
+338
+00:16:37,440 --> 00:16:39,240
+But as it turns out-- sorry about that.
+
+339
+00:16:39,240 --> 00:16:44,580
+As it turns out, in order for
+my color changing to work,
+
+340
+00:16:44,580 --> 00:16:48,990
+I can't pass in a capital
+letter color name.
+
+341
+00:16:48,990 --> 00:16:50,710
+I have to pass in a lowercase one.
+
+342
+00:16:50,710 --> 00:16:53,670
+So what I'm going to do instead is
+I'm going to set the document's--
+
+343
+00:16:53,670 --> 00:16:57,360
+the colorDiv's backgroundColor
+to whatever object
+
+344
+00:16:57,360 --> 00:17:02,460
+triggered the event to be
+called in the first place.
+
+345
+00:17:02,460 --> 00:17:06,150
+I'm going to look at its InnerHTML-- so
+here's that InnerHTML property coming
+
+346
+00:17:06,150 --> 00:17:07,410
+into play.
+
+347
+00:17:07,410 --> 00:17:12,869
+And what I'm going to do to it is
+transform that entire string, so
+
+348
+00:17:12,869 --> 00:17:15,342
+that capital P purple, into lowercase.
+
+349
+00:17:15,342 --> 00:17:17,800
+So basically what happens here
+is when I click on a button,
+
+350
+00:17:17,800 --> 00:17:20,010
+say I click on the purple
+button, what is happening
+
+351
+00:17:20,010 --> 00:17:24,210
+is that capital P purple is being
+turned into all lowercase purple.
+
+352
+00:17:24,210 --> 00:17:27,839
+And then that word "purple" is
+going to become the color that I'm
+
+353
+00:17:27,839 --> 00:17:30,410
+setting the backgroundColor to.
+
+354
+00:17:30,410 --> 00:17:31,660
+So hopefully that makes sense.
+
+355
+00:17:31,660 --> 00:17:33,743
+Again, what I'm doing is
+I'm clicking on a button.
+
+356
+00:17:33,743 --> 00:17:35,042
+That button has a title.
+
+357
+00:17:35,042 --> 00:17:36,750
+I'm just taking the
+title of that button,
+
+358
+00:17:36,750 --> 00:17:41,100
+the InnerHTML turmoil between the
+button tags, making it all lowercase.
+
+359
+00:17:41,100 --> 00:17:44,175
+And that is then a color that I
+can assign the backgroundColor to.
+
+360
+00:17:44,175 --> 00:17:46,050
+Again, you might play
+with this yourself when
+
+361
+00:17:46,050 --> 00:17:48,260
+you're tinkering if you're
+following along with this video
+
+362
+00:17:48,260 --> 00:17:50,259
+and maybe set some other
+different colors to see
+
+363
+00:17:50,259 --> 00:17:52,870
+that you can make this change as well.
+
+364
+00:17:52,870 --> 00:17:55,790
+And then we have the
+jQuery version of this.
+
+365
+00:17:55,790 --> 00:17:59,100
+And we'll take a look at the
+HTML again for a second here.
+
+366
+00:17:59,100 --> 00:18:01,350
+Notice with this one, it
+looks a little bit different.
+
+367
+00:18:01,350 --> 00:18:03,810
+I'm not specifying an
+onClick attribute this time.
+
+368
+00:18:03,810 --> 00:18:07,230
+I'm creating a new class
+called a jQuery button.
+
+369
+00:18:07,230 --> 00:18:10,380
+But there seems to be no
+function that gets called.
+
+370
+00:18:10,380 --> 00:18:13,680
+Well, that's kind of a side effect
+of what is happening in jQuery.
+
+371
+00:18:13,680 --> 00:18:17,040
+And the way jQuery works-- or
+one of the ways jQuery can work
+
+372
+00:18:17,040 --> 00:18:18,930
+is that we can do something like this.
+
+373
+00:18:18,930 --> 00:18:20,650
+This uses anonymous functions.
+
+374
+00:18:20,650 --> 00:18:23,691
+Remember from JavaScript that we have
+this notion of anonymous functions.
+
+375
+00:18:23,691 --> 00:18:25,560
+We can have functions
+that don't have names.
+
+376
+00:18:25,560 --> 00:18:28,726
+So what's happening here is when the
+document-- there's that word "document"
+
+377
+00:18:28,726 --> 00:18:29,250
+again--
+
+378
+00:18:29,250 --> 00:18:33,420
+when the document object
+is fully loaded or ready,
+
+379
+00:18:33,420 --> 00:18:36,180
+the page is going to execute
+the following function.
+
+380
+00:18:36,180 --> 00:18:39,570
+It's going to say, I'm going to
+look for every instance of something
+
+381
+00:18:39,570 --> 00:18:40,354
+being of class--
+
+382
+00:18:40,354 --> 00:18:42,770
+that's what the little dot
+there, remember that from CSS--
+
+383
+00:18:42,770 --> 00:18:45,600
+of class JQ button appears on the page.
+
+384
+00:18:45,600 --> 00:18:48,630
+And when any of those
+buttons is clicked,
+
+385
+00:18:48,630 --> 00:18:52,266
+I'm going to execute this
+other anonymous function that
+
+386
+00:18:52,266 --> 00:18:55,140
+is going to do basically what we
+just saw in the final example there,
+
+387
+00:18:55,140 --> 00:18:58,500
+where we transformed the entire
+text of the button into lowercase
+
+388
+00:18:58,500 --> 00:19:01,680
+and that becomes a color
+name that we can assign.
+
+389
+00:19:01,680 --> 00:19:06,140
+But I'm just going to do it using jQuery
+syntax instead of JavaScript syntax.
+
+390
+00:19:06,140 --> 00:19:10,680
+So again, what is happening here is
+the document, the page is fully loaded.
+
+391
+00:19:10,680 --> 00:19:14,010
+And when the page is fully
+loaded, the following function
+
+392
+00:19:14,010 --> 00:19:15,810
+is applied to the page.
+
+393
+00:19:15,810 --> 00:19:19,620
+Every jQuery button is
+given this extra attribute,
+
+394
+00:19:19,620 --> 00:19:23,110
+this onClick attribute,
+such that when you click it,
+
+395
+00:19:23,110 --> 00:19:27,420
+it assigns a color based on
+whatever the text is of the button.
+
+396
+00:19:27,420 --> 00:19:31,110
+Again, we're not going to get into
+a lot of detail on jQuery itself.
+
+397
+00:19:31,110 --> 00:19:32,940
+That's sort of an exercise for at home.
+
+398
+00:19:32,940 --> 00:19:35,760
+But this version that you're
+seeing here is exactly
+
+399
+00:19:35,760 --> 00:19:40,110
+the same as the event handler version
+we just saw for pure JavaScript,
+
+400
+00:19:40,110 --> 00:19:42,670
+except written in jQuery style.
+
+401
+00:19:42,670 --> 00:19:46,470
+And if I actually go to the page,
+all four of these do in fact work.
+
+402
+00:19:46,470 --> 00:19:49,350
+I can click the purple one
+here, the green one here.
+
+403
+00:19:49,350 --> 00:19:51,570
+I can click the orange one, red one.
+
+404
+00:19:51,570 --> 00:19:54,580
+They all do the exact same thing.
+
+405
+00:19:54,580 --> 00:19:56,700
+They just do it doing
+a couple of different--
+
+406
+00:19:56,700 --> 00:19:58,680
+using a couple of different techniques.
+
+407
+00:19:58,680 --> 00:20:02,160
+So you can hopefully use
+this example to give yourself
+
+408
+00:20:02,160 --> 00:20:05,440
+a better understanding of
+using functions in JavaScript,
+
+409
+00:20:05,440 --> 00:20:07,450
+using events in JavaScript,
+and perhaps dipping
+
+410
+00:20:07,450 --> 00:20:10,580
+your toe in the water of jQuery.
+
+411
+00:20:10,580 --> 00:20:13,810
+So if you want to learn more about
+jQuery beyond what we talk about
+
+412
+00:20:13,810 --> 00:20:16,690
+in this video, you can go
+to the jQuery documentation,
+
+413
+00:20:16,690 --> 00:20:19,640
+which is available at the website
+you see on the screen here.
+
+414
+00:20:19,640 --> 00:20:23,860
+It's a great place to go to learn about
+some of the more interesting things
+
+415
+00:20:23,860 --> 00:20:25,450
+that you can do with jQuery.
+
+416
+00:20:25,450 --> 00:20:30,130
+And we'll see a little bit more about
+this in our video on AJAX as well.
+
+417
+00:20:30,130 --> 00:20:31,090
+I'm Doug Lloyd.
+
+418
+00:20:31,090 --> 00:20:33,020
+This is CS50.
+
+419
+00:20:33,020 --> 00:20:34,650

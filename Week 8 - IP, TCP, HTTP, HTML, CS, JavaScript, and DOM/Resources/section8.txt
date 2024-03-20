@@ -1,0 +1,219 @@
+YULIIA ZHUKOVETS: OK, welcome to CS50. This is week eight. Today, we'll be covering a lot of stuff on web development-- HTML, CSS, and all the other good things. My name is Yuliia. I'm one of the preceptors here at CS50 at Harvard. 
+
+And let's kick things in. So as you know, this past week, David was talking about all things about development, anything from how internet works to how we actually construct the web pages that we interact with on everyday basis. So just to recap some of the main things that David talked about in the lecture and something that we'll be covering today, HTTP, which does someone want to give us the definition of what HTTP is to get us started here? Feel free to type it in the chat as a direct message for everyone to see. 
+
+So yeah, I'm seeing some good answers. HTTP is a hypertext transfer protocol, which is essentially a thing that allows the servers and the computers to interact between each other and for us to access all the information on the web. Then we'll get going with HTML, which essentially is a tool and a language that allows us to build all these web pages. And we'll jump into CSS and JavaScript that makes things a little bit more interesting in our web pages. 
+
+So as we already talked about, HTTP is the hypertext transfer protocol, which essentially allows the servers and the computers to interact between each other to send, get requests or post requests, and to get the information that the user might need from the internet. And as you might have seen in the lecture, David ran a command that's called http-server. Does anyone want to type in the chat what http-server actually does for us when we type it out in the terminal? 
+
+Exactly, yeah, so it creates a server that listens to the HTTP requests. And so when I click on something on the HTML page, I essentially send a request that a server can respond to and provide me with the information that I asked for. So we're going to move on to HTML and get a lot practice with how to build web pages, what components go into it, and how all the web pages are actually constructed that we see every day. 
+
+So what I'm going to do is I'm going to open a scoreboard dot HTML that I already have in cs50.dev. You are free to, welcome to follow along. And later on, we'll post the resource, and you can access the file yourself. So essentially what is going on here is that we have an HTML file that's already prepopulated with some information. So first I'm going to run http-server to see what is actually going on here. 
+
+OK, so I'm going to zoom in a little bit so that everyone can see what's going on. Essentially, what we have is a quite simple HTML page where it is a table that has three rows and two columns. And what the page currently does is that I can click one of these buttons. 
+
+And you can see that the score inside the table for a corresponding team will change. It doesn't really do much behind this, right? It's a pretty simple web page. But we will make some changes to make it more interactive. 
+
+So to go back to the HTML code that we already have, let's just break down what's going on here. Currently, we only have the table code in the body tag that essentially just builds out the rows and the columns. And we also have some other components that we'll talk about later. So to actually go into the whole structure of the HTML, what we can see here is a thing that we call DOM, which is a Document Object Model. It is essentially a tree that builds the HTML files. 
+
+It goes top to bottom as everything in programming. So at the very top, we see the document itself. And it has the HTML code in it. And so then it splits up into a head and a body. And we can see that it then goes into a different component of the HTML files. 
+
+So in the head, we have information like title that goes on the tab that you open-- essentially the name of the web page. It takes in a style, so the different CSS components that we can modify to make our web page a little bit prettier. And then on the right side, we have the body of the HTML that contains, in this case, a table that has other components to it and also a script that would contain, in this case, some JavaScript code that makes the web page a little bit more interactive. 
+
+So now let's actually examine what's going on underneath the hood for the table component. Well, as you saw in the code, it actually is a bunch of different things. Essentially, what is going on here is that we have our rows that have tag tr. And then each row has some td components, which essentially are like individual cells. 
+
+So again, the structure goes top to bottom where we start with a big overarching tag. You can call it a parent. And then it goes into smaller children that have some smaller information in it. In such a way, we have, for example, the first row that contains the names of the teams-- Team 1 and Team 2-- the second row that will be storing our score. In this case, it's set to zero. 
+
+And the third row, it contains the button. That actually splits up into two components where we specify that the tag actually has to be a button and not just text. But at the same time, we can set that text of the button to be something else. In this case, it is plus 1. 
+
+So the overall structure of the HTML code is very top to bottom. You can think about it as a tree that starts from document HTML and goes into different parts of it. So before we move on to actually modifying our scoreboard HTML and adding some things to it, do we have any questions about the structure of the HTML for now? 
+
+OK, sounds good. So now let's move on into the scoreboard HTML where we will add some things. So these are some things that I laid out for us to do. But there's certainly so many other tags that you can explore on the web. W3Schools is a great resource to look into things. 
+
+And let's switch to the code and change some things. So first, I am going to introduce some bigger, overarching kind of like parent tags that currently are not in our HTML code. So one thing that we're going to add first is you can see we still have our head and body. What we're going to introduce is some other tags. 
+
+For example, we're going to introduce a tag header, which essentially is going to have a title of our page. And I'm going to leave that blank for just a second. Our next big overarching tag is going to be main, which is going to be kind of like the main part of our HTML page where we're going to store our table. And the last part is going to be a footer, so something that you see on the bottom of your web page. Usually, I think it's small copyright tags, that, for example, David introduced in lecture. 
+
+So let's start populating these things. First, for the header, let's do something like H1, which is just one of the tags for our HTML file. And I'm going to say something like left team versus right team. And I'm going to close my tag. And then I'm going to maybe do a paragraph tag that says, hey, there, click a button to change the score. 
+
+OK, so this is our header. And actually you can see that I'm still running my http-server here in the terminal. And it's listening to all the changes that I'm making. And so if I go back to my scoreboard web page, you can see the changes that we made. 
+
+Now we have our big header that we just implemented. And we have our paragraph, kind of like the subtext that's giving a little bit more information of what's going on the HTML page. Now, since we already have a main part of our web page ready, I'm just going to copy and paste the table inside the main. So nothing is really changing. We're just introducing some bigger, overarching tags that really don't change much about HTML page. 
+
+But we use it for better readability and for better design so that it is very clear to another user who might open your code that here's what's going on. We have a header, the main, and the footer separating the HTML into these three parts so that it's easier to find information or change the code later on. And in the footer, for example, I can say something like made by CS50-- something simple. It can be made by Juliia or if Carter was here, made by Carter, so still using the same paragraph tag that we've seen before. 
+
+And let's just reload to make sure all the changes are here. And yes, you can see that we have the title, the subtext, and the footer present on the web page right now. Before we move on to other things, do we have any questions about HTML tags-- introducing different tags and modifying the code? There are certainly so many other things that you can do. And there are so many other tags that you can explore. 
+
+One of the questions is, does footer make text smaller? Not necessarily. For example, I can remove the footer from here. And I will just keep my paragraph tag. And let's reload to see. 
+
+It's still the same, right, because HTML structure goes top to bottom. And it really is only outputting on the web page itself-- the tags that I'm putting in. And footer main and the same way header is kind of just like breaking it down in the code so that it is easier for readability for the user who might open your code later on to make some changes. But that's a great question. 
+
+I'm just going to revert to back to what we had. Is it normal for tables to be centered by default? Let's check. Actually, we've already modified the table style to be centered, which we'll get into just in a few moments. But that's a very great question. 
+
+Yes. I think by default, everything is left centered. So you definitely need to go in and make the changes yourself. What other questions do we have before we move on? 
+
+OK, let's go back to our slides. And what we're going to talk about now is CSS. Does anyone know what CSS is, what it does, how does it make our web page a little bit better? Great, yes, it's cascading style sheets. So CSS is what makes the web pages pretty, right? 
+
+We barely have any style applied right now. It looks very black and white. But CSS is what makes all the websites look so pretty. And with the bootstraps and all the other resources that are out there, you can make the web pages really interactive and really user-friendly, improving their user experience. So let's jump into it. 
+
+How actually do we use CSS? So the way that the syntax works is that you will have some kind of selector. It can be a tag. It can be an ID. It can be a class. 
+
+And then in the curly braces, you would specify the property and the value. For example, as we've already talked about, it can be the text align. Or it can be a font. It can be the size of the font or the color and really so many other properties that you can change on the web page to make it a little bit prettier. 
+
+So for example, here, I have all of my components of the table. So for example, if I wanted to apply some particular property to our tag td, what I could do is select all of the td tags. I'm specifying my tag right here. I'm opening the curly braces. And I can specify some particular properties in the same-- yeah, so it will go in and grab all of the td tags that it sees in the HTML file. 
+
+And it will apply that same property to all of them. In the same way, I can do something a little bit different. And I can just pick one element that I want to modify. And I can do that by assigning a tag and ID. So in this case, I have ID score1. 
+
+And I can specify that for this particular element that has an ID score1, I want the color to be red, for example. And so what it will do, it will look through the whole tree of our HTML tags. It will go in. And it will find an element that has an ID score of 1. And it will apply a particular property that we picked for it to this tag. 
+
+In a similar way, if there are, for example, multiple tags that I want to apply the same property to but they're not necessarily the same tags-- for example, I want to apply the same property too-- I don't know-- say, like, all the tr tags and all the td tags, I want to, for example, modify the font-- I could do that by assigning them a specific class. So in this case, the class can specify by dot team. And I can assign some properties. 
+
+For example, I want the font to be bold. So the main difference in syntax just to recap is that for the tags, when you want to specify it in CSS, it is just the tag name for IDs. It's hashtag ID name. And for the classes, it's dot class name. 
+
+So moving on, let's go back to our scoreboard dot HTML. And let's look at some of the style that we've already modified. And before we jump into changing some things, what questions do we have about the syntax of CSS, how we can apply that to our HTML, or anything along those lines? 
+
+OK, let's get going then. So what I'm going to do here is I'm just going to modify a few things. Before I do that, let's just go over what we already have here. So as you can see, we've already applied some stylistic changes to the tag table. 
+
+So it means that it will apply to the entire table that we have. So we changed the border. And then we changed the margins a little bit. And we aligned it to be centered. 
+
+And then we set a specific stylistic change to an element td, which makes the border a little bit bigger. But how about modifying other elements? Well, let's say that I want my header and my subtext and my footer to be aligned in the center. Well, how can I do that? My header and the other two components are different tags. 
+
+Let me just start with the subtext and the footer. And if we go back, we can see that the subtext has tag p. And my footer also has tag p. So what I could do is go back to my style tag. And in here, I'm going to say for tag p, what I want to do is align it in the center. 
+
+So I'm going to do text-align center semicolon. Save it. Reload the page. And boom, our subtext and our footer now is centered in the middle, which makes it a little easier to read. And everything is now in one place. 
+
+So let's go back to our code and say I want to now modify the background color for my team names. It seems a little black and white. So I want to change it. Well, what can I do is if I apply it to tag td, it means that everything's going to change the color. But it's two elements, so ID doesn't really make sense. 
+
+So what can I do in this case is assign it a class. So for example, I'm going to call it class team. Don't forget about the dot operator that we want to use in this case. I'm going to change the background color to be crimson. And I looked up the hex value for that. 
+
+So this will make the background color crimson. I go in. I reload. It didn't change. What happened? 
+
+What did we miss? I went in. And I did the style. I changed the color. But what am I missing here? 
+
+Right. I didn't specify that my class is now a team. Great catch. So what I'm going to do is I'm going to go into my element. 
+
+And I'm going to say that I actually want to assign a class team here and then class team right here as well. Save it. Reload. And boom, now my background color is different but just for those two cells, not for any other row. 
+
+OK, so now what I want to do is maybe I want to have my buttons be different colors but not the background color, just the text so that I can distinguish it. And I can already see that they have IDs assigned to them, which is very useful to me because now I can just go to our style part. And all I need to do is specify the ID. 
+
+I want to change just the text color. So for that, the property's going to be color. And I'm going to make team one crimson. And then for ID 2, I am going to make it blue. 
+
+OK, great. I think this is supposed to be zero. OK, I already have my ID specified. So there are no changes to be made. Right here I already have add1 and add2. 
+
+So if I reload the page, oh-- did I miss something? Nice catch. [LAUGHS] Wrong spelling. Let's reload. Hm. 
+
+Let's try something different. I tested it with score1 and score2. So let's see if that might work. A-ha, OK, this worked. So now we have 0 and 0 in crimson and in blue. 
+
+I wonder why it didn't quite work out for the buttons. This is something for me to debug later. But as you can see, you can also change the font of the color for different IDs. Before we move on, do we have any questions about this? 
+
+Oh, thank you so much for catching that-- add1 and id1. OK, let's maybe make these changes as well so that it can reflect on the rest of the web page. I'm going to copy this. OK, yay. Boom, it works for the button as well. 
+
+Thank you for catching it. Any questions that we have about CSS applying properties, changing the values? There are a lot of the things that you can do with it. And there's certainly resources like Bootstrap that already have all these stylistic changes premade for you that you can kind of just import into your own code. 
+
+But there is a question about how to change a button color. So here, we've already changed the color of the text. To change the button color, you can do something very similar-- for example, change the background color. And since it has the button tag to it, I believe you can just specify button tag on top of your code in the style part. And it should apply the changes to all of the buttons. 
+
+We have a question. How did you use CSS in an HTML file? So there are two ways to go about it. And we will talk about the second way a little bit later. 
+
+But for now, what I'm doing is that in my head that contains title. I also have my tag style that essentially incorporates all the CSS changes that I am making. But we will talk about other alternative way of storing CSS properties later on. 
+
+OK, so let's go back to our slides for now. The next topic we're going to be talking about is JavaScript, which makes our web pages a little bit more interactive. Right now, you can see that all I'm really doing is I'm clicking the button. And it's changing the score, what is already JavaScript. But there are actually so many other things that you can do. 
+
+And actually, every time you see a change on the web page, that doesn't necessarily, like, refresh the page for you and bring you to the next one over. That's where JavaScript is working. It's, like, modifying some things on the web page for you immediately to see without necessarily sending it back as a request to the server. So what's going on underneath the hood? Let's go back to our code and see what changes we've already made in our JavaScript. 
+
+So as you can see on the bottom of my body tag, so still in the body not outside, I have a separate part that is surrounded by script tag. This is where all of my JavaScript is happening. What I'm doing here is I'm saying, OK, I'm going to look at ID add1. 
+
+And once it's clicked, I'm going to apply some things. And the same thing is going on with add2, which are essentially our tags right here, the buttons. So JavaScript code is looking for ID add1, ID add2. Once it's clicked, it's doing the function of adding one point to the existing score of Team 1 and Team 2. 
+
+And then it goes on to find ID score1. It goes into the inner HTML, which essentially is the text that you see, the text you specified. And it's updating the score. 
+
+So if we go back right here, what I'm doing is once I click button plus one that has ID add1, JavaScript now records the new score and updates the text that we are storing right here under the tag score1. And the same thing is happening for Team 2, where as many times as I click, the score is now changing. So now that we kind of parsed what's going on in our code, let's go back and see how actually all of these changes are happening. 
+
+So for example, we have a statement-- document dot query selector, parentheses, quotes, hashtag add1. So add1 is an ID, as we already talked about. So what JavaScript actually does, it searches for the entire tree top to bottom looking for that particular ID. So as we've seen this structure before, it first goes into the document and then goes into the HTML. Then it goes into the body, down to the table. 
+
+And then we have our table structure. And it keeps going down, down, down until it finds the ID that we're looking for. In this case, ID is add1, which is a button. And so it had found it. 
+
+In the same way, when we have onclick, what it does is that it looks for the ID 1-- sorry-- for the add1 ID once we clicked that particular tag. Another statement that we just saw is document dot query selector, hashtag score1 and dot, innerHTML. So what innerHTML now stands for is really the text that we've specified in our HTML file previously. 
+
+And in the same way, the whole code is going to search the entire tree looking for that particular ID, score1 and going then into the innerHTML or the text of that tag to do the necessary changes, so a very top to bottom approach. It has a lot of things to look for. But that's what's going on underneath the hood for JavaScript. What questions do we have before we jump back into our code and add on some other JavaScript features? 
+
+And again, kind of just to mention is that we're touching on just a few basic things today. And David covered some more extensive examples in the lecture. But there's certainly so many other things you can do with JavaScript. And definitely everything that you see on the web page utilizes-- all the web pages regularly utilizes all of these languages to make the user experience much better. 
+
+So Python is compatible with CSS and HTML. It just, it works a little bit differently. So for example, JavaScript can be embedded directly into the HTML file while with Python, it will have to be through some different kind of, like, framework. 
+
+It's something that we'll see next week when we're working with Flask and we're implementing more extensive website where we have actually the interaction between the server and the web page going on. In that case, we're using kind of, like, Python on the back end where we're managing the server requests, while JavaScript, HTML, and CSS are all working on the front end, really making the changes to the web page and to the visual things that folks see on the screen. That's a great question. 
+
+All righty, so moving on, what we're going to do is we're going to go into scoreboard dot HTML. And we're going to alert the user when a certain team won the game. So I'm going to go back into my code. I already have some code pre-written here as we already talked about. And what I'm going to do is that modify it a little bit so that we can actually see other visual changes on the screen. 
+
+So for example, I decided that my team would win if it has 5 points. That seems somewhat fair. [CHUCKLES] It seems enough of points to get to be considered a winner. So what I'm going to do is make some conditions. 
+
+I'm already tracking my score using Team 1 and Team 2 variables. So I already took care of that. What I'm going to do here is I'm going to say if Team 1, which is the score, is equal to 5, I am going to set an alert saying Team 1 won. 
+
+Then I save the changes, reload the page. Click, click, click, click, click, boom, you can see I'm going-- I can't zoom in more. But you can see that on the top, I now have an alert window that says Team 1 won. 
+
+Now, if I do it for the Team 2, nothing is happening, although I'm definitely reaching a lot of points. So let's just go back and make the necessary changes here. So I'm just going to do the same thing where I'm going to say if Team 2 now-- if Team 2 score is now equal to 5, I am going to create an alert for Team 2. 
+
+And now if I go back and I reload, Team 1 won. I got an alert. And Team 2 won. I get an alert. 
+
+And it's actually interesting to see that the alert happens when I click. And the score is technically 5. But alert appears before the HTML actually changes it to a score of 5. 
+
+I have a question in the chat. Could you not use the kind of [? CLion ?] line operator for the or? So because it is separated in our JavaScript code by IDs-- we're looking at one element at the time-- I could not do the or operator to minimize the code because in this JavaScript setup, it is looking at one particular element at a time. So it listens for the onclick for the tag add1 and then makes all the necessary changes within kind of that branch. So there are definitely ways to optimize. 
+
+I'm sure you can click more than 5 because we didn't really set any restrictions. We kind of just said, like, once it's 5, Team 1, but we can certainly keep going. And before we move on, I want to show you one more feature. Do we have any questions about this part? 
+
+The syntax is certainly somewhat similar to what we saw. For example, we have same way of kind of setting the variables. Semicolons are back, unfortunately. But for example, we don't need to specify a data type or some of those things. 
+
+So we have a question. Is it better to select an HTML element with query selector instead of get element by ID? I'm pretty sure both are interchangeable. It just depends on what syntax you're using. Query selector would allow you to use it on the IDs, on the classes, and on tags, versus get element by ID is just with those specific-- like for a specific ID, so depending on how you want to set up your code. 
+
+OK, so what I'm going to do here now is I'm still going to announce the winner, just a little bit differently. So I'm just going to [INAUDIBLE] this out. What I'm instead going to do is create a paragraph tag up here. But I'm actually not specifying anything. I'm just giving it an ID. 
+
+I'm going to give it an ID result, so result. Great. So if I go back in here, there's nothing, right? I specified a paragraph tag. But I didn't put any text in, so you can't really see it on the web page right now. 
+
+What I'm going to do instead is instead of creating an alert that's kind of like a browser thing, I'm going to modify something within our HTML page. I'm going to do document query selector. And I'm going to grab my ID result. And I'm going to change an innerHTML for that. 
+
+So it's a very similar structure to what we're doing up here. We're grabbing, for example, score of 1 and changing the innerHTML to a specific number. I'm going to do exact same thing here. 
+
+But I'm just going to put in text instead of numbers. And now if we go back, reload, we still see nothing. The tag is there. But text isn't. 
+
+But once I click-- oops. What's going on? Let me see where I might have messed up. Hm. 
+
+And I didn't change anything here. That is very true. You're not doing it right if you don't get bugs once in a while. Let me cut out this whole part and just test it out as we've had before. 
+
+OK, so there's definitely something with my if statement that wasn't working. So let's just maybe delete this part. And let's check our syntax-- document dot query selector. A-ah, a dot-- that's why it wasn't working. OK, so let's go back. 
+
+I can now make the changes. So we click 2, 3, 4, 5. And now I see my innerHTML changed to Team 1 won in the paragraph tag that I specified earlier but that was empty. I can now go in and do exact same thing for Team 2. I'm just going to change it to Team 2 won. 
+
+And now if we go back and refresh, Team 2 won. So these are some of the things that you can do. As you can see, I didn't necessarily specify any text in the beginning. I just put in a plain tag. But you can go in later on using JavaScript to make the necessary changes to update your innerHTML or even change the color. 
+
+I'm going to Zoom out a little bit so that it's fully visible. But what questions do we have about, at this point, HTML, CSS, JavaScript-- kind of all of that we've talked about today? These are certainly just small bits and pieces that I'm showing today. But it definitely has a lot of potential for a lot more things. 
+
+If you get a score of 5 on both, will the Team 1 and Team 2 won both appear on the screen? Or will the first one get priority? That is a great question. And we can test it out. 
+
+So for example, if I go evenly, right-- I'm updating it one after another-- I reach 4. So if I add a score to Team 1, we'll see Team 1 won. But now if I add the score to Team 2, it changes to Team 2 won because that's the sequence that it happened in. And then you can actually see that it doesn't disappear. 
+
+Once you keep clicking the buttons, it's kind of, like, static. It doesn't really go anywhere at this point. There's certainly changes that you can make where you kind of, like, restrict. You don't allow a user to click more buttons after they reach the score of 5. 
+
+Or you make the tag that we've created, Team 2 won, disappear after a few seconds after you clicked it. There are a lot of components to JavaScript and to HTML that can make all of these things possible. And we're certainly just, like, scratching the surface of these three languages today but introducing some of the most common features. 
+
+All righty, if we don't have any questions, there's just one last thing that I wanted to show you. So we've made a lot of changes to our HTML file. We started by modifying our HTML body, adding some new tags, as well as introducing some overarching tags that help us break out the code better. We've made some changes to the JavaScript to make it more interactive so that the web page is a little bit more dynamic. And we certainly made a lot of changes to our style tag. 
+
+And as you can see, it is getting very long. We have 1, 2, 3, 4, 5, 6, 7, 8 different changes. So does anyone have an idea how we can make this look a little bit better? How can we make our current code look a little bit shorter in the dot HTML file? 
+
+That's a great idea. Yes, we can move it to a different file, so completely move CSS out of the way. So why don't we go and do that. So I am going to create a new terminal so that I don't stop my website from running. I am going to create a file called styles dot CSS. 
+
+And I'm just going to copy over-- oop-- I'm going to copy over all of the changes that we made to our styles dot CSS, save it, go back to scoreboard dot title. Now I can get rid of these tags because I already moved my styles to the other place. And what I'm going to do instead is I'm going to link my HTML file and my CSS file together. So I'm going to create a tag link and specify that the relationship is stylesheet. 
+
+And I'm going to reference file styles dot CSS. Close the tag, save it, save this again, go back, reload. And you can see that all of the changes still apply. So we still have the color change for the background. 
+
+We still change the color of the fonts by moving the styles-- kind of like CSS properties-- out of the way. We also made our HTML look a little bit cleaner. Instead of now having rows and rows of different properties, we now just have our HTML tags and our HTML body. 
+
+There's also a way to move JavaScript out of the way so that it doesn't make your HTML file look a little bit more complex. But for now, we can just keep it in here as we just have maybe like a dozen lines. And it's not really abstracting our HTML for now. But what questions do we have about anything that we've done today about changing the styles, linking the sheets together, creating classes, IDs, new tags? 
+
+So we have a question in the chat. Is it necessary to keep the script tag at the bottom? For now, yes, because we still have our JavaScript code and our HTML file. If we decide to move JavaScript to a different file, it's going to be slightly different syntax. 
+
+Unfortunately, I don't have an example on me. But I'm sure this is something that you can look up very easily. Do we have any other questions? 
+
+The question is, is this session going to be posted after it? And, yes, certainly we will post it on the website a little bit later. And you all should have access to it, yes. 
+
+All right, sounds good. Well, thank you so much for joining. This was Section 8 of really delving into the web development-- HTML, CSS, internet, things related. 
+
+Thank you so much for joining us today. I hope I lived up to your expectations and I was a good for Carter. But I'm looking forward to seeing you all in the next sessions. 
