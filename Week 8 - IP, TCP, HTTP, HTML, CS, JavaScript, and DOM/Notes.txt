@@ -67,9 +67,18 @@ defenitions:
         * Data Distribution Service (DDS)
         * Remote Desktop Protocol (RDP)
         * Extinsible Message and Presense Protocol (XMPP) - For chats 
-    - HTML / CSS / JavaScript
     - run ```>> http-server``` to start a listening server to http requests
+    - HTML (Hypertext Markup Language): It is a Language, but not a Programming Language. 
+        * No vars, logic, loops, or functions in it
+        * Uses tags to Markup text
+        * The <html> tag around text says that it is an HTML page 
+        * White space does not affect it, white spaces costs (It is already characters sent for and back), you have to calculate the trade-off between readability and cost
+        * Each tag should be either closed or being a self-closed tag
+        * Tags should be closed in a reverse order, LIFO
+        * More than 100 tags are known currently, some common tags are: <b> bold, <i> italic, and <u> for underlined
+        * You can use https://validator.w3.org/ to check your HTML code validation
     - HTML Document Object Model (DOM) <html>
+        -> <!DOCTYPE html> specific to HTML 5 that started in 2014 (10 years), means that you will meet HTML5 tags here
         -> <head>
             -> <title>
             -> <style>
@@ -84,16 +93,18 @@ defenitions:
                 -> <h6>
             -> <main>
                 -> <p title = "">
+                -> <form>
+                -> <input name = x type = {"text", "password","radio", "checkbox","submit"}/> always self-closing tag
                 -> <div>
                 -> <a href = "">
-                -> <img src = "" alt = "">
+                -> <img src = "" alt = ""/> always self-closing tag
                 -> <video width="" height="" controls muted>
                     -> <source src="" type="video/mp4">
                     -> <source src="" type="video/ogg">
                 -> <!-- comments -->
                 -> <ul> unordered list
                     -> <li> list item
-                -> <ol> ordered list
+                -> <ol start = 1> ordered list
                     -> <li> list item
                 -> <dl> description list
                     -> <dt> description term
@@ -103,28 +114,82 @@ defenitions:
                         -> <td> table data (cell)
                 -> <script>
             -> <footer>
-    - CSS
-        - tag selector: Applies to all elements with the same type (for example the <p> tag or the <tr> tag)
-            p
+    - CSS (Cascading Style Sheet) used to enhance look, it is not also a Programming Language
+        * Consists of selectors which can be: tag, id or a class selector
+            - tag selector: Applies to all elements with the same type (for example the <p> tag or the <tr> tag)
+                p
+                {
+                    property1 : value1;
+                    property2 : value2;
+                }
+            - ID selector: apply directly to a certain element by its ID, for example, if you have a certain table <table id = "some_id"> make the following 
+                #some_id
+                {
+                    property1 : value1;
+                    property2 : value2;                  
+                }
+            - class selector: will not apply directly, you should mention it within the "class" attribute, for example <a href="alashmony.site" class = "c_style">
+                .c_style
+                {
+                    property1 : value1;
+                    property2 : value2;                
+                }
+        * each key-value (property: value) pair element in the selector is called a declaration
+        * common properties like:
+            - border: style (dotted, dashed, solid, ridge), color, width
+            - background-color: [keyword | #<6-digit hex>]
+            - color: [keyword | #<6-digit hex>]
+            - font-size: [keyword (xx-small, medium) | absolute (10pt, 12pt, 80%) | relative (smaller, larger)]
+            - font-family: [font name | generic name (any "web-safe")]
+            - text-align: [left | right | center | justify]
+            - opacity: [percent]
+        * To comment within CSS, use /* here is a comment */ just like SQL long-comment
+        * Copy CSS to a different file and <link> instead of <style> in the same page
+    - JavaScript: The language that makes webpages interactive, syntax is similar to C :C
+        - Use a <script> tag within the HTML file
+        - You can also open a file with a ".js" extension and <link> it 
+        - JavaScript runs on the client-side when you visit a website
+        - Use "let" or "var" to define a variable
+        - Just like C, each line ends with a simi-colon ";" 
+        - Conditionals (if, else if, else, swtich, ?:) are available and usable just like C
+        - Loops (while, do-while, for) are also available with little changes
+        - Functions are introduced with the "function" keyword, then, just like C EXCEPT THAT you can create a function without a name (anonymous)
+        - Arrays are also available ```var list = [1,"2",3];```
+            * Some Array methods like: .size(), .pop(), .push(x), .shift(), and .map() that applies a function to each element
+        - JavaScript can act as an OOP language where the oblect is a struct-like object
+        - OOP means that you can call a method that is part of the the object ```object.menthod()```
+        - Structs / Objects in JavaScript are created like a python dictionary
+        - To iterate over an object / Array, like python in C syntax with two different ways:
+            * use "in" to iterate over elements
+            ```
+            for (var key in object)
             {
-                property1 : value1;
-                property2 : value2;
+                // use object[key]
+                console.log(object[key])
             }
-        - ID selector: apply directly to a certain element by its ID, for example, if you have a certain table <table id = "some_id"> make the following 
-            #some_id
+            ```
+            * or use "of" instead of "in" to interate over the key only
+            ```
+            for (var key of object)
             {
-                property1 : value1;
-                property2 : value2;                  
+                // use key
+                console.log(key)
             }
-        - class selector: will not apply directly, you should mention it within the "class" attribute, for example <a href="alashmony.site" class = "c_style">
-            .c_style
-            {
-                property1 : value1;
-                property2 : value2;                
-            }
-    - JavaScript
-        - Use "let" to define a variable
-        - Just like C, each line ends with a simi-colon ";" :-( 
+            ```
+        - Events: Responses to an event going on the HTML page, for example, a button is clicked, page loaded, mouse hovered a link ... etc
+            * JavaScript and HTML goes hand-in-hand, JavaScript has event handler for events, and HTML has event attributes
+            * HTML can pass the "event" details to a function, for example, 
+                ```
+                function log(event)
+                {
+                    var my_element = event.srcElement;
+                    console.log("you clicked " + my_element.innerHTML);
+                }
+
+                <button onclick = log(event)>Ahmad Alashmony</button>
+                ```
+        - console.log(); can be used like print() in python
+        - The "+" with strings means concatenation
         - document.querySelector("#id"), points to an element within the DOM with id = "id", a hash is needed
         - You can also getElementByID() to select an element
         - querySelector() can be used with id(#id), tag("p"), or class (.class) while getElementByID() uses the ID only
@@ -148,4 +213,3 @@ defenitions:
             }
 
             ``` 
-    - Copy CSS to a different file and <link> instead of <style> in the same page
