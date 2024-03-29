@@ -9,5 +9,143 @@ Shorts:
     - HTML              https://video.cs50.io/YK78KhMf7bs
     - CSS               https://video.cs50.io/Ub3FKU21ubk
     - JavaScript        https://video.cs50.io/Ub3FKU21ubk
-    = DOM               https://video.cs50.io/LKWJpgvfH3U
+    - DOM               https://video.cs50.io/LKWJpgvfH3U
 
+defenitions:
+    - IP: Internet Protocol is a unique identifier for the machines on the Internet
+        * IPv4 consists of 32bit identifier (4 * 8bit) as 127.0.0.1 each 8bit number (placeholder) ranges between 0x[0:ff] or [0:255]
+        * This format only allows about 4 billion machines only. As a work arond, we created private addresses which won't standout alot
+        * IPv6 consists of 128bit addresses (8 * 16bit) as 1f:2e:3d:4c:5b:6a:79:88 each 16bit number (placeholder) ranges ranging between 0x[0:ffff] or [0:65,535]
+        * This can handle up to 340 billion billion billion + Machines
+    - DHCP (Dynamic Host Configuration Protocol) Server: is a server that assigns an IP addresse automatically instead of manually try and error 
+    - DNS (Domain Name System) Server: A server that resolves (translate) the website domain name into the associated IP address
+        * There is no one DNS that contains all the hostnames and the IP addresses for the world, but there is an way to find what is not in your DNS by going to higher level
+    - Access Point: As we went out of the 4 Billion devices, 
+        * The Access points like routers, switches, and other access points give each machine on the local network a private IP address 
+        * The Access point will redirect traffic within the internal network in both directions (in and out) 
+    - Networks: we cannot connect every device to all other devices in the world directly
+        * To resolve it, we connect each point to some other points
+    - The router is used to point to the direction where we should go whenever we needed to connect to a point that is not directly connected
+        * The router does this based on a pre-registered table on the router saying that when the IP starts with 5, go here. When it starts with 15, go on this direction 
+        * Routers connect to each other and routes the traffic
+        * Router also contains data about local network traffic that enables to get the best route within the network
+    - Packets: Data should not be moved as one package, here is where the data is splitted into packets
+        * Larger packets slows the connection dramatically
+        * Making too small packets that cannot be handled might cause packet transfer failure (dropped packets)
+        * Still, dropping a small package is much better than than dropping a large packet
+    - TCP (Transmission Control Protocol): The way to drirect data to a specific application or service on a machine and assuring the packet delivery
+        * The port detects which app / service on the machine is relevant to this traffic
+        * Detect any dropped packets based on the number of packets the data is splitted into in the first place and the order of those packets
+    - Ports: Most common ports are: FTP= 21, SMTP= 25, DNS= 53, HTTP= 80, HTTPS = 443
+    - The TCP/IP lifecycle:
+        * When data is ready to be sent, TCP splits them into packages and adds a layer with the packet order, number of packets, and the port / app that should receive it
+        * Then, IP adds another layer on the top of it with details regarding the machine that should recieve and the sender machine
+        * Packets are sent via routers, maybe each of them goes in a different path
+        * When the reciever machine receives it, it recognizes that it is the relevant machine
+        * Then, TCP reorders them and handles them to the relevant port / application / service 
+    - HTTP and HTTPs (Hypertext Transfer Protocol / Secure): The protocol of how the webpages are bering transmitted :
+        * There are multiple HTTP methods including Get, Post, insert ... etc
+        * Most requests uses http 1.1, version 1 is no longer used that much
+        * This line is used to make requests "method request-target http-version" for example:
+            "GET www.alashmony.site HTTP/1.1"
+        * On the second line you can ask for the specific page, for example: "/home.html"
+        * Responses has multiple statuses like 2xx (OK), 3xx (Redirect), 4xx (Client-side issue), 5xx (Server-side issue) in format "http-version status" for example:
+            "HTTP/1.1 200"
+        * Example statuses:
+            - 200 OK
+            - 301 Moved Permenantely "www.TheFaceBook.com"
+            - 302 Found (Moved Temporary)
+            - 401 Unauthorized (Needs Login or Credentials)
+            - 403 Forbidden (Not allowed at all even if logged in)
+            - 404 Not Found
+            - 500 Internal Server Error
+            - 503 Service Unavailable
+            - 504 Request timed-out (Server issue)
+    - Other protocols like: 
+        * File Transfer Protocol (FTP)
+        * Simple Mail Transfer Protocol (SMTP)
+        * Data Distribution Service (DDS)
+        * Remote Desktop Protocol (RDP)
+        * Extinsible Message and Presense Protocol (XMPP) - For chats 
+    - HTML / CSS / JavaScript
+    - run ```>> http-server``` to start a listening server to http requests
+    - HTML Document Object Model (DOM) <html>
+        -> <head>
+            -> <title>
+            -> <style>
+            -> <link rel = "stylesheet" href = "file.css">
+        -> <body>
+            -> <header>
+                -> <h1>
+                -> <h2>
+                -> <h3>
+                -> <h4>
+                -> <h5>
+                -> <h6>
+            -> <main>
+                -> <p title = "">
+                -> <div>
+                -> <a href = "">
+                -> <img src = "" alt = "">
+                -> <video width="" height="" controls muted>
+                    -> <source src="" type="video/mp4">
+                    -> <source src="" type="video/ogg">
+                -> <!-- comments -->
+                -> <ul> unordered list
+                    -> <li> list item
+                -> <ol> ordered list
+                    -> <li> list item
+                -> <dl> description list
+                    -> <dt> description term
+                        -> <dd> describe the description
+                -> <table>
+                    -> <tr> table row
+                        -> <td> table data (cell)
+                -> <script>
+            -> <footer>
+    - CSS
+        - tag selector: Applies to all elements with the same type (for example the <p> tag or the <tr> tag)
+            p
+            {
+                property1 : value1;
+                property2 : value2;
+            }
+        - ID selector: apply directly to a certain element by its ID, for example, if you have a certain table <table id = "some_id"> make the following 
+            #some_id
+            {
+                property1 : value1;
+                property2 : value2;                  
+            }
+        - class selector: will not apply directly, you should mention it within the "class" attribute, for example <a href="alashmony.site" class = "c_style">
+            .c_style
+            {
+                property1 : value1;
+                property2 : value2;                
+            }
+    - JavaScript
+        - Use "let" to define a variable
+        - Just like C, each line ends with a simi-colon ";" :-( 
+        - document.querySelector("#id"), points to an element within the DOM with id = "id", a hash is needed
+        - You can also getElementByID() to select an element
+        - querySelector() can be used with id(#id), tag("p"), or class (.class) while getElementByID() uses the ID only
+        - querySelector() can also access an attribute as follows querySelector(a["href"])
+        - Some methods can be called on different element types, for example:
+            * For buttons:  ```.onclick``` that defines the button action
+            * For text:     ```.innerHTML``` that gets the text value in this html item
+        - defining a variable that works as the button function as follows:
+            ```
+            document.querySelector("#button_id").onclick = function() 
+            {
+                some_code_block = "as the button function";
+            }
+            ```
+        - alert("some text") shows an alert for users
+        - Just like C, the if is written as follows:
+            ```
+            if (condition)
+            {
+                do_this();
+            }
+
+            ``` 
+    - Copy CSS to a different file and <link> instead of <style> in the same page
