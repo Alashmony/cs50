@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            function cafsays(event) {
+                // Get the element which triggered the event
+                let button = event.target;
+
+                // Check if the element's inner HTML matches expected answer
+                if (button.innerHTML == 'Alahly') {
+                    button.style.backgroundColor = 'Green';
+                    //button.parentElement.querySelector('.feedback').innerHTML = 'Correct!';
+                    document.getElementById('Alahly').innerHTML = 'Correct!';
+                } else {
+                    button.style.backgroundColor = 'Red';
+                    //button.parentElement.querySelector('.feedback').innerHTML = 'Incorrect';
+                    document.getElementById(button.innerHTML).innerHTML = 'Incorrect';
+
+                }
+            }
+
+            function shawaly(event) {
+
+                // Get the element which triggered the event
+                let button = event.target;
+
+                // Get the input element corresponding to the button
+                let input = button.parentElement.querySelector('input');
+
+                // Check for correct answer
+                if (input.value === 'Elqadia') {
+                    input.style.backgroundColor = 'Green';
+                    document.getElementById('elqadia').innerHTML = 'Correct!';
+                } else {
+                    input.style.backgroundColor = 'Red';
+                    document.getElementById('elqadia').innerHTML = 'Incorrect';
+                }
+                event.preventDefault();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="header caf">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>Which club won CAF Champions League the most</h3>
+                <table>
+                    <tr id='clubs'>
+                        <td>
+                            <button onclick=cafsays(event)>Alahly</button>
+                        </td>
+                        <td>
+                            <button onclick=cafsays(event)>Raja</button>
+                        </td>
+                        <td>
+                            <button onclick=cafsays(event)>Wydad</button>
+                        </td>
+                        <td>
+                            <button onclick=cafsays(event)>Simba</button>
+                        </td>
+                    </tr>
+                    <tr id='answer'>
+                        <td id='Alahly'></td>
+                        <td id='Raja'></td>
+                        <td id='Wydad'></td>
+                        <td id='Simba'></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>What is the best goal in the CAF Champions League?</h3>
+                <form>
+                    <input name='goal' type='text'>
+                    <input onclick=shawaly(event) type='submit'>
+                </form>
+                <p id='elqadia'></p>
+            </div>
+        </div>
+    </body>
+
+</html>
