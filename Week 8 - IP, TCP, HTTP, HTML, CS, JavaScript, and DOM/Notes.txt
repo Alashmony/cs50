@@ -146,7 +146,7 @@ defenitions:
         * To comment within CSS, use /* here is a comment */ just like SQL long-comment
         * Copy CSS to a different file and <link> instead of <style> in the same page
     - JavaScript: The language that makes webpages interactive, syntax is similar to C :C
-        - Use a <script> tag within the HTML file
+        - Use a <script src = '' type = 'text/javascript'></script> tag within the HTML file
         - You can also open a file with a ".js" extension and <link> it 
         - JavaScript runs on the client-side when you visit a website
         - Use "let" or "var" to define a variable
@@ -191,8 +191,8 @@ defenitions:
         - console.log(); can be used like print() in python
         - The "+" with strings means concatenation
         - document.querySelector("#id"), points to an element within the DOM with id = "id", a hash is needed
-        - You can also getElementByID() to select an element
-        - querySelector() can be used with id(#id), tag("p"), or class (.class) while getElementByID() uses the ID only
+        - You can also getElementById() to select an element
+        - querySelector() can be used with id(#id), tag("p"), or class (.class) while getElementById() uses the ID only
         - querySelector() can also access an attribute as follows querySelector(a["href"])
         - Some methods can be called on different element types, for example:
             * For buttons:  ```.onclick``` that defines the button action
@@ -212,4 +212,20 @@ defenitions:
                 do_this();
             }
 
-            ``` 
+            ```
+    - Document Object Model (DOM): Documents are also an Object that can be used in JavaScript and it has its methods
+        * Objects consists of preoperties/data, each property is also an object and has its methods
+        * Each HTML page is a DOM object that we can access childern elements through to manipulate the data in the page
+        * You can modify, change, or edit attributes of a webpage once you know the methods and objects of a webpage
+        * Within the condole, use ```console.dir(document)```, check the "children" of the document, go down further as you need
+        * Most important DOM properties: innerHTML, nodeName, id, parentNode, childNodes, attributes, style
+        * Most important DOM Methods: getElementById(id), getElementByTagName(tag), appendChild(node), removeChild(node)
+        * jQuery helps finding elements easy because finding an element from the top (DOM) is a long path
+            ```
+            /* Normal path with JavaScript*/
+            document.getElementById('colorDiv').style.backgroundColor = 'green';
+
+            /* with jQuery*/
+            $('#colorDiv').css('background-color', 'green');
+            ```
+        * jQuery also does AJAX queries
