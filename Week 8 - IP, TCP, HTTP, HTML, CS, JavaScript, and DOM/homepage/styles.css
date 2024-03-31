@@ -1,0 +1,85 @@
+h1
+{
+    text-align: center;
+    padding: 15px;
+}
+h2
+{
+    text-align: center;
+    padding: 10px;
+    font-size: 25px;
+}
+h3
+{
+    font-size: 50px;
+    background-color: White;
+}
+h4
+{
+    font-size: 20px;
+    /*background-color: #212529;*/
+    padding-left: 20px;
+}
+.header
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+.myimage
+{
+    text-align: right;
+    padding: 15px;
+}
+footer
+{
+    background-color: #212529;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+}
+.footerp
+{
+    text-align: center;
+    color: White;
+    font-size: 20px;
+}
+.footerl
+{
+    text-align: center;
+    padding: 5px;
+}
+.bodyp
+{
+    padding: 15px;
+}
+.navlinks
+{
+    text-align: center;
+}
+.hiderow
+{
+    display: none;
+}
+.bodym
+{
+    margin-bottom: 150px;;
+}
+a
+{
+    color: red;
+    text-decoration-line: none;
+    
+}
+td
+{
+    vertical-align: center;
+}
+tr
+{
+    vertical-align: center;
+}

@@ -1,0 +1,30 @@
+HTML tags used
+<table>
+<tr>
+<td>
+<h1>
+<h2>
+<h3>
+<img>
+<ul>
+<ol>
+<dl>
+<li>
+<a>
+<link>
+
+
+CSS Properties used
+    text-align
+    margin
+    margin-top
+    margin-bottom
+    background-color
+    font-size
+    color
+    position
+    left
+    bottom
+    width
+    padding
+    display

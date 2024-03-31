@@ -1,5 +1,7 @@
 Lecture:    https://video.cs50.io/ciz2UaifaNM?screen=0h4f9-SJwkc
             https://cs50.harvard.edu/x/2024/notes/8/
+            https://youtu.be/jjR0nsb9Kmw
+            https://youtu.be/cUJlRNRguAM
 Section:    https://cs50.harvard.edu/x/2024/notes/8/
 Shorts:
     - Internet Primer   https://video.cs50.io/04GztBlVo_s
