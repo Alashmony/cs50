@@ -1,0 +1,453 @@
+SPEAKER 1: OK. Well hello, one and all, and welcome to CS50's Week 9 section. This one on this framework called Flask, where you can actually build your very own dynamic web applications. 
+
+And there are many topics we'll get through today, but the goal is that you're able to ask the questions you want to ask, so we can bridge that gap between lecture and this week's problem set. 
+
+So, among the topics for today are these. We have this idea of Flask, this framework we could use to write web applications more dynamic than those we wrote last week. 
+
+We also have this new, kind of templating language we're going to work with called Jinja. And along the way, we'll learn all the more about forms and databases, where we can actually store user data in our web applications. 
+
+And what I find so exciting is we're going to be tying together a lot of the material from these past few weeks of CS50 now to build our very own application on the web. So, let's begin by jumping into this idea of Flask. 
+
+So Flask is, again, what we call a framework. Flask is a bit like being handed some tool kit, and inside that tool kit are all kinds of tools you can use to more easily build some web application. 
+
+And as you get more familiar with the tools of Flask, I think you'll find you're able to build applications more quickly, and even more securely than you could do without having those tools at your disposal. 
+
+That's exactly why people make things like Flask, to help you as a programmer get started with things faster and do things more securely. Kind of standing on the shoulders of people who came before you. 
+
+So, Flask, at its core, is a way of handling interaction on the web. And we saw in lecture that often when you're using the web application, you're interacting with a site using its routes, and using what we call HTTP requests. 
+
+So let's do a bit of a refresher here and look at what you might see in the browser bar as you go to some web application. So let's say we go to birthdays.com, which is a hint as to what we'll be doing today. 
+
+And this very first part that you will see, https, colon, slash, slash, is the protocol you're using to talk to this server called birthdays.com, let's say. Now, HTTPS stands for Hypertext Transfer Protocol, and the secure version of that. 
+
+So this is kind of like a way of us extending our hand, and the server then saying I'm going to shake that hand and together, we'll know how to communicate with each other securely. So this first part is saying, how are we going to talk? 
+
+What is the common language we're going to use to talk about what you want, and how I can give it to you. There's the next part though, birthdays.com, that we call our domain. 
+
+So maybe if you go on the web, and you try to get your very own domain like cartersinc.com, or yourname.com, you could actually do that from several providers online. But this idea of a domain is kind of like the user friendly name for our site. 
+
+How does a user get to the server that has all these files on it that other people can access? And then the most important piece here, at least the most important piece for today, is going to be what follows this domain, which is called our route, where we're accessing the application. 
+
+So by default, the basic route is just a slash at the end. And means give me, let's say, the home page of this site. Whatever is the default page, I want that page when I go to the slash route. 
+
+But we can make all kinds of different routes on our applications. Some of them might look like this. Maybe you've seen websites that have an about us page. So the route for that might be something like slash about dash us. 
+
+Or if you're trying to register for an account, the route might be slash register. Or if you're trying to submit some form, it could be slash submit. 
+
+The idea here is that the application could come up with their own names for routes, and then define what happens when the user goes to an application at that particular-- or goes to that particular route on the application. If that makes sense. 
+
+So let me pause here and ask, what questions we have so far on this idea of interacting with a web application through the routes it might offer us. What questions do we have so far? 
+
+OK. So not seeing any yet, but feel free to chime in the chat if you'd like. What we'll do to explore this idea of how to build applications with Flask, is I really jump into this week's problem set. 
+
+And in particular, we'll work together on the very first problem in problem set 9, which is this idea of keep track of our friends birthdays through a web application. So I will go to this very particular problem here called Birthdays. 
+
+And as you can see down below, our goal is to have this application that allows us to have a form, like this, where I could submit somebody's name, the month of their birthday, and the day of their birthday. 
+
+So if me, Carter, if my birthday is on January 1st, I would type in Carter. And the month would be one for January, and the day would be one for the first day of January. 
+
+And then down below, we keep track of all of our friends birthdays. So it seems like Harry was born on 7/31, for instance. We generate this table of birthdays so we can actually visit this site and remember whose birthday is when. 
+
+So a few things going on here. We're able to submit a form to store data persistently across multiple instances of the site. And we're also able to dynamically add things to our site when we click that Add Birthday button. 
+
+So, Flask can help us with all of these kinds of problems we're seeing here today. Now, to get started with birthdays, I will scroll down, and I'll go to Getting Started, and I'll then click here to download what we call the distribution code for birthdays. 
+
+So I'll go to my code space, and I will just simply copy paste this in. And I'll download that birthdays.zip file containing all the distribution code for birthdays. I'll then unzip birthdays.zip. 
+
+And then I will type CD birthdays. And now, if I type ls to list all the files in this folder, I should see a few here that are hopefully familiar from lecture. So we saw in lecture, this idea of app.py. 
+
+We saw its idea of databases a few weeks ago, I have birthdays.db. And we have these two new folders we learned about briefly in lecture, static and templates, where static stores, let's say, images that don't often change. Maybe our CSS for instance. 
+
+And template stores our HTML that is rendered every time the user visits some site. So let's see what questions we have here. I see a few coming in. One question is about, we saw this route called slash submit earlier, which is one example of some kind of route. 
+
+And the question then is, do we have to have some underlying HTML file called, let's say, submit.html? So if the user goes to slash submit, does the HTML file they get have to be called submit.html? 
+
+In this case, in the world of Flask, it does not. So Flask helps us by allowing us to have more flexibility with the naming of our files, and actually with generating our files before they even get sent to the user. What we call rendering our files, like we'll see in just a bit. 
+
+All right. So let's keep going. And one thing in particular, that we saw in a week prior in week eight, was this idea of http-server. So here, I could still use http-serve. 
+
+If everything in here is my Flask application, I mean, I could still use http-server, and let me see what happens here. I'll get this URL where I can actually access these files. So I'll connect to this forwarded port and I'll see all of those same files now accessible to me on my own HTTP server. 
+
+So let's try going into templates. And I see index.html, so I'll click on that. And I'll see, All Birthdays. Kind of not complete all the way yet, but we'll get there, and we'll work on this together. 
+
+I could also go through and let's say I want to see what's inside static, I could click on that. And I see I have this CSS file that seems to be styling index.html. We won't focus too much on this today. 
+
+But the idea here is that HTTP server allows us to access these files, but what it doesn't allow us to do is actually have interactivity here. So if I wanted to use HTTP server to submit a birthday to store in a database to show it to my user, at the end, I couldn't do that with a HTTP server. 
+
+I have to use Flask, as we'll see, to be able to actually get form data to store it in a database, and to return that information to the user. So if you want to build a more dynamic application, you need to use some framework like Flask, as opposed to a simple HTTP server here. 
+
+So I will hit Control C to get outside of my HTTP server, and why don't I try running my Flask application. Does anyone remember how we run a Flask application from lecture? How do we run a Flask application? 
+
+Yeah, so I'm seeing an answer here, which is by default, we type flask run. And this is just what the developers of Flask decided. They say, when you have your very own Flask application denoted by app.py, with your own static folder, and a templates folder, maybe a database, you can then run that application with flask, space, run. 
+
+So I will hit Enter here. Let's see what happens now. So I'm again given this URL that seems to be a server I could access to see my site. I'll click on that. And now, I'll see something pretty familiar from HTTP server. 
+
+I'm able to see our Birthdays site, kind of half finished right now. There's no form. No birthdays. But at least I can see this index.html page being rendered for me. So we'll see, as we actually add more functionality, what Flask can do for us. 
+
+But for right now, Flask seems to just be giving us that very basic HTML file inside of our templates folder. A question here. What is the base file it runs? Like what is the runner? What is the application here? 
+
+A very good question. So let me open up a new terminal, and let me go back into our birthdays folder, and let me show you the structure of this site again. So, here we have a few different files. 
+
+The main one, when you're talking about a Flask application, is app.py. This is what you might call the brains of the operation. It is what listens for requests to our server, and decides how to handle them. 
+
+For instance, if I, a user, accessed the slash route, app.py will decide what kind of content I should get when I access the slash route. We call this framework like a model-view-controller framework. So app.py is the controller deciding what we actually see at the end of the day. 
+
+All right. And just to formalize this a little bit, let me go to this slide here and show you what Flask can really do for us. So really, the reason you might use Flask is, again, to listen for requests to a certain route. 
+
+That is what app.py is doing. Maybe a user goes to the slash route, then they should be sent some particular HTML file. Flask is what can do that for us. 
+
+Importantly though, it can also execute Python code, depending on the route that gets requested. And it can also render HTML files, depending on the route requested, which makes it very powerful because we're able to build up HTML files as the user requests them from our server. 
+
+So as we saw in lecture, one of the most basic applications we can build in Flask looks a bit like this. So we have app.py. And we then might add in some starter code, some boilerplate template code like this. 
+
+And this is simply just how the developers of Flask decided we would indicate that this is a Flask application. We're going to first import this idea of Flask, this class called Flask, from the Flask library. 
+
+And we're then going to say, in that very same file, that we're going to create some app. App equals Flask, and then parentheses we call dunder name, which is the name of this file we have here. 
+
+All that line of code does is say, this file is going to be our Flask application. And then, really the heart of things come in a little bit later, where we can actually specify what we want to have happen when a user requests a certain route. 
+
+So here, at app.route. And then in the middle means that this function index will be run every time the user tries to access that slash route on our application. And what could we do? 
+
+Well, we could return to the user, like we saw in lecture, something as simple as Hello, world, where they would just see Hello, world in their browser if they go to the slash route of our application. But really, the power of Flask comes in by not just returning regular old text, but by returning templates that get rendered as we go. 
+
+So what we tend to use instead is this function called render template, where Flask will take an HTML file that we give it, like index.html, will render it, add in some data, and then show that data back to us as we go on our own application. 
+
+So let's see what this looks like in birthdays here. So why don't I go back to our application. Go back to our application. And I will now code app.py to see what is going on inside. 
+
+So it looks like we have a few things going on here, but let's focus on what's familiar at least at first. Up top, I see we're still importing from Flask. Import Flask, that seems familiar from before. 
+
+We're still configuring our application. And if I scroll down some more, I should see that we do have a function to run when the user requests this slash route. And this is called index here. Doesn't have to be called index, but at least for our purposes, it is. 
+
+Now on the inside, we have to make a choice did the user make a request with POST or with GET, and it seems like we need to maybe fill in these TODOs as to how we can make our application actually work. 
+
+But notice here, at the very base, if I simply make a GET request to this website using the slash route, I should get the rendered version of index.html, which is exactly what's happening here. 
+
+If I go to my application, go to the simple slash route here, I'm simply rendered index.html here. So let's see what questions we have so far. 
+
+I see one, which is, is the at Flask syntax or is that Python syntax? That's a great question. So here we see at, the at sign, app.route. So this at sign is a character that we use in Python to denote what we call a decorator. 
+
+So a decorator is a function, in this case app.route, that we extend the functionality of with our very own function here. So you can use decorators to extend the functionality of some base function. 
+
+In this case, the authors of Flask, they wrote this function called route that handles a lot of things for us. When the user asks for a route, there's a lot that goes on between the server and the client, that is their very own computer. 
+
+And by making this a decorator, what Flask allowed us to do is not worry about all these kinds of low level details, it allows us to specify just what we want to have happen as the user asks for this particular page. So Flask will handle all the underlying details. 
+
+All we have to do is specify, through our very own function here, what we want the user to see at the end of the day. And so here, we do that by specifying the return value of this particular function. 
+
+Do we want to redirect the user to the slash trail, basically send them back there again with a GET request, or do we want to simply render this template called index.html. A good question. 
+
+Let's see what other ones we have. What is GET and what is POST? A great one. So we learned about this very briefly in lecture, and I think it's an important one here because we're seeing GET and POST come up in various ways. 
+
+So let's take a look at these different request methods and how they can actually influence our application, before we dive into working on this birthdays application ourselves. So, when we're working with applications on the web, there are a few ways to interact with them. 
+
+They all involve requests, but among these requests are two methods with which we can actually access our application, which we can request a route. So on the one hand, we have a very simple GET request, where let's say we have a server on the right hand side here, and a client or a computer on the left hand side here. 
+
+And if this client, this computer, wants to access some web page, they might make what we call a GET request. Maybe they say, I want to see what's on that slash route of this page. They would send a GET request to get whatever is available at that slash route. 
+
+So here is them sending that request. The server, meanwhile, then says, OK, I understand you want to get whatever is at the slash route. Why don't I give you this file, which is right there at that slash route. 
+
+Maybe in terms of Flask, it says, let me render this file for you, and let me give it back to you so you can see it on your own computer here. Now one other kind of request exists as well. 
+
+Maybe the user is also sending the server some data. Maybe, for instance, it's sending a birthday for that server to store. So that's when we would use a POST request. 
+
+A POST request generally allows us to send data to a server, and generally implies the server will do something with that data. So maybe the user fills out some form. They say I want you to store Carter's birthday, which is supposedly on January 1st. 
+
+Then it will be able to send that data to the server, and then that data will be stored by the server. So GET is more about trying to get some file from the particular server, whereas POST involves posting some information to that server, in the hopes that it will store it or do something with it at the end of the day. 
+
+And I asked you a few questions here. One is that, is POST encrypted by default? And is it better to POST sensitive data versus using GET? 
+
+So whether or not POST and GET are encrypted depends on the underlying protocol you're using. So we saw before, HTTP versus HTTPS. You could have both of these methods under HTTP or HTTPS, in either case. 
+
+So that has nothing to do with encryption. What is different though, is that POST-- when you use POST, it doesn't put your data in the URL parameter. 
+
+So recall in lecture, when we use GET and we had the greet application, when we used GET, we saw that the name ended up in the URL address bar. But when we used POST, it did not. 
+
+So POST is better for keeping information secret because it doesn't end up in your URL itself, and thus, in your browser history, for instance. So POST is better for things like credit cards, et cetera. 
+
+All right. So now that we have an idea of GET and POST, it seems like we can better understand how to build up this application. So let's go back to our code space here. And let us try this. 
+
+We know we want to be able to submit a birthday here, but what do we need to do first to allow the user to submit a birthday? Just thinking visually, what might we want a user to be able to do? 
+
+Maybe have some kind of like input box, like a way for them to type in some information. Maybe they could click a calendar. I like what you're thinking there. 
+
+But I think we'll stick today with this idea of a basic form, where they could submit and type in that data. So let's go ahead and try to add a form to our birthdays application. 
+
+Well, what could we do there? Let me go back to some slides and visualize what we could do with forms. So with forms, there's a few things to note. 
+
+One, is that a form generally comes from this form HTML element here. So if my application is on the right hand side, and my code is on the left hand side, my HTML. 
+
+Generally, it could look like this, where I have an opening tag and a closing tag for a form. But now it's up to me to decide what kinds of text boxes we'll give to the user. And as people have been saying, maybe we can have our very own input box. 
+
+So here, I might make two kinds of inputs. One, is simply of type text. And one is actually a button of type submit, and maybe I would say submit as the kind of text the user would see there. 
+
+And this would show up on our application as follows. I would see this blank text box for user to type in their text. And I would then see down below a button for them to click Submit on. 
+
+And because this button has type submit when they click this form, that data will then be submitted to our application. But for those of you who are feeling a little more comfortable with forms, what is this form still missing? 
+
+Let's say we have everything we need in terms of data. What is it missing? So giving a few ideas, well, we need to have a place to submit this data to. 
+
+So, as we saw before, it's important to think about routes and the request method we're going to use. So when the user clicks submit, we want this data to be submitted to the site. 
+
+But we need to specify that in our form. So in the form itself up above, we could specify two attributes, the action attribute and the method attribute. 
+
+So action says, here is where I want you to request after you click Submit. When the user clicks submit, the next thing we do is request the particular route. And then the method attribute says, which method should we use to actually access that route. 
+
+Should we POST or should it be GET? Most often for sensitive information, or really most information in general, we would use POST for our form, because POST is most often about sending data to our site and having the site do something with it at the end of the day. 
+
+So, let's see here. Let's go ahead and try to actually implement this in our own application here. So I currently see nothing in terms of a form. But if I go to, not app.py, if I instead go to my templates, CD-- let's say, templates, and then type ls, I'll see index.html. 
+
+So let me code index.html to open that file. And I should see a little, bit down below, a TODO that says Create a form for users to submit a name, a month, and a day. 
+
+So, maybe we'll fill in this form here. As we saw-- whoops. Defining something I don't mean to define. Let me go back to line 17 here and let me try to actually add this form. 
+
+I'll say, have an opening tag and a closing tag for our form. And now let me ask you, what kinds of input should we have, or input boxes, for our form? We want to keep track of names, and months, and days for birthdays, so what might we need? 
+
+Yeah, so one thing we might want to have is an input box for the name. And to add an input box, we simply go within our form element and add a child, a child input element. 
+
+And here, we don't need a closing tag for an input element just by convention, but I should specify a few attributes. So one of these attributes is, what kind of data it will accept? 
+
+In this case, the type. So the type will be text for a name like this. And one more thing we should specify is the name for this input. So that is how do we identify this particular input box among the other input boxes we might have? 
+
+So maybe we could call this input box name itself because we're actually accepting some person's name. OK. What else? Well, we know we want an input for the month that the user is actually able to have their birthday in. 
+
+So I'll say the name equals here, maybe month. And the type, well the type is, in this case, a number. We want to be able to have the user type in their input as one through 12 for the month. 
+
+And we also, of course, want them to be able to type in the day of their birthday, and the type of that will be number as well. Now are we done here? What else are we missing? 
+
+We have three input boxes, but we're still missing a few things. What are they? One of them is a Submit button. So we saw before, we could make our very own button element, and make it of type submit. 
+
+That is one approach we could take here. We could also make an input element and have that be simply, type submit. And then have the value be whatever we want the text to be. 
+
+So a few ways here, I'll show you one new way that's different from the slides. This will allow us to have a button that says Add Birthday, because the type is submit and we specified a value here. 
+
+Now, when the user clicks that button, it should allow us to submit this form. But we're still missing one more thing, and I have seen people say it already. 
+
+We need an action and a method. So if I say, the action here is, I want to submit all this data to the slash route. As we saw in our app.py, we can accept both POST and GET request to slash. 
+
+So I'll make this method, the method here, POST. So now when the user clicks submit, I should be posting that data to the actual slash route. So let's go ahead and go back to our application here and refresh the page. 
+
+I'll use Command R. And I'll see a place where me to type in some data. So why don't I try Carter here. And maybe my birthday is on January 1st, and I'll go ahead and add that birthday. 
+
+And maybe it's working, maybe it's not. But it seemed to, at least allow me to, type in a birthday here and submit this form, which is making some progress. All right. What questions do we have on this form? 
+
+What do we have here? A good question. So one is, don't we need like placeholders for this? And that's a good idea. So if I go and look at this, it's kind of confusing what I want the user to actually type in. 
+
+So I could use placeholder. I could go in and say the placeholder for this element is, let's say, name. The placeholder here is month. And the placeholder here is, let's say, day. Just like this. 
+
+So let me go back and refresh the page, and now we see some placeholders inside of our text, which is good. Question, does this automatically post to the database? 
+
+So, no, it does not. That'll be up to us, as we actually implement the dynamic part of this application inside of app.py. OK. 
+
+So, let's keep going, and this is going to be a little more exciting than what we did last week, because I imagine this is kind of similar to what we did last week in terms of HTML. But now that we're using Flask, we can actually do things that are a bit more exciting. 
+
+So one of these things we can do, is actually have an application see whatever we submitted to our form. Now we saw in lecture, we can use a special Flask method, request.form.get, to actually access whatever data is inside our form as it's submitted to a particular route. 
+
+So the catch here is that simply, when we use request.form.get, we need to make sure that the name we're requesting, like in this case an email, matches up with the name we give our input. 
+
+So if the name of this input is email, then we have to use request.form.get, and give as an argument that very same name, email, case-sensitive. Just like that. 
+
+So let's try it on our own application and see what we can see. I'll go back to my app.py now. Our code app.py over here. And-- oops. Wrong place. 
+
+Let me go back up one level to the birthdays folder. And now let me code app.py. And let's see in this. So here is our route for this application slash. 
+
+And now, we're using the request method POST because, notice our form, the method is POST, and the action is slash. So, inside of this conditional, if the request method is POST, we want to perhaps first see what the user submitted. 
+
+So I could try something like this. I could maybe say, name equals request.form.get, name. And that should hopefully give me the name the user entered when they submitted this form. 
+
+I could say, maybe month, and we'll do month equals request.form.get, and now month here. And then day. Day equals request.form.get, and finally day. 
+
+So notice how these, name, month, and day correspond to the names we gave to these three inputs here. And then just to be sure, to a question earlier about how to debug a Flask application, one thing I could do is use print statements. 
+
+And I could print out the following. Name is, and then we have a f string here. Name is, and I will interpolate name. And I'll also maybe print, just for the sake of knowing whether it's working, month is month. 
+
+And then down below, I'll also print day is day. Just like this. And now hopefully we should see the very same information the user entered in the form, but now in our terminal helping us know that at least in this case, Flask will be able to grab that form data from our submission. 
+
+So I'll open up my terminal, and why don't I go back to our server here. Let me refresh the page. And now I'll type my name Carter, month one, and day one. I'll type Add Birthday. 
+
+And now let's see. Seems to have worked. So Flask is telling me here, in my terminal, that it does see that the name is Carter, the month is one, and the day is one. So we've been able to now submit some data from our form into our app.py. 
+
+So let's see what questions we have here. One is, how do you specify the form you are interested in if you have more than one? A great question. 
+
+So let's say I'm on my index.html, over here. And here is kind of easy because I only have one form, right? It would be harder though, it would be harder if I had multiple forms. 
+
+And there are a few ways to handle this. One, is to have those different forms submit to different routes, and that would allow me to have different functions to handle these different form submissions. 
+
+Another way to do this is to make sure that every input box has some unique name to it. So if I have two different forms, it might be helpful for me to make sure that those forms have different names in the input boxes. 
+
+So when I go to my app.py, if both these forms are submitting to the same route, I can use the name attribute to only get data from one form and not from another. There are probably other ways to solve this problem too, but I think the most common way is to have different forms submit to different routes. 
+
+So, good question there. Let's see. Can you store all values in an array from multiple forms? So the nice thing about Flask being a Python framework is that you can really use any Python data structure you'd like to work with form data. 
+
+If I wanted to, I could make a list of all these things. I could say data is now a list, and it involves name, month, and day. And now we'd have a list of these very variables inside my Python program. 
+
+So you can be creative with these as you'd like. OK. So I think we're making some progress here. We're able to actually access, in this case, the form data from our submission, which is great. 
+
+But the next step-- the next step is going to be to figure out how we can store this data inside of our database. So currently, it's just all inside Python, which is fine, but I want to persist this information. 
+
+Have it recognized in my database, kind of long term. So if I show you what's currently inside my database, I will open up a new terminal here and I will do sqlite3 birthdays.db. Just like this. 
+
+I can type .schema, And I'll see that this is the table inside of birthdays.db. We have a column for name, a column for month, and a column for day. 
+
+So now I'll SELECT star FROM birthdays, semicolon, and I'll see I actually already have three birthdays in there. But now I want to be able to add in my own birthday, and see some more birthdays inside this database. 
+
+So, one way to do this is to take advantage of the way that Flask can communicate with our very own database here. So if I scroll up, I should see this line on line 13. 
+
+And this-- thanks to the CS50 library --allows us to talk to birthdays.db using Python. And in particular, if I scroll down, I can use this method called db.execute. Db.execute. 
+
+And the way db.execute works is, I can type in a SQL query as an argument, and then run that SQL query, in this case, on birthdays.db. So if I wanted to select all birthdays, I could simply say SELECT star FROM birthdays. 
+
+And then that would be it. I would get back a list of dictionaries of all the birthdays in that database. But in this case, we want to insert some data. And let me ask now, what kind of SQL query could we write to insert some birthday into our database? 
+
+We could focus just on SQLite here. What could I type to add in a new birthday to this table of birthdays here? Seeing insert into is a good start. 
+
+So I'll insert into, in this case some particular table, birthdays, like this. And now I'll specify the columns I want to add data to. So if you're familiar, I want to add data to the name, month, and day columns, just like this. 
+
+And now add a new line here, just for style sake. Now, what should I do? Let's say we're trying to add my own birthday here, I need to say the values. 
+
+So I'll say the values, and then let's say, I'll go with a different one. I'll go with-- let's just choose Charlie. Charlie, and their birthday is on February 1st, like this. Semicolon, Enter. 
+
+And now if I SELECT star FROM birthdays, I see that Charlie has been added to this database. So I can do this same thing, but now in app.py. 
+
+Why don't I go to db.execute again and type in that same query. INSERT INTO birthdays, the name, the month, and the day columns. The values are going to be--- what are the value is going to be? 
+
+I don't quite know yet. I'm seeing some question marks, which I think is less indicative of a question and more so what we should actually use here. 
+
+So a question mark is our way of having a placeholder in this query. So similar to what we've seen with print F, earlier in C, we're able to specify a special kind of character to indicate a placeholder in our query. 
+
+And that in this case, is a question mark. So I'll say values, question mark, comma, question mark, comma, question mark. So three placeholders for three different values. 
+
+Now what are those three values? Well, they're whatever we get in name, month, and day from the user. So the first one is name, then month, then day, just like this. 
+
+And that hopefully should allow us to actually take this form data and then run this SQL query to add it into our birthdays.db. So, let's try it and see if we see anything pop up in our database. 
+
+I will clear my SQLite prompt, and I will SELECT star FROM birthdays. So this is what we currently have here. Why don't I now go back to my application, refresh the page. 
+
+And now I'll choose Carter, January 1st, Add Birthday. And now, if I SELECT star FROM birthdays, I should see that now Carter is added into our list of birthdays, all thanks to db.execute. 
+
+So what questions do we have here on how we added data to our database using Flask and the CS50 library? Is there another SQLite library to use similar to CS50? 
+
+So I think our own library is based on a library called SQLAlchemy, if you're familiar. If you want to learn more about that, you can look it up online. 
+
+Question, if you have a long query, how should you properly format on multiple lines? That will depend on your own style. I think generally, one way to do that is as follows. 
+
+If you have a long query, I tend to do something like this, where you have three quotes, and then hit Tab or Enter. Here it is on multiple lines. And then close again with three quotes down below like this. 
+
+Some people would say, looks a little messier. Let me see if I can make it any better, actually. Something like this. 
+
+And then, name, month, and the-- there are formatters that will actually do this for you, so you don't need to specify exactly how this needs to look. But you can do things like this if you want to make it a little more readable, overall. 
+
+Other questions too. I'll leave it all as one line for now. Can we use an F-string instead of question mark? You could, but you really shouldn't, and that's because of SQL injection attacks, which you learned about a little bit, I think two weeks prior in our week seven. 
+
+SQL injection attacks allow the user to add in any kind of SQL code they want to. When you use these question marks here-- these question marks, they take care of guarding you against SQL injection attacks. 
+
+Whereas an F-string, a regular F-string, does not. So you could use them, but you really should not. OK. I think that just about covers most of our questions here. So let's keep going. 
+
+Now one thing before we move on-- I'll only touch on this briefly --is that what we've done here is we've kind of trusted that the user will give us some data. And let's see what could go wrong if for instance, I don't follow that assumption. 
+
+I'll SELECT star FROM birthdays. Why don't I then go and just not-- I'll click Add Birthday, but I won't type anything in to this particular form. I'll Add Birthday, and now, let me try selecting star from birthdays, and I don't know if I want this row in my database. 
+
+This is kind of not what I expected here. So, I think what happened is, when I clicked Submit, I simply trusted the user would have some data to insert. In this case though, they didn't. 
+
+They just sent me some empty strings, and then my application added those empty strings to my database. So, why don't I just delete this. I'll DELETE FROM birthdays WHERE id equals 6. 
+
+And then I'll SELECT star again, so that is gone. But I could guard against this by being a little more smart about when I request user input. So when I get user input, it's a good habit to actually check if it matches my expectations. 
+
+So I could say something like this. If not name-- if I don't get back a name, maybe it's an empty string, maybe it's a special keyword called none, I should just redirect the user back to the slash route. 
+
+So here, I won't actually get down to the portion where I execute the SQL statement. I will instead, just prematurely redirect them to the slash route. I could do the same for month. 
+
+I could say if not month, that is if month is an empty string, then redirect to the slash route. And if not day, then redirect to the slash route as well. This will simply return the user back to that slash route overall. 
+
+I could maybe make this a little more shorter, I could say if not name or not month, and et cetera. But for now, I'll leave it as this. The main thing though, is that you're often testing for things you don't want to have happen, and handling them before you do what you think you want to do with the user data down below. 
+
+All right. So now that we've seen some validation, I think our last step is to see these birthdays actually printed out on the screen. So let's try that. And to start, let's go down to this else here in this final TODO. 
+
+Which is display the entries in the database on index.html. Display the entries. So here, we've handled the case where the user submits data via POST. 
+
+But when they simply go to this page, perhaps for the first time, or they just refresh it without submitting the form, we want them to see some birthdays down below here. But the question first is, well, what data should we show in index.html? 
+
+Seems like the data in our database. What ideas do you have for how we can actually pull all that data from our database? We've seen a tool we could use before. What could we use to get that database information now? 
+
+So I see some suggestions. We could maybe use request.form. That is good for getting data from the form itself when the user submits that data via POST. 
+
+In this case, we want to actually get data from our database, and we could use db.execute to execute some query on our database. So I could choose db.execute, and then maybe whatever query would give me back all entries in the database on index.html. 
+
+So why don't I say SELECT star FROM birthdays, which would give me back every row inside of birthdays and every column, which seems good enough for me. Why don't I then give that a name. 
+
+I could say, maybe I'll call this rows. These are the rows returned by my database. And then I'll print out rows to my terminal to see if this is working so far. 
+
+So I'll go to Birthdays, and I will refresh the page. You're making a GET request there. Now I'll go back to my Flask server running in my terminal, and I'll see some data. 
+
+You can see this down below here. This is what db.execute returned to me, and notice that it seems to be a list of dictionaries. It's a list because, notice on the outside it has these square brackets. 
+
+And it's a list of dictionaries because on the inside, notice how we have curly braces, and in the middle, lots of key and value pairs. So the id is a key. The value is 1. 
+
+The name is the key. The value is Harry. Same for month and day. And notice how for each row, we have our very own dictionary and some data in terms of keys and values. 
+
+So this is what we could use to render our birthdays in index.html. But first we need to pass this information into index.html in order to render it. And as we saw in lecture, we can do this by adding in a special keyword argument to render template. 
+
+So in index.html, if I want to be able to access this particular data, rows, under some name in index.html, I could say something like as follows. 
+
+Maybe birthdays equals rows, and that will allow me to access the same data that's in rows, but now under the name birthdays in index.html. So let's try that. I'll go to index.html. 
+
+And I will scroll down, and I'll go down to my table body. And let's say I want to show whatever's inside birthdays. Because remember, I told render template that inside of this variable birthdays, they would have the data that's inside of rows. 
+
+So now I'll make the special placeholder syntax. This comes from Jinja, our templating syntax, that says, whatever is inside of birthdays, show it to me right here on this page. 
+
+So now let me go back to our application. I will refresh the page. And I see some data, but it doesn't look properly formatted. So I think things are happening, which is that I'm able to pass in that same data from Rose to my application, it just doesn't look very pretty. 
+
+So what I could do is use some other features of Jinja that are very similar in spirit to Python to print this information out row by row by row. And for this, what I find very handy is that Jinja has a special kind of for loop similar to Python. 
+
+If I want to make a for loop in Jinja by convention, I do this. I could have this denoted inside of this bracket percent sign, and then percent sign bracket. I could say for, and then similar to Python, let's maybe do for birthday in birthdays. 
+
+This could be anything, it could be for a row in birthdays, but I'll stick with birthday here, kind of by convention. And now I need to close this for loop, endfor down below. This is just syntax you would learn by using Jinja more frequently. 
+
+Now in the inside, I could do the very same thing I would do in a Python loop. I could, for instance, say, give me, let's say, birthday.name, which means, on this particular dictionary, for this particular row in my list of dictionaries, access the value with the key, name. 
+
+So birthday.name says, in this dictionary, give me the value for the name, the name key. And to make sure this is actually being added properly to my table, let me try inside this for loop, to add a td-- or a tr element. Sorry, a tr means table row. 
+
+And then inside of this, I'll add a td element, which stands for table data, or kind of like a table column. So here I have the name associated with the birthdays. I'll go back to my page, refresh it. 
+
+And now I actually see the names more nicely formatted for me. And if I choose to go to Developer Tools, if I Zoom in a little bit over here, notice how if I go to container, this table, tbodyy-- notice how for every birthday in my list of birthdays, I now have a tr element here. 
+
+All thanks to Jinja and the templating syntax there. So let's clean this up. I'll make sure I have not just birthday.name, but also birthday.month, and then slash birthday.day, like this. 
+
+And that should complete my for loop. So if I refresh the page again, now I should see that I have all my birthdays very nicely listed out in terms of this table down below. So let me ask now, what questions we have on our templating for Jinja here? 
+
+A good question I see, who plugs in these values for us? So, here, I'm using this placeholder notation, with these double curly braces. But who is actually in charge of substituting these values? 
+
+Well, Flask actually is, in particular, the render template function is. So notice how when I make a GET request to the slash route, if it's not a POST request, we'll go down here and we will select all birthdays from the birthdays table. 
+
+Then I will render the template index.html, passing in data for this birthdays variable that we're having to use in index.html. So what render template does is it takes this HTML file, exactly as you see it here, it looks through it and it says something like, I see this variable called birthdays, but what data should go inside of birthdays? 
+
+Well hopefully, I was told what data should go in there. It will then look and see, OK, I was told which information should go in there. I will render that for me, and I will actually substitute in these values and return it to you as this version here. 
+
+So notice how in this version, its render template has replaced all of the placeholders with actual pieces of data. So you don't see the placeholder syntax anymore, but you see the actual data. 
+
+Let's see, would each user get a new table for their saved birthdays? In fact, every user would get a new row, because in for loop here, we said for every birthday in birthdays, add some new table row to our table. So let's try this out. 
+
+Maybe I'll add in another birthday. I'll add one for-- let's go ahead and add Amy's Birthday, which is the fifth month and the fifth day. I'll add the birthday and we should see that Amy pops up down below, with the birthday on 5/5. 
+
+All right. How did these get their formatting? So we saw here, this is a number, and then a slash, and then a number again. We simply specify that in our HTML. 
+
+So if I go to index.html here, notice how in this td, I have a placeholder for the month, followed by a slash. This slash, which is like literally, I want to show up there. 
+
+And then afterwards, I have the birthday.day. So this is how it renders, where I see the birthday.month, and then a literal slash, and the day afterwards too. Good question. 
+
+Let me actually let you see it. So here we have the two, and the slash, and then the one. Like that. Cool. OK. Other questions on Flask in general? 
+
+OK. So suffice to say for now, there are a few improvements still to be made to this application. One, is this idea of trying to add more validation to user input. 
+
+So notice how on app.py, all we did was simply ask if the user didn't give us information. But it could be useful, maybe on your own, to try to check if the user gave us a month. 
+
+That's great, but we also want to make sure that that number is between one and 12. Or for the day, we want to make sure that the day is between one and 31. 
+
+So always try to not trust your user input, and try to have those validations in place. Similarly, in our index.html, if I scroll up, let's see this. I can also specify other attributes. 
+
+I could maybe specify for this input of type number, a minimum. The minimum the user could type in is one, and the max is 12. That allows me to have some client-side validation. 
+
+And same for day. Maybe it's minimum one and maximum 31. But that's all fine and good, we just also want to have that validation as well on the server side too. So I'll leave that part up to you. 
+
+And I think with that, we have really seen a lot of what Flask can offer us. We're able to build our very own birthdays application. 
+
+And I think with that, we'll go ahead and conclude our last CS50 section for this week. This was CS50'S Week 9 section, and we'll see you all next time. 

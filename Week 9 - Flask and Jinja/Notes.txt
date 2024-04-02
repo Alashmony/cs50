@@ -1,0 +1,5 @@
+Lecture:    https://video.cs50.io/-aqUek49iL8?screen=nvlhcdtCSKY
+            https://cs50.harvard.edu/x/2024/notes/9/
+Section:    https://video.cs50.io/IkpaPGqlDHU
+Shors:
+    - Flask:    https://video.cs50.io/X0dwkDh8kwA
