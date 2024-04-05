@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" minlength=6 pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=])[A-Za-z0-9@#$%^&+=]{6,}$" title="ssword must be at least 6 characters including at least a capital letter, a small letter, an integer, and a special character." required>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <p> </p>
+    <p>{{ registered }} <a href="/login">{{ log }}</a></p>
+
+{% endblock %}
