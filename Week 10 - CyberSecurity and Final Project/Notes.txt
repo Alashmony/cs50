@@ -1,0 +1,4 @@
+Lecture:    https://video.cs50.io/EKof-cJiTG8?screen=6uNx4HNz0zg
+            https://cs50.harvard.edu/x/2024/notes/cybersecurity/
+Seminars:   https://cs50.harvard.edu/x/2024/seminars/
+Final Project:  https://cs50.harvard.edu/x/2024/project/
